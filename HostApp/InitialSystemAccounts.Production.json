@@ -1,0 +1,337 @@
+{
+  "SystemAccounts": [
+    {
+      "user": {
+        "email": "MoviesBackend@hulubeje.com",
+        "password": "Pass123$",
+        "roleTypeId": "100",
+        "userClaims": []
+      },
+      "client": {
+        "clientId": "movies_backend",
+        "clientDisplayName": "movies_backend",
+        "clientDescription": "",
+        "clientRedirectUris": [
+          "https://api.movies.hulubeje.com"
+        ],
+        "allowedCorsOrigins": [ "https://api.movies.hulubeje.com" ],
+        "allowedGrantTypes": [ "client_credentials" ],
+        "RequireClientSecret": true,
+        "clientClaims": [
+          {
+            "type": "permission",
+            "value": "SSA" //"EthioArt.UserAccounts.ClaimsX.Permissions.SETUP_SYSTEM_ACOUNT"
+          },
+          {
+            "type": "permission",
+            "value": "ACTOU" // "EthioArt.Clients.ClaimsX.Permissions.CAN_ASSING_CLIENT_TO_OTHER_USER"
+          },
+          {
+            "type": "permission",
+            "value": "CC" //"EthioArt.Clients.ClaimsX.Permissions.CREATE_CLIENT "
+          }
+        ],
+        "clientScopes": [
+          "BillingApi",
+          "UsersApi",
+          "KeysApi",
+          "openid",
+          "profile",
+          "email"
+        ],
+        "clientProperties": []
+      }
+    },
+
+
+    {
+      "user": {
+        "email": "MoviesPublic@hulubeje.com",
+        "password": "Pass123$",
+        "roleTypeId": "100",
+        "userClaims": []
+      },
+      "client": {
+        "clientId": "movies_public",
+        "clientDisplayName": "movies_public",
+        "clientDescription": "",
+        "clientRedirectUris": [
+          "https://movies.hulubeje.com"
+        ],
+        "allowedCorsOrigins": [ "https://movies.hulubeje.com" ],
+        "allowedGrantTypes": [ "password" ],
+        "RequireClientSecret": true,
+        "clientScopes": [
+          "BillingApi",
+          "UsersApi",
+          "KeysApi",
+          "openid",
+          "profile",
+          "email"
+        ],
+        "clientProperties": []
+      }
+    },
+
+
+
+
+
+    {
+      "user": {
+        "email": "MobileApp@hulubeje.com",
+        "password": "Pass123$",
+        "userClaims": []
+      },
+      "client": {
+        "clientId": "mobile_app",
+        "clientDisplayName": "mobile_app",
+        "clientDescription": "",
+        "clientRedirectUris": [
+          "https://com.hulubeje.auth/oauthcallback"
+        ],
+        "allowedCorsOrigins": [],
+        "allowedGrantTypes": [ "password" ],
+        "RequireClientSecret": true,
+        "clientScopes": [
+          "MoviesApi",
+          "BillingApi",
+          "UsersApi",
+          "KeysApi",
+          "ReservationApi",
+          "RolesApi",
+          "openid",
+          "profile",
+          "email",
+          "OrgApi",
+          "offline_access",
+          "TravelsApi"
+        ],
+        "AllowOfflineAccess": true,
+        "clientProperties": []
+      }
+    },
+
+    {
+      "user": {
+        "email": "MoviesAdmin@hulubeje.com",
+        "password": "Pass123$",
+        "userClaims": []
+      },
+      "client": {
+        "clientId": "movies_admin",
+        "clientDisplayName": "movies_admin",
+        "clientDescription": "",
+        "clientRedirectUris": [
+          "https://api.movies.hulubeje.com"
+        ],
+        "allowedCorsOrigins": [ "https://api.movies.hulubeje.com" ],
+        "allowedGrantTypes": [ "password" ],
+        "RequireClientSecret": true,
+        "clientScopes": [
+          "MoviesApi",
+          "BillingApi",
+          "UsersApi",
+          "KeysApi",
+          "ReservationApi",
+          "RolesApi",
+          "openid",
+          "profile",
+          "email",
+          "OrgApi",
+          "TravelsApi"
+        ],
+        "clientProperties": []
+      }
+    },
+
+
+    {
+      "user": {
+        "email": "BillingPublic@hulubeje.com",
+        "password": "Pass123$",
+        "userClaims": []
+      },
+      "client": {
+        "clientId": "billing_public",
+        "clientDisplayName": "billing_public",
+        "clientDescription": "",
+        "clientRedirectUris": [
+          "https://billing.hulubeje.com"
+        ],
+        "allowedCorsOrigins": [
+          "https://billing.hulubeje.com"
+        ],
+        "allowedGrantTypes": [ "password" ],
+        "RequireClientSecret": true,
+        "clientScopes": [
+          "MoviesApi",
+          "BillingApi",
+          "UsersApi",
+          "KeysApi",
+          "ReservationApi",
+          "RolesApi",
+          "openid",
+          "profile",
+          "email",
+          "OrgApi",
+          "TravelsApi"
+        ],
+        "clientProperties": []
+      }
+    },
+
+
+    {
+      "user": {
+        "email": "BillingBackend@hulubeje.com",
+        "password": "Pass123$",
+        "userClaims": []
+      },
+      "client": {
+        "clientId": "billing_backend",
+        "clientDisplayName": "billing_backend",
+        "clientDescription": "",
+        "clientRedirectUris": [
+          "https://billing.hulubeje.com"
+        ],
+        "allowedCorsOrigins": [
+          "https://billing.hulubeje.com"
+        ],
+        "allowedGrantTypes": [ "client_credentials" ],
+        "RequireClientSecret": true,
+        "clientClaims": [
+          {
+            "Type": "permission",
+            "Value": "ACTOU"
+          },
+          {
+            "Type": "permission",
+            "Value": "CC"
+          },
+          {
+            "Type": "permission",
+            "Value": "SMS"
+          }
+        ],
+        "clientScopes": [
+          "MoviesApi",
+          "BillingApi",
+          "UsersApi",
+          "KeysApi",
+          "ReservationApi",
+          "RolesApi",
+          "openid",
+          "profile",
+          "email",
+          "SMSMessagesApi",
+          "PaymentStatusUpdateApi",
+          "OrgApi",
+          "TravelsApi"
+        ],
+        "clientProperties": []
+      }
+    },
+
+
+
+    {
+      "user": {
+        "email": "IsBackend@hulubeje.com",
+        "password": "Pass123$",
+        "userClaims": []
+      },
+      "client": {
+        "clientId": "is_backend",
+        "clientDisplayName": "is_backend",
+        "clientDescription": "",
+        "clientRedirectUris": [
+          "https://api.oauth.hulubeje.com"
+        ],
+        "allowedCorsOrigins": [
+          "https://api.oauth.hulubeje.com"
+        ],
+        "allowedGrantTypes": [ "client_credentials" ],
+        "RequireClientSecret": true,
+        "clientClaims": [
+          {
+            "Type": "permission",
+            "Value": "ACTOU"
+          },
+          {
+            "Type": "permission",
+            "Value": "CC"
+          },
+          {
+            "Type": "permission",
+            "Value": "SMS"
+          }
+        ],
+        "clientScopes": [
+          "MoviesApi",
+          "BillingApi",
+          "UsersApi",
+          "KeysApi",
+          "ReservationApi",
+          "RolesApi",
+          "openid",
+          "profile",
+          "email",
+          "SMSMessagesApi",
+          "PaymentStatusUpdateApi",
+          "OrgApi",
+          "TravelsApi"
+        ],
+        "clientProperties": []
+      }
+    },
+
+
+    {
+      "user": {
+        "email": "SMSMessage@hulubeje.com",
+        "password": "Pass123$",
+        "userClaims": []
+      },
+      "client": {
+        "clientId": "SMSMessage",
+        "clientDisplayName": "SMSMessage",
+        "clientDescription": "",
+        "clientRedirectUris": [
+          "http://192.168.137.1:6874"
+        ],
+        "allowedCorsOrigins": [
+          "http://192.168.137.1:6874"
+        ],
+        "allowedGrantTypes": [ "client_credentials" ],
+        "RequireClientSecret": true,
+        "clientClaims": [
+          {
+            "Type": "permission",
+            "Value": "RBMD" //"EthioArt.UserAccounts.ClaimsX.Permissions.SETUP_SYSTEM_ACOUNT"
+          },
+          {
+            "Type": "permission",
+            "Value": "ASEA"
+          }
+        ],
+        "clientScopes": [
+          //        "MoviesApi",
+          "BillingApi",
+          "UsersApi",
+          "KeysApi",
+          //        "ReservationApi",
+          "RolesApi",
+          "openid",
+          "profile",
+          "email"
+          //,
+          //"OrgApi"
+        ],
+        "clientProperties": []
+      }
+    }
+
+
+  ]
+}

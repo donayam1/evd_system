@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
+    <PackageReference Include="IdentityServer4" Version="2.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\TacTec.APIs\TacTec.APIs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AspNetIdentity.Data.Entities">
+      <HintPath>..\..\HostApp\OtherDeps\AspNetIdentity.Data.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.APIs">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.APIs.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Clients.ViewModels">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Clients.ViewModels.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Data.Entities.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Data.Enumerations">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.EntityFramework.DatabaseInit.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.EntityFramework.DatabaseInit.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Security.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Security.Abstraction.dll</HintPath>
+    </Reference>
+
+    <Reference Include="EthioArt.Security">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Security.dll</HintPath>
+    </Reference>
+
+    <Reference Include="EthioArt.UserAccounts.Models">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.UserAccounts.Models.dll</HintPath>
+    </Reference>
+
+    <Reference Include="EthioArt.UserAccounts.Services.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.UserAccounts.Services.Abstractions.dll</HintPath>
+    </Reference>
+
+    <Reference Include="IdentityServer4.Data.Entities">
+      <HintPath>..\..\HostApp\OtherDeps\IdentityServer4.Data.Entities.dll</HintPath>
+    </Reference>
+
+    <Reference Include="IdentityServer4.Mappers">
+      <HintPath>..\..\HostApp\OtherDeps\IdentityServer4.Mappers.dll</HintPath>
+    </Reference>
+
+    <Reference Include="Users.BusinessLogic.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\Users.BusinessLogic.Abstraction.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+
+  <!--<ItemGroup>
+    <ProjectReference Include="..\..\Accounts\EthioArt.UserAccounts.Models\EthioArt.UserAccounts.Models.csproj" />
+    <ProjectReference Include="..\..\Accounts\EthioArt.UserAccounts.Security\EthioArt.UserAccounts.Security.csproj" />
+    <ProjectReference Include="..\..\Accounts\EthioArt.UserAccounts.Services.Abstractions\EthioArt.UserAccounts.Services.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Clients\EthioArt.Clients.Claims\EthioArt.Clients.Claims.csproj" />
+    <ProjectReference Include="..\..\Clients\EthioArt.Clients.Security\EthioArt.Clients.Security.csproj" />
+    <ProjectReference Include="..\IdentityServer4.Data.Entities\IdentityServer4.Data.Entities.csproj" />
+    <ProjectReference Include="..\IdentityServer4.Mappers\IdentityServer4.Mappers.csproj" />
+  </ItemGroup>-->
+
+
+
+
+
+</Project>

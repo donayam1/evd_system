@@ -1,0 +1,13 @@
+
+<div ngbDropdown class="d-inline-block">
+    <button class="btn btn-outline-primary" id="langDB" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
+      <span class="flag-icon flag-icon-{{lang.flagIcon}}"> </span>{{" " +lang.text}}
+    </button>
+    <div ngbDropdownMenu aria-labelledby="langDB">     
+      <div class="dropdown-item" *ngFor="let item of model">
+        <a  (click)="useLanguage(item)"    ngbDropdownItem>
+          <span class="flag-icon flag-icon-{{item.flagIcon}}"> </span>{{" " + item.text}}
+        </a>
+      </div>    
+    </div>
+  </div>

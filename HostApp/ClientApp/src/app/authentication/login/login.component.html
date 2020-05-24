@@ -1,0 +1,85 @@
+<div class="container-flude">
+  <div class="row">
+    <div class="col-sm-5">
+      Say something about login page.
+    </div>
+    <div class="col-sm-5 mt-5">
+      <app-loading-indicator [isLoading]="isLoading"></app-loading-indicator>
+      <div class="mb-4 mx-auto" style="width:100%">
+        <h2>Tak Technologies EVD Platform</h2>
+      </div>
+      <div>
+        <h4>Login</h4>
+        <div class="mb-3"></div>
+      </div>
+      <form>
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input
+              type="email"
+              name="email"
+              [(ngModel)]="model.UserName"
+              class="form-control"
+              id="inputEmail3"
+              placeholder="Email"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword3" class="col-sm-2 col-form-label"
+            >Password</label
+          >
+          <div class="col-sm-10">
+            <input
+              type="password"
+              name="password"
+              [(ngModel)]="model.Password"
+              class="form-control"
+              id="inputPassword3"
+              placeholder="Password"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="checkbox col-sm-12">
+            <label class="small">
+              <input
+                type="checkbox"
+                name="checkbox"
+                [(ngModel)]="model.RememberMe"
+              />
+              remember me</label
+            >
+          </div>
+        </div>
+        <div class="form-group row">
+          <!-- <label for="inputPassword3" class="col-sm-2 col-form-label"></label> -->
+          <div class="col-sm-12">
+            <input
+              class="btn btn-primary btn-block"
+              (click)="login()"
+              type="submit"
+              name="commit"
+              value="Sign In"
+            />
+            <!-- un.value,pw.value,rm.value -->
+            <span>{{ loginErrorMessage }}</span>
+            <hr />
+            <div class="create-account-link ">
+              You don't have account? Please
+              <a (click)="register()"> create new account</a>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12 create-account-link ">
+            Forgot your password? Please <a (click)="resetPassword()"
+              > reset your password</a
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

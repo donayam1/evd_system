@@ -1,0 +1,9 @@
+.hidden{
+    display: none;
+}
+
+.linkg{
+    float: left;
+    margin: auto 10px;
+    line-height: 35px;
+}

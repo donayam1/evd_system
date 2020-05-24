@@ -1,0 +1,20 @@
+{
+    "env":{
+        "name":"production"
+    },
+    "apiServers":{
+        "authServer":"https://auth.hulubeje.com"
+    },
+    "authSettings":{
+        "redirectUri" : "https://api.movies.hulubeje.com",
+        "clientId" : "evd_public",
+        "dummyClientSecret": "secret",
+        "oidc":true,  
+        "skipSubjectCheck":true,      
+        "scope" :"email profile openid BillingApi",
+        "issuer": "https://auth.hulubeje.com",
+        "responseType":"token id_token", 
+        "showDebugInformation" : true        
+    }
+}
+

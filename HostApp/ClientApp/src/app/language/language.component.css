@@ -1,0 +1,47 @@
+
+.lang:hover{
+    cursor: pointer;
+    background-color: #BD3518;
+}
+.lang{
+    background-color:#417630;
+} 
+.langlist{
+    margin-top: -15px;
+}
+.active{
+    background-color: blue;
+}
+
+.flag-icon-background {
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+  }
+  .flag-icon {
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    position: relative;
+    display: inline-block;
+    width: 1.33333333em;
+    line-height: 1em;
+  }
+  .flag-icon:before {
+    content: "\00a0";
+  }
+  .flag-icon.flag-icon-squared {
+    width: 1em;
+  }
+  .flag-icon-et {
+    background-image: url('/assets/flags/4x3/et.svg');
+  }
+  .flag-icon-et.flag-icon-squared {
+    background-image: url('/assets/flags/1x1/et.svg');
+  }
+  .flag-icon-us {
+    background-image: url('/assets//flags/4x3/us.svg');
+  }
+  .flag-icon-us.flag-icon-squared {
+    background-image: url('/assets//flags/1x1/us.svg');
+  }

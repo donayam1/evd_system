@@ -1,0 +1,65 @@
+{
+  "SystemAccounts": [
+    {
+      "user": {
+        "email": "EvdPublic@tektec.com",
+        "password": "Pass123$",
+        "roleTypeId": "100",
+        "userClaims": []
+        
+      },
+      "client": {
+        "clientId": "evd_public",
+        "clientDisplayName": "evd_public",
+        "clientDescription": "",
+        "clientRedirectUris": [
+          "http://192.168.137.1:5001"
+        ],
+        "allowedCorsOrigins": [ "http://192.168.137.1:5001" ],
+        "allowedGrantTypes": [ "password" ],
+        "RequireClientSecret": true,
+        "clientScopes": [
+          "EVDApi",
+          "BillingApi",
+          "UsersApi",
+          "KeysApi",
+          "openid",
+          "profile",
+          "email"
+        ],
+        "clientProperties": []
+      }
+    },
+    {
+      "user": {
+        "email": "MobileApp@tektec.com",
+        "password": "Pass123$",
+        "roleTypeId": "100",
+        "userClaims": []
+      },
+      "client": {
+        "clientId": "mobile_app",
+        "clientDisplayName": "mobile_app",
+        "clientDescription": "",
+        "clientRedirectUris": [
+          "https://com.taktec.auth/oauthcallback0"
+        ],
+        "allowedCorsOrigins": [],
+        "allowedGrantTypes": [ "password" ],
+        "RequireClientSecret": true,
+        "clientScopes": [
+          "BillingApi",
+          "UsersApi",
+          "KeysApi",
+          "openid",
+          "profile",
+          "email",
+          "offline_access",
+        ],
+        "AllowOfflineAccess": true,
+        "clientProperties": []
+      }
+    }
+
+  ]
+}

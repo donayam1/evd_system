@@ -1,0 +1,20 @@
+{
+    "env":{
+        "name":"dev"
+    },
+    "apiServers":{
+        "authServer":"http://192.168.137.1:5001"
+    },
+    "authSettings":{
+        "redirectUri" : "http://192.168.137.1:5001",
+        "clientId" : "evd_public",
+        "dummyClientSecret": "secret",
+        "oidc":true,  
+        "skipSubjectCheck":true,      
+        "scope" :"email profile openid EVDApi BillingApi ",
+        "issuer": "http://192.168.137.1:5001",
+        "responseType":"token id_token", 
+        "showDebugInformation" : true,
+        "requireHttps":false
+    }
+}

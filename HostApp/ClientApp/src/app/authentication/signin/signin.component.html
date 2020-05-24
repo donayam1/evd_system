@@ -1,0 +1,11 @@
+
+<div class="linkg" [ngClass]="{'hidden':!isUserLoggedIn}">
+    Wellcome {{user.UserName}} <span (click)="logout()"><a href="#">SIGN OUT</a> </span>
+</div>    
+<div class="linkg" [ngClass]="{'hidden':isUserLoggedIn}">
+  <!-- <span (click)="login()"><a href="#">SIGN IN</a></span>    -->
+  <a [routerLink]="['login']">SIGNIN</a>
+</div>       
+<!--<div class="linkg" [ngClass]="{'hidden':isUserLoggedIn}">
+  <span (click)="register($event)"><a><i class="badge  rounded-circle " style="Color:gold;background-color:black">R</i>{{'head.register' |   uppercase}}</a></span> 
+</div>-->          

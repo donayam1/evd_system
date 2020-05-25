@@ -49,9 +49,7 @@ export class AuthService {
 
 
   OnInit(): void {
-    //.oauthService.configure(<AuthConfig>AppConfig.settings.authSettings );
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-    //this.oauthService.loadDiscoveryDocument();
 
     if (this.cookieOAuthStorage.getAccessToken()) {
       const user = this.cookieOAuthStorage.getUser();
@@ -70,7 +68,7 @@ export class AuthService {
     const obser = Observable.create(observer => {
       this.store.select(SelectIsAuthenticated).subscribe((state: boolean) => {
         // let user = CurrentUserSelector(state);
-        // this.isUserLoggedIn = SelectIsAuthenticated(state);
+       this.isUserLoggedIn = state;
         observer.next(state);
       });
     });
@@ -147,7 +145,7 @@ export class AuthService {
   }
   loadUsersProfile(users: string[]) {
     const upUrl = AppConfig.settings.apiServers.authServer + userProfileServieUrl;
-    let z = FiterUsersNotInStoreSelector(this.state.value)(users); //cache
+    const z = FiterUsersNotInStoreSelector(this.state.value)(users); //cache
     if (z.length <= 0) {
       return;
     }

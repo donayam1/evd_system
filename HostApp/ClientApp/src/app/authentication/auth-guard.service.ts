@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, 
+  RouterStateSnapshot, Router } from '@angular/router';
 // import { AuthService } from '../data/Account/Services/account.service';
 import { State } from '@ngrx/store';
 import { AccountState } from '../data/Account/Reducers/account.reducers';

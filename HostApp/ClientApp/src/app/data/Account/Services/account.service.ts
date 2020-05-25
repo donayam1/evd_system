@@ -64,17 +64,17 @@ export class AuthService {
     }
   }
 
-  isLoggedIn(): boolean {
-    const isLoggedIn =  SelectIsAuthenticated(this.state.value);
-    return isLoggedIn;
-    // const obser = Observable.create(observer => {
-    //   this.store.subscribe((state: AppState) => {
-    //     // let user = CurrentUserSelector(state);
-    //     this.isUserLoggedIn = LoginStatusSelector(state);
-    //     observer.next(this.isUserLoggedIn);
-    //   });
-    // });
-    // return obser;
+  isLoggedIn(): Observable<boolean> {
+    // const isLoggedIn =  SelectIsAuthenticated(this.state.value);
+    // return isLoggedIn;
+    const obser = Observable.create(observer => {
+      this.store.select(SelectIsAuthenticated).subscribe((state: boolean) => {
+        // let user = CurrentUserSelector(state);
+        // this.isUserLoggedIn = SelectIsAuthenticated(state);
+        observer.next(state);
+      });
+    });
+    return obser;
   }
   getCurrentUser(): Observable<CurrentUser> {
     const obser = Observable.create(observer => {

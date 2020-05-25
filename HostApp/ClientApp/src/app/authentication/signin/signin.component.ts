@@ -14,17 +14,17 @@ export class SigninComponent implements OnInit {
   isUserLoggedIn: Boolean = false;
   name: string;
   user: CurrentUser;
-  registerUrl: string = "https://localhost:44334/Account/register";
+  registerUrl = "https://localhost:44334/Account/register";
 
   constructor(private authService: AuthService,
     private store:Store<AccountState>) {}
 
   ngOnInit() {
 
-    this.isUserLoggedIn = this.authService.isLoggedIn();
-    // this.authService.isLoggedIn().subscribe(logStatus => {
-    //   this.isUserLoggedIn = logStatus;
-    // });
+    // this.isUserLoggedIn = this.authService.isLoggedIn();
+    this.authService.isLoggedIn().subscribe(logStatus => {
+      this.isUserLoggedIn = logStatus;
+    });
     this.authService.getCurrentUser().subscribe(user => {
       this.user = user;
     });

@@ -27,6 +27,7 @@ import { LoadingModule } from './loading/loading.module';
 import { StoreModule } from '@ngrx/store';
 import { AppReducers } from './data/app.state';
 import { ItemResolverReducer } from './data/Shared/Reducers/itemResolver.reducers';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
 
@@ -45,6 +46,7 @@ const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
     HttpClientModule,
     FormsModule,
     LoadingModule,
+    NgbDropdownModule,
     StoreModule.forRoot(AppReducers, {}),
     StoreModule.forFeature("searchIndexes", ItemResolverReducer),
     TranslateModule.forRoot({

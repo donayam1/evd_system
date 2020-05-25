@@ -11,13 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accounting", "Accounting", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.BusinessTransactions.MoneyDeposit.Processors", "Accounting\TakTec.BusinessTransactions.MoneyDeposit.Processors\TakTec.BusinessTransactions.MoneyDeposit.Processors.csproj", "{8AF2D237-5041-4FA3-B930-2F0846AEE876}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakTec.Users.InitialDataSeed", "Users\TakTec.Users.InitialDataSeed\TakTec.Users.InitialDataSeed.csproj", "{9DA6E9D5-DAA4-459A-A702-BD67CE65778D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.Users.InitialDataSeed", "Users\TakTec.Users.InitialDataSeed\TakTec.Users.InitialDataSeed.csproj", "{9DA6E9D5-DAA4-459A-A702-BD67CE65778D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.BusinessTransactions.Processors.Abstraction", "Accounting\TakTec.BusinessTransactions.Processors.Abstraction\TakTec.BusinessTransactions.Processors.Abstraction.csproj", "{95AD93C2-9B42-4D9A-95D9-355E344617E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{813D88DF-ECC2-4FDB-A02A-5247F0ED3958}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TacTec.APIs", "Core\TacTec.APIs\TacTec.APIs.csproj", "{A71E381F-14F6-40BB-82BD-17EC2F003C99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TacTec.APIs", "Core\TacTec.APIs\TacTec.APIs.csproj", "{A71E381F-14F6-40BB-82BD-17EC2F003C99}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Operators", "Operators", "{F8598944-FA23-4790-ABB9-14FE85B91331}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakTec.Operators.Backend", "Operators\TakTec.Operators.Backend\TakTec.Operators.Backend.csproj", "{4117CB63-9820-43E2-A3EA-CF4A0B62A963}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,10 @@ Global
 		{A71E381F-14F6-40BB-82BD-17EC2F003C99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A71E381F-14F6-40BB-82BD-17EC2F003C99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A71E381F-14F6-40BB-82BD-17EC2F003C99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4117CB63-9820-43E2-A3EA-CF4A0B62A963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4117CB63-9820-43E2-A3EA-CF4A0B62A963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4117CB63-9820-43E2-A3EA-CF4A0B62A963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4117CB63-9820-43E2-A3EA-CF4A0B62A963}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +62,7 @@ Global
 		{9DA6E9D5-DAA4-459A-A702-BD67CE65778D} = {CC389892-81C9-4710-962C-3F5610F847F7}
 		{95AD93C2-9B42-4D9A-95D9-355E344617E6} = {A28A7672-621A-4D4F-AD9A-D5782CDBE357}
 		{A71E381F-14F6-40BB-82BD-17EC2F003C99} = {813D88DF-ECC2-4FDB-A02A-5247F0ED3958}
+		{4117CB63-9820-43E2-A3EA-CF4A0B62A963} = {F8598944-FA23-4790-ABB9-14FE85B91331}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9E686B4-CC76-435F-B915-E2FA0F0D7C71}

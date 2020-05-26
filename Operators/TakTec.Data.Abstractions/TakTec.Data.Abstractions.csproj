@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+   <ProjectReference Include="..\TakTec.Data.Entities\TakTec.Data.Entities.csproj" />
+
+  <Reference Include="EthioArt.Data.Abstraction">
+     <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+  </Reference>
+  </ItemGroup>
+  
+
+</Project>
+ 

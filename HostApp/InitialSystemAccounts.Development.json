@@ -25,7 +25,8 @@
           "KeysApi",
           "openid",
           "profile",
-          "email"
+          "email",
+          "RolesApi"
         ],
         "clientProperties": []
       }

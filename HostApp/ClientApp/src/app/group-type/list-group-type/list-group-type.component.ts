@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GrouptypeService } from 'src/app/data/GroupType/Services/grouptype.service';
 
 @Component({
   selector: 'app-list-group-type',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-group-type.component.css']
 })
 export class ListGroupTypeComponent implements OnInit {
+  grouptype: any[];
 
-  constructor() { }
+  constructor( private grouptypeService :GrouptypeService) { }
 
   ngOnInit() {
+     this.grouptypeService.getGroupType();
   }
 
 }

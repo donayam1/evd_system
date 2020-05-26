@@ -92,7 +92,7 @@ gulp.task(
         //gulp.src([keyMangerRoot+"EthioArt/EthioArt.Filters/bin/" + version + "/" + dotNetCoreVersion + "/EthioArt.Filters.dll"]).pipe(gulp.dest("OtherDeps"));
         gulp.src([ethioartcoreroot + "EthioArt.Extensions/bin/" + version + "/" + dotNetCoreVersion + "/EthioArt.Extensions.dll"]).pipe(gulp.dest("OtherDeps"));
         //gulp.src([keyMangerRoot+"EthioArt/EthioArt.Events.Abstraction/bin/" + version + "/" + dotNetCoreVersion + "/EthioArt.Events.Abstraction.dll"]).pipe(gulp.dest("OtherDeps"));
-        //gulp.src([keyMangerRoot+"EthioArt/EthioArt.ServiceProviderAccessor/bin/" + version + "/" + dotNetCoreVersion + "/EthioArt.ServiceProviderAccessor.dll"]).pipe(gulp.dest("OtherDeps"));
+        gulp.src([ethioartcoreroot + "EthioArt.ServiceProviderAccessor/bin/" + version + "/" + dotNetCoreVersion + "/EthioArt.ServiceProviderAccessor.dll"]).pipe(gulp.dest("OtherDeps"));
 
         gulp.src([ethioartcoreroot + "EthioArt.Sorters/bin/" + version + "/" + dotNetCoreVersion + "/EthioArt.Sorters.dll"]).pipe(gulp.dest("OtherDeps"));
         gulp.src([ethioartcoreroot + "EthioArt.Sorters.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/EthioArt.Sorters.Abstractions.dll"]).pipe(gulp.dest("OtherDeps"));
@@ -207,7 +207,7 @@ gulp.task(
         gulp.src([IdentityServerRoot + "KeyManager/KeyManager.ServiceRegistration/bin/" + version + "/" + dotNetCoreVersion + "/KeyManager.ServiceRegistration.dll"]).pipe(gulp.dest("OtherDeps"));
         gulp.src([IdentityServerRoot + "KeyManager/KeyManager.Data.InitialDataSeed/bin/" + version + "/" + dotNetCoreVersion + "/KeyManager.Data.InitialDataSeed.dll"]).pipe(gulp.dest("OtherDeps"));
 
-        //gulp.src([IdentityServerRoot + "Role/Roles.Backend/bin/" + version + "/" + dotNetCoreVersion + "/Roles.Backend.dll"]).pipe(gulp.dest("OtherDeps"));
+        gulp.src([IdentityServerRoot + "Role/Roles.Backend/bin/" + version + "/" + dotNetCoreVersion + "/Roles.Backend.dll"]).pipe(gulp.dest("OtherDeps"));
         gulp.src([IdentityServerRoot + "Role/Roles.Mapper/bin/" + version + "/" + dotNetCoreVersion + "/Roles.Mapper.dll"]).pipe(gulp.dest("OtherDeps"));
         gulp.src([IdentityServerRoot + "Role/Roles.ViewModels/bin/" + version + "/" + dotNetCoreVersion + "/Roles.ViewModels.dll"]).pipe(gulp.dest("OtherDeps"));
         gulp.src([IdentityServerRoot + "Role/Roles.Security/bin/" + version + "/" + dotNetCoreVersion + "/Roles.Security.dll"]).pipe(gulp.dest("OtherDeps"));

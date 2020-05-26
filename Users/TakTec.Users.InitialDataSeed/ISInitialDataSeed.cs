@@ -292,12 +292,6 @@ namespace TakTec.Users.InitialDataSeed
             //}
 
 
-
-            
-
-
-
-
         var apiResDbSet = sc.Set<x.ApiResource>();
             foreach (var v in ApiResourceData.ApiResources) {
                 apiResDbSet.Add(v);

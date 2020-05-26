@@ -1,3 +1,4 @@
+using EthioArt.ServiceProviderAccessor;
 using ExtCore.Data.EntityFramework;
 using ExtCore.WebApplication.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace HostApp
 {
@@ -27,11 +29,15 @@ namespace HostApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging(loggingBuilder =>
+                loggingBuilder.AddSerilog(dispose: true));
+
             services.Configure<StorageContextOptions>(options => {
                 options.ConnectionString = this.Configuration.GetConnectionString("Default");
             });
 
             services.AddExtCore(this.extensionsPath, this.Configuration["Extensions:IncludingSubpaths"] == true.ToString());
+            ServiceProviderServiceAccesser.ServiceProvider = services.BuildServiceProvider();
 
         }
 

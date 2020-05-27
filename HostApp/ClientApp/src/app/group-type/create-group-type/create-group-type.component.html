@@ -1,1 +1,15 @@
-<p>create-group-type works!</p>
+<form class="form-group">
+    <h3 class="form-text header">Add a Group Type</h3>
+
+    <div class="field">
+        <label for="level">Level:</label>
+        <input name="level" #newlevel>
+    </div>
+    
+    <div class="field">
+        <label for="label">Label:</label>
+        <input name="label" #newlabel>
+    </div>
+    
+    <button (click)="addArticle(newlevel, newlabel)" class="btn btn-primary">Submit link</button>
+</form>

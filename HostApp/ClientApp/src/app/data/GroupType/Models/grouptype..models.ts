@@ -2,6 +2,10 @@ import { extend } from "webdriver-js-extender";
 import { ResponseBase } from "../../Shared/Models/responseBase";
 
 export class GroupType {
+    push(arg0: GroupType) {
+        //To DB
+      throw new Error("Method not implemented.");
+    }
 
     constructor(obj?: any) {
         this.id = obj && obj.id;

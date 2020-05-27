@@ -10,6 +10,7 @@ import { of, Observable } from 'rxjs';
 })
 export class GrouptypeService {
   private readonly url = '/api/grouptype';
+  grouptype: GroupType;
   constructor(private http: HttpClient) { }
 
     getGroupType(): Observable<GroupTypesResponse>{
@@ -24,5 +25,14 @@ export class GrouptypeService {
         groupTypesResponse.status = false;
 
         return of(groupTypesResponse);// this.http.get<GroupType[]>(this.url);
+  }
+
+  addGroupType({ level, label }: { level: HTMLInputElement; label: HTMLInputElement; }): boolean{
+    console.log('Adding new group type');
+    
+    this.grouptype.push(new GroupType(level.value, label.value, 0));
+    level.value = '';
+    label.value = '';
+    return false;
   }
 }

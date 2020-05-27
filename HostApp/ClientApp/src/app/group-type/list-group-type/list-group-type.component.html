@@ -1,5 +1,5 @@
 <h1 id="tableLabel">Operator List</h1>
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="grouptypeService">
+<table class='table table-striped' aria-labelledby="tableLabel" >
   <thead>
     <tr>
       <th>Name</th>
@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let grouptype of grouptypeService">
+    <tr *ngFor="let grouptype of grouptype">
       <td>{{ grouptype.name }}</td>
       <td>{{ grouptype.level }}</td>
       <td>{{ grouptype.status }}</td>

@@ -5,10 +5,12 @@ namespace TakTec.Data.Entities
 {
     public class Operator: EntityBase
     {
-        public Operator(string ownerId, ResourceTypes ownerType) : base(ownerId, ownerType)
+        public Operator(string ownerId, ResourceTypes ownerType,string name,string USSDrechargeCode ) : base(ownerId, ownerType)
         {
             this.OwnerId = ownerId;
             this.OwnerType=ownerType;
+            Name = name;
+            USSDRechargeCode=USSDrechargeCode;
         }
         public string Name { get; set; }
         public string USSDRechargeCode { get; set; }

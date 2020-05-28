@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+   <ProjectReference Include="..\TakTec.Data.Entities\TakTec.Data.Entities.csproj" />
+   <ProjectReference Include="..\TakTec.Operators.ViewModel\TakTec.Operators.ViewModel.csproj" />
+   
+
+
+   <Reference Include="Data.Entities.Abstraction">
+     <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+   </Reference>
+   <Reference Include="Data.Enumerations">
+     <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
+   </Reference>
+   
+  </ItemGroup>
+
+</Project>

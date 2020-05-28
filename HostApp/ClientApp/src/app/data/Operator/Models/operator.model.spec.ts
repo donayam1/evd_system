@@ -1,7 +1,7 @@
-import { Operator } from './operator.model';
+import { Operator } from "./operator.model";
 
-describe('Operator', () => {
-  it('should create an instance', () => {
+describe("Operator", () => {
+  it("should create an instance", () => {
     expect(new Operator()).toBeTruthy();
   });
 });

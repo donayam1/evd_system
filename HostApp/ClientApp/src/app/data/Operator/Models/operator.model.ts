@@ -1,15 +1,15 @@
-export class Operator {
-    id: number;
-    name: string;
-    ussdCode: string;
-    status: string;
-    lastupdate: Date;
+import { NamedItem } from "../../Shared/Models/nameditem.model";
 
-    constructor(obj?: any){
-        this.id = obj && obj.id;
-        this.name = obj && obj.name;
-        this.ussdCode = obj && obj.ussdCode;
-        this.status = obj && obj.status;
-        this.lastupdate = obj && obj.lastupdate;        
-    }
+export class Operator extends NamedItem {
+  constructor(obj?: any) {
+    super();
+    //this.id = obj && obj.id;
+    //this.name = obj && obj.name;
+    this.ussdCode = obj && obj.ussdCode;
+    this.status = obj && obj.status;
+    this.lastUpdate = obj && obj.lastUpdate;
+  }
+  ussdCode: string;
+  status: number;
+  lastUpdate: Date;
 }

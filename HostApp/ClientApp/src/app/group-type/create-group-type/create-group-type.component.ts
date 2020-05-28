@@ -23,16 +23,16 @@ export class CreateGroupTypeComponent implements OnInit {
 
   addGroupType($event?: any) {
     this.idCounter--;
-    this.currentGroupType.id = this.idCounter;
+    this.currentGroupType.id = this.idCounter + "";
     console.log('Adding new group type');
     this.grouptypes.push(new GroupType(this.currentGroupType));
     this.currentGroupType.level = -1;
     this.currentGroupType.name = '';
   }
 
-  deleteGroupType(item: GroupType){
-    const index= this.grouptypes.findIndex(x=> x.id == item.id);
-    this.grouptypes.splice(index,1);
+  deleteGroupType(item: GroupType) {
+    const index = this.grouptypes.findIndex(x => x.id === item.id);
+    this.grouptypes.splice(index, 1);
   }
 
   ngOnInit() {

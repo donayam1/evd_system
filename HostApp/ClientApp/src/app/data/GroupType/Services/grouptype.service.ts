@@ -29,7 +29,19 @@ export class GrouptypeService {
     return of(groupTypesResponse); // this.http.get<GroupType[]>(this.url);
   }
 
+  fetchGroupType(): Observable<GroupTypesResponse>{
+    return this.http.get<GroupTypesResponse>(this.url);
+  }
+
   saveGroupTypes(grouptypes: GroupType): Observable<any> {
     return this.http.post<any>(this.url, grouptypes);
   }
+<<<<<<< HEAD
+
+  updateGroupType(grouptype: GroupType): Observable<any>{
+    return this.http.post<any>(this.url, grouptype);
+  }
+
+=======
+>>>>>>> a4f1ebfa2725210257481ce53fc64fb56509f9e0
 }

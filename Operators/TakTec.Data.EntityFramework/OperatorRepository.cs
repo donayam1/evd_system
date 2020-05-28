@@ -16,7 +16,7 @@ using EthioArt.Sorters.Abstractions;
 
 namespace TakTec.Data.EntityFramework
 {
-    public class OperatorRepo : GenericRepositoryBase<Operator>, IOperatorRepo
+    public class OperatorRepository : GenericRepositoryBase<Operator>, IOperatorRepository
     {
         public override IQueryable<Operator> LoadNavigationProperties(IQueryable<Operator> items)
         {

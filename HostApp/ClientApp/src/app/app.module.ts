@@ -37,8 +37,8 @@ import { AppReducers } from "./data/app.state";
 import { ItemResolverReducer } from "./data/Shared/Reducers/itemResolver.reducers";
 import { NgbDropdownModule } from "@ng-bootstrap/ng-bootstrap";
 
-import { ListGroupTypeComponent } from "./group-type/list-group-type/list-group-type.component";
-import { ListOperatorComponent } from "./operator/list-operator/list-operator.component";
+// import { ListGroupTypeComponent } from "./group-type/list-group-type/list-group-type.component";
+// import { ListOperatorComponent } from "./operator/list-operator/list-operator.component";
 
 const externalUrlProvider = new InjectionToken("externalUrlRedirectResolver");
 
@@ -51,8 +51,8 @@ const externalUrlProvider = new InjectionToken("externalUrlRedirectResolver");
     LoginComponent,
     LanguageComponent,
     NotFoundComponent,
-    ListGroupTypeComponent,
-    ListOperatorComponent,
+    // ListGroupTypeComponent,
+    // ListOperatorComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -73,8 +73,8 @@ const externalUrlProvider = new InjectionToken("externalUrlRedirectResolver");
     OAuthModule.forRoot(),
     RouterModule.forRoot([
       { path: "", redirectTo: "login", pathMatch: "full" },
-      { path: "grouptype", component: ListGroupTypeComponent },
-      { path: "operator-list", component: ListOperatorComponent },
+      // { path: "grouptype", component: ListGroupTypeComponent },
+      // { path: "operator-list", component: ListOperatorComponent },
       {
         path: "home",
         loadChildren: "./admin-home/admin-home.module#AdminHomeModule",

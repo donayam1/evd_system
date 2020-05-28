@@ -36,12 +36,9 @@ export class GrouptypeService {
   saveGroupTypes(grouptypes: GroupType): Observable<any> {
     return this.http.post<any>(this.url, grouptypes);
   }
-<<<<<<< HEAD
 
   updateGroupType(grouptype: GroupType): Observable<any>{
     return this.http.post<any>(this.url, grouptype);
   }
 
-=======
->>>>>>> a4f1ebfa2725210257481ce53fc64fb56509f9e0
 }

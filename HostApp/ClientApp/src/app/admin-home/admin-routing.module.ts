@@ -7,7 +7,8 @@ const AdminRoutes: Routes = [
   {
     path: '', component: AdminHomeComponent,
     children: [
-      { path: '', component: HomeComponent }
+      { path: '', component: HomeComponent },
+      { path: 'groups', loadChildren:'../group-type/group-type.module#GroupTypeModule' }
       // { path: 'movies', loadChildren: '../movies-admin/movies-admin.module#MoviesAdminModule' },
       // { path: 'genres', loadChildren: '../genre-admin/genre-admin.module#GenreAdminModule' },
       // { path: 'orgs', loadChildren: '../organizations/organizations-admin.module#OrganizationsAdminModule' },

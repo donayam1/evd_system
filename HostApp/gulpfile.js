@@ -2,13 +2,14 @@
 //<binding BeforeBuild='clean' AfterBuild='copy-extensions' Clean='clean' />
 var gulp = require("gulp");
 var del = require("del");
+//command line arguments using yargs 
+var argv = require('yargs').argv;
 
 var paths = {
     Extensions: ['scripts/**/*.js', 'scripts/**/*.ts', 'scripts/**/*.map']
 };
 
-//command line arguments using yargs 
-var argv = require('yargs').argv;
+
 
 var version = "Debug";//Release 
 if (argv.ver !== undefined) {

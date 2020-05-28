@@ -9,21 +9,30 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./create-group-type.component.css']
 })
 export class CreateGroupTypeComponent implements OnInit {
-  grouptype: GroupType[];
+  grouptypes: GroupType[];
   isError: boolean;
-  messages:Message[];
-  constructor(private grouptypeService: GrouptypeService) { 
-    this.grouptype = Array();
+  messages: Message[];
+  currentGroupType: GroupType;
+  idCounter = -1;
+  constructor(private grouptypeService: GrouptypeService) {
+    this.grouptypes = Array();
     this.isError = false;
     this.messages = Array();
+    this.currentGroupType = new GroupType();
   }
 
-  addGroupType({ level, label }: { level: HTMLInputElement; label: HTMLInputElement; }): boolean{
+  addGroupType($event?: any) {
+    this.idCounter--;
+    this.currentGroupType.id = this.idCounter;
     console.log('Adding new group type');
-    this.grouptype.push(new GroupType(level.value, label.value, 0));
-    level.value = '';
-    label.value = '';
-    return false;
+    this.grouptypes.push(new GroupType(this.currentGroupType));
+    this.currentGroupType.level = -1;
+    this.currentGroupType.name = '';
+  }
+
+  deleteGroupType(item: GroupType){
+    const index= this.grouptypes.findIndex(x=> x.id == item.id);
+    this.grouptypes.splice(index,1);
   }
 
   ngOnInit() {

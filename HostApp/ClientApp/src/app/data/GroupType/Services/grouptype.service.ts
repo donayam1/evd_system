@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
 import {HttpClient} from "@angular/common/http";
 import { GroupType, GroupTypesResponse } from '../Models/grouptype..models';
 import { of, Observable } from 'rxjs';
@@ -10,13 +9,12 @@ import { of, Observable } from 'rxjs';
 })
 export class GrouptypeService {
   private readonly url = '/api/grouptype';
-  grouptype: GroupType;
   constructor(private http: HttpClient) { }
 
     getGroupType(): Observable<GroupTypesResponse>{
 
         let groupTypesResponse: GroupTypesResponse = new GroupTypesResponse();
-       
+
         let types: GroupType[] = Array();
         let gt = new GroupType({id:"1",level:2});
         types.push(gt);
@@ -27,12 +25,8 @@ export class GrouptypeService {
         return of(groupTypesResponse);// this.http.get<GroupType[]>(this.url);
   }
 
-  addGroupType({ level, label }: { level: HTMLInputElement; label: HTMLInputElement; }): boolean{
-    console.log('Adding new group type');
-    
-    this.grouptype.push(new GroupType(level.value, label.value, 0));
-    level.value = '';
-    label.value = '';
-    return false;
-  }
+  // saveGroupTypes(): Observable<any> {
+
+  // }
+
 }

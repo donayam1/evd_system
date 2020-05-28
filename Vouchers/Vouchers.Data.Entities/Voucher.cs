@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Voters.Data.Entities
+namespace Vouchers.Data.Entities
 {
     public class Voucher:EntityBase 
     {

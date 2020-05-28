@@ -1,7 +1,7 @@
 ﻿using EthioArt.Data.Entities.Abstraction;
 using System;
 
-namespace Voters.Data.Entities
+namespace Vouchers.Data.Entities
 {
     public class VoucherBatch:EntityBase 
     {

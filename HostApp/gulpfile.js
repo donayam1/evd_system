@@ -49,18 +49,27 @@ var qrRoot = sourceRoot + "QrGenerator/";
 var chageListenerRoot = sourceRoot + "ChangeListeners/";
 
 
-var TacAccountingRoot = "../Accounting/";
-var TacUserRoot = "../Users/";
+var TakAccountingRoot = "../Accounting/";
+var TakUserRoot = "../Users/";
+var TakVouchersRoot = "../Vouchers/";
 
 gulp.task(
     "copy-extensions", function (cb) {
         gulp.src(["./OtherDeps/**"]).pipe(gulp.dest("Extensions"));
 
-        gulp.src([TacAccountingRoot + "TakTec.BusinessTransactions.Processors.Abstraction/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.Processors.Abstraction.dll"]).pipe(gulp.dest("Extensions"));
-        gulp.src([TacAccountingRoot + "TakTec.BusinessTransactions.MoneyDeposit.Processors/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.MoneyDeposit.Processors.dll"]).pipe(gulp.dest("Extensions"));        
-        gulp.src([TacUserRoot + "TakTec.Users.InitialDataSeed/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.InitialDataSeed.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakAccountingRoot + "TakTec.BusinessTransactions.Processors.Abstraction/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.Processors.Abstraction.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakAccountingRoot + "TakTec.BusinessTransactions.MoneyDeposit.Processors/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.MoneyDeposit.Processors.dll"]).pipe(gulp.dest("Extensions"));        
+        gulp.src([TakUserRoot + "TakTec.Users.InitialDataSeed/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.InitialDataSeed.dll"]).pipe(gulp.dest("Extensions"));
 
 
+        gulp.src([TakVouchersRoot + "Vouchers.Backend/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Backend.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakVouchersRoot + "Vouchers.BusinessLogic/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.BusinessLogic.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakVouchersRoot + "Vouchers.BusinessLogic.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.BusinessLogic.Abstractions.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakVouchersRoot + "Vouchers.Data.Entities/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Data.Entities.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakVouchersRoot + "Vouchers.Data.EntityFramework/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Data.EntityFramework.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakVouchersRoot + "Vouchers.Data.Enumerations/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Data.Enumerations.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakVouchersRoot + "Vouchers.ServiceRegistrations/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.ServiceRegistrations.dll"]).pipe(gulp.dest("Extensions"));
+        
         
         cb();
     }

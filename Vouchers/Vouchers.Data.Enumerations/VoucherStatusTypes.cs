@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Voters.Data.Enumerations
+namespace Vouchers.Data.Enumerations
 {
     public enum VoucherStatusTypes
     {

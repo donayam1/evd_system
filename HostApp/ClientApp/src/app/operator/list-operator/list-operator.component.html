@@ -1,0 +1,19 @@
+<h1 id="tableLabel">Operator List</h1>
+<table class="table table-striped" aria-labelledby="tableLabel">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Level</th>
+      <th>Status</th>
+      <th>Last Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let op of Operator">
+      <td>{{ op.name }}</td>
+      <td>{{ op.level }}</td>
+      <td>{{ op.status }}</td>
+      <td>{{ op.lastUpdate }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,9 +1,8 @@
 
 
-export class Error{
-    constructor(obj?:any)
-    {
-        this.error = obj&& obj.error || "";
+export class Error {
+    constructor(obj?: any) {
+        this.error = obj && obj.error || "";
     }
-    error:string;
+    error: string;
 }

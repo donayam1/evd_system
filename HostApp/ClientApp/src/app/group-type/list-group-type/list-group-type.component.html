@@ -1,18 +1,17 @@
-<h1 id="tableLabel">Operator List</h1>
-<table class='table table-striped' aria-labelledby="tableLabel" >
+<h1 id="tableLabel">Group Type List</h1>
+<table class="table table-striped" aria-labelledby="tableLabel">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Level</th>
+      <th>ussdCode</th>
       <th>Status</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let grouptype of grouptype">
       <td>{{ grouptype.name }}</td>
-      <td>{{ grouptype.level }}</td>
+      <td>{{ grouptype.ussdCode }}</td>
       <td>{{ grouptype.status }}</td>
     </tr>
   </tbody>
 </table>
-

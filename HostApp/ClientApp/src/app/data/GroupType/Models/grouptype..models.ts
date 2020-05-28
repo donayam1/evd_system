@@ -1,15 +1,18 @@
 import { extend } from "webdriver-js-extender";
 import { ResponseBase } from "../../Shared/Models/responseBase";
+import { NamedItem } from '../../Shared/Models/nameditem.model';
 
-export class GroupType {
-
+export class GroupType extends NamedItem {
     constructor(obj?: any) {
-        this.id = obj && obj.id;
-
+        super(obj);
+        // this.id = obj && obj.id;
+        // this.name = obj && obj.name;
+        this.level = obj && obj.level;
+        this.status = obj && obj.status;
     }
 
-    id: number;
-    name: string;
+    // id: number;
+    // name: string;
     level: number;
     status: string;
 }

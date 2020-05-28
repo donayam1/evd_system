@@ -17,7 +17,7 @@ export class NotificationService {
     }
     public buildConnection()  {
         this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl("")
+        .withUrl("http://192.168.137.1:5001/singalHub")
         .build();
     }
     public startConnection() {

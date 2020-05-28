@@ -19,7 +19,7 @@ export class ListGroupTypeComponent implements OnInit {
 
     ngOnInit() {
         this.grouptypeService.getGroupType().subscribe(x => {
-            if (x.status == true) {
+            if (x.status === true) {
                 this.grouptype = x.groupTypes;
             } else {
                 this.isError = true;

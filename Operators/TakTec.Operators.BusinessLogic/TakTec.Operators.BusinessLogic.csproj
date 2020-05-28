@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>Enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    
+
+    <ProjectReference Include="..\TakTec.Data.Abstractions\TakTec.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\TakTec.Operators.BusinessLogic.Abstraction\TakTec.Operators.BusinessLogic.Abstraction.csproj" />
+    <ProjectReference Include="..\TakTec.Data.Abstractions\TakTec.Data.Abstractions.csproj" />
+
+
+    <Reference Include="Messages.Logging.Extensions">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.Logging.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Data.Enumerations">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Data.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Data.Entities.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.4" />
+  </ItemGroup>
+
+</Project>

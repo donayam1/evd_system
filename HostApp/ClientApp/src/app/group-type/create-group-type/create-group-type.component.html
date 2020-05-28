@@ -4,8 +4,11 @@
             <td>{{item.level}}</td>
             <td>{{item.name}}</td>
             <td>
-                <button (click)="deleteGroupType(item)" class="btn btn-primary">delete</button> 
+                <button (click)="deleteGroupType(item)" class="btn btn-danger">delete</button> 
             </td>
+         </tr>
+         <tr>
+             <button (click) = "saveGroupType(grouptypes)" class="btn btn-primary">Submit</button>
          </tr>
      </table>   
      <div *ngIf="grouptypes.length <= 0">
@@ -26,5 +29,5 @@
         <input name="label" [(ngModel)]="currentGroupType.name">
     </div>
     
-    <button (click)="addGroupType($event)" class="btn btn-primary">Submit link</button>
+    <button (click)="addGroupType($event)" class="btn btn-outline-primary">Add</button>
 </form>

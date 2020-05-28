@@ -11,6 +11,8 @@
     <ProjectReference Include="..\TakTec.Data.Abstractions\TakTec.Data.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.Operators.BusinessLogic.Abstraction\TakTec.Operators.BusinessLogic.Abstraction.csproj" />
     <ProjectReference Include="..\TakTec.Data.Abstractions\TakTec.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\TakTec.Operators.ViewModel\TakTec.Operators.ViewModel.csproj" />
+    <ProjectReference Include="..\TakTec.Operators.Mapper\TakTec.Operators.Mapper.csproj" />
 
 
     <Reference Include="Messages.Logging.Extensions">

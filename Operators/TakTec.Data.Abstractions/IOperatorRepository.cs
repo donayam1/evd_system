@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace TakTec.Data.Abstractions
 {
-    public interface IOperatorRepo : IGenericRepository<Operator>
+    public interface IOperatorRepository : IGenericRepository<Operator>
     {
         IQueryable<Operator> LoadNavigationProperties(IQueryable<Operator> items);
     }

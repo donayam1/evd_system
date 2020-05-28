@@ -8,20 +8,23 @@ using Messages.Logging.Extensions;
 using Microsoft.Extensions.Logging;
 using TakTec.Operators.BusinessLogic.Abstraction;
 using ExtCore.Data.Abstractions;
+using TakTec.Operators.ViewModel;
+using TakTec.Operators.Mapper;
+
 
 namespace TakTec.Operators.BusinessLogic
 {
     public class OperatorService : IOperatorService
     {
         
-        private readonly IOperatorRepo _operatorRepository;
+        private readonly IOperatorRepository _operatorRepository;
         private readonly ILogger<IOperatorService> _logger;
 
         public OperatorService(IStorage storage, ILogger<Operator> Logger){
-            _operatorRepository = storage.GetRepository<IOperatorRepo>();
+            _operatorRepository = storage.GetRepository<IOperatorRepository>();
             _logger= (ILogger<IOperatorService>)Logger;
         }
-        public Operator CreateOperator(Operator _operator)
+        public NewOperatorViewModel CreateOperator(Operator _operator,int  UIid)
         {
             bool exists= _operatorRepository.Exists(_operator.Id);
             if(exists){
@@ -29,10 +32,11 @@ namespace TakTec.Operators.BusinessLogic
                 return null;
             }
             else{
-                // TODO ViewModel to DomainModel and update OperatorViewModel.Status
+                
                 _operatorRepository.Create(_operator);
-                _logger.AddUserError("Operator Created successfully!");
-                return _operator;// return viewmodel
+                _logger.AddUserMesage("Operator Created successfully!");
+                var newOPViewModel = OperatorMapper.ToNewOperatorViewModel(_operator,UIid);
+                return newOPViewModel;// return viewmodel
             }
             
         }
@@ -43,11 +47,18 @@ namespace TakTec.Operators.BusinessLogic
                         .Skip(NumberOfItemsPerPage * (pageNo - 1))
                         .Take(NumberOfItemsPerPage)
                         .ToList();
-            
-            return items;
+            if(items ==null){
+                _logger.AddUserError("There is no operator in database!");
+                return null;
+            }
+            else{
+                string msg = "There are "+items.Count+" operators";
+                _logger.AddUserMesage(msg);
+                return items;
+            }
         }
 
-        public Operator UpdateOperator(Operator op)
+        public OperatorViewModel UpdateOperator(Operator op)
         {
 
             bool exists= _operatorRepository.Exists(op.Id);
@@ -56,10 +67,11 @@ namespace TakTec.Operators.BusinessLogic
                 return null;
             }
             else{
-                // TODO ViewModel to DomainModel and update OperatorViewModel.Status
+                
                 _operatorRepository.Edit(op);
-                _logger.AddUserError("Operator Updated successfully!");
-                return op;// return viewmodel
+                _logger.AddUserMesage("Operator Updated successfully!");
+                var opVM = OperatorMapper.ToViewModel(op,Status.UPDATED);
+                return opVM;// return viewmodel
             }
         }
     }

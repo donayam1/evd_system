@@ -17,6 +17,17 @@ namespace HostApp
     {
         public static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                      .MinimumLevel.Verbose()
+                      .MinimumLevel.Override("Microsoft", LogEventLevel.Verbose)
+                      .MinimumLevel.Override("System", LogEventLevel.Debug)
+                      .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Verbose)
+                      .Enrich.FromLogContext()
+                      .WriteTo.File($"logs/App{DateTime.Now.ToString("MM_dd_yyyy")}_log.txt", rollingInterval: RollingInterval.Day)
+
+                      .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Literate)
+                     .CreateLogger();
+
             CreateWebHostBuilder(args).Build().Run();
         }
 
@@ -30,18 +41,24 @@ namespace HostApp
                               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                               .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: false, reloadOnChange: true)
                               .AddJsonFile($"InitialSystemAccounts.{context.HostingEnvironment.EnvironmentName}.json", optional: false, reloadOnChange: true);
+                   }).ConfigureLogging((hostingContext, logging) =>
+                   {
+                       logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                       logging.AddConsole();
+                       logging.AddDebug();
+                       logging.AddEventSourceLogger();
                    });
-                   //.UseSerilog((context, config) =>
-                   //{
-                   //    config
-                   //        .MinimumLevel.Debug()
-                   //        .MinimumLevel.Override("Microsoft", LogEventLevel.Verbose)
-                   //        .MinimumLevel.Override("System", LogEventLevel.Verbose)
-                   //        .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Verbose)
-                   //        .Enrich.FromLogContext()
-                   //        .WriteTo.File($"logs/AppLog_{DateTime.Now.ToString("MM_dd_yyyy")}_log.txt")
-                   //        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Literate);
-                   //});
+            //.UseSerilog((context, config) =>
+            //{
+            //    config
+            //        .MinimumLevel.Debug()
+            //        .MinimumLevel.Override("Microsoft", LogEventLevel.Verbose)
+            //        .MinimumLevel.Override("System", LogEventLevel.Verbose)
+            //        .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Verbose)
+            //        .Enrich.FromLogContext()
+            //        .WriteTo.File($"logs/AppLog_{DateTime.Now.ToString("MM_dd_yyyy")}_log.txt")
+            //        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Literate);
+            //});
 
             return host;
 

@@ -8,12 +8,13 @@ import { NamedItem } from '../../Shared/Models/nameditem.model';
 })
 export class NotificationService {
 
-    private hubConnection: signalR.HubConnection;
+    public hubConnection: signalR.HubConnection;
     singalRecived = new EventEmitter<NamedItem>();
 
     constructor() {
         this.buildConnection();
         this.startConnection();
+        this.registerSignalEvents();
     }
     public buildConnection()  {
         this.hubConnection = new signalR.HubConnectionBuilder()
@@ -31,7 +32,7 @@ export class NotificationService {
     }
     public registerSignalEvents() {
         this.hubConnection.on("RecevieMessage", (user: String, message: String) => {
-                this.singalRecived.emit(new NamedItem({"name": user, "message": message}));
+                this.singalRecived.emit(new NamedItem({"name": user, "id": message}));
         });
     }
 

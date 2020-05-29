@@ -8,6 +8,7 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="ExtCore.Infrastructure" Version="5.0.0" />
+  
   </ItemGroup>
 
   <ItemGroup>

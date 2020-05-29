@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vouchers.BusinessLogic.Abstractions;
 
-namespace Vouchers.Backend
+namespace Vouchers.Backend.Controllers
 {
     public class VoucherUploadController : VoucherControllersBase
     {

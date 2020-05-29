@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Vouchers.Backend
+namespace Vouchers.Backend.Controllers
 {
     [Route("api/vouchers/[controller]")]
-    public abstract class VoucherControllersBase:ControllersBase
+    public class VoucherControllersBase:ControllersBase
     {
         public VoucherControllersBase(IUserMessageLogges logs) : 
             base(logs) { }

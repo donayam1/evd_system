@@ -70,6 +70,8 @@ gulp.task(
         gulp.src([TakVouchersRoot + "Vouchers.Data.Enumerations/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Data.Enumerations.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakVouchersRoot + "Vouchers.ServiceRegistrations/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.ServiceRegistrations.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakVouchersRoot + "Vouchers.ViewModels/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.ViewModels.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakVouchersRoot + "Vouchers.Configurations/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Configurations.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakVouchersRoot + "Vouchers.Data.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Data.Abstractions.dll"]).pipe(gulp.dest("Extensions"));
         
         
         cb();

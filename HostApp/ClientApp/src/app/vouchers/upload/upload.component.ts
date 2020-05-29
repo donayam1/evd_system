@@ -37,7 +37,6 @@ export class UploadComponent implements OnInit {
   }
 
   fileToUploaded($event: File) {
-    alert($event.name);
     this.fileToUpload = $event;
   }
 

@@ -9,14 +9,16 @@ namespace Vouchers.Data.Entities
             String purchaserOrderNumber,
             String batch,
             DateTime stopDate,
-            String startSequence,
-            int quantity
+            int startSequence,
+            int quantity,
+            float denomination
             ) :base("",EthioArt.Data.Enumerations.ResourceTypes.SITE) {
             this.PurchaserOrderNumber = purchaserOrderNumber;
             this.Batch = batch;
             this.StopDate = stopDate;
             this.StartSequence = startSequence;
             this.Quantity = quantity;
+            this.Denomination = denomination;
         }
 
         /// <summary>
@@ -38,12 +40,14 @@ namespace Vouchers.Data.Entities
         /// <summary>
         /// The start serial number of this batch 
         /// </summary>
-        public String StartSequence { get; set; }
+        public int StartSequence { get; set; }
 
         /// <summary>
         /// The total number of pins in this Voter 
         /// </summary>
         public int Quantity { get; set; }
+
+        public float Denomination { get; set; }
 
         /// <summary>
         /// The id of the key used to encrypt and store the voture numbers 

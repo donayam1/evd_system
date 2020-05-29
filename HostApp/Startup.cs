@@ -37,6 +37,12 @@ namespace HostApp
             });
 
             services.AddExtCore(this.extensionsPath, this.Configuration["Extensions:IncludingSubpaths"] == true.ToString());
+
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration => {
+                configuration.RootPath = "ClientApp/dist";
+            });
+
             ServiceProviderServiceAccesser.ServiceProvider = services.BuildServiceProvider();
 
         }
@@ -50,7 +56,7 @@ namespace HostApp
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
-            app.UseExtCore();
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -59,6 +65,9 @@ namespace HostApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseExtCore();
+            app.UseSpaStaticFiles();
 
             app.UseSpa(spa =>
             {

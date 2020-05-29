@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Voters.Data.Entities
+namespace Vouchers.Data.Entities
 {
     /// <summary>
     /// This represents all the voters bought by a specefied user 
@@ -17,6 +17,15 @@ namespace Voters.Data.Entities
         }
 
         public String VoucherId { get; set; }
+
+        /// <summary>
+        /// This filed show the current status of Voucher,
+        /// e.g. if a sub-disributor reserves a Voucher the he sells it
+        /// to a distributor we will mark through which user it has been
+        /// sent to a retailer. This indicates if this is the current state 
+        /// of the voucher.  
+        /// </summary>
+        public Boolean IsCurrent { get; set; } = true;
         
 
     }

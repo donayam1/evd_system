@@ -1,1 +1,19 @@
-<p>edit-operator works!</p>
+<div class="card bg-success col-6 mr-auto ml-auto" *ngIf = "operator">
+    <div class="card-body">
+        <form class="" *ngFor = "let item of operator">
+            <h4 class="form-text card-title mt-md-3 mb-md-3">Edit an Operator</h4>
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input class="form-control" name="name" value="{{item.level}}" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="ussd">USSD Recharge Code:</label>
+                <input class="form-control" name="ussd" value="{{item.name}}">
+            </div>
+        
+            <button (click)="updateOperator($event)" class="btn btn-outline-primary">Update</button>
+        </form>
+    </div>
+</div>

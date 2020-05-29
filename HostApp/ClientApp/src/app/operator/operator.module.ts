@@ -7,10 +7,11 @@ import { OperatorRoutingModule } from './operator-routing.module';
 import { CreateOperatorComponent } from './create-operator/create-operator.component';
 import { ListOperatorComponent } from './list-operator/list-operator.component';
 import { EditOperatorComponent } from './edit-operator/edit-operator.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
-  declarations: [CreateOperatorComponent, ListOperatorComponent, EditOperatorComponent],
+  declarations: [CreateOperatorComponent, ListOperatorComponent, EditOperatorComponent, HomeComponent],
   imports: [
     CommonModule,
     OperatorRoutingModule,

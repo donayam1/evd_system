@@ -4,8 +4,8 @@
   "private": true,
   "devDependencies": {},
   "dependencies": {
-    "gulp": "^4.0.0",
-    "del": "^3.0.0",
-    "yargs": "13.2.4"
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "yargs": "^15.3.1"
   }
 }

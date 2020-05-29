@@ -4,8 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using Vouchers.Data.Entities;
 
-namespace Voters.Data.Entities
+namespace Vouchers.Data.Entities
 {
     /// <summary>
     /// A retailer can request a sub distributor to re-transmit a voture if he pays for it 
@@ -13,9 +14,9 @@ namespace Voters.Data.Entities
     /// ready for re transmission. This table contains those marked votures and we will send them
     /// to the retailer when the minWaitMinutes time reaches above the created date time 
     /// </summary>
-    public class VotureMarkedForReTransmit : EntityBase 
+    public class VoucherMarkedForReTransmit : EntityBase 
     {
-        public VotureMarkedForReTransmit(String voterId,
+        public VoucherMarkedForReTransmit(String voterId,
             int minWaitMinutes) :
             base("",ResourceTypes.GROUP) {
             this.VoterId = voterId;

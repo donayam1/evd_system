@@ -28,7 +28,7 @@ export class RemoteItemResolver implements IItemResolver {
 
 
 
-        const url = AppConfig.settings.apiServers.moviesBackendServer + "/api/itemresolvers/ItemResolver";
+        const url = AppConfig.settings.apiServers.authServer + "/api/itemresolvers/ItemResolver";
         const item = SelectSearchIndexForItem(this.state.value)(id, type);
         if (item == null) {
             const obs = Observable.create(observer => {

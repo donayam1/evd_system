@@ -4,9 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using Voters.Data.Enumerations;
+using Vouchers.Data.Entities;
+using Vouchers.Data.Enumerations;
 
-namespace Voters.Data.Entities
+namespace Vouchers.Data.Entities
 {
     public class VoucherStatus:EntityBase 
     {

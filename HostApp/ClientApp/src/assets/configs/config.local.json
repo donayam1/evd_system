@@ -1,0 +1,20 @@
+{
+    "env":{
+        "name":"local"
+    },
+    "apiServers":{
+        "authServer":"http://localhost:5001"
+    },
+  "authSettings": {
+    "redirectUri": "http://localhost:5001",
+    "clientId": "evd_public",
+    "dummyClientSecret": "secret",
+    "oidc": true,
+    "skipSubjectCheck": true,
+    "scope": "email profile openid EVDApi BillingApi RolesApi ",
+    "issuer": "http://localhost:5001",
+    "responseType": "token id_token",
+    "showDebugInformation": true,
+    "requireHttps": false
+  }
+}

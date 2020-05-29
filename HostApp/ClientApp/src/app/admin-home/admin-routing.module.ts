@@ -8,9 +8,9 @@ const AdminRoutes: Routes = [
     path: '', component: AdminHomeComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'groups', loadChildren:'../group-type/group-type.module#GroupTypeModule' },
-      { path: 'operators', loadChildren:'../operator/operator.module#OperatorModule' }
-      
+      { path: 'groups', loadChildren: '../group-type/group-type.module#GroupTypeModule' },
+      { path: 'operators', loadChildren: '../operator/operator.module#OperatorModule' },
+      { path: 'vouchers', loadChildren: '../vouchers/vouchers.module#VouchersModule' }
 
     ]
   },

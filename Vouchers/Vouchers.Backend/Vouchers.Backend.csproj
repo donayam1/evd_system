@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Vouchers.BusinessLogic.Abstractions\Vouchers.BusinessLogic.Abstractions.csproj" />
     <ProjectReference Include="..\Vouchers.BusinessLogic\Vouchers.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Vouchers.ViewModels\Vouchers.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

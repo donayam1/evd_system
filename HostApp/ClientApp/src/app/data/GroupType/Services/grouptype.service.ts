@@ -2,12 +2,13 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { GroupType, GroupTypesResponse } from "../Models/grouptype..models";
 import { of, Observable } from "rxjs";
+import { AppConfig } from '../../Configs/Services/app.config';
 
 @Injectable({
   providedIn: "root",
 })
 export class GrouptypeService {
-  private readonly url = "/api/roles/roleTypes1";
+  private readonly url = "/api/roles/roleTypes";
 
   constructor(private http: HttpClient) {}
 
@@ -31,7 +32,9 @@ export class GrouptypeService {
   // }
 
   fetchGroupType(): Observable<GroupTypesResponse[]>{
-    return this.http.get<GroupTypesResponse[]>(this.url);
+    const url =  AppConfig.settings.apiServers.authServer + this.url;
+
+    return this.http.get<GroupTypesResponse[]>(url);
   }
 
   saveGroupTypes(grouptypes: GroupType): Observable<any> {

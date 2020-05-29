@@ -103,6 +103,7 @@ export class AuthService {
           Id: data.sub,
           Token: tok
         });
+        // this.loggedIn(user0);
         observer.next(user0);
         observer.complete();
       })

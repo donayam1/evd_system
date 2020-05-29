@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
   register(event?: any) {
     // let returnUrl="";//window.location.origin.concat(this.router.url)  ;
     const registerUrl = AppConfig.settings.apiServers.authServer + this.registerUrl + "?returnUrl=" +
-      encodeURIComponent(AppConfig.settings.apiServers.moviesBackendServer);
+      encodeURIComponent(AppConfig.settings.apiServers.authServer);
 
     document.location.href = registerUrl;
     // this.router.navigate(['/externalRedirect',{externalUrl:registerUrl}],{
@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
   }
   resetPassword() {
     const registerUrl = AppConfig.settings.apiServers.authServer + this.forgotPassword + "?returnUrl=" +
-    encodeURIComponent(AppConfig.settings.apiServers.billingServer);
+    encodeURIComponent(AppConfig.settings.apiServers.authServer);
 
     document.location.href = registerUrl;
     return true;

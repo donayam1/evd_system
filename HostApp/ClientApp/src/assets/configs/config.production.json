@@ -11,7 +11,7 @@
         "dummyClientSecret": "secret",
         "oidc":true,  
         "skipSubjectCheck":true,      
-        "scope" :"email profile openid BillingApi",
+        "scope" :"email profile openid BillingApi RolesApi",
         "issuer": "https://auth.hulubeje.com",
         "responseType":"token id_token", 
         "showDebugInformation" : true        

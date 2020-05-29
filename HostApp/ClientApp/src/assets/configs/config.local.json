@@ -11,7 +11,7 @@
     "dummyClientSecret": "secret",
     "oidc": true,
     "skipSubjectCheck": true,
-    "scope": "email profile openid EVDApi BillingApi ",
+    "scope": "email profile openid EVDApi BillingApi RolesApi ",
     "issuer": "http://localhost:5001",
     "responseType": "token id_token",
     "showDebugInformation": true,

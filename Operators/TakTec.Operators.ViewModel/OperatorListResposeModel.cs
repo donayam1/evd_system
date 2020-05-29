@@ -6,6 +6,6 @@ namespace TakTec.Operators.ViewModel
 {
     public class OperatorListResposeModel:EthioArt.Backend.Models.Responses.ResponseBase
     {
-        public List<Operator> operators{get;set;}=default;
+        public List<OperatorViewModel> operators{get;set;}=default;
     }
 }

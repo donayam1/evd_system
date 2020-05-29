@@ -5,6 +5,7 @@
     <Nullable>Enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
     <ProjectReference Include="..\TakTec.Data.Abstractions\TakTec.Data.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.Data.Entities\TakTec.Data.Entities.csproj" />
     <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />

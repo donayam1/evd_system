@@ -1,0 +1,7 @@
+<div *ngFor="let item of responses">
+    
+    <div class="alert" [ngClass]="{'alert-danger': !item.status,'alert-success':item.status}" >
+        {{item.messages|json}}
+    </div>
+    
+</div>

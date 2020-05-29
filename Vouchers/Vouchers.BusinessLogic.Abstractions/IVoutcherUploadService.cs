@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Vouchers.ViewModels;
 
 namespace Vouchers.BusinessLogic.Abstractions
 {
@@ -12,7 +13,7 @@ namespace Vouchers.BusinessLogic.Abstractions
         /// directory and decrypt, verify and insert the upload voucher to the system
         /// database 
         /// </summary>
-        public Task UploadVoutchers();
+        public void UploadVoutchersAsync(UploadedFile file);
 
     }
 }

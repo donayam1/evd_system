@@ -212,3 +212,4 @@ tools/
 tempkey.rsa
 hostApp/Extensions/
 hostApp/logs/
+hostApp/Upload/

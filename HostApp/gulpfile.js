@@ -69,6 +69,7 @@ gulp.task(
         gulp.src([TakVouchersRoot + "Vouchers.Data.EntityFramework/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Data.EntityFramework.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakVouchersRoot + "Vouchers.Data.Enumerations/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Data.Enumerations.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakVouchersRoot + "Vouchers.ServiceRegistrations/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.ServiceRegistrations.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakVouchersRoot + "Vouchers.ViewModels/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.ViewModels.dll"]).pipe(gulp.dest("Extensions"));
         
         
         cb();

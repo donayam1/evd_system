@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NotificationService } from './data/Notification/Services/notification.services';
+
 
 @Component({
   selector: 'app-root',
@@ -7,11 +7,7 @@ import { NotificationService } from './data/Notification/Services/notification.s
 })
 export class AppComponent {
   title = 'app';
-  message: string;
-  constructor(private notificationService: NotificationService){
-    this.notificationService.singalRecived.subscribe(x=>{
-        this.message = x;
-    });
+  constructor() {
 
   }
 }

@@ -18,7 +18,7 @@ export class GroupType extends NamedItem {
 }
 
 export class GroupTypesResponse extends ResponseBase {
-
+     
     constructor(obj?: any) {
         super(obj);
         this.totalItems = obj && obj.totalItems;

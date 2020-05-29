@@ -8,7 +8,7 @@ import { Operator } from "src/app/data/Operator/Models/operator.model";
   styleUrls: ["./list-operator.component.css"],
 })
 export class ListOperatorComponent implements OnInit {
-  operator: any;
+  operator: Operator[] =[];
 
   constructor(private operatorService: OperatorService) {}
 

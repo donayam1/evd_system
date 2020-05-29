@@ -10,12 +10,7 @@ const AdminRoutes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'groups', loadChildren:'../group-type/group-type.module#GroupTypeModule' },
       { path: 'operators', loadChildren:'../operator/operator.module#OperatorModule' }
-      // { path: 'movies', loadChildren: '../movies-admin/movies-admin.module#MoviesAdminModule' },
-      // { path: 'genres', loadChildren: '../genre-admin/genre-admin.module#GenreAdminModule' },
-      // { path: 'orgs', loadChildren: '../organizations/organizations-admin.module#OrganizationsAdminModule' },
-      // { path: 'show/:id', loadChildren: '../show-admin/show-admin.module#ShowAdminModule' },
-      // { path: 'travels', loadChildren: '../travels/travels.module#TravelsModule' }
-      // { path: 'region/:id', loadChildren: '../region/region.module#RegionModule'}
+      
 
     ]
   },

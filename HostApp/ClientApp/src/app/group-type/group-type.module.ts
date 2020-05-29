@@ -6,9 +6,10 @@ import { GroupTypeRoutingModule } from './group-type-routing.module';
 import { CreateGroupTypeComponent } from './create-group-type/create-group-type.component';
 import { ListGroupTypeComponent } from './list-group-type/list-group-type.component';
 import { EditGroupTypeComponent } from './edit-group-type/edit-group-type.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [CreateGroupTypeComponent, ListGroupTypeComponent, EditGroupTypeComponent],
+  declarations: [CreateGroupTypeComponent, ListGroupTypeComponent, EditGroupTypeComponent, HomeComponent],
   imports: [
     CommonModule,
     GroupTypeRoutingModule,

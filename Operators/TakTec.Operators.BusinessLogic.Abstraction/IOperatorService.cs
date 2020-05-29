@@ -9,6 +9,6 @@ namespace TakTec.Operators.BusinessLogic.Abstraction
     {
         NewOperatorViewModel CreateOperator(Operator _operator,int  UIid);
         OperatorViewModel UpdateOperator(Operator op);
-        List <Operator> ListOperator(int pageNo, int NumberOfItemsPerPage);
+        List <OperatorViewModel> ListOperator(int pageNo, int NumberOfItemsPerPage);
     }
 }

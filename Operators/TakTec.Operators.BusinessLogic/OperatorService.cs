@@ -41,7 +41,7 @@ namespace TakTec.Operators.BusinessLogic
             
         }
 
-        public List<Operator> ListOperator(int pageNo, int NumberOfItemsPerPage)
+        public List<OperatorViewModel> ListOperator(int pageNo, int NumberOfItemsPerPage)
         {
             var items = _operatorRepository.All()
                         .Skip(NumberOfItemsPerPage * (pageNo - 1))
@@ -54,7 +54,7 @@ namespace TakTec.Operators.BusinessLogic
             else{
                 string msg = "There are "+items.Count+" operators";
                 _logger.AddUserMesage(msg);
-                return items;
+                return OperatorMapper.ToViewModelList(items);
             }
         }
 
@@ -70,7 +70,7 @@ namespace TakTec.Operators.BusinessLogic
                 
                 _operatorRepository.Edit(op);
                 _logger.AddUserMesage("Operator Updated successfully!");
-                var opVM = OperatorMapper.ToViewModel(op,Status.UPDATED);
+                var opVM = OperatorMapper.ToViewModel(op);
                 return opVM;// return viewmodel
             }
         }

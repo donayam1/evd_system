@@ -6,10 +6,12 @@ import { ListGroupTypeComponent } from './list-group-type/list-group-type.compon
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {path:'', component: HomeComponent},
-  {path:'list', component: ListGroupTypeComponent},
-  {path:'edit', component: EditGroupTypeComponent},
-  {path:'add', component: CreateGroupTypeComponent}
+  {path:'', component: HomeComponent ,children:[
+    {path:'list', component: ListGroupTypeComponent},
+    {path:'edit', component: EditGroupTypeComponent},
+    {path:'add', component: CreateGroupTypeComponent}
+  ]}
+  
 ];
 
 @NgModule({

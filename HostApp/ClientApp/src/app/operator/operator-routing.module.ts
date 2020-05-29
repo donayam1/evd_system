@@ -5,10 +5,11 @@ import { ListOperatorComponent } from './list-operator/list-operator.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  { path: "list", component: ListOperatorComponent },
+  {path: '', component: HomeComponent, children:[
+    { path: "list", component: ListOperatorComponent },
   { path: "add", component: CreateOperatorComponent },
   { path: "edit", component: CreateOperatorComponent }
+  ]}
 ];
 
 @NgModule({

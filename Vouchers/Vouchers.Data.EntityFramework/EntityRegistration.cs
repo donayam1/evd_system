@@ -2,7 +2,7 @@
 
 namespace Vouchers.Data.EntityFramework
 {
-    public class EntityRegistration
+    public class EntityRegistration 
     {
     }
 }

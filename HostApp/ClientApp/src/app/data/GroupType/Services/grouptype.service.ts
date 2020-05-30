@@ -12,30 +12,12 @@ export class GrouptypeService {
 
   constructor(private http: HttpClient) {}
 
-  // getGroupType(): Observable<GroupTypesResponse> {
-  //   let groupTypesResponse: GroupTypesResponse = new GroupTypesResponse();
-
-  //   let types: GroupType[] = Array();
-  //   let gt = new GroupType({
-  //     id: "1",
-  //     name: "new",
-  //     level: 2,
-  //     status: "active",
-  //   });
-  //   types.push(gt);
-
-  //   groupTypesResponse.groupTypes = types;
-  //   groupTypesResponse.status = false;
-  //   console.log(groupTypesResponse)
-
-  //   return of(groupTypesResponse); // this.http.get<GroupType[]>(this.url);
-  // }
-
+  
   fetchGroupType(): Observable<GroupTypesResponse>{
     const url =  AppConfig.settings.apiServers.authServer + this.url;
     const observer = Observable.create(observer=>{
-        this.http.get<GroupTypesResponse>(url).subscribe(x=>{
-          const response = new GroupTypesResponse(x);
+        this.http.get<GroupTypesResponse>(url).subscribe(data=>{
+          const response = new GroupTypesResponse(data);
           observer.next(response);
           observer.complete();
         },error=>{

@@ -31,10 +31,19 @@ export class GrouptypeService {
   //   return of(groupTypesResponse); // this.http.get<GroupType[]>(this.url);
   // }
 
-  fetchGroupType(): Observable<GroupTypesResponse[]>{
+  fetchGroupType(): Observable<GroupTypesResponse>{
     const url =  AppConfig.settings.apiServers.authServer + this.url;
-
-    return this.http.get<GroupTypesResponse[]>(url);
+    const observer = Observable.create(observer=>{
+        this.http.get<GroupTypesResponse>(url).subscribe(x=>{
+          const response = new GroupTypesResponse(x);
+          observer.next(response);
+          observer.complete();
+        },error=>{
+          observer.error(error);
+          observer.complete();
+        });
+    })
+     return observer;
   }
 
   saveGroupTypes(grouptypes: GroupType): Observable<any> {

@@ -14,7 +14,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let grouptype of grouptype">
+            <tr *ngFor="let grouptype of grouptype.groupTypes">
               <td>{{ grouptype.name }}</td>
               <td>{{ grouptype.level }}</td>
               <td><button (click)="editGroupType($event)" class="btn btn-outline-secondary">Edit</button></td>

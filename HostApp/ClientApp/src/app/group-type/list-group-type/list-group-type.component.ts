@@ -9,20 +9,23 @@ import { Message } from "../../data/Shared/Models/responseBase";
   styleUrls: ["./list-group-type.component.css"],
 })
 export class ListGroupTypeComponent implements OnInit {
-  grouptype: GroupTypesResponse[];
+  grouptype: GroupTypesResponse;
   isError: boolean;
+  roleTypes=[]
 
   messages: Message[];
   constructor(private grouptypeService: GrouptypeService) {
     //this.grouptype = Array();
     this.isError = false;
     this.messages = Array();
+    this.grouptype = new GroupTypesResponse();
   }
 
   ngOnInit() {
-    this.grouptypeService.fetchGroupType().subscribe((response : GroupTypesResponse[])=>{
-     console.log(response);
-     this.grouptype =response;
+    this.grouptypeService.fetchGroupType().subscribe((response : GroupTypesResponse)=>{
+     //console.log(response);
+     this.grouptype = response;
+     console.log(this.grouptype)
     })
      
   }

@@ -1,5 +1,6 @@
 ﻿using EthioArt.Data.Entities.Abstraction;
 using System;
+using System.Collections.Generic;
 
 namespace Vouchers.Data.Entities
 {
@@ -59,6 +60,9 @@ namespace Vouchers.Data.Entities
         /// 
         /// </summary>
         public String? EncryptionKeyId { get; set; }
+
+        public List<Voucher> Vouchers { get; set; } = new List<Voucher>();
+
 
     }
 }

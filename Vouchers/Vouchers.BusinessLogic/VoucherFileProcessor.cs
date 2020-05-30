@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,8 @@ namespace Vouchers.BusinessLogic
         private readonly VoucherFileParameters voucherFileParameters;
         private readonly ILogger<VoucherFileProcessor> _logger;
         private readonly IStorage _storage;
-        private readonly IVouchersRepository _vouchersRepository;
+        //private readonly IVouchersRepository _vouchersRepository;
+        private readonly IVoucherBatchRepository _voucherBatchRepository;
         public VoucherFileProcessor(IOptions<VoucherFileParameters> voucherFileParameterOptions,
             ILogger<VoucherFileProcessor> logger,
             IStorage storage) {
@@ -28,10 +30,15 @@ namespace Vouchers.BusinessLogic
                 throw new ArgumentNullException(nameof(IOptions<VoucherFileParameters>));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _storage = storage ?? throw new ArgumentNullException(nameof(storage));
-
+            //_vouchersRepository = _storage.GetRepository<IVouchersRepository>() ??
+            //    throw new ArgumentNullException(nameof(IVouchersRepository));
+            _voucherBatchRepository = _storage.GetRepository<IVoucherBatchRepository>()??
+                throw new ArgumentNullException(nameof(IVoucherBatchRepository));
 
         }
-
+        public VoucherFileProcessor(VoucherFileParameters parameters) {
+          
+        }
 
         public async Task<UploadVoucherResponse> ProcessFile(String path) {
 
@@ -41,7 +48,8 @@ namespace Vouchers.BusinessLogic
             };
             try
             {
-                System.IO.StreamReader f = new System.IO.StreamReader(path);
+                using StreamReader f = new StreamReader(path);
+
                 String line;
                 Boolean readingHeader = true;
                 Boolean endFound = false;
@@ -49,25 +57,29 @@ namespace Vouchers.BusinessLogic
                 VoucherBatch batch = new VoucherBatch("", "", DateTime.Now, 0, 0, 0);
                 while ((line = f.ReadLine()) != null)
                 {
+                    Console.WriteLine(line);
                     lineNumber++;
                     if (readingHeader)
                     {
-                        VoucherFileParameterTypes type = getType(line);
+                        
+                        VoucherFileParameterTypes type = getType(line,out String value);
                         if (type == VoucherFileParameterTypes.Begin) {
+                            readingHeader = false;
                             continue;
                         }
-                        updateBatch(batch, line, type);
+                        updateBatch(batch, value, type);
                         
                     }
                     else  //Reading pins
                     {
-                        VoucherFileParameterTypes type = getType(line);
+                        VoucherFileParameterTypes type = getType(line,out String value);
                         if (type == VoucherFileParameterTypes.End)
                         {
                             endFound = true;
                             break;
                         }
                         Voucher v = GetVoucher(line,lineNumber, batch.Id);
+                        batch.Vouchers.Add(v);
                     }
                 }
 
@@ -75,21 +87,36 @@ namespace Vouchers.BusinessLogic
                     _logger.LogWarning($"Voucher file {path} does not have end tag");
                 }
 
+
+                _voucherBatchRepository.Create(batch);
+                _storage.Save();
             }
             catch (FileNotFoundException e)
             {
                 _logger.LogError($"file {path} not found. ");
                 response0.Messages.Add(
                          new Message("Unknowen Error ..... Please contact the administrator.",
-                         Messages.Enumeration.MessageTypes.USER_MESSAGE, "200")
+                         Messages.Enumeration.MessageTypes.USER_ERROR_REPORT, "200")
                      );
+                return response0;
             }
             catch (Exception e)
             {
-
+                _logger.LogError(e.InnerException, e.Message);
+                response0.Messages.Add(
+                        new Message("Unknowen Error ..... Please contact the administrator.",
+                        Messages.Enumeration.MessageTypes.USER_ERROR_REPORT, "200")
+                    );
+                return response0;
             }
-
-
+            finally{ 
+            
+            }
+            response0.Messages.Add(
+                       new Message("Sucessfully uploaded voucher file.",
+                       Messages.Enumeration.MessageTypes.USER_MESSAGE, "200")
+                   );
+            response0.Status = true;
 
             return response0;
         }
@@ -142,21 +169,15 @@ namespace Vouchers.BusinessLogic
                     }
                     break;
                 case VoucherFileParameterTypes.StopDate:
-                    bool dres = DateTime.TryParse(line, out DateTime stopDate);
-                    if (dres)
-                    {
-                        batch.StopDate = stopDate;
-                    }
-                    else
-                    {
-                        throw new Exception($"Error parsing date {line}");
-                    }
+                    DateTime stopDate = DateTime.ParseExact(line,"yyyyMMdd",
+                        CultureInfo.InvariantCulture);
+                    batch.StopDate = stopDate;
                     break;
 
                 case VoucherFileParameterTypes.VoucherType:
                     break;
-                case VoucherFileParameterTypes.UNKnowen:
-                    throw new Exception($"Unknowen voucher tag found {line}");
+                default:
+                    break;
 
 
             }
@@ -197,8 +218,18 @@ namespace Vouchers.BusinessLogic
             return v;
         }
 
-        private VoucherFileParameterTypes getType(String parameter)
+        private VoucherFileParameterTypes getType(String parameter0, out String value)
         {
+            String []parameters = parameter0.Split(":");
+            String parameter = parameters[0];
+            if (parameters.Length > 1)
+                value = parameters[1];
+            else {
+                value = "";
+            }
+            if (String.IsNullOrWhiteSpace(parameter)) {
+                return VoucherFileParameterTypes.UNKnowen;
+            }
 
             if (String.Compare(parameter, this.voucherFileParameters.PoNo, true) == 0)
             {

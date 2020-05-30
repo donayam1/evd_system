@@ -16,6 +16,7 @@ namespace Vouchers.ServiceRegistrations
         {            
             services.AddSignalR();
             services.AddScoped<IVoucherUploadService, VoucherUploadService>();
+            services.AddScoped<IVoucherFileProcessor, VoucherFileProcessor>();
 
             IConfiguration config = serviceProvider.GetService<IConfiguration>()
                 ??throw new NullReferenceException(nameof(IConfiguration));

@@ -1,29 +1,8 @@
-<!--Registry form to add group types-->
-<div class="card bg-light">
-    <div class="card-body mx-md-auto">
-        <form class="mx-md-auto">
-            <h4 class="form-text card-title mt-md-3 mb-md-4 text-md-center">Add Group Types</h4>
-        
-            <div class="form-group">
-                <label for="level">Level:</label>
-                <input class="form-control" name="level" [(ngModel)]="currentGroupType.level" type="number" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="label">Label:</label>
-                <input class="form-control" name="label" [(ngModel)]="currentGroupType.name" type="text" required>
-            </div>
-            
-            <button (click)="addGroupType($event)" class="btn btn-outline-secondary">Add</button>
-        </form>
-    </div>
-</div>
-
 <!--A validation table to confirm and submit to store-->
-<div class="card text-md-center" *ngIf="grouptypes.length > 0">
+<div class="card bg-transparent col-md-7 mr-auto ml-auto mb-md-5" *ngIf="grouptypes.length > 0">
     <div class="card-header">Confirmation Table</div>
     <div class="card-body">
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">Level</th>
@@ -40,11 +19,32 @@
             </tbody>
         </table>
     </div>
-    <div class="card-footer">
-        <button (click) = "saveGroupType(grouptypes)" class="btn btn-primary">Submit</button>
+    <div class="card-footer float-md-right">
+        <button (click) = "saveGroupType(grouptypes)" class="btn btn-primary float-md-right mr-md-4">Submit</button>
     </div>
       
     <div *ngIf="grouptypes.length <= 0">
         <!-- Add some data -->
+    </div>
+</div>
+
+<!--Registry form to add group types-->
+<div class="card bg-light col-md-5 mr-auto ml-auto">
+    <div class="card-body mx-md-auto">
+        <form class="mx-md-auto">
+            <h4 class="form-text card-title mt-md-3 mb-md-4 text-md-center">Add Group Types</h4>
+        
+            <div class="form-group">
+                <label for="level">Level:</label>
+                <input class="form-control" name="level" [(ngModel)]="currentGroupType.level" type="number" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="label">Label:</label>
+                <input class="form-control" name="label" [(ngModel)]="currentGroupType.name" type="text" required>
+            </div>
+            
+            <button (click)="addPo($event)" class="btn btn-outline-secondary">Add</button>
+        </form>
     </div>
 </div>

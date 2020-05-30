@@ -42,8 +42,7 @@ export class UploadComponent implements OnInit {
 
   uploadFile() {
     this.fileUploadService.uploadFiles(this.fileToUpload, "/api/Vouchers/vouchers/Upload").
-      subscribe(x => {
-        alert("sucess");
+      subscribe(x => {       
       }, error => {
         alert("faile");
       });

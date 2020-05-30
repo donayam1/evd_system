@@ -22,10 +22,23 @@ export class GroupTypesResponse extends ResponseBase {
     constructor(obj?: any) {
         super(obj);
         this.totalItems = obj && obj.totalItems;
-        this.groupTypes = obj && obj.groupTypes.map(x => new GroupType(x));
+        this.groupTypes = obj && obj.roleTypes.map(x => new GroupType(x));
 
     }
 
     totalItems: number;
     groupTypes: GroupType[];
+}
+
+export class GroupTypeResponse extends ResponseBase {
+     
+    constructor(obj?: any) {
+        super(obj);
+        this.totalItems = obj && obj.totalItems;
+        this.groupType = obj && new GroupType(obj);
+
+    }
+
+    totalItems: number;
+    groupType: GroupType;
 }

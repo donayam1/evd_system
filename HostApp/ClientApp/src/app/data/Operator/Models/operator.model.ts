@@ -1,4 +1,5 @@
 import { NamedItem } from "../../Shared/Models/nameditem.model";
+import { ResponseBase } from "../../Shared/Models/responseBase";
 
 export class Operator extends NamedItem {
   constructor(obj?: any) {
@@ -12,4 +13,15 @@ export class Operator extends NamedItem {
   ussdCode: string;
   status: number;
   lastUpdate: Date;
+}
+
+export class OperatorResponse extends ResponseBase {
+
+  constructor(obj? : any){
+    super(obj);
+    this.totalItems = obj && obj.totalItems;
+    this.operators = obj && obj.operators.map(op => new Operator(op));
+  }
+  totalItems: number;
+  operators: Operator[];
 }

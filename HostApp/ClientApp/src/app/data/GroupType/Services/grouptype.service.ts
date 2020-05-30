@@ -34,7 +34,15 @@ export class GrouptypeService {
   }
 
   saveGroupTypes(grouptypes: GroupType): Observable<any> {
-    return this.http.post<any>(this.url, grouptypes);
+    let groupTypesResponse: GroupTypesResponse = new GroupTypesResponse();
+    
+    let gt = new GroupType({id: 1, name: "ethioTel", level: 100, status: "active"});
+    groupTypesResponse.grouptype = gt;
+    groupTypesResponse.status = false;
+
+    return of(groupTypesResponse);
+
+      //return this.http.post<any>(this.url, grouptypes);
   }
 
   updateGroupType(grouptype: GroupType): Observable<any>{

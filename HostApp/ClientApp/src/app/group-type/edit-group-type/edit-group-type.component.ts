@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupType } from 'src/app/data/GroupType/Models/grouptype..models';
 import { GrouptypeService } from 'src/app/data/GroupType/Services/grouptype.service';
+import { Message } from 'src/app/data/Shared/Models/responseBase';
 
 @Component({
   selector: 'app-edit-group-type',
@@ -9,7 +10,13 @@ import { GrouptypeService } from 'src/app/data/GroupType/Services/grouptype.serv
 })
 export class EditGroupTypeComponent implements OnInit {
   grouptype: GroupType;
-  constructor(private grouptypeService: GrouptypeService) { }
+  isError: boolean;
+  messages: Message[];
+  constructor(private grouptypeService: GrouptypeService) {
+    //this.grouptype = new GroupType();
+    this.isError = false;
+    this.messages = Array();
+  }
 
   updateGroupType(){
     this.grouptypeService.updateGroupType(this.grouptype).subscribe(success=>{}, err=>{});

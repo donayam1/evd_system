@@ -23,9 +23,11 @@ export class GroupTypesResponse extends ResponseBase {
         super(obj);
         this.totalItems = obj && obj.totalItems;
         this.groupTypes = obj && obj.groupTypes.map(x => new GroupType(x));
+        this.grouptype = obj && obj.grouptype.map(x => new GroupType(x));
 
     }
 
     totalItems: number;
     groupTypes: GroupType[];
+    grouptype: GroupType;
 }

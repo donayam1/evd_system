@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { OperatorService } from "src/app/data/Operator/Services/operator.service";
-import { Operator } from "src/app/data/Operator/Models/operator.model";
+import { Operator, OperatorResponse } from "src/app/data/Operator/Models/operator.model";
 
 @Component({
   selector: "app-list-operator",
@@ -8,12 +8,12 @@ import { Operator } from "src/app/data/Operator/Models/operator.model";
   styleUrls: ["./list-operator.component.css"],
 })
 export class ListOperatorComponent implements OnInit {
-  operator: Operator[] =[];
+  operator: OperatorResponse;
 
   constructor(private operatorService: OperatorService) {}
 
   ngOnInit() {
-    this.operatorService.getOperator().subscribe((data: Operator[]) => {
+    this.operatorService.fetchOperator().subscribe((data: OperatorResponse) => {
       this.operator = data;
     });
   }

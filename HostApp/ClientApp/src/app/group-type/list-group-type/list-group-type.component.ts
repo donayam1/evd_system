@@ -12,8 +12,8 @@ export class ListGroupTypeComponent implements OnInit {
   grouptype: GroupTypesResponse;
   isError: boolean;
   roleTypes=[]
-
   messages: Message[];
+  
   constructor(private grouptypeService: GrouptypeService) {
     //this.grouptype = Array();
     this.isError = false;
@@ -23,7 +23,6 @@ export class ListGroupTypeComponent implements OnInit {
 
   ngOnInit() {
     this.grouptypeService.fetchGroupType().subscribe((response : GroupTypesResponse)=>{
-     //console.log(response);
      this.grouptype = response;
      console.log(this.grouptype)
     })

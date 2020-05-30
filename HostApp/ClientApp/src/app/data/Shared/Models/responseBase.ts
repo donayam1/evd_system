@@ -20,6 +20,6 @@ export class ResponseBase {
 
     constructor(obj?: any) {
         this.status = obj && obj.status;
-        this.messages = obj && obj.messages;
+        this.messages = obj && obj.messages || Array();
     }
 }

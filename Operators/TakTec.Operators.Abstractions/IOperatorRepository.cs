@@ -1,12 +1,12 @@
 ﻿using System.Reflection.Metadata;
 using System;
-using TakTec.Data.Entities;
+using TakTec.Operators.Entities;
 using EthioArt.Data.Abstraction;
 using EthioArt.Data.Entities.Abstraction;
 using ExtCore.Data.Abstractions;
 using System.Linq;
 
-namespace TakTec.Data.Abstractions
+namespace TakTec.Operators.Abstractions
 {
     public interface IOperatorRepository : IGenericRepository<Operator>
     {

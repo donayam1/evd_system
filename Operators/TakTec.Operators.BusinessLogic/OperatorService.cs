@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System;
 using System.Collections.Generic;
-using TakTec.Data.Abstractions;
-using TakTec.Data.Entities;
+using TakTec.Operators.Abstractions;
+using TakTec.Operators.Entities;
 using EthioArt.Data.Enumerations;
 using Messages.Logging.Extensions;
 using Microsoft.Extensions.Logging;

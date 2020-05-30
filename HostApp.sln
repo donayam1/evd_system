@@ -29,11 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.Data.Entities", "V
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.Data.Enumerations", "Vouchers\Vouchers.Data.Enumerations\Vouchers.Data.Enumerations.csproj", "{73A392E1-CF95-449E-BE27-ED1C58F79304}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.Data.Entities", "Operators\TakTec.Data.Entities\TakTec.Data.Entities.csproj", "{3CD6FFB6-8F04-4CFC-A2E9-3A51978C0A3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.Operators.Entities", "Operators\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj", "{3CD6FFB6-8F04-4CFC-A2E9-3A51978C0A3E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.Data.Abstractions", "Operators\TakTec.Data.Abstractions\TakTec.Data.Abstractions.csproj", "{1E9B6DA7-28B3-4630-9079-1FA3C70C8495}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.Operators.Abstractions", "Operators\TakTec.Operators.Abstractions\TakTec.Operators.Abstractions.csproj", "{1E9B6DA7-28B3-4630-9079-1FA3C70C8495}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.Data.EntityFramework", "Operators\TakTec.Data.EntityFramework\TakTec.Data.EntityFramework.csproj", "{2B110BE3-B2D3-4E72-8A3B-63023141E9FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.Operators.EntityFramework", "Operators\TakTec.Operators.EntityFramework\TakTec.Operators.EntityFramework.csproj", "{2B110BE3-B2D3-4E72-8A3B-63023141E9FB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.Operators.BusinessLogic", "Operators\TakTec.Operators.BusinessLogic\TakTec.Operators.BusinessLogic.csproj", "{CA8013DC-2E81-40DB-9C3A-4A6FAA4E2B4A}"
 EndProject

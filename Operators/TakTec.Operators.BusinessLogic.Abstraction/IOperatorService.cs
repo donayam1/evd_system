@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TakTec.Data.Entities;
+using TakTec.Operators.Entities;
 using TakTec.Operators.ViewModel;
 
 namespace TakTec.Operators.BusinessLogic.Abstraction

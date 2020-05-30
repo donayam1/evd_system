@@ -1,0 +1,50 @@
+<div class="card bg-transparent col-md-7 mr-auto ml-auto mb-md-5" *ngIf="po.purchaseOrderItems.length > 0">
+    <div class="card-header">Confirmation Table</div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Denomination</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of po.purchaseOrderItems">
+                    <td>{{item.denomination}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td><button (click)="deletePo(item)" class="btn btn-danger">delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer float-md-right">
+        <button (click) = "createPo($event)" class="btn btn-primary float-md-right mr-md-4">Submit</button>
+    </div>
+      
+    <div *ngIf="po.purchaseOrderItems.length <= 0">
+        <!-- Add some data -->
+    </div>
+</div>
+
+<div class="card bg-light col-md-5 mr-auto ml-auto">
+    <div class="card-body mx-md-auto">
+        <form class="mx-md-auto">
+            <h4 class="form-text card-title mt-md-3 mb-md-4 text-md-center">Purchase Order</h4>
+        
+            <div class="form-group">
+                <label for="denomination">Denomination:</label>
+                <input class="form-control" name="denomination" [(ngModel)]="currentPoItem.denomination" type="number" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input class="form-control" name="quantity" [(ngModel)]="currentPoItem.quantity" type="number" required>
+            </div>
+            
+            <button (click)="addPo($event)" class="btn btn-outline-secondary">Add</button>
+        </form>
+    </div>
+</div>
+
+<app-message #messages></app-message>

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { GroupType, GroupTypesResponse } from "../Models/grouptype..models";
+import { GroupType, GroupTypesResponse, GroupTypeResponse } from "../Models/grouptype..models";
 import { of, Observable } from "rxjs";
 import { AppConfig } from '../../Configs/Services/app.config';
 
@@ -12,24 +12,24 @@ export class GrouptypeService {
 
   constructor(private http: HttpClient) {}
 
-  // getGroupType(): Observable<GroupTypesResponse> {
-  //   let groupTypesResponse: GroupTypesResponse = new GroupTypesResponse();
+  getGroupType(id: String): Observable<GroupTypeResponse> {
+    let groupTypeResponse: GroupTypeResponse = new GroupTypeResponse();
 
-  //   let types: GroupType[] = Array();
-  //   let gt = new GroupType({
-  //     id: "1",
-  //     name: "new",
-  //     level: 2,
-  //     status: "active",
-  //   });
-  //   types.push(gt);
+    //let types: GroupType[] = Array();
+    let gt = new GroupType({
+      id: "1",
+      name: "Admin",
+      level: 2,
+      status: "active",
+    });
+    //types.push(gt);
 
-  //   groupTypesResponse.groupTypes = types;
-  //   groupTypesResponse.status = false;
-  //   console.log(groupTypesResponse)
+    groupTypeResponse.groupType = gt;
+    groupTypeResponse.status = true;
+    console.log(groupTypeResponse)
 
-  //   return of(groupTypesResponse); // this.http.get<GroupType[]>(this.url);
-  // }
+    return of(groupTypeResponse); // this.http.get<GroupType[]>(this.url);
+  }
 
   fetchGroupType(): Observable<GroupTypesResponse>{
     const url =  AppConfig.settings.apiServers.authServer + this.url;
@@ -46,12 +46,12 @@ export class GrouptypeService {
      return observer;
   }
 
-  saveGroupTypes(grouptypes: GroupType): Observable<any> {
+  saveGroupTypes(grouptypes: GroupType[]): Observable<any> {
     let groupTypesResponse: GroupTypesResponse = new GroupTypesResponse();
     
-    let gt = new GroupType({id: 1, name: "ethioTel", level: 100, status: "active"});
-    groupTypesResponse.grouptype = gt;
-    groupTypesResponse.status = false;
+    // let gt = new GroupType({id: 1, name: "ethioTel", level: 100, status: "active"});
+    // groupTypesResponse.grouptype = gt;
+    // groupTypesResponse.status = false;
 
     return of(groupTypesResponse);
 

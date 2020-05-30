@@ -15,4 +15,11 @@ export class EditOperatorComponent implements OnInit {
     this.operatorService.getOperator().subscribe(x=>{}, err=>{})
   }
 
+  updateOperator() {
+    this.operatorService.saveOperator(this.operator).subscribe(
+      (x) => {},
+      (err) => {}
+    );
+  }
+
 }

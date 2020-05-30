@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { GroupType, GroupTypesResponse } from "../Models/grouptype..models";
+import { GroupType, GroupTypesResponse, GroupTypeResponse } from "../Models/grouptype..models";
 import { of, Observable } from "rxjs";
 import { AppConfig } from '../../Configs/Services/app.config';
 
@@ -28,8 +28,16 @@ export class GrouptypeService {
      return observer;
   }
 
-  saveGroupTypes(grouptypes: GroupType): Observable<any> {
-    return this.http.post<any>(this.url, grouptypes);
+  saveGroupTypes(grouptypes: GroupType[]): Observable<any> {
+    let groupTypesResponse: GroupTypesResponse = new GroupTypesResponse();
+    
+    // let gt = new GroupType({id: 1, name: "ethioTel", level: 100, status: "active"});
+    // groupTypesResponse.grouptype = gt;
+    // groupTypesResponse.status = false;
+
+    return of(groupTypesResponse);
+
+      //return this.http.post<any>(this.url, grouptypes);
   }
 
   updateGroupType(grouptype: GroupType): Observable<any>{

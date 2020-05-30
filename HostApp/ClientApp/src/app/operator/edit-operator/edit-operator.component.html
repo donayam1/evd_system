@@ -1,4 +1,4 @@
-<div class="card bg-success col-6 mr-auto ml-auto" *ngIf = "operator">
+<div class="card bg-light col-6 mr-auto ml-auto">
     <div class="card-body">
         <form class="" *ngFor = "let item of operator">
             <h4 class="form-text card-title mt-md-3 mb-md-3">Edit an Operator</h4>
@@ -13,7 +13,7 @@
                 <input class="form-control" name="ussd" value="{{item.name}}">
             </div>
         
-            <button (click)="updateOperator($event)" class="btn btn-outline-primary">Update</button>
+            <button (click)="updateOperator()" class="btn btn-outline-primary">Update</button>
         </form>
     </div>
 </div>

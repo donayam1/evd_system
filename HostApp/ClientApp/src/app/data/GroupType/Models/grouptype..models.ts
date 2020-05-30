@@ -29,3 +29,16 @@ export class GroupTypesResponse extends ResponseBase {
     totalItems: number;
     groupTypes: GroupType[];
 }
+
+export class GroupTypeResponse extends ResponseBase {
+     
+    constructor(obj?: any) {
+        super(obj);
+        this.totalItems = obj && obj.totalItems;
+        this.groupType = obj && new GroupType(obj);
+
+    }
+
+    totalItems: number;
+    groupType: GroupType;
+}

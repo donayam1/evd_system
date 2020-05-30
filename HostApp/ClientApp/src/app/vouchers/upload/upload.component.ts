@@ -37,14 +37,12 @@ export class UploadComponent implements OnInit {
   }
 
   fileToUploaded($event: File) {
-    alert($event.name);
     this.fileToUpload = $event;
   }
 
   uploadFile() {
     this.fileUploadService.uploadFiles(this.fileToUpload, "/api/Vouchers/vouchers/Upload").
-      subscribe(x => {
-        alert("sucess");
+      subscribe(x => {       
       }, error => {
         alert("faile");
       });

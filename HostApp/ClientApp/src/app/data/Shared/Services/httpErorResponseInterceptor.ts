@@ -7,32 +7,31 @@ import { AuthService } from '../../Account/Services/account.service';
 
 
 @Injectable({
-    providedIn:'root'
+    providedIn: 'root'
 })
-export class HttpErrorInterceptor implements HttpInterceptor
-{
-    constructor(private router:Router,
-        private accountServie:AuthService//,
+export class HttpErrorInterceptor implements HttpInterceptor {
+    constructor(private router: Router,
+        private accountServie: AuthService//,
         // private route:ActivatedRoute
-        ){
+    ) {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-     return  next.handle(req)
-        .pipe(
-            map((x:HttpEvent<any>)=>{
-              return x;
-            }),catchError((err:HttpErrorResponse) => {
-                if(err.status === 401 ) //anauthorized 
-                {
-                    const route = this.router.url;// this.route.snapshot.url;
-                    // console.log(route);
-                    this.accountServie.logout();
-                    this.router.navigate(['/login'],{queryParams:{returnUrl:route}});
-                }
-                return throwError(err);// Observable.throw(err);
-            })
-        )
+        return next.handle(req)
+            .pipe(
+                map((x: HttpEvent<any>) => {
+                    return x;
+                }), catchError((err: HttpErrorResponse) => {
+                    if (err.status === 401) //anauthorized 
+                    {
+                        const route = this.router.url;// this.route.snapshot.url;
+                        // console.log(route);
+                        this.accountServie.logout();
+                        this.router.navigate(['/login'], { queryParams: { returnUrl: route } });
+                    }
+                    return throwError(err);// Observable.throw(err);
+                })
+            );
     }
 }

@@ -2,11 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  
+  
   <ItemGroup>
-    <PackageReference Include="ExtCore.Data.EntityFramework" Version="5.0.0" />
-    <ProjectReference Include="..\Vouchers.Data.Abstractions\Vouchers.Data.Abstractions.csproj" />
+    <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
+    <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />
+    <ProjectReference Include="..\Vouchers.Data.Entities\Vouchers.Data.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,9 +19,6 @@
     </Reference>
     <Reference Include="EthioArt.Data.Entities.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
-    </Reference>
-    <Reference Include="EthioArt.Data.EntityFramework">
-      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.EntityFramework.dll</HintPath>
     </Reference>
   </ItemGroup>
 

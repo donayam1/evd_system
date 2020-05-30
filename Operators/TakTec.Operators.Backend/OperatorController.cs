@@ -5,6 +5,7 @@ using EthioArt.Backend.Models;
 using Messages.BusinessLogic.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 using TakTec.Data.Entities;
+using TakTec.Operators.BusinessLogic;
 using TakTec.Operators.BusinessLogic.Abstraction;
 using Messages.Logging.Extensions;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,7 +41,7 @@ namespace TakTec.Operators.Backend
                 }
                 operatorList.Messages=_userMessageLogges.UserMessages;
                 operatorList.operators=items;
-                Ok(operatorList);
+                SendResult(operatorList);
             }
             return BadRequest(ModelState);
         }
@@ -59,7 +60,7 @@ namespace TakTec.Operators.Backend
                 }
                 resp.Messages=_userMessageLogges.UserMessages;
                 resp.newOperatorViewModel = newOperator;
-                Ok(resp);
+                SendResult(resp);
             }
             return BadRequest(ModelState);
         }
@@ -77,7 +78,7 @@ namespace TakTec.Operators.Backend
                 }
                 resp.Messages=_userMessageLogges.UserMessages;
                 resp.operatorVM = UpdatedOp;
-                Ok(resp);
+                SendResult(resp);
             }
             return BadRequest(ModelState);
         }

@@ -1,25 +1,22 @@
 
 
-export interface IAppConfig{
-    env:{
-        name:string;
+export interface IAppConfig {
+    env: {
+        name: string;
     };
-    apiServers:{
-        authServer:string;
-        moviesBackendServer:string;
-        billingServer:string;
-        moivesFrontendServer:string;
+    apiServers: {
+        authServer: string;
     };
-    authSettings:{
+    authSettings: {
         redirectUri: string;
         clientId: string;
         dummyClientSecret: string;
-        oidc:boolean;
-        skipSubjectCheck:boolean;
+        oidc: boolean;
+        skipSubjectCheck: boolean;
         scope: string;
         issuer: string;
-        responseType:string;
+        responseType: string;
         showDebugInformation: boolean;
-        requireHttps:boolean;
+        requireHttps: boolean;
     }
 }

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vouchers.BusinessLogic\Vouchers.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Vouchers.Configurations\Vouchers.Configurations.csproj" />
   </ItemGroup>
     
 

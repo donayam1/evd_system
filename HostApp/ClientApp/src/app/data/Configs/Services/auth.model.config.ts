@@ -15,7 +15,7 @@ export class MyAuthConfig extends OAuthModuleConfig{
     getResourceServerConfig(){
         this.appConfig.settings0.subscribe(x => {
             const y = {
-                allowedUrls: [AppConfig.settings.apiServers.moviesBackendServer],
+                allowedUrls: [AppConfig.settings.apiServers.authServer],
                 sendAccessToken: true
             };
             this.resourceServer = y;

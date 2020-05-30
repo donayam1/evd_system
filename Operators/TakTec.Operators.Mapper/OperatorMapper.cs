@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 using System;
 using TakTec.Data.Entities;
 using TakTec.Operators.ViewModel;
@@ -9,25 +10,31 @@ namespace TakTec.Operators.Mapper
 {
     public static class OperatorMapper
     {
-        public static OperatorViewModel ToViewModel(Operator op,Status status){
-            var OpviewModel = new OperatorViewModel(op.OwnerId,op.OwnerType,op.Name,op.USSDRechargeCode);
-            OpviewModel.Status = status;
+        public static OperatorViewModel ToViewModel(this Operator op){
+            var OpviewModel = new OperatorViewModel();
+            OpviewModel.Name=op.Name;
+            OpviewModel.USSDRechargeCode = op.USSDRechargeCode;
             return OpviewModel;
         }
 
        
 
-        public static Operator ToDomainModel (OperatorViewModel opVM){
-            string OwnerID = opVM.OwnerId;
-            var OPModel = new Operator(OwnerID,opVM.OwnerType,opVM.Name,opVM.USSDRechargeCode);
+        public static Operator ToDomainModel (this OperatorViewModel opVM){
+            var OPModel = new Operator("",ResourceTypes.GROUP,opVM.Name,opVM.USSDRechargeCode);
             
             return OPModel;
         }
-        public static NewOperatorViewModel ToNewOperatorViewModel(Operator op,int UI_ID){
-            NewOperatorViewModel OpviewModel = new NewOperatorViewModel(op.OwnerId,op.OwnerType,op.Name,op.USSDRechargeCode);
-            OpviewModel.Status = Status.NEW;
+        public static NewOperatorViewModel ToNewOperatorViewModel(this Operator op,int UI_ID){
+            NewOperatorViewModel OpviewModel = new NewOperatorViewModel();
+            OpviewModel.Name=op.Name;
+            OpviewModel.USSDRechargeCode=op.USSDRechargeCode;
             OpviewModel.UI_Id = UI_ID;
             return OpviewModel;
+        }
+
+        public static List<OperatorViewModel> ToViewModelList(this List<Operator> Operatorlist){
+            var items = Operatorlist.Select(x=>x.ToViewModel()).ToList();
+            return items;
         }
     }
 }

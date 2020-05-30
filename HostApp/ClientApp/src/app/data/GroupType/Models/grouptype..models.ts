@@ -18,12 +18,13 @@ export class GroupType extends NamedItem {
 }
 
 export class GroupTypesResponse extends ResponseBase {
+    grouptypes: GroupType;
      
     constructor(obj?: any) {
         super(obj);
         this.totalItems = obj && obj.totalItems;
-        this.groupTypes = obj && obj.roleTypes.map(x => new GroupType(x));
-
+        this.groupTypes = obj && obj.roleTypes.map(x => new GroupType(x)) || Array();
+        this.grouptypes = obj && new GroupType(obj.grouptypes);
     }
 
     totalItems: number;

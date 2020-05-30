@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { GroupType, GroupTypesResponse, GroupTypeResponse } from "../Models/grouptype..models";
 import { of, Observable } from "rxjs";
 import { AppConfig } from '../../Configs/Services/app.config';
+import { Message } from "../../Shared/Models/responseBase";
 
 @Injectable({
   providedIn: "root",
@@ -47,10 +48,17 @@ export class GrouptypeService {
   }
 
   saveGroupTypes(grouptypes: GroupType[]): Observable<any> {
-    let groupTypesResponse: GroupTypesResponse = new GroupTypesResponse();
+    let groupTypesResponse = new GroupTypesResponse();
+    groupTypesResponse.status = true;
+    let mes = new Message();
+    mes.messageCode = '30';
+    mes.messageType = 20;
+    mes.systemMessage = 'working';
+    groupTypesResponse.messages.push(mes);
+
+    let gt = new GroupType([{id: 1, name: "ethioTel", level: 100, status: "active"}]);
+    groupTypesResponse.grouptypes = gt;
     
-    // let gt = new GroupType({id: 1, name: "ethioTel", level: 100, status: "active"});
-    // groupTypesResponse.grouptype = gt;
     // groupTypesResponse.status = false;
 
     return of(groupTypesResponse);

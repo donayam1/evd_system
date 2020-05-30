@@ -18,6 +18,9 @@ namespace Vouchers.ServiceRegistrations
             services.AddScoped<IVoucherUploadService, VoucherUploadService>();
             services.AddScoped<IVoucherFileProcessor, VoucherFileProcessor>();
 
+            services.AddSingleton< IVoucherFileProcessorTaskes, VoucherFileProcessorTaskes > ();
+            //services.AddHostedService<BackGroudService>();
+
             IConfiguration config = serviceProvider.GetService<IConfiguration>()
                 ??throw new NullReferenceException(nameof(IConfiguration));
 

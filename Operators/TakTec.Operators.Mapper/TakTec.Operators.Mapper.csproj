@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-   <ProjectReference Include="..\TakTec.Data.Entities\TakTec.Data.Entities.csproj" />
+   <ProjectReference Include="..\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj" />
    <ProjectReference Include="..\TakTec.Operators.ViewModel\TakTec.Operators.ViewModel.csproj" />
    
 

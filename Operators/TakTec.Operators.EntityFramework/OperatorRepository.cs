@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualBasic.CompilerServices;
 using System;
-using TakTec.Data.EntityFramework;
-using TakTec.Data.Abstractions;
+using TakTec.Operators.Abstractions;
+using TakTec.Operators.Entities;
 using System.Linq;
-using TakTec.Data.Entities;
 using ExtCore.Data.Abstractions;
 using EthioArt.Data.Enumerations;
 using EthioArt.Data.Abstraction;
@@ -14,7 +13,7 @@ using EthioArt.Filters.Abstraction;
 using EthioArt.Data.Entities;
 using EthioArt.Sorters.Abstractions;
 
-namespace TakTec.Data.EntityFramework
+namespace TakTec.Operators.EntityFramework
 {
     public class OperatorRepository : GenericRepositoryBase<Operator>, IOperatorRepository
     {

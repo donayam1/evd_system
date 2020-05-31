@@ -42,19 +42,19 @@ export class GrouptypeService {
      return observer;
   }
 
-  saveGroupTypes(grouptypes: GroupType[]): Observable<GroupType> {
+  saveGroupTypes(grouptypes: GroupType[]): Observable<GroupTypesResponse> {
     const url = AppConfig.settings.apiServers.authServer + this.url;
-    const observer = Observable.create(observer=>{
-      this.http.post<GroupType>(url, grouptypes).subscribe(res=>{
+    return new Observable(observer => {
+      this.http.post<GroupTypesResponse>(url, grouptypes).subscribe(res => {
         const response = new GroupTypesResponse(res);
         observer.next(response);
         observer.complete();
-      }, error=>{
+      }, error => {
         observer.error(error);
         observer.complete();
       });
-    })
-    return observer;
+    });
+
     // let groupTypesResponse = new GroupTypesResponse();
     // groupTypesResponse.status = true;
     // let mes = new Message();

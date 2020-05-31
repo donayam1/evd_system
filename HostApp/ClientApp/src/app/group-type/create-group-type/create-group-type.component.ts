@@ -2,7 +2,6 @@ import { Component, OnInit, Input, HostBinding } from '@angular/core';
 import { GrouptypeService } from 'src/app/data/GroupType/Services/grouptype.service';
 import { GroupType, GroupTypesResponse } from '../../data/GroupType/Models/grouptype..models';
 import { Message } from '../../data/Shared/Models/responseBase';
-import { Title } from '@angular/platform-browser';
 import { ObjectStatus } from 'src/app/data/Shared/Models/newObjectStatus.model';
 @Component({
   selector: 'app-create-group-type',
@@ -10,7 +9,6 @@ import { ObjectStatus } from 'src/app/data/Shared/Models/newObjectStatus.model';
   styleUrls: ['./create-group-type.component.css']
 })
 export class CreateGroupTypeComponent implements OnInit {
-  //status: ObjectStatus;
   grouptypes: GroupType[];
   isError: boolean;
   messages: Message[];
@@ -27,7 +25,7 @@ export class CreateGroupTypeComponent implements OnInit {
   addGroupType($event?: any) {
     this.idCounter++;
     this.currentGroupType.id = this.idCounter + "";
-    this.currentGroupType.status = ObjectStatus.NEW;
+    this.currentGroupType.objectStatus = ObjectStatus.NEW;
     //this.currentGroupType.itemType = 0;
     console.log(this.currentGroupType);
     this.grouptypes.push(new GroupType(this.currentGroupType));
@@ -35,11 +33,11 @@ export class CreateGroupTypeComponent implements OnInit {
     this.currentGroupType.name = '';
   }
 
-  saveGroupTypes($event?: any){
-    this.grouptypeService.saveGroupTypes(this.grouptypes).subscribe(x=>{
+  saveGroupTypes($event?: any) {
+    this.grouptypeService.saveGroupTypes(this.grouptypes).subscribe(x => {
       //this.grouptypes = x;
-      console.log(this.grouptypes);
-    })
+      console.log(x);
+    });
     // this.grouptypeService.saveGroupTypes(this.grouptypes).subscribe(x=>{
     //   if (x.status == true){
     //     this.grouptypes = x.grouptypes;

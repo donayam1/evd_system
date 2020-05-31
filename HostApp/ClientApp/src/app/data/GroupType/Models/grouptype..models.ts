@@ -8,23 +8,20 @@ export class GroupType extends NamedItem {
         // this.id = obj && obj.id;
         // this.name = obj && obj.name;
         this.level = obj && obj.level;
-        this.status = obj && obj.status;
+        this.objectStatus = obj && obj.objectStatus;
     }
 
     // id: number;
     // name: string;
     level: number;
-    status: number;
+    objectStatus: number;
 }
 
 export class GroupTypesResponse extends ResponseBase {
-    grouptypes: GroupType;
-     
     constructor(obj?: any) {
         super(obj);
         this.totalItems = obj && obj.totalItems;
         this.groupTypes = obj && obj.roleTypes.map(x => new GroupType(x)) || Array();
-        this.grouptypes = obj && new GroupType(obj.grouptypes);
     }
 
     totalItems: number;
@@ -32,7 +29,6 @@ export class GroupTypesResponse extends ResponseBase {
 }
 
 export class GroupTypeResponse extends ResponseBase {
-     
     constructor(obj?: any) {
         super(obj);
         this.totalItems = obj && obj.totalItems;

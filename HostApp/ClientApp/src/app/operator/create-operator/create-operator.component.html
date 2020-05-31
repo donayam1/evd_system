@@ -5,15 +5,17 @@
         
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input class="form-control" name="name" type="text" aria-required="true">
+                <input class="form-control" [(ngModel)]="operator.name" name="name" type="text" aria-required="true">
             </div>
         
             <div class="form-group">
                 <label for="ussd">USSD Recharge Code:</label>
-                <input class="form-control" name="ussd" type="text" aria-required="true">
+                <input class="form-control" [(ngModel)]="operator.uSSDRechargeCode" name="ussd" type="text" aria-required="true">
             </div>
         
             <button (click)='saveOperator()' class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
+
+<app-message #messages></app-message>

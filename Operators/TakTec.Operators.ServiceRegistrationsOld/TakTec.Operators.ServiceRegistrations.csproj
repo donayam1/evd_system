@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExtCore.Infrastructure" Version="5.0.0" />
+    <ProjectReference Include="..\..\Vouchers\Vouchers.BusinessLogic\Vouchers.BusinessLogic.csproj" />
+    <ProjectReference Include="..\TakTec.Operators.BusinessLogic\TakTec.Operators.BusinessLogic.csproj" />
+  </ItemGroup>
+
+</Project>

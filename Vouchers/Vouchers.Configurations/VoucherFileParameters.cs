@@ -10,7 +10,7 @@ namespace Vouchers.Configurations
         public String VoucherType { get; set; }
         public String FaceValue { get; set; }
         public String StopDate { get; set; }
-        public String Start_Sequence { get; set; }
+        public String StartSequence { get; set; }
         public String Begin { get; set; }
         public String End { get; set; }
     }

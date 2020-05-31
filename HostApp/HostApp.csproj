@@ -81,9 +81,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="EthioArt.ScopedServiceAcessor">
-      <HintPath>OtherDeps\EthioArt.ScopedServiceAcessor.dll</HintPath>
-    </Reference>
     <Reference Include="EthioArt.ServiceProviderAccessor">
       <HintPath>..\..\..\source\repos\EthioArtCore\EthioArt.ServiceProviderAccessor\bin\Debug\netcoreapp3.0\EthioArt.ServiceProviderAccessor.dll</HintPath>
     </Reference>

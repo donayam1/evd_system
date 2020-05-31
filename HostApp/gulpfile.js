@@ -72,6 +72,8 @@ gulp.task(
         gulp.src([TakOperatorsRoot + "TakTec.Operators.EntityFramework/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Operators.EntityFramework.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakOperatorsRoot + "TakTec.Operators.Mapper/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Operators.Mapper.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakOperatorsRoot + "TakTec.Operators.ViewModel/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Operators.ViewModel.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakOperatorsRoot + "TakTec.Operators.ServiceRegistrations/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Operators.ServiceRegistrations.dll"]).pipe(gulp.dest("Extensions"));
+        
 
         gulp.src([TakVouchersRoot + "Vouchers.Backend/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Backend.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakVouchersRoot + "Vouchers.BusinessLogic/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.BusinessLogic.dll"]).pipe(gulp.dest("Extensions"));

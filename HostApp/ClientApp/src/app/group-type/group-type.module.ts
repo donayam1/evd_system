@@ -7,6 +7,7 @@ import { CreateGroupTypeComponent } from './create-group-type/create-group-type.
 import { ListGroupTypeComponent } from './list-group-type/list-group-type.component';
 import { EditGroupTypeComponent } from './edit-group-type/edit-group-type.component';
 import { HomeComponent } from './home/home.component';
+import { MessagesModule } from '../messages/messages.module';
 
 @NgModule({
   declarations: [CreateGroupTypeComponent, ListGroupTypeComponent, EditGroupTypeComponent, HomeComponent],
@@ -14,6 +15,7 @@ import { HomeComponent } from './home/home.component';
     CommonModule,
     GroupTypeRoutingModule,
     FormsModule,
+    MessagesModule
   ]
 })
 export class GroupTypeModule { }

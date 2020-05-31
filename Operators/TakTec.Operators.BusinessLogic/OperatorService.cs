@@ -5,7 +5,6 @@ using TakTec.Operators.Abstractions;
 using TakTec.Operators.Entities;
 using EthioArt.Data.Enumerations;
 using Messages.Logging.Extensions;
-using Microsoft.Extensions.Logging;
 using TakTec.Operators.BusinessLogic.Abstraction;
 using ExtCore.Data.Abstractions;
 using TakTec.Operators.ViewModel;
@@ -13,7 +12,7 @@ using TakTec.Operators.Mapper;
 using EthioArt.Filters.Abstraction;
 using EthioArt.Data.Entities;
 using EthioArt.Sorters.Abstractions;
-
+using Microsoft.Extensions.Logging;
 
 namespace TakTec.Operators.BusinessLogic
 {
@@ -30,22 +29,24 @@ namespace TakTec.Operators.BusinessLogic
             _logger= Logger ??
                 throw new ArgumentNullException(nameof(ILogger<IOperatorService>));
         }
-        public NewOperatorViewModel? CreateOperator(Operator _operator)
+        public NewOperatorViewModel? CreateOperator(OperatorViewModel _operator)
         {
             String UiId = _operator.Id;
-            bool exists= _operatorRepository.Exists(_operator.Id);
-            if(exists){
-                _logger.AddUserError("Operator already exists");
-                return null;
-            }
-            else{
-                
-                _operatorRepository.Create(_operator);
-                _storage.Save();
-                _logger.AddUserMesage("Operator Created successfully!");
-                var newOPViewModel = OperatorMapper.ToNewOperatorViewModel(_operator, UiId);
-                return newOPViewModel;// return viewmodel
-            }
+            //bool exists= _operatorRepository.Exists(_operator.Id);
+            //if(exists){
+            //    _logger.AddUserError("Operator already exists");
+            //    return null;
+            //}
+            //else{
+
+            var oper = _operator.ToDomainModel();
+            _operatorRepository.Create(oper);
+            _storage.Save();
+            _logger.AddUserMesage("Operator Created successfully!");
+            var newOPViewModel = oper.ToNewOperatorViewModel(UiId);// OperatorMapper.ToNewOperatorViewModel(_operator, UiId);
+            return newOPViewModel;// return viewmodel
+
+            //}
             
         }
 
@@ -67,7 +68,7 @@ namespace TakTec.Operators.BusinessLogic
             }
         }
 
-        public OperatorViewModel? UpdateOperator(Operator op)
+        public OperatorViewModel? UpdateOperator(OperatorViewModel op)
         {
 
             bool exists= _operatorRepository.Exists(op.Id);
@@ -76,10 +77,10 @@ namespace TakTec.Operators.BusinessLogic
                 return null;
             }
             else{
-                
-                _operatorRepository.Edit(op);
+                var oper = op.ToDomainModel();
+                _operatorRepository.Edit(op.ToDomainModel());
                 _logger.AddUserMesage("Operator Updated successfully!");
-                var opVM = OperatorMapper.ToViewModel(op);
+                var opVM = oper.ToViewModel();// OperatorMapper.ToViewModel(oper.);
                 return opVM;// return viewmodel
             }
         }

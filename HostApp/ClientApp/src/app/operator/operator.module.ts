@@ -8,6 +8,7 @@ import { CreateOperatorComponent } from './create-operator/create-operator.compo
 import { ListOperatorComponent } from './list-operator/list-operator.component';
 import { EditOperatorComponent } from './edit-operator/edit-operator.component';
 import { HomeComponent } from './home/home.component';
+import { MessagesModule } from '../messages/messages.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { HomeComponent } from './home/home.component';
     OperatorRoutingModule,
     FormsModule,
     HttpClientModule,
+    MessagesModule
   ]
 })
 export class OperatorModule { }

@@ -9,16 +9,14 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>Level</th>
-              <th>Last Update</th>
-              <th>Edit</th>
+              <th>USSDRechargeCode</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let op of operator">
+            <tr *ngFor="let op of operator.operators">
               <td>{{ op.name }}</td>
-              <td>{{ op.level }}</td>
-              <td>{{ op.lastUpdate }}</td>
+              <td>{{ op.uSSDRechargeCode }}</td>
+              
             </tr>
           </tbody>
         </table>

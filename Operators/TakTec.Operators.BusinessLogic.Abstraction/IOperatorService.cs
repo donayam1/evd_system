@@ -7,8 +7,8 @@ namespace TakTec.Operators.BusinessLogic.Abstraction
 {
     public interface IOperatorService
     {
-        NewOperatorViewModel? CreateOperator(Operator _operator);
-        OperatorViewModel? UpdateOperator(Operator op);
+        NewOperatorViewModel? CreateOperator(OperatorViewModel op);
+        OperatorViewModel? UpdateOperator(OperatorViewModel op);
         List <OperatorViewModel>? ListOperator(int pageNo, int NumberOfItemsPerPage);
     }
 }

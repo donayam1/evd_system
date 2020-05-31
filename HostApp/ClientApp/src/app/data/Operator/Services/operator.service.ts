@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { Operator, OperatorResponse, Operator_Response } from "../Models/operator.model";
+import { Operator, ListOperatorResponse, NewOperatorResponse } from "../Models/operator.model";
 import { HttpClient } from "@angular/common/http";
 import { AppConfig } from '../../Configs/Services/app.config';
 import { error } from "util";
@@ -9,12 +9,12 @@ import { error } from "util";
   providedIn: "root",
 })
 export class OperatorService {
-  private readonly url = "/api/operators/operators";
+  private readonly url = "/api/operators/operator";
 
   constructor(private http: HttpClient) { }
 
   getOperator(id: String) {
-    const operatorResponse: Operator_Response = new Operator_Response();
+    const operatorResponse: NewOperatorResponse = new NewOperatorResponse();
     const operator = new Operator({
       id: '1',
       name: "ethioTel",
@@ -27,11 +27,11 @@ export class OperatorService {
     return of(operatorResponse);
   }
 
-  fetchOperator(): Observable<OperatorResponse> {
-    const url = AppConfig.settings.apiServers.authServer + this.url;
+  fetchOperator(): Observable<ListOperatorResponse> {
+    const url = AppConfig.settings.apiServers.authServer + this.url + "/list";
     return new Observable(observer => {
-      this.http.get<OperatorResponse>(url).subscribe(data => {
-        const response = new OperatorResponse(data);
+      this.http.get<ListOperatorResponse>(url).subscribe(data => {
+        const response = new ListOperatorResponse(data);
         observer.next(response);
         observer.complete();
       }, error => {
@@ -41,11 +41,11 @@ export class OperatorService {
     });
   }
 
-  saveOperator(operator: Operator): Observable<any> {
-    const rurl = AppConfig.settings.apiServers.authServer + this.url;
+  saveOperator(operator: Operator): Observable<NewOperatorResponse> {
+    const rurl = AppConfig.settings.apiServers.authServer + this.url + "/Create";
     return new Observable(observer => {
-      this.http.post<any>(rurl, operator).subscribe(x => {
-        observer.next(new OperatorResponse(x));
+      this.http.post<NewOperatorResponse>(rurl, operator).subscribe(x => {
+        observer.next(new NewOperatorResponse(x));
         observer.complete();
       }, error => {
         observer.error(error);

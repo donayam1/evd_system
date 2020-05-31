@@ -298,7 +298,7 @@ namespace Vouchers.BusinessLogic
             {
                 return VoucherFileParameterTypes.VoucherType;
             }
-            else if (String.Compare(parameter, this._voucherFileParameters.Start_Sequence, true) == 0)
+            else if (String.Compare(parameter, this._voucherFileParameters.StartSequence, true) == 0)
             {
                 return VoucherFileParameterTypes.Start_Sequence;
             }

@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, ViewChild } from '@angular/core';
 import { GrouptypeService } from 'src/app/data/GroupType/Services/grouptype.service';
 import { GroupType, GroupTypesResponse } from '../../data/GroupType/Models/grouptype..models';
 import { Message } from '../../data/Shared/Models/responseBase';
 import { ObjectStatus } from 'src/app/data/Shared/Models/newObjectStatus.model';
+import { MessageComponent } from '../../messages/message/message.component';
 @Component({
   selector: 'app-create-group-type',
   templateUrl: './create-group-type.component.html',
@@ -14,6 +15,10 @@ export class CreateGroupTypeComponent implements OnInit {
   messages: Message[];
   currentGroupType: GroupType;
   idCounter = 0;
+
+  @ViewChild('messages', { static: true })
+  messageComponent: MessageComponent;
+
   constructor(private grouptypeService: GrouptypeService) {
     this.grouptypes = Array();
     this.isError = false;
@@ -36,6 +41,7 @@ export class CreateGroupTypeComponent implements OnInit {
   saveGroupTypes($event?: any) {
     this.grouptypeService.saveGroupTypes(this.grouptypes).subscribe(x => {
       //this.grouptypes = x;
+      this.messageComponent.addMessages(x);
       console.log(x);
     });
     // this.grouptypeService.saveGroupTypes(this.grouptypes).subscribe(x=>{

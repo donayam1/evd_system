@@ -22,7 +22,7 @@ namespace TakTec.Operators.Mapper
         public static Operator ToDomainModel(this OperatorViewModel opVM)
         {
             var OPModel = new Operator("", ResourceTypes.GROUP, opVM.Name, opVM.USSDRechargeCode);
-            OPModel.Id = opVM.Id;
+            //OPModel.Id = opVM.Id;
             return OPModel;
         }
         public static NewOperatorViewModel ToNewOperatorViewModel(this Operator op, String UI_ID)

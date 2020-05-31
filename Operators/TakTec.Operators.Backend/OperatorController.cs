@@ -7,11 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using TakTec.Operators.Entities;
 using TakTec.Operators.BusinessLogic;
 using TakTec.Operators.BusinessLogic.Abstraction;
-using Messages.Logging.Extensions;
-using Microsoft.Extensions.DependencyInjection;
-using Messages.Models;
-using Messages.BusinessLogic;
-using System.Linq;
 using TakTec.Operators.ViewModel;
 using EthioArt.Backend.Models.Requests; 
 
@@ -32,55 +27,67 @@ namespace TakTec.Operators.Backend
           //  _userMessageLogges = userMessageLogges;
         }
 
-        [HttpGet]
+        [HttpGet(template:"list")]
         public  IActionResult ListOperators([FromQuery]PagedItemRequestBase  page) {
             OperatorListResposeModel operatorList= new OperatorListResposeModel();
             if (ModelState.IsValid) {
                 var items = _operatorService.ListOperator(page.Page,page.ItemsPerPage);
-                if(items == null){
-                   // operatorList.Messages = _userMessageLogges.UserErrorMessages;
+                if (items == null)
+                {
+                    // operatorList.Messages = _userMessageLogges.UserErrorMessages;
                     operatorList.Status = false;
+                }
+                else {
+                    operatorList.Status = true;
                 }
                 //operatorList.Messages=_userMessageLogges.UserMessages;
                 operatorList.Operators=items;
-                SendResult(operatorList);
+                return SendResult(operatorList);
             }
             return BadRequest(ModelState);
         }
 
-        [HttpPost]
-        public IActionResult Create([FromBody] Operator op)
+        [HttpPost(template:"create")]
+        public IActionResult Create([FromBody] OperatorViewModel op)
         {
             NewOperatorResponseViewModel resp = new NewOperatorResponseViewModel();
             
             if (ModelState.IsValid)
             {
                 var newOperator =  _operatorService.CreateOperator(op);
-                if(newOperator == null){
+                if (newOperator == null)
+                {
                     resp.Status = false;
                     //resp.Messages = _userMessageLogges.UserErrorMessages;
                 }
+                else {
+                    resp.Status = true;
+                }
                 //resp.Messages=_userMessageLogges.UserMessages;
                 resp.newOperatorViewModel = newOperator;
-                SendResult(resp);
+                return SendResult(resp);
             }
             return BadRequest(ModelState);
         }
         [HttpPost(template:"update")]
-        public IActionResult Update([FromBody] Operator op)
+        public IActionResult Update([FromBody] OperatorViewModel op)
         {
             OperatorResponseModel resp = new OperatorResponseModel();
 
             if(ModelState.IsValid)
             {
                 var UpdatedOp = _operatorService.UpdateOperator(op);
-                if(UpdatedOp == null){
+                if (UpdatedOp == null)
+                {
                     resp.Status = false;
-                   // resp.Messages=_userMessageLogges.UserErrorMessages;
+                    // resp.Messages=_userMessageLogges.UserErrorMessages;
+                }
+                else {
+                    resp.Status = true;
                 }
                // resp.Messages=_userMessageLogges.UserMessages;
                 resp.Operator = UpdatedOp;
-                SendResult(resp);
+                return SendResult(resp);
             }
             return BadRequest(ModelState);
         }

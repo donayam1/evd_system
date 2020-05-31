@@ -23,26 +23,25 @@ namespace Vouchers.BusinessLogic
         private readonly VoucherFileParameters _voucherFileParameters;
         private readonly ILogger<VoucherFileProcessor> _logger;
         private readonly IStorage _storage;
-        //private readonly IVouchersRepository _vouchersRepository;
+
         private readonly IVoucherBatchRepository _voucherBatchRepository;
-        //private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider _serviceProvider;
         private readonly IHubContext<VoucherSignalHub> _hubContext;
 
         public VoucherFileProcessor(
-            //IServiceProvider serviceProvider,
+            IServiceProvider serviceProvider,
             IOptions<VoucherFileParameters> voucherFileParameterOptions,
-            ILogger<VoucherFileProcessor> logger,
+            ILogger<VoucherFileProcessor> logger ,
             IStorage storage,
             IHubContext<VoucherSignalHub> hubContext
             ) {
-            //_serviceProvider = serviceProvider ??
-            //    throw new ArgumentNullException(nameof(IServiceProvider));
+            _serviceProvider = serviceProvider ??
+                throw new ArgumentNullException(nameof(IServiceProvider));
             _voucherFileParameters = voucherFileParameterOptions?.Value ??
                 throw new ArgumentNullException(nameof(IOptions<VoucherFileParameters>));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _storage = storage ?? throw new ArgumentNullException(nameof(storage));
-            //_vouchersRepository = _storage.GetRepository<IVouchersRepository>() ??
-            //    throw new ArgumentNullException(nameof(IVouchersRepository));
+
             _voucherBatchRepository = _storage.GetRepository<IVoucherBatchRepository>() ??
                 throw new ArgumentNullException(nameof(IVoucherBatchRepository));
             _hubContext = hubContext;
@@ -52,9 +51,10 @@ namespace Vouchers.BusinessLogic
           
         }
 
-        public async Task<UploadVoucherResponse> ProcessFile(String path) {
+        public async Task ProcessFile(String path) {
 
-            return await Task.Run(() => {
+             //await Task.Run(() => {
+
                 UploadVoucherResponse response0 = new UploadVoucherResponse()
                 {
                     Status = false,
@@ -62,23 +62,24 @@ namespace Vouchers.BusinessLogic
                 try
                 {
 
+                
 
-                    // using var scope = _serviceProvider.CreateScope();
-                    // var ssp = scope.ServiceProvider;
+                     //using var scope = _serviceProvider.CreateScope();
+                     //var ssp = _serviceProvider;// scope.ServiceProvider;
 
-                    //VoucherFileParameters _voucherFileParameters = ssp.GetRequiredService< IOptions < VoucherFileParameters >>().Value ??
-                    //    throw new ArgumentNullException(nameof(IOptions<VoucherFileParameters>));
-                    //ILogger<VoucherFileProcessor> _logger = ssp.GetService<ILogger<VoucherFileProcessor>>()?? 
-                    //    throw new ArgumentNullException(nameof(ILogger<VoucherFileProcessor>));
-                    //IStorage _storage = ssp.GetService<IStorage>() ?? 
-                    //    throw new ArgumentNullException(nameof(IStorage));
-                    ////_vouchersRepository = _storage.GetRepository<IVouchersRepository>() ??
-                    ////    throw new ArgumentNullException(nameof(IVouchersRepository));
-                    //IVoucherBatchRepository _voucherBatchRepository = _storage.GetRepository<IVoucherBatchRepository>() ??
-                    //    throw new ArgumentNullException(nameof(IVoucherBatchRepository));
+                     ////VoucherFileParameters _voucherFileParameters = ssp.GetService<IOptions<VoucherFileParameters>>().Value ??
+                     ////    throw new ArgumentNullException(nameof(IOptions<VoucherFileParameters>));
+                     ////ILogger<VoucherFileProcessor> _logger = ssp.GetService<ILogger<VoucherFileProcessor>>() ??
+                     ////    throw new ArgumentNullException(nameof(ILogger<VoucherFileProcessor>));
+                     //IStorage _storage = ssp.GetService<IStorage>() ??
+                     //    throw new ArgumentNullException(nameof(IStorage));
+                     ////_vouchersRepository = _storage.GetRepository<IVouchersRepository>() ??
+                     ////    throw new ArgumentNullException(nameof(IVouchersRepository));
+                     //IVoucherBatchRepository _voucherBatchRepository = _storage.GetRepository<IVoucherBatchRepository>() ??
+                     //    throw new ArgumentNullException(nameof(IVoucherBatchRepository));
 
 
-                    using StreamReader f = new StreamReader(path);
+                using StreamReader f = new StreamReader(path);
 
                     String line;
                     Boolean readingHeader = true;
@@ -130,7 +131,6 @@ namespace Vouchers.BusinessLogic
                              new Message("Unknowen Error ..... Please contact the administrator.",
                              Messages.Enumeration.MessageTypes.USER_ERROR_REPORT, "200")
                          );
-                    return response0;
                 }
                 catch (Exception e)
                 {
@@ -139,7 +139,6 @@ namespace Vouchers.BusinessLogic
                             new Message("Unknowen Error ..... Please contact the administrator.",
                             Messages.Enumeration.MessageTypes.USER_ERROR_REPORT, "200")
                         );
-                    return response0;
                 }
                 finally
                 {
@@ -151,10 +150,17 @@ namespace Vouchers.BusinessLogic
                        );
                 response0.Status = true;
 
-                return response0;
+                await this._hubContext.Clients.All.SendAsync("VoutureUploadStatus", response0);
 
-            });
+
+            //await Task.Run(() => { });
+
+            return;// response0;
+
+            //});
+
             
+
         }
 
         void updateBatch(VoucherBatch batch, string line, VoucherFileParameterTypes type) {

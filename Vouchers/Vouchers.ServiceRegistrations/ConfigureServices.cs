@@ -16,10 +16,10 @@ namespace Vouchers.ServiceRegistrations
         {            
             services.AddSignalR();
             services.AddScoped<IVoucherUploadService, VoucherUploadService>();
-            services.AddScoped<IVoucherFileProcessor, VoucherFileProcessor>();
+            services.AddTransient<IVoucherFileProcessor, VoucherFileProcessor>();
 
             services.AddSingleton< IVoucherFileProcessorTaskes, VoucherFileProcessorTaskes > ();
-            //services.AddHostedService<BackGroudService>();
+            services.AddHostedService<MyBackGroudService>();
 
             IConfiguration config = serviceProvider.GetService<IConfiguration>()
                 ??throw new NullReferenceException(nameof(IConfiguration));

@@ -12,7 +12,7 @@ export class EditOperatorComponent implements OnInit {
   constructor(private operatorService: OperatorService) { }
 
   ngOnInit() {
-    this.operatorService.getOperator().subscribe(x=>{}, err=>{})
+    // this.operatorService.getOperator().subscribe(x=>{}, err=>{})
   }
 
   updateOperator() {

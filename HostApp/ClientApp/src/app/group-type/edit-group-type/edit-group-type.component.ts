@@ -23,17 +23,17 @@ export class EditGroupTypeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.grouptypeService.getGroupType("12").subscribe(x => {
-       if (x.status == true) {
-          this.grouptype = x.groupType;
-      } else {
-          this.isError = true;
-          this.messages = x.messages;
-      }
+  //   this.grouptypeService.getGroupType("12").subscribe(x => {
+  //      if (x.status == true) {
+  //         this.grouptype = x.groupType;
+  //     } else {
+  //         this.isError = true;
+  //         this.messages = x.messages;
+  //     }
       
-      }, error => {
-          this.isError = true; 
-  });
+  //     }, error => {
+  //         this.isError = true; 
+  // });
   }
 
 }

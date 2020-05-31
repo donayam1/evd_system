@@ -52,6 +52,7 @@ var chageListenerRoot = sourceRoot + "ChangeListeners/";
 var TakAccountingRoot = "../Accounting/";
 var TakUserRoot = "../Users/";
 var TakVouchersRoot = "../Vouchers/";
+var TakOperatorsRoot = "../Operators/";
 
 gulp.task(
     "copy-extensions", function (cb) {
@@ -60,7 +61,17 @@ gulp.task(
         gulp.src([TakAccountingRoot + "TakTec.BusinessTransactions.Processors.Abstraction/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.Processors.Abstraction.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakAccountingRoot + "TakTec.BusinessTransactions.MoneyDeposit.Processors/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.MoneyDeposit.Processors.dll"]).pipe(gulp.dest("Extensions"));        
         gulp.src([TakUserRoot + "TakTec.Users.InitialDataSeed/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.InitialDataSeed.dll"]).pipe(gulp.dest("Extensions"));
+        
+        
 
+        gulp.src([TakOperatorsRoot + "Operators.Backend/bin/" + version + "/" + dotNetCoreVersion + "/Operators.Backend.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakOperatorsRoot + "Operators.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/Operators.Abstractions.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakOperatorsRoot + "Operators.BusinessLogic/bin/" + version + "/" + dotNetCoreVersion + "/Operators.BusinessLogic.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakOperatorsRoot + "Operators.BusinessLogic.Abstraction/bin/" + version + "/" + dotNetCoreVersion + "/Operators.BusinessLogic.Abstraction.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakOperatorsRoot + "Operators.Entities/bin/" + version + "/" + dotNetCoreVersion + "/Operators.Entities.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakOperatorsRoot + "Operators.EntityFramework/bin/" + version + "/" + dotNetCoreVersion + "/Operators.EntityFramework.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakOperatorsRoot + "Operators.Mapper/bin/" + version + "/" + dotNetCoreVersion + "/Operators.Mapper.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakOperatorsRoot + "Operators.ViewModel/bin/" + version + "/" + dotNetCoreVersion + "/Operators.ViewModel.dll"]).pipe(gulp.dest("Extensions"));
 
         gulp.src([TakVouchersRoot + "Vouchers.Backend/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Backend.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakVouchersRoot + "Vouchers.BusinessLogic/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.BusinessLogic.dll"]).pipe(gulp.dest("Extensions"));

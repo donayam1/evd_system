@@ -1,6 +1,7 @@
 ﻿using System;
 using EthioArt.Data.Entities.Abstraction;
 using EthioArt.Data.Enumerations;
+using System.ComponentModel.DataAnnotations;
 namespace TakTec.Operators.Entities
 {
     public class Operator : EntityBase

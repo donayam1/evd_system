@@ -23,8 +23,17 @@
     <Reference Include="EthioArt.Data.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
     </Reference>
+    <Reference Include="EthioArt.Data.Entities">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.dll</HintPath>
+    </Reference>
     <Reference Include="EthioArt.Data.Entities.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Filters.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Filters.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Sorters.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Sorters.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
 

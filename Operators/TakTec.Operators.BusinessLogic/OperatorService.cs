@@ -10,6 +10,9 @@ using TakTec.Operators.BusinessLogic.Abstraction;
 using ExtCore.Data.Abstractions;
 using TakTec.Operators.ViewModel;
 using TakTec.Operators.Mapper;
+using EthioArt.Filters.Abstraction;
+using EthioArt.Data.Entities;
+using EthioArt.Sorters.Abstractions;
 
 
 namespace TakTec.Operators.BusinessLogic
@@ -44,16 +47,17 @@ namespace TakTec.Operators.BusinessLogic
 
         public List<OperatorViewModel>? ListOperator(int pageNo, int NumberOfItemsPerPage)
         {
-            var items = _operatorRepository.All()
-                        .Skip(NumberOfItemsPerPage * (pageNo - 1))
-                        .Take(NumberOfItemsPerPage)
-                        .ToList();
+            // var items = _operatorRepository.All()
+            //             .Skip(NumberOfItemsPerPage * (pageNo - 1))
+            //             .Take(NumberOfItemsPerPage)
+            //             .ToList();
+            var items = _operatorRepository.GetCustomFilters(pageNo,NumberOfItemsPerPage).Items.ToList();//.GetCustomFilters<Operator>();
             if(items ==null){
                 _logger.AddUserError("There is no operator in database!");
                 return null;
             }
             else{
-                string msg = "There are "+items.Count+" operators";
+                string msg = "There are " + items.Count + " operators";
                 _logger.AddUserMesage(msg);
                 return OperatorMapper.ToViewModelList(items);
             }

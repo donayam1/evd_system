@@ -7,11 +7,11 @@ namespace TakTec.Operators.Entities
     public class Operator : EntityBase
     {
         public Operator(string ownerId, ResourceTypes ownerType, 
-            string name, string USSDrechargeCode) : 
+            string name, string uSSDRechargeCode) : 
             base(ownerId, ownerType)
         {
             Name = name;
-            USSDRechargeCode = USSDrechargeCode;
+            this.USSDRechargeCode = uSSDRechargeCode;
         }
 
         public string Name { get; set; }

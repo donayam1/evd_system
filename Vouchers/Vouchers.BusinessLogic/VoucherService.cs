@@ -30,7 +30,7 @@ namespace Vouchers.BusinessLogic
 
         public void UpdateVoutcher()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

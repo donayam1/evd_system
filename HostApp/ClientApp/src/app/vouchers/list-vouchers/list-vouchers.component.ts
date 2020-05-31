@@ -9,16 +9,16 @@ import { VoucherService } from 'src/app/data/Voucher/Services/voucher.service';
 })
 export class ListVouchersComponent implements OnInit {
 
-  vouchers: ListVoucherResponse;
+  response: ListVoucherResponse;
 
   constructor(private voucherService: VoucherService) {
-    this.vouchers = new ListVoucherResponse();
+    this.response = new ListVoucherResponse();
    }
 
   ngOnInit() {
     this.voucherService.fetchVoucher().subscribe((response: ListVoucherResponse)=>{
-      this.vouchers = response;
-      console.log(this.vouchers);
+      this.response = response;
+      console.log(this.response);
     })
   }
 

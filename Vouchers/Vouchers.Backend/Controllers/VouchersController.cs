@@ -30,7 +30,7 @@ namespace Vouchers.Backend.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetVouchers([FromQuery] PagedItemRequestBase request) {
+        public IActionResult Get([FromQuery] PagedItemRequestBase request) {
             if (ModelState.IsValid) {
 
                 var res = _voucherService.ListVoutchers(request);
@@ -40,6 +40,7 @@ namespace Vouchers.Backend.Controllers
                     Vouchers = res
 
                 };
+                return SendResult(response);
             }
             return BadRequest(ModelState);
         }

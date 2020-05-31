@@ -7,8 +7,8 @@ export class UploadVoucherResponse extends ResponseBase {
     }
 }
 
-export class Voucher{
-    constructor(obj? : any){
+export class Voucher {
+    constructor(obj?: any) {
         this.id = obj && obj.id;
         this.serialNumber = obj && obj.serialNumber;
         this.pinNumber = obj && obj.pinNumber;
@@ -19,21 +19,21 @@ export class Voucher{
 
     id: number;
     serialNumber: number;
-    pinNumber : number;
-    stopDate : string;
-    denomination : number;
-    voucherStatus: number;     
+    pinNumber: number;
+    stopDate: string;
+    denomination: number;
+    voucherStatus: number;
 
-} 
+}
 
 
 export class ListVoucherResponse extends PagedItemResponseBase {
-    constructor(obj? : any) {
+    constructor(obj?: any) {
         super(obj);
-        this.vouchers = obj && obj.vouchers.map(v => new Voucher(v))
+        this.vouchers = obj && obj.vouchers.map(v => new Voucher(v)) || Array();
     }
 
-    vouchers:Voucher[];
+    vouchers: Voucher[];
 
- 
+
 }

@@ -18,7 +18,8 @@ namespace Vouchers.ObjectMapper
                 Denomination = voucher.Batch?.Denomination ??0.0f,
                 PinNumber = voucher.PinNumber,
                 SerialNumber = voucher.SerialNumber,
-                VoucherStatus = voucher.VoucherStatuses.Where(x => x.IsCurrent == true).FirstOrDefault().Status,
+                VoucherStatus = voucher.VoucherStatuses.Where(x => x.IsCurrent == true).FirstOrDefault()?.Status??
+                Data.Enumerations.VoucherStatusTypes.Available,
                 StopDate = voucher.Batch?.StopDate.ToSharedDateString()??""
             };
             return vm;

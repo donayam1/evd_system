@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vouchers.Data.Entities\Vouchers.Data.Entities.csproj" />
+    <ProjectReference Include="..\Vouchers.ViewModels\Vouchers.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EthioArt.Data.Entities.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Extensions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

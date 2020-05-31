@@ -15,9 +15,10 @@ namespace Vouchers.ServiceRegistrations
         public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
         {            
             services.AddSignalR();
+            services.AddScoped<IVoucherService, VoucherService>();
             services.AddScoped<IVoucherUploadService, VoucherUploadService>();
             services.AddTransient<IVoucherFileProcessor, VoucherFileProcessor>();
-
+            
             services.AddSingleton< IVoucherFileProcessorTaskes, VoucherFileProcessorTaskes > ();
             services.AddHostedService<MyBackGroudService>();
 

@@ -1,13 +1,16 @@
-﻿using System;
+﻿using EthioArt.Backend.Models.Requests;
+using System;
+using System.Collections.Generic;
+using Vouchers.ViewModels;
 
 namespace Vouchers.BusinessLogic.Abstractions
 {
-    public interface IVotureService
+    public interface IVoucherService
     {
         /// <summary>
         /// Returns Pages List of votures for the current user
         /// </summary>
-        public void ListVoutchers();
+        public List<VoucherModel> ListVoutchers(PagedItemRequestBase request);
         
         /// <summary>
         /// Updates a Voutcher. Chages its status 

@@ -7,15 +7,15 @@ namespace Vouchers.ViewModels
 {
     public class VoucherModel
     {
-        public String Id { get; set; }
+        public String Id { get; set; } = default!;
 
-        public String SerialNumber { get; set; }
+        public int SerialNumber { get; set; }
 
-        public String PinNumber { get; set; }
+        public int PinNumber { get; set; }
 
-        public String StopDate { get; set; }
+        public String StopDate { get; set; } = default!;
 
-        public String Denomination { get; set; }
+        public float Denomination { get; set; }
 
         public VoucherStatusTypes VoucherStatus { get; set; }
 

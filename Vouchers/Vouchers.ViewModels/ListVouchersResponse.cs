@@ -7,6 +7,7 @@ namespace Vouchers.ViewModels
 {
     public class ListVouchersResponse:PagedItemResponseBase 
     {
-        public List<>
+        public List<VoucherModel> Vouchers { get; set; } = 
+            new List<VoucherModel>();
     }
 }

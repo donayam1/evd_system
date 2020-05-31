@@ -53,15 +53,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.Data.EntityFramewo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.Operators.Mapper", "Operators\TakTec.Operators.Mapper\TakTec.Operators.Mapper.csproj", "{A5931C52-A41E-459E-B320-FB52957EE922}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.ViewModels", "Vouchers\Vouchers.ViewModels\Vouchers.ViewModels.csproj", "{C062B536-60E9-4650-A409-AF8C0557B7A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.ViewModels", "Vouchers\Vouchers.ViewModels\Vouchers.ViewModels.csproj", "{C062B536-60E9-4650-A409-AF8C0557B7A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.Configurations", "Vouchers\Vouchers.Configurations\Vouchers.Configurations.csproj", "{50C02830-1606-4BC3-A56F-F0FFB09A1624}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.Configurations", "Vouchers\Vouchers.Configurations\Vouchers.Configurations.csproj", "{50C02830-1606-4BC3-A56F-F0FFB09A1624}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.Data.Abstractions", "Vouchers\Vouchers.Data.Abstractions\Vouchers.Data.Abstractions.csproj", "{F58F5BDF-1FE7-4BCA-86EA-667F7C052DF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.Data.Abstractions", "Vouchers\Vouchers.Data.Abstractions\Vouchers.Data.Abstractions.csproj", "{F58F5BDF-1FE7-4BCA-86EA-667F7C052DF5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{321F2E5C-E25C-47F9-951D-C2BFB85FB12B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.BusinessLogic.Testes", "Testes\Vouchers.BusinessLogic.Testes\Vouchers.BusinessLogic.Testes.csproj", "{0D325C5A-1A86-43C2-9CB4-32751E560E0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.BusinessLogic.Testes", "Testes\Vouchers.BusinessLogic.Testes\Vouchers.BusinessLogic.Testes.csproj", "{0D325C5A-1A86-43C2-9CB4-32751E560E0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.ObjectMapper", "Vouchers\Vouchers.ObjectMapper\Vouchers.ObjectMapper.csproj", "{7B0CD96A-72F1-4214-9C6F-3004876FF2AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -165,6 +167,10 @@ Global
 		{0D325C5A-1A86-43C2-9CB4-32751E560E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D325C5A-1A86-43C2-9CB4-32751E560E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D325C5A-1A86-43C2-9CB4-32751E560E0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B0CD96A-72F1-4214-9C6F-3004876FF2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B0CD96A-72F1-4214-9C6F-3004876FF2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B0CD96A-72F1-4214-9C6F-3004876FF2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B0CD96A-72F1-4214-9C6F-3004876FF2AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,6 +199,7 @@ Global
 		{50C02830-1606-4BC3-A56F-F0FFB09A1624} = {00DA286F-85BD-42D7-B419-F434D632DED4}
 		{F58F5BDF-1FE7-4BCA-86EA-667F7C052DF5} = {00DA286F-85BD-42D7-B419-F434D632DED4}
 		{0D325C5A-1A86-43C2-9CB4-32751E560E0D} = {321F2E5C-E25C-47F9-951D-C2BFB85FB12B}
+		{7B0CD96A-72F1-4214-9C6F-3004876FF2AA} = {00DA286F-85BD-42D7-B419-F434D632DED4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9E686B4-CC76-435F-B915-E2FA0F0D7C71}

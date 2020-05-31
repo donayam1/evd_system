@@ -1,13 +1,17 @@
-﻿using ExtCore.Data.Abstractions;
+﻿using EthioArt.Backend.Models.Requests;
+using ExtCore.Data.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Vouchers.BusinessLogic.Abstractions;
 using Vouchers.Data.Abstractions;
+using Vouchers.ViewModels;
+using Vouchers.ObjectMapper;
 
 namespace Vouchers.BusinessLogic
 {
-    public class VoucherService : IVotureService
+    public class VoucherService : IVoucherService
     {
         private readonly IStorage _storage;
         private readonly IVouchersRepository _vouchersRepository;
@@ -19,9 +23,9 @@ namespace Vouchers.BusinessLogic
                 throw new ArgumentNullException(nameof(IVouchersRepository));
         }
 
-        public void ListVoutchers()
+        public List<VoucherModel> ListVoutchers(PagedItemRequestBase request)
         {
-            throw new NotImplementedException();
+            return _vouchersRepository.All().ToList().ToViewModel();
         }
 
         public void UpdateVoutcher()

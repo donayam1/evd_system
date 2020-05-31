@@ -11,7 +11,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\TakTec.Data.Entities\TakTec.Data.Entities.csproj" />
+    <ProjectReference Include="..\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj" />
     <ProjectReference Include="..\TakTec.Operators.BusinessLogic\TakTec.Operators.BusinessLogic.csproj" />
     <ProjectReference Include="..\TakTec.Operators.BusinessLogic.Abstraction\TakTec.Operators.BusinessLogic.Abstraction.csproj" />
     <ProjectReference Include="..\TakTec.Operators.Mapper\TakTec.Operators.Mapper.csproj" />

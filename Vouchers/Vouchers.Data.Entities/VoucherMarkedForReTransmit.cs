@@ -16,22 +16,22 @@ namespace Vouchers.Data.Entities
     /// </summary>
     public class VoucherMarkedForReTransmit : EntityBase 
     {
-        public VoucherMarkedForReTransmit(String voterId,
+        public VoucherMarkedForReTransmit(String voucherId,
             int minWaitMinutes) :
             base("",ResourceTypes.GROUP) {
-            this.VoterId = voterId;
+            this.VoucherId = voucherId;
             this.MinWaitMinutes = minWaitMinutes;
         }
 
-        public String VoterId { get; set; }
+        public String VoucherId { get; set; }
         /// <summary>
         /// Weight at least this much minuest before sending this
         /// pin along with the users Sync pins request 
         /// </summary>
         public int MinWaitMinutes { get; set; }
-
-        [ForeignKey(nameof(VoterId))]
-        public Voucher? Voter { get; set; }
+        
+        [ForeignKey(nameof(VoucherId))]
+        public Voucher? Voucher { get; set; }
 
 
     }

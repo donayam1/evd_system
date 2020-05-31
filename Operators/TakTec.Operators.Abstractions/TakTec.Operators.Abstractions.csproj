@@ -5,7 +5,7 @@
     <Nullable>Enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-   <ProjectReference Include="..\TakTec.Data.Entities\TakTec.Data.Entities.csproj" />
+   <ProjectReference Include="..\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj" />
     <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
 
      <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />

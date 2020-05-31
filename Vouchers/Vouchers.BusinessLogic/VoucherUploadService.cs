@@ -16,21 +16,25 @@ namespace Vouchers.BusinessLogic
         private readonly IHubContext<VoucherSignalHub> _hubContext;
         private readonly IVoucherFileProcessor _voucherFileProcessor;
         private readonly ITokenUserService _tokenUserService;
+        private readonly IVoucherFileProcessorTaskes _voucherFileProcessorTaskes;
 
         public VoucherUploadService(IHubContext<VoucherSignalHub> hubContext,
             IVoucherFileProcessor voucherFileProcessor,
-            ITokenUserService tokenUserService) {
+            ITokenUserService tokenUserService,
+            IVoucherFileProcessorTaskes voucherFileProcessorTaskes) {
             this._hubContext = hubContext ?? 
                 throw new ArgumentNullException(nameof(hubContext));
             this._voucherFileProcessor = voucherFileProcessor ??
                 throw new ArgumentNullException(nameof(voucherFileProcessor));
             this._tokenUserService = tokenUserService ??
                 throw new ArgumentNullException(nameof(_tokenUserService));
+            _voucherFileProcessorTaskes = voucherFileProcessorTaskes;
+
         }
 
         public void UploadVoutchersAsync(UploadedFile file)
         {
-            
+
             var t = Task.Run(() =>
             {
                 UploadVoucherResponse response0 = new UploadVoucherResponse()
@@ -41,13 +45,13 @@ namespace Vouchers.BusinessLogic
                      }
                 };
                 this._hubContext.Clients.All.SendAsync("VoutureUploadStatus", response0);
+                _voucherFileProcessorTaskes.Enqueue(file);
+                //UploadVoucherResponse response = _voucherFileProcessor.ProcessFile(file.FullPath).Result;
+                //this._hubContext.Clients.All.SendAsync("VoutureUploadStatus", response);
 
-                UploadVoucherResponse response = _voucherFileProcessor.ProcessFile(file.FullPath).Result;                                
-                this._hubContext.Clients.All.SendAsync("VoutureUploadStatus", response);
 
-
-            }).ConfigureAwait(false);
-            
+            });//.ConfigureAwait(false);
+           
             return;
         }
     }

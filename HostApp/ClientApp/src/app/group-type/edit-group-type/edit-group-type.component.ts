@@ -13,7 +13,7 @@ export class EditGroupTypeComponent implements OnInit {
   isError: boolean;
   messages: Message[];
   constructor(private grouptypeService: GrouptypeService) {
-    //this.grouptype = new GroupType();
+    this.grouptype = new GroupType();
     this.isError = false;
     this.messages = Array();
   }

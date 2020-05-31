@@ -11,19 +11,16 @@ namespace Vouchers.Data.Entities
 {
     public class VoucherStatus:EntityBase 
     {
-        public VoucherStatus(String voucherId,VoucherStatusTypes status) : 
-            base("",ResourceTypes.NONE) // Make this voture
+        public VoucherStatus(String ownerId,VoucherStatusTypes status) : 
+            base(ownerId,ResourceTypes.NONE) // Make this voture
         {
             this.Status = status;
-            this.VoucherId = voucherId;            
         }
-
-        public String VoucherId { get; set; }
         public VoucherStatusTypes Status { get; set; }
         public Boolean IsCurrent { get; set; } = true;
 
 
-        [ForeignKey(nameof(VoucherId))]
+        [ForeignKey(nameof(OwnerId))]
         public Voucher? Voucher { get; set; }
 
     }

@@ -1,9 +1,9 @@
-using TakTec.Data.Entities;
+using TakTec.Operators.Entities;
 using ExtCore.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace TakTec.Data.EntityFramework
+namespace TakTec.Operators.EntityFramework
 {
     public class EntityRegistration: IEntityRegistrar
     {

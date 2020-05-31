@@ -23,7 +23,7 @@ namespace Vouchers.Data.Entities
 
         [ForeignKey(nameof(BatchId))]
         public VoucherBatch? Batch { get; set; }
-
+        public List<VoucherStatus> VoucherStatuses { get; set; } = new List<VoucherStatus>();
 
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Operator } from 'src/app/data/Operator/Models/operator.model';
 import { OperatorService } from 'src/app/data/Operator/Services/operator.service';
+import { Message } from 'src/app/data/Shared/Models/responseBase';
 
 @Component({
   selector: 'app-edit-operator',
@@ -9,10 +10,26 @@ import { OperatorService } from 'src/app/data/Operator/Services/operator.service
 })
 export class EditOperatorComponent implements OnInit {
   operator: Operator;
-  constructor(private operatorService: OperatorService) { }
+  isError: boolean;
+  messages: Message[];
+  constructor(private operatorService: OperatorService) {
+    this.operator = new Operator();
+    this.isError = false;
+    this.messages = Array();
+  }
 
   ngOnInit() {
-    // this.operatorService.getOperator().subscribe(x=>{}, err=>{})
+    this.operatorService.getOperator('1').subscribe(x=>{
+      if(x.status == true){
+        this.operator = x.operator;
+      }
+      else{
+        this.isError = true;
+        this.messages = x.messages;
+      }
+    }, err=>{
+      this.isError = true;
+    })
   }
 
   updateOperator() {

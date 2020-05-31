@@ -30,6 +30,10 @@ export class CreateGroupTypeComponent implements OnInit {
     this.currentGroupType.name = '';
   }
 
+  saveGroupTypes($event?: any){
+    this.grouptypeService.saveGroupTypes(this.grouptypes).subscribe(x=>{}, err=>{})
+  }
+
   deleteGroupType(item: GroupType) {
     const index = this.grouptypes.findIndex(x => x.id === item.id);
     this.grouptypes.splice(index, 1);

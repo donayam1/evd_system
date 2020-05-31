@@ -20,7 +20,7 @@
         </table>
     </div>
     <div class="card-footer float-md-right">
-        <button (click) = "saveGroupType(grouptypes)" class="btn btn-primary float-md-right mr-md-4">Submit</button>
+        <button (click) = "saveGroupTypes(grouptypes)" class="btn btn-primary float-md-right mr-md-4">Submit</button>
     </div>
       
     <div *ngIf="grouptypes.length <= 0">
@@ -44,7 +44,7 @@
                 <input class="form-control" name="label" [(ngModel)]="currentGroupType.name" type="text" required>
             </div>
             
-            <button (click)="addPo($event)" class="btn btn-outline-secondary">Add</button>
+            <button (click)="addGroupType($event)" class="btn btn-outline-secondary">Add</button>
         </form>
     </div>
 </div>

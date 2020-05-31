@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { GroupType, GroupTypesResponse, GroupTypeResponse } from "../Models/grouptype..models";
 import { of, Observable } from "rxjs";
 import { AppConfig } from '../../Configs/Services/app.config';
+import { Message } from "../../Shared/Models/responseBase";
 
 @Injectable({
   providedIn: "root",
@@ -12,7 +13,20 @@ export class GrouptypeService {
 
   constructor(private http: HttpClient) {}
 
-  
+  getGroupType(id: String): Observable<GroupTypeResponse>{
+    let groupTypeResponse: GroupTypeResponse = new GroupTypeResponse();
+    let gt = new GroupType({
+      id: '12',
+      name: 'Admin',
+      level: 2,
+      status: 'active'
+    });
+    groupTypeResponse.groupType = gt;
+    groupTypeResponse.status = true;
+    console.log(groupTypeResponse)
+    return of(groupTypeResponse);
+  }
+
   fetchGroupType(): Observable<GroupTypesResponse>{
     const url =  AppConfig.settings.apiServers.authServer + this.url;
     const observer = Observable.create(observer=>{
@@ -29,10 +43,17 @@ export class GrouptypeService {
   }
 
   saveGroupTypes(grouptypes: GroupType[]): Observable<any> {
-    let groupTypesResponse: GroupTypesResponse = new GroupTypesResponse();
+    let groupTypesResponse = new GroupTypesResponse();
+    groupTypesResponse.status = true;
+    let mes = new Message();
+    mes.messageCode = '30';
+    mes.messageType = 20;
+    mes.systemMessage = 'working';
+    groupTypesResponse.messages.push(mes);
+
+    let gt = new GroupType([{id: 1, name: "ethioTel", level: 100, status: "active"}]);
+    groupTypesResponse.grouptypes = gt;
     
-    // let gt = new GroupType({id: 1, name: "ethioTel", level: 100, status: "active"});
-    // groupTypesResponse.grouptype = gt;
     // groupTypesResponse.status = false;
 
     return of(groupTypesResponse);

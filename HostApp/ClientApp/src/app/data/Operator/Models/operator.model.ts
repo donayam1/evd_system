@@ -25,3 +25,12 @@ export class OperatorResponse extends ResponseBase {
   totalItems: number;
   operators: Operator[];
 }
+
+export class Operator_Response extends ResponseBase{
+  operator: Operator;
+
+  constructor(obj?: any){
+    super(obj);
+    this.operator = obj && new Operator(obj);
+  }
+}

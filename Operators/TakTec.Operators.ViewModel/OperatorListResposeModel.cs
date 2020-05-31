@@ -1,11 +1,12 @@
+using EthioArt.Backend.Models.Responses;
 using System;
 using System.Collections.Generic;
 using TakTec.Operators.Entities;
 
 namespace TakTec.Operators.ViewModel
 {
-    public class OperatorListResposeModel:EthioArt.Backend.Models.Responses.ResponseBase
+    public class OperatorListResposeModel:ResponseBase
     {
-        public List<OperatorViewModel> operators{get;set;}=default;
+        public List<OperatorViewModel> Operators { get; set; } = new List<OperatorViewModel>();
     }
 }

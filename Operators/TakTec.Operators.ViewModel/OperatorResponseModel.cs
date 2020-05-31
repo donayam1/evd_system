@@ -1,8 +1,10 @@
 using EthioArt.Backend.Models;
+using EthioArt.Backend.Models.Responses;
+
 namespace TakTec.Operators.ViewModel
 {
-    public class OperatorResponseModel:EthioArt.Backend.Models.Responses.ResponseBase
+    public class OperatorResponseModel : ResponseBase
     {
-       public OperatorViewModel operatorVM {get;set;}=default;
+        public OperatorViewModel Operator { get; set; } = default!;
     }
 }

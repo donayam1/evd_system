@@ -24,8 +24,9 @@ namespace TakTec.Operators.BusinessLogic
             _operatorRepository = storage.GetRepository<IOperatorRepository>();
             _logger= (ILogger<IOperatorService>)Logger;
         }
-        public NewOperatorViewModel CreateOperator(Operator _operator,int  UIid)
+        public NewOperatorViewModel? CreateOperator(Operator _operator)
         {
+            String UiId = _operator.Id;
             bool exists= _operatorRepository.Exists(_operator.Id);
             if(exists){
                 _logger.AddUserError("Operator already exists");
@@ -35,13 +36,13 @@ namespace TakTec.Operators.BusinessLogic
                 
                 _operatorRepository.Create(_operator);
                 _logger.AddUserMesage("Operator Created successfully!");
-                var newOPViewModel = OperatorMapper.ToNewOperatorViewModel(_operator,UIid);
+                var newOPViewModel = OperatorMapper.ToNewOperatorViewModel(_operator, UiId);
                 return newOPViewModel;// return viewmodel
             }
             
         }
 
-        public List<OperatorViewModel> ListOperator(int pageNo, int NumberOfItemsPerPage)
+        public List<OperatorViewModel>? ListOperator(int pageNo, int NumberOfItemsPerPage)
         {
             var items = _operatorRepository.All()
                         .Skip(NumberOfItemsPerPage * (pageNo - 1))
@@ -58,7 +59,7 @@ namespace TakTec.Operators.BusinessLogic
             }
         }
 
-        public OperatorViewModel UpdateOperator(Operator op)
+        public OperatorViewModel? UpdateOperator(Operator op)
         {
 
             bool exists= _operatorRepository.Exists(op.Id);

@@ -12,6 +12,10 @@
 
      <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />
 
+     <ProjectReference Include="..\TakTec.Operators.Abstractions\TakTec.Operators.Abstractions.csproj" />
+
+     <ProjectReference Include="..\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj" />
+
   <Reference Include="EthioArt.Data.Abstraction">
      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
   </Reference>

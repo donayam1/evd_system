@@ -41,20 +41,20 @@ namespace TakTec.Operators.Backend
                     operatorList.Status = false;
                 }
                 //operatorList.Messages=_userMessageLogges.UserMessages;
-                operatorList.operators=items;
+                operatorList.Operators=items;
                 SendResult(operatorList);
             }
             return BadRequest(ModelState);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Operator op, int UI_id)
+        public IActionResult Create([FromBody] Operator op)
         {
             NewOperatorResponseViewModel resp = new NewOperatorResponseViewModel();
             
             if (ModelState.IsValid)
             {
-                var newOperator =  _operatorService.CreateOperator(op,UI_id);
+                var newOperator =  _operatorService.CreateOperator(op);
                 if(newOperator == null){
                     resp.Status = false;
                     //resp.Messages = _userMessageLogges.UserErrorMessages;
@@ -78,7 +78,7 @@ namespace TakTec.Operators.Backend
                    // resp.Messages=_userMessageLogges.UserErrorMessages;
                 }
                // resp.Messages=_userMessageLogges.UserMessages;
-                resp.operatorVM = UpdatedOp;
+                resp.Operator = UpdatedOp;
                 SendResult(resp);
             }
             return BadRequest(ModelState);

@@ -10,7 +10,7 @@ namespace TakTec.Operators.Abstractions
 {
     public interface IOperatorRepository : IGenericRepository<Operator>
     {
-        IQueryable<Operator> LoadNavigationProperties(IQueryable<Operator> items);
+        //IQueryable<Operator> LoadNavigationProperties(IQueryable<Operator> items);
     }
 
 

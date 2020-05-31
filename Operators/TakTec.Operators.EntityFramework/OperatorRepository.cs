@@ -19,8 +19,7 @@ namespace TakTec.Operators.EntityFramework
     {
         public override IQueryable<Operator> LoadNavigationProperties(IQueryable<Operator> items)
         {
-            //TODO implementation
-            throw new NotImplementedException();
+            return items;
         }
         
         

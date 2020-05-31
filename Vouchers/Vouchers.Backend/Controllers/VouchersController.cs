@@ -25,10 +25,13 @@ namespace Vouchers.Backend.Controllers
 
         }
 
-          
+        [HttpGet]
+        public IActionResult GetVouchers() {
+            return Ok();
+        }
 
         [HttpPost, DisableRequestSizeLimit]
-        public ActionResult Upload()
+        public IActionResult Upload()
         {
 
             UploadedFile file = this.UploadTheFile();

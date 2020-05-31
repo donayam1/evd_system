@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vouchers.Data.Enumerations\Vouchers.Data.Enumerations.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="EthioArt.Backend.Models">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Backend.Models.dll</HintPath>
     </Reference>

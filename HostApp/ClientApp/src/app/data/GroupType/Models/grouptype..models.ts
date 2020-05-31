@@ -14,7 +14,7 @@ export class GroupType extends NamedItem {
     // id: number;
     // name: string;
     level: number;
-    status: string;
+    status: number;
 }
 
 export class GroupTypesResponse extends ResponseBase {

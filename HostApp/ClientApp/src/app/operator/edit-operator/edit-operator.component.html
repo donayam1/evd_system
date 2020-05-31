@@ -1,16 +1,16 @@
 <div class="card bg-light col-6 mr-auto ml-auto">
     <div class="card-body">
-        <form class="" *ngFor = "let item of operator">
+        <form class="">
             <h4 class="form-text card-title mt-md-3 mb-md-3">Edit an Operator</h4>
 
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input class="form-control" name="name" value="{{item.level}}" readonly>
+                <input class="form-control" name="name" value="{{operator.name}}">
             </div>
             
             <div class="form-group">
                 <label for="ussd">USSD Recharge Code:</label>
-                <input class="form-control" name="ussd" value="{{item.name}}">
+                <input class="form-control" name="ussd" value="{{operator.ussdCode}}">
             </div>
         
             <button (click)="updateOperator()" class="btn btn-outline-primary">Update</button>

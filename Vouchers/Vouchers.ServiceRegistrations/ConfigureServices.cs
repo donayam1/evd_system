@@ -15,11 +15,15 @@ namespace Vouchers.ServiceRegistrations
         public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
         {            
             services.AddSignalR();
+            services.AddScoped<IVoucherService, VoucherService>();
             services.AddScoped<IVoucherUploadService, VoucherUploadService>();
-            services.AddScoped<IVoucherFileProcessor, VoucherFileProcessor>();
-
+            services.AddTransient<IVoucherFileProcessor, VoucherFileProcessor>();
+            
             services.AddSingleton< IVoucherFileProcessorTaskes, VoucherFileProcessorTaskes > ();
-            //services.AddHostedService<BackGroudService>();
+            services.AddScoped<IVoucherStatusNotificationService, VoucherStatusNotificationService>();
+            services.AddHostedService<MyBackGroudService>();
+
+
 
             IConfiguration config = serviceProvider.GetService<IConfiguration>()
                 ??throw new NullReferenceException(nameof(IConfiguration));

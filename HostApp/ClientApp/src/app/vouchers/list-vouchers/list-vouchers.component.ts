@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ListVoucherResponse } from 'src/app/data/Voucher/Models/voucherUpload.services';
+import { VoucherService } from 'src/app/data/Voucher/Services/voucher.service';
 
 @Component({
   selector: 'app-list-vouchers',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListVouchersComponent implements OnInit {
 
-  constructor() { }
+  response: ListVoucherResponse;
+
+  constructor(private voucherService: VoucherService) {
+    this.response = new ListVoucherResponse();
+   }
 
   ngOnInit() {
+    this.voucherService.fetchVoucher().subscribe((response: ListVoucherResponse)=>{
+      this.response = response;
+      console.log(this.response);
+    })
   }
 
 }

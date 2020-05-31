@@ -6,8 +6,9 @@ using Vouchers.ViewModels;
 
 namespace Vouchers.BusinessLogic.Abstractions
 {
-    public interface IVoucherFileProcessor
+    public interface IVoucherStatusNotificationService
     {
-        Task ProcessFile(String path);
+
+        Task NotifyUploadVoucherStatus(UploadVoucherResponse response);
     }
 }

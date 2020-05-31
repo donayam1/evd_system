@@ -13,22 +13,18 @@ namespace Vouchers.BusinessLogic
 {
     public class VoucherUploadService : IVoucherUploadService
     {
-        private readonly IHubContext<VoucherSignalHub> _hubContext;
-        private readonly IVoucherFileProcessor _voucherFileProcessor;
         private readonly ITokenUserService _tokenUserService;
         private readonly IVoucherFileProcessorTaskes _voucherFileProcessorTaskes;
-
-        public VoucherUploadService(IHubContext<VoucherSignalHub> hubContext,
-            IVoucherFileProcessor voucherFileProcessor,
+        private readonly IVoucherStatusNotificationService _voucherStatusNotificationService;
+        public VoucherUploadService(
             ITokenUserService tokenUserService,
-            IVoucherFileProcessorTaskes voucherFileProcessorTaskes) {
-            this._hubContext = hubContext ?? 
-                throw new ArgumentNullException(nameof(hubContext));
-            this._voucherFileProcessor = voucherFileProcessor ??
-                throw new ArgumentNullException(nameof(voucherFileProcessor));
+            IVoucherFileProcessorTaskes voucherFileProcessorTaskes,
+            IVoucherStatusNotificationService voucherStatusNotificationService) {
             this._tokenUserService = tokenUserService ??
                 throw new ArgumentNullException(nameof(_tokenUserService));
             _voucherFileProcessorTaskes = voucherFileProcessorTaskes;
+            _voucherStatusNotificationService = voucherStatusNotificationService ??
+                throw new ArgumentNullException(nameof(IVoucherStatusNotificationService));
 
         }
 
@@ -44,13 +40,9 @@ namespace Vouchers.BusinessLogic
                          new Message("File uploaded, processing .....", Messages.Enumeration.MessageTypes.USER_MESSAGE, "200")
                      }
                 };
-                this._hubContext.Clients.All.SendAsync("VoutureUploadStatus", response0);
+                _voucherStatusNotificationService.NotifyUploadVoucherStatus(response0);
                 _voucherFileProcessorTaskes.Enqueue(file);
-                //UploadVoucherResponse response = _voucherFileProcessor.ProcessFile(file.FullPath).Result;
-                //this._hubContext.Clients.All.SendAsync("VoutureUploadStatus", response);
-
-
-            });//.ConfigureAwait(false);
+            });
            
             return;
         }

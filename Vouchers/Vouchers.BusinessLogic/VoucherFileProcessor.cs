@@ -18,146 +18,150 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Vouchers.BusinessLogic
 {
-    public class VoucherFileProcessor: IVoucherFileProcessor
+    public class VoucherFileProcessor : IVoucherFileProcessor
     {
         private readonly VoucherFileParameters _voucherFileParameters;
         private readonly ILogger<VoucherFileProcessor> _logger;
         private readonly IStorage _storage;
-        //private readonly IVouchersRepository _vouchersRepository;
+
         private readonly IVoucherBatchRepository _voucherBatchRepository;
         //private readonly IServiceProvider _serviceProvider;
-        private readonly IHubContext<VoucherSignalHub> _hubContext;
+        //private readonly IHubContext<VoucherSignalHub> _hubContext;
+        private readonly IVoucherStatusNotificationService _voucherStatusNotificationService;
 
         public VoucherFileProcessor(
             //IServiceProvider serviceProvider,
             IOptions<VoucherFileParameters> voucherFileParameterOptions,
             ILogger<VoucherFileProcessor> logger,
             IStorage storage,
-            IHubContext<VoucherSignalHub> hubContext
-            ) {
+            IVoucherStatusNotificationService voucherStatusNotificationService//,
+            //IHubContext<VoucherSignalHub> hubContext
+            )
+        {
             //_serviceProvider = serviceProvider ??
             //    throw new ArgumentNullException(nameof(IServiceProvider));
             _voucherFileParameters = voucherFileParameterOptions?.Value ??
                 throw new ArgumentNullException(nameof(IOptions<VoucherFileParameters>));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _storage = storage ?? throw new ArgumentNullException(nameof(storage));
-            //_vouchersRepository = _storage.GetRepository<IVouchersRepository>() ??
-            //    throw new ArgumentNullException(nameof(IVouchersRepository));
+
             _voucherBatchRepository = _storage.GetRepository<IVoucherBatchRepository>() ??
                 throw new ArgumentNullException(nameof(IVoucherBatchRepository));
-            _hubContext = hubContext;
+            //_hubContext = hubContext;
+            _voucherStatusNotificationService = voucherStatusNotificationService ??
+                throw new ArgumentNullException(nameof(IVoucherStatusNotificationService));
 
         }
-        public VoucherFileProcessor(VoucherFileParameters parameters) {
-          
-        }
 
-        public async Task<UploadVoucherResponse> ProcessFile(String path) {
 
-            return await Task.Run(() => {
-                UploadVoucherResponse response0 = new UploadVoucherResponse()
+        public async Task ProcessFile(String path)
+        {
+
+
+            UploadVoucherResponse response0 = new UploadVoucherResponse()
+            {
+                Status = false,
+            };
+            try
+            {
+
+
+
+                using StreamReader f = new StreamReader(path);
+
+                String line;
+                Boolean readingHeader = true;
+                Boolean endFound = false;
+                int lineNumber = 0;
+                VoucherBatch batch = new VoucherBatch("", "", DateTime.Now, 0, 0, 0);
+                while ((line = f.ReadLine()) != null)
                 {
-                    Status = false,
-                };
-                try
-                {
-
-
-                    // using var scope = _serviceProvider.CreateScope();
-                    // var ssp = scope.ServiceProvider;
-
-                    //VoucherFileParameters _voucherFileParameters = ssp.GetRequiredService< IOptions < VoucherFileParameters >>().Value ??
-                    //    throw new ArgumentNullException(nameof(IOptions<VoucherFileParameters>));
-                    //ILogger<VoucherFileProcessor> _logger = ssp.GetService<ILogger<VoucherFileProcessor>>()?? 
-                    //    throw new ArgumentNullException(nameof(ILogger<VoucherFileProcessor>));
-                    //IStorage _storage = ssp.GetService<IStorage>() ?? 
-                    //    throw new ArgumentNullException(nameof(IStorage));
-                    ////_vouchersRepository = _storage.GetRepository<IVouchersRepository>() ??
-                    ////    throw new ArgumentNullException(nameof(IVouchersRepository));
-                    //IVoucherBatchRepository _voucherBatchRepository = _storage.GetRepository<IVoucherBatchRepository>() ??
-                    //    throw new ArgumentNullException(nameof(IVoucherBatchRepository));
-
-
-                    using StreamReader f = new StreamReader(path);
-
-                    String line;
-                    Boolean readingHeader = true;
-                    Boolean endFound = false;
-                    int lineNumber = 0;
-                    VoucherBatch batch = new VoucherBatch("", "", DateTime.Now, 0, 0, 0);
-                    while ((line = f.ReadLine()) != null)
+                    lineNumber++;
+                    if (readingHeader)
                     {
-                        Console.WriteLine(line);
-                        lineNumber++;
-                        if (readingHeader)
-                        {
 
-                            VoucherFileParameterTypes type = getType(line, out String value);
-                            if (type == VoucherFileParameterTypes.Begin)
-                            {
-                                readingHeader = false;
-                                continue;
-                            }
-                            updateBatch(batch, value, type);
-
-                        }
-                        else  //Reading pins
+                        VoucherFileParameterTypes type = getType(line, out String value);
+                        if (type == VoucherFileParameterTypes.Begin)
                         {
-                            VoucherFileParameterTypes type = getType(line, out String value);
-                            if (type == VoucherFileParameterTypes.End)
-                            {
-                                endFound = true;
-                                break;
-                            }
-                            Voucher v = GetVoucher(line, lineNumber, batch.Id);
-                            batch.Vouchers.Add(v);
+                            readingHeader = false;
+                            continue;
                         }
+                        else if (type == VoucherFileParameterTypes.UNKnowen) {
+                            throw new Exception($"Error reading file {line}");
+                            
+                        }
+                        updateBatch(batch, value, type);
+
                     }
-
-                    if (endFound == false)
+                    else  //Reading pins
                     {
-                        _logger.LogWarning($"Voucher file {path} does not have end tag");
+                        VoucherFileParameterTypes type = getType(line, out String value);
+                        if (type == VoucherFileParameterTypes.End)
+                        {
+                            endFound = true;
+                            break;
+                        }
+                        Voucher v = GetVoucher(line, lineNumber, batch.Id);
+                        batch.Vouchers.Add(v);
                     }
+                }
+
+                if (endFound == false)
+                {
+                    _logger.LogWarning($"Voucher file {path} does not have end tag");
+                }
 
 
-                    _voucherBatchRepository.Create(batch);
-                    _storage.Save();
-                }
-                catch (FileNotFoundException e)
-                {
-                    _logger.LogError($"file {path} not found. ");
-                    response0.Messages.Add(
-                             new Message("Unknowen Error ..... Please contact the administrator.",
-                             Messages.Enumeration.MessageTypes.USER_ERROR_REPORT, "200")
-                         );
-                    return response0;
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e.InnerException, e.Message);
-                    response0.Messages.Add(
-                            new Message("Unknowen Error ..... Please contact the administrator.",
-                            Messages.Enumeration.MessageTypes.USER_ERROR_REPORT, "200")
-                        );
-                    return response0;
-                }
-                finally
-                {
 
-                }
-                response0.Messages.Add(
-                           new Message("Sucessfully uploaded voucher file.",
-                           Messages.Enumeration.MessageTypes.USER_MESSAGE, "200")
-                       );
+
+
+                _voucherBatchRepository.Create(batch);
+                _storage.Save();
+
                 response0.Status = true;
+            }
+            catch (FileNotFoundException e)
+            {
+                _logger.LogError($"file {path} not found. ");
+                response0.Messages.Add(
+                         new Message("Unknowen Error ..... Please contact the administrator.",
+                         Messages.Enumeration.MessageTypes.USER_ERROR_REPORT, "200")
+                     );
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.InnerException, e.Message);
+                response0.Messages.Add(
+                        new Message($"Error: {e.Message}. Please contact the administrator.",
+                        Messages.Enumeration.MessageTypes.USER_ERROR_REPORT, "200")
+                    );
+            }
+            finally
+            {
 
-                return response0;
+            }
+            if (response0.Status == true) {
+                response0.Messages.Add(
+                         new Message("Sucessfully uploaded voucher file.",
+                         Messages.Enumeration.MessageTypes.USER_MESSAGE, "200")
+                     );
+            }
+          
+            await this._voucherStatusNotificationService.NotifyUploadVoucherStatus(response0);
 
-            });
-            
+
         }
 
-        void updateBatch(VoucherBatch batch, string line, VoucherFileParameterTypes type) {
+        bool validateVoucherBatch(VoucherBatch batch) {
+            if (String.IsNullOrWhiteSpace(batch.Batch)) {
+
+                return false;
+            }
+            return true;
+        }
+
+        void updateBatch(VoucherBatch batch, string line, VoucherFileParameterTypes type)
+        {
             switch (type)
             {
                 case VoucherFileParameterTypes.Batch:
@@ -205,7 +209,7 @@ namespace Vouchers.BusinessLogic
                     }
                     break;
                 case VoucherFileParameterTypes.StopDate:
-                    DateTime stopDate = DateTime.ParseExact(line,"yyyyMMdd",
+                    DateTime stopDate = DateTime.ParseExact(line, "yyyyMMdd",
                         CultureInfo.InvariantCulture);
                     batch.StopDate = stopDate;
                     break;
@@ -217,15 +221,17 @@ namespace Vouchers.BusinessLogic
 
 
             }
-            
+
         }
 
 
-        public Voucher GetVoucher(String fileLine,int lineNumber,String batchId) {
-            
+        public Voucher GetVoucher(String fileLine, int lineNumber, String batchId)
+        {
+
             String[] items = fileLine.Split(" ");
 
-            if (items.Length != 2) {
+            if (items.Length != 2)
+            {
                 throw new Exception($"Invalid voucher line {lineNumber} - {fileLine}");
             }
 
@@ -251,19 +257,24 @@ namespace Vouchers.BusinessLogic
                 throw new Exception($"invalid pin number {lineNumber} while processing vocher file");
             }
 
+            VoucherStatus vs = new VoucherStatus(v.Id,Data.Enumerations.VoucherStatusTypes.Available);
+            v.VoucherStatuses.Add(vs);
+
             return v;
         }
 
         private VoucherFileParameterTypes getType(String parameter0, out String value)
         {
-            String []parameters = parameter0.Split(":");
+            String[] parameters = parameter0.Split(":");
             String parameter = parameters[0];
             if (parameters.Length > 1)
                 value = parameters[1];
-            else {
-                value = "";
+            else
+            {
+                value = parameter0;
             }
-            if (String.IsNullOrWhiteSpace(parameter)) {
+            if (String.IsNullOrWhiteSpace(parameter))
+            {
                 return VoucherFileParameterTypes.UNKnowen;
             }
 

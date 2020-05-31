@@ -12,6 +12,10 @@ namespace Vouchers.Data.EntityFramework
             modelbuilder.Entity<Voucher>(x =>
             {
                 x.HasKey(x => x.Id);
+                x.HasIndex(x => x.SerialNumber)
+                    .IsUnique();
+                x.HasIndex(x => x.PinNumber)
+                    .IsUnique();
                 x.HasOne(x => x.Batch)
                     .WithMany(z => z.Vouchers)
                     .HasForeignKey(w => w.BatchId);
@@ -25,6 +29,7 @@ namespace Vouchers.Data.EntityFramework
 
             modelbuilder.Entity<VoucherBatch>(x => {
                 x.HasKey(x => x.Id);
+                x.HasIndex(x => x.Batch).IsUnique();
                 x.HasMany(x => x.Vouchers);
                 x.ToTable(nameof(VoucherBatch) + "s");
             });

@@ -42,23 +42,35 @@ export class GrouptypeService {
      return observer;
   }
 
-  saveGroupTypes(grouptypes: GroupType[]): Observable<any> {
-    let groupTypesResponse = new GroupTypesResponse();
-    groupTypesResponse.status = true;
-    let mes = new Message();
-    mes.messageCode = '30';
-    mes.messageType = 20;
-    mes.systemMessage = 'working';
-    groupTypesResponse.messages.push(mes);
+  saveGroupTypes(grouptypes: GroupType[]): Observable<GroupTypesResponse> {
+    const url = AppConfig.settings.apiServers.authServer + this.url;
+    return new Observable(observer => {
+      this.http.post<GroupTypesResponse>(url, grouptypes).subscribe(res => {
+        const response = new GroupTypesResponse(res);
+        observer.next(response);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      });
+    });
 
-    let gt = new GroupType([{id: 1, name: "ethioTel", level: 100, status: "active"}]);
-    groupTypesResponse.grouptypes = gt;
+    // let groupTypesResponse = new GroupTypesResponse();
+    // groupTypesResponse.status = true;
+    // let mes = new Message();
+    // mes.messageCode = '30';
+    // mes.messageType = 20;
+    // mes.systemMessage = 'working';
+    // groupTypesResponse.messages.push(mes);
+
+    // let gt = new GroupType([{id: 1, name: "ethioTel", level: 100, status: "active"}]);
+    // groupTypesResponse.grouptypes = gt;
     
     // groupTypesResponse.status = false;
 
-    return of(groupTypesResponse);
+    //return of(groupTypesResponse);
 
-      //return this.http.post<any>(this.url, grouptypes);
+    //return this.http.post<any>(url, grouptypes);
   }
 
   updateGroupType(grouptype: GroupType): Observable<any>{

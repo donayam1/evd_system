@@ -17,7 +17,7 @@ using EthioArt.Backend.Models.Requests;
 
 namespace TakTec.Operators.Backend
 {
-    
+    [Route("api/operators/[controller]")]
     public class OperatorController:ControllersBase 
     {
         
@@ -27,7 +27,8 @@ namespace TakTec.Operators.Backend
         public OperatorController(IUserMessageLogges userMessageLogges,IOperatorService operatorService):
             base(userMessageLogges)
         { 
-            _operatorService = operatorService;
+            _operatorService = operatorService ?? 
+                throw new ArgumentNullException(nameof(IOperatorService));
           //  _userMessageLogges = userMessageLogges;
         }
 
@@ -65,7 +66,7 @@ namespace TakTec.Operators.Backend
             }
             return BadRequest(ModelState);
         }
-        [HttpPost]
+        [HttpPost(template:"update")]
         public IActionResult Update([FromBody] Operator op)
         {
             OperatorResponseModel resp = new OperatorResponseModel();

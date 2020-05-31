@@ -22,10 +22,13 @@ namespace TakTec.Operators.BusinessLogic
         
         private readonly IOperatorRepository _operatorRepository;
         private readonly ILogger<IOperatorService> _logger;
-
-        public OperatorService(IStorage storage, ILogger<Operator> Logger){
-            _operatorRepository = storage.GetRepository<IOperatorRepository>();
-            _logger= (ILogger<IOperatorService>)Logger;
+        private readonly IStorage _storage;
+        public OperatorService(IStorage storage, ILogger<IOperatorService> Logger){
+            _storage = storage ?? throw new ArgumentNullException(nameof(storage));
+            _operatorRepository = _storage.GetRepository<IOperatorRepository>() ??
+                throw new ArgumentNullException(nameof(IOperatorService));
+            _logger= Logger ??
+                throw new ArgumentNullException(nameof(ILogger<IOperatorService>));
         }
         public NewOperatorViewModel? CreateOperator(Operator _operator)
         {
@@ -38,6 +41,7 @@ namespace TakTec.Operators.BusinessLogic
             else{
                 
                 _operatorRepository.Create(_operator);
+                _storage.Save();
                 _logger.AddUserMesage("Operator Created successfully!");
                 var newOPViewModel = OperatorMapper.ToNewOperatorViewModel(_operator, UiId);
                 return newOPViewModel;// return viewmodel

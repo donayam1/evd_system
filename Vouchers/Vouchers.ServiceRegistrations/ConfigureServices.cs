@@ -20,7 +20,10 @@ namespace Vouchers.ServiceRegistrations
             services.AddTransient<IVoucherFileProcessor, VoucherFileProcessor>();
             
             services.AddSingleton< IVoucherFileProcessorTaskes, VoucherFileProcessorTaskes > ();
+            services.AddScoped<IVoucherStatusNotificationService, VoucherStatusNotificationService>();
             services.AddHostedService<MyBackGroudService>();
+
+
 
             IConfiguration config = serviceProvider.GetService<IConfiguration>()
                 ??throw new NullReferenceException(nameof(IConfiguration));

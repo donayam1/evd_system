@@ -213,3 +213,5 @@ tempkey.rsa
 hostApp/Extensions/
 hostApp/logs/
 hostApp/Upload/
+hostApp/ClientAppNew/
+hostApp/ClientAppOld/

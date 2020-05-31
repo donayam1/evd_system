@@ -28,6 +28,6 @@ namespace Vouchers.BusinessLogic
             return workItem;
             //return _tasks.Take(token);
         }
-
+        
     }
 }

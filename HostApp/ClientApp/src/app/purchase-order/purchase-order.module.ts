@@ -6,9 +6,10 @@ import { CreatePurchaseOrderComponent } from './create-purchase-order/create-pur
 import { PurchaseOrderHomeComponent } from './purchase-order-home/purchase-order-home.component';
 import { MessagesModule } from '../messages/messages.module';
 import { FormsModule } from '@angular/forms';
+import { ListPurchaseOrderComponent } from './list-purchase-order/list-purchase-order.component';
 
 @NgModule({
-  declarations: [CreatePurchaseOrderComponent, PurchaseOrderHomeComponent],
+  declarations: [CreatePurchaseOrderComponent, PurchaseOrderHomeComponent, ListPurchaseOrderComponent],
   imports: [
     CommonModule,
     PurchaseOrderRoutingModule,

@@ -8,7 +8,7 @@ import { VoucherService } from 'src/app/data/Voucher/Services/voucher.service';
   styleUrls: ['./list-vouchers.component.css']
 })
 export class ListVouchersComponent implements OnInit {
-
+ 
   response: ListVoucherResponse;
 
   constructor(private voucherService: VoucherService) {

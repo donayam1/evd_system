@@ -28,9 +28,9 @@ namespace Vouchers.BusinessLogic
             return _vouchersRepository.All().ToList().ToViewModel();
         }
 
-        public void UpdateVoutcher()
-        {
-            //throw new NotImplementedException();
-        }
+        //public void UpdateVoutcher()
+        //{
+        //    //throw new NotImplementedException();
+        //}
     }
 }

@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\TacTec.APIs\TacTec.APIs.csproj" />
+    <ProjectReference Include="..\..\Core\TaKTec.Core.APIs\TaKTec.Core.APIs.csproj" />
   </ItemGroup>
 
   <ItemGroup>

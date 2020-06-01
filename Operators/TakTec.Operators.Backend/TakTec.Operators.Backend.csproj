@@ -11,6 +11,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\TakTec.Core.Security\TakTec.Core.Security.csproj" />
     <ProjectReference Include="..\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj" />
     <ProjectReference Include="..\TakTec.Operators.BusinessLogic\TakTec.Operators.BusinessLogic.csproj" />
     <ProjectReference Include="..\TakTec.Operators.BusinessLogic.Abstraction\TakTec.Operators.BusinessLogic.Abstraction.csproj" />

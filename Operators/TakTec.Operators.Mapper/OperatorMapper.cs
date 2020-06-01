@@ -27,7 +27,7 @@ namespace TakTec.Operators.Mapper
         }
         public static NewOperatorViewModel ToNewOperatorViewModel(this Operator op, String UI_ID)
         {
-            NewOperatorViewModel OpviewModel = new NewOperatorViewModel();
+            NewOperatorViewModel OpviewModel =  new NewOperatorViewModel();
             OpviewModel.Name = op.Name;
             OpviewModel.USSDRechargeCode = op.USSDRechargeCode;
             OpviewModel.UI_Id = UI_ID;

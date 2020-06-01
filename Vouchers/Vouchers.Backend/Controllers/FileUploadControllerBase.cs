@@ -14,7 +14,7 @@ namespace Vouchers.Backend.Controllers
 {
    
 
-    public class FileUploadControllerBase : VoucherControllersBase
+    public abstract class FileUploadControllerBase : VoucherControllersBase
     {
         IWebHostEnvironment _hostingEnvironment;
 

@@ -22,7 +22,7 @@ using Users.BusinessLogic.Abstraction;
 using EthioArt.Security.ClaimsCollection;
 using EthioArt.Clients.ViewModels;
 using IdentityServer4;
-using TacTec.APIs;
+using TaKTec.Core.APIs;
 
 namespace TakTec.Users.InitialDataSeed
 {

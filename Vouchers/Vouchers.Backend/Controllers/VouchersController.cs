@@ -10,9 +10,12 @@ using System.IO;
 using System.Net.Http.Headers;
 using Vouchers.ViewModels;
 using EthioArt.Backend.Models.Requests;
-
+using Microsoft.AspNetCore.Authorization;
+using TakTec.Core.Security;
+using EthioArt.Security.Constants;
 namespace Vouchers.Backend.Controllers
 {
+    [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName)]
     public class VouchersController : FileUploadControllerBase
     {
         private readonly IVoucherUploadService _voucherUploadService;
@@ -29,7 +32,7 @@ namespace Vouchers.Backend.Controllers
                 throw new ArgumentNullException(nameof(IVoucherService));
         }
 
-        [HttpGet]
+        [HttpGet]      
         public IActionResult Get([FromQuery] PagedItemRequestBase request) {
             if (ModelState.IsValid) {
 
@@ -45,6 +48,8 @@ namespace Vouchers.Backend.Controllers
             return BadRequest(ModelState);
         }
 
+        [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName,
+        Policy = TakTec.Core.Security.Policies.UploadVoucherPolicy)]
         [HttpPost, DisableRequestSizeLimit]
         public IActionResult Upload()
         {

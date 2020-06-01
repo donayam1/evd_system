@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="5.0.0" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Policies\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaKTec.Core.APIs\TaKTec.Core.APIs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EthioArt.Configurations">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Configurations.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Security.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Security.Abstraction.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

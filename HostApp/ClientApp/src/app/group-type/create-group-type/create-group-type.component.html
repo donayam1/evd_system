@@ -39,10 +39,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of grouptypes">
+                <tr *ngFor="let item of grouptypes" [ngClass]="{'removed': item.objectStatus===30}">
                     <td>{{item.level}}</td>
                     <td>{{item.name}}</td>
-                    <td><button (click)="deleteGroupType(item)" class="btn btn-danger">delete</button></td>
+                    <td>
+                        <button (click)="deleteGroupType(item)" class="btn btn-danger">
+                            <span *ngIf="item.objectStatus===0 || item.objectStatus === 10">
+                                delete
+                            </span>
+                            <span *ngIf="item.objectStatus===30">
+                                undo
+                            </span>                       
+                         </button>
+                </td>
                 </tr>
             </tbody>
         </table>

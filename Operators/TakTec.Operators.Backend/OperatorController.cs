@@ -8,11 +8,15 @@ using TakTec.Operators.Entities;
 using TakTec.Operators.BusinessLogic;
 using TakTec.Operators.BusinessLogic.Abstraction;
 using TakTec.Operators.ViewModel;
-using EthioArt.Backend.Models.Requests; 
+using EthioArt.Backend.Models.Requests;
+using Microsoft.AspNetCore.Authorization;
+using TakTec.Core.Security;
 
 namespace TakTec.Operators.Backend
 {
     [Route("api/operators/[controller]")]
+    [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName,
+        Policy = TakTec.Core.Security.Policies.ManageOperatorsPolicy)]
     public class OperatorController:ControllersBase 
     {
         
@@ -62,9 +66,10 @@ namespace TakTec.Operators.Backend
                 }
                 else {
                     resp.Status = true;
+                    resp.newOperatorViewModel = newOperator;
                 }
                 //resp.Messages=_userMessageLogges.UserMessages;
-                resp.newOperatorViewModel = newOperator;
+
                 return SendResult(resp);
             }
             return BadRequest(ModelState);
@@ -84,9 +89,10 @@ namespace TakTec.Operators.Backend
                 }
                 else {
                     resp.Status = true;
+                    resp.Operator = UpdatedOp;
                 }
                // resp.Messages=_userMessageLogges.UserMessages;
-                resp.Operator = UpdatedOp;
+                
                 return SendResult(resp);
             }
             return BadRequest(ModelState);

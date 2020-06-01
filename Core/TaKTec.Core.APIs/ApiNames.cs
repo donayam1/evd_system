@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TacTec.APIs
+namespace TaKTec.Core.APIs
 {
     public static class TakApiNames
     {

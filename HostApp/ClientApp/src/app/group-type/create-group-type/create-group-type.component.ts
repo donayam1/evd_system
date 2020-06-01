@@ -27,6 +27,11 @@ export class CreateGroupTypeComponent implements OnInit {
     //this.status;
   }
 
+  ngOnInit() {
+    this.grouptypeService.fetchGroupType().subscribe(x => {
+      this.grouptypes.push(...x.groupTypes);
+    });
+  }
   addGroupType($event?: any) {
     this.idCounter++;
     this.currentGroupType.id = this.idCounter + "";
@@ -61,10 +66,18 @@ export class CreateGroupTypeComponent implements OnInit {
 
   deleteGroupType(item: GroupType) {
     const index = this.grouptypes.findIndex(x => x.id === item.id);
-    this.grouptypes.splice(index, 1);
+    if (item.objectStatus === ObjectStatus.NEW) {
+      this.grouptypes.splice(index, 1);
+    }
+    else if (item.objectStatus === ObjectStatus.REMOVED) {
+      const tItem = this.grouptypes[index];
+      tItem.objectStatus = ObjectStatus.UNCHANGED;
+    } else if (item.objectStatus === ObjectStatus.UNCHANGED) {
+      const tItem3 = this.grouptypes[index];
+      tItem3.objectStatus = ObjectStatus.REMOVED;
+    }
   }
 
-  ngOnInit() {
-  }
+
 
 }

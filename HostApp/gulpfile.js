@@ -48,7 +48,7 @@ var qrRoot = sourceRoot + "QrGenerator/";
 
 var chageListenerRoot = sourceRoot + "ChangeListeners/";
 
-
+var TakCoreRoot = "../Core/";
 var TakAccountingRoot = "../Accounting/";
 var TakUserRoot = "../Users/";
 var TakVouchersRoot = "../Vouchers/";
@@ -57,11 +57,12 @@ var TakOperatorsRoot = "../Operators/";
 gulp.task(
     "copy-extensions", function (cb) {
         gulp.src(["./OtherDeps/**"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakCoreRoot + "TaKTec.Core.Security/bin/" + version + "/" + dotNetCoreVersion + "/TaKTec.Core.Security.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakCoreRoot + "TaKTec.Core.APIs/bin/" + version + "/" + dotNetCoreVersion + "/TaKTec.Core.APIs.dll"]).pipe(gulp.dest("Extensions"));
 
         gulp.src([TakAccountingRoot + "TakTec.BusinessTransactions.Processors.Abstraction/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.Processors.Abstraction.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakAccountingRoot + "TakTec.BusinessTransactions.MoneyDeposit.Processors/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.MoneyDeposit.Processors.dll"]).pipe(gulp.dest("Extensions"));        
         gulp.src([TakUserRoot + "TakTec.Users.InitialDataSeed/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.InitialDataSeed.dll"]).pipe(gulp.dest("Extensions"));
-        
         
 
         gulp.src([TakOperatorsRoot + "TakTec.Operators.Backend/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Operators.Backend.dll"]).pipe(gulp.dest("Extensions"));

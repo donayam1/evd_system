@@ -13,6 +13,8 @@ using EthioArt.Backend.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using TakTec.Core.Security;
 using EthioArt.Security.Constants;
+using EthioArt.Backend.Models.Responses;
+
 namespace Vouchers.Backend.Controllers
 {
     [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName)]
@@ -53,19 +55,22 @@ namespace Vouchers.Backend.Controllers
         [HttpPost, DisableRequestSizeLimit]
         public IActionResult Upload()
         {
-
+            ResponseBase response = new ResponseBase()
+            {
+                Status = false
+            };
             UploadedFile file = this.UploadTheFile();
             if (file.Status == true)
             {
-                _voucherUploadService.UploadVoutchersAsync(file);
-                return Ok(true);
+                _voucherUploadService.ScheduleUploadedVoucherFileProcessor(file);
+                response.Status = true;                
             }
             else
             {
-
+                response.Status = false;
             }
-            return Ok(true);
-            
+            return SendResult(response);
+
         }
 
     }

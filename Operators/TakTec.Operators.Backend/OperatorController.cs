@@ -43,9 +43,10 @@ namespace TakTec.Operators.Backend
                 }
                 else {
                     operatorList.Status = true;
+                    operatorList.Operators = items;
                 }
                 //operatorList.Messages=_userMessageLogges.UserMessages;
-                operatorList.Operators=items;
+                
                 return SendResult(operatorList);
             }
             return BadRequest(ModelState);

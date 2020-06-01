@@ -16,6 +16,7 @@ namespace TakTec.Operators.Mapper
             OpviewModel.Name = op.Name;
             OpviewModel.USSDRechargeCode = op.USSDRechargeCode;
             OpviewModel.Id = op.Id;
+            
             return OpviewModel;
         }
 
@@ -31,7 +32,7 @@ namespace TakTec.Operators.Mapper
             OpviewModel.Name = op.Name;
             OpviewModel.USSDRechargeCode = op.USSDRechargeCode;
             OpviewModel.UI_Id = UI_ID;
-            OpviewModel.Id = op.Id;
+            OpviewModel.Id = op.Id;            
             return OpviewModel;
         }
 

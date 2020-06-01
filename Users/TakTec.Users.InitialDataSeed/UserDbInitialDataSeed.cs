@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 //using IdentityServer4.EntityFramework.StorageContext;
 using System;
 using System.Collections.Generic;
+using TakTec.Users.Constants;
 
 namespace TakTec.Users.InitialDataSeed
 {
@@ -63,13 +64,13 @@ namespace TakTec.Users.InitialDataSeed
 
         public static List<AspNetRoleType> RoleTypes = new List<AspNetRoleType>()
         {
-            new AspNetRoleType(0,"SupperAdmin"){ 
+            new AspNetRoleType(RoleTypeConstants.SystemAdminLevel,"SupperAdmin"){ 
                 Id = "1"
             },
-            new AspNetRoleType(100,"SystemAccounts"){
+            new AspNetRoleType(RoleTypeConstants.SystemAccounts,"SystemAccounts"){
                 Id = "100"
             },
-            new AspNetRoleType(10000,"Retailer"){
+            new AspNetRoleType(RoleTypeConstants.RetailerLevel,"Retailer"){
                 Id = "10000"
             }
         };

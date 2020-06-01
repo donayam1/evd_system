@@ -62,7 +62,11 @@ gulp.task(
 
         gulp.src([TakAccountingRoot + "TakTec.BusinessTransactions.Processors.Abstraction/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.Processors.Abstraction.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakAccountingRoot + "TakTec.BusinessTransactions.MoneyDeposit.Processors/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.MoneyDeposit.Processors.dll"]).pipe(gulp.dest("Extensions"));        
+
         gulp.src([TakUserRoot + "TakTec.Users.InitialDataSeed/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.InitialDataSeed.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakUserRoot + "TakTec.Users.BusinessLogic/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.BusinessLogic.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakUserRoot + "TakTec.Users.ServiceRegistrations/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.ServiceRegistrations.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakUserRoot + "TakTec.Users.Constants/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.Constants.dll"]).pipe(gulp.dest("Extensions"));
         
 
         gulp.src([TakOperatorsRoot + "TakTec.Operators.Backend/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Operators.Backend.dll"]).pipe(gulp.dest("Extensions"));

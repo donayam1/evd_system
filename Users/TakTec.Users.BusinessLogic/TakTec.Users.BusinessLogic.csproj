@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TakTec.Users.Constants\TakTec.Users.Constants.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="EthioArt.Data.Enumerations">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
+    </Reference>
+    <Reference Include="Messages.Logging.Extensions">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.Logging.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Roles.BusinessLogic.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\Roles.BusinessLogic.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="Roles.ViewModels">
+      <HintPath>..\..\HostApp\OtherDeps\Roles.ViewModels.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="ExtCore.Infrastructure" Version="5.0.0" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TakTec.Users.BusinessLogic\TakTec.Users.BusinessLogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Roles.BusinessLogic.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\Roles.BusinessLogic.Abstraction.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

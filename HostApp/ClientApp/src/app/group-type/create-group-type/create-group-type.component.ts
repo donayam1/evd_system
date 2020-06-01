@@ -44,7 +44,13 @@ export class CreateGroupTypeComponent implements OnInit {
   }
 
   saveGroupTypes($event?: any) {
-    this.grouptypeService.saveGroupTypes(this.grouptypes).subscribe(x => {
+    const editedGt: GroupType[] = Array();
+    this.grouptypes.forEach(x => {
+      if (x.objectStatus !== ObjectStatus.UNCHANGED) {
+        editedGt.push(x);
+      }
+    });
+    this.grouptypeService.saveGroupTypes(editedGt).subscribe(x => {
       //this.grouptypes = x;
       this.messageComponent.addMessages(x);
       console.log(x);

@@ -6,6 +6,7 @@ using EthioArt.Data.Entities.Abstraction;
 using EthioArt.Data.Enumerations;
 using TakTec.Operators.Entities;
 using System.Collections.Generic;
+using TakTec.RetailerPlans.Enumerations;
 
 namespace TakTec.RetailerPlans.Entities
 {
@@ -33,9 +34,6 @@ namespace TakTec.RetailerPlans.Entities
     }
 }
 
-public enum CommissionRateType{
-    FLAT_COMMISSION = 1,
-    PER_RECHARGE_COMMISSION =2
-};
+
 
 

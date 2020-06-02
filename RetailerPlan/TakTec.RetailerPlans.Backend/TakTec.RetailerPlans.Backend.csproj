@@ -4,4 +4,37 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+  <FrameworkReference Include="Microsoft.AspNetCore.App"></FrameworkReference>
+
+  <ProjectReference Include="..\TakTec.RetailerPlans.Entities\TakTec.RetailerPlans.Entities.csproj" />
+  <ProjectReference Include="..\TakTec.RetailerPlans.ViewModels\TakTec.RetailerPlans.ViewModels.csproj" />
+  <ProjectReference Include="..\TakTec.RetailerPlans.BusinessLogic\TakTec.RetailerPlans.BusinessLogic.csproj" />
+  <ProjectReference Include="..\TakTec.RetailerPlans.BusinessLogic.Abstraction\TakTec.RetailerPlans.BusinessLogic.Abstraction.csproj" />
+
+
+
+  <Reference Include="EthioArt.Backend.Models">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Backend.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="Messages.BusinessLogic.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.BusinessLogic.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Data.Entities.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include=" Messages.Logging.Extensions">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.Logging.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include=" Messages.BusinessLogic.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.BusinessLogic.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include=" Messages.BusinessLogic">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.BusinessLogic.dll</HintPath>
+    </Reference>
+    <Reference Include=" Messages.Models">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.Models.dll</HintPath>
+    </Reference>
+
+</ItemGroup>
 </Project>

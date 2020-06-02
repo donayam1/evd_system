@@ -2,6 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TakTec.RetailerPlans.Entities\TakTec.RetailerPlans.Entities.csproj" />
+    <ProjectReference Include="..\TakTec.RetailerPlans.ViewModels\TakTec.RetailerPlans.ViewModels.csproj" />
+
+    <Reference Include="EthioArt.Data.Entities.Abstraction">
+     <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+   </Reference>
+   <Reference Include="EthioArt.Data.Enumerations">
+     <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
+   </Reference>
+   
+  </ItemGroup>
 
 </Project>

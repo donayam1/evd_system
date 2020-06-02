@@ -5,7 +5,7 @@ import { PagedItemResponseBase } from "../../Shared/Models/PagedItemResponseBase
 export class Operator extends NamedItem {
   constructor(obj?: any) {
     super(obj);
-    this.uSSDRechargeCode = obj && obj.ussdRechargeCode;
+    this.uSSDRechargeCode = obj && obj.uSSDRechargeCode;
     this.status = obj && obj.status;
     this.lastUpdatedDate = obj && obj.lastUpdatedDate;
   }

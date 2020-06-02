@@ -9,14 +9,15 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>USSDRechargeCode</th>
+              <th>USSD Recharge Code</th>
+              <th>Last Updated Date</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let op of NewOperatorResponse .operators">
+            <tr *ngFor="let op of operator.operators">
               <td>{{ op.name }}</td>
               <td>{{ op.uSSDRechargeCode }}</td>
-              
+              <td>{{ op.lastUpdatedDate }}</td>
             </tr>
           </tbody>
         </table>

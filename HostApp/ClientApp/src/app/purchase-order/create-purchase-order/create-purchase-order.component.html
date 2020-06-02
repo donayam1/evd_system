@@ -1,4 +1,126 @@
-<div class="card bg-transparent col-md-7 mr-auto ml-auto mb-md-5" *ngIf="po.purchaseOrderItems.length > 0">
+<div class="row">
+    <div class="card bg-light col-md-auto ml-md-0  font-weight-lighter">
+        <div class="card-body">
+            <form>
+                <h5 class="form-text card-title mt-md-3 mb-md-4 text-md-left">Purchase Order</h5>
+                <hr class="border-bottom"/>
+                <div class="form-row py-md-1 bg-light">
+                    <div class="form-group form-check form-check-inline col-md-1">
+                        <input class="form-check-input" type="checkbox" value="" name="self-purchase" id="self-purchase" (change)='isChecked($event)'>
+                        <label class="form-check-label col-form-label-sm" for="self-purchase">Self</label>
+                    </div>
+                    <div class="col-md-7 ml-md-5 float-md-right">
+                        <div class="form-group form-row">
+                            <label class="col-md-3 col-form-label col-form-label-sm" for="on-behalf-user-list">Users:</label>
+                            <select class="form-control form-control-sm mr-md-auto col-md-7" id="on-behalf-user-list">
+                                <option selected>Select a user</option>
+                                <option value="1">User 1</option>
+                                <option value="2">User 2</option>
+                                <option value="3">User 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-row py-md-0 my-md-0">
+                    <div class="col-md-4"></div>
+                    <div class="form-group form-row col-md-8 float-md-right mr-md-0">
+                        <label for="poNumber" class="col-md-auto col-form-label-sm">PO Number:</label>
+                        <input type="text" class="col-md-6 form-control form-control-sm text-center" name="poNumber" id="poNumber" placeholder="new PO number" [(ngModel)]="po.poNumber"> 
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="denomination" class="col-form-label-sm">Denomination:</label>
+                        <input type="number" class="form-control form-control-sm" name="denomination" id="denomination" placeholder="denominations" [(ngModel)]="currentPoItem.denomination">
+                        <!-- <select id="denomination" [(ngModel)]="currentPoItem.denomination">
+                            <option *ngFor="let item of poitem.denominations" [value]="item">{{item}}</option>
+                        </select> -->
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="quantity" class="col-form-label-sm">Quantity:</label>
+                        <input type="number" class="form-control form-control-sm" name="quantity" id="quantity" placeholder="quanity" [(ngModel)]="currentPoItem.quantity">
+                    </div>
+                </div>
+                <button (click)="addPo($event)" class="btn btn-outline-secondary float-md-right">Add</button>
+            </form>
+        </div>
+    </div>
+    <div class="card bg-transparent col-md-auto mr-md-auto mb-md-5" *ngIf="po.purchaseOrderItems.length > 0">
+        <div class="card-header">Confirmation Table</div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="h6" scope="col">Denomination</th>
+                        <th class="h6" scope="col">Quantity</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of po.purchaseOrderItems">
+                        <td>{{item.denomination}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td><button (click)="deletePo(item)" class="btn btn-danger">delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer float-md-right">
+            <button (click) = "createPo($event)" class="btn btn-primary float-md-right mr-md-4">Submit</button>
+        </div>
+          
+        <div *ngIf="po.purchaseOrderItems.length <= 0">
+    
+        </div>
+    </div>
+</div>
+        <!-- <form class="">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <h5 class="form-text card-title mt-md-3 mb-md-4 text-md-left">Purchase Order</h5>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <br/>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" value="" id="self-purchase">
+                                    <label class="form-check-label" for="self-purchase">Self</label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <select class="form-control form-control-sm">
+                                    <option selected>Select a user</option>
+                                    <option value="1">User 1</option>
+                                    <option value="2">User 2</option>
+                                    <option value="3">User 3</option>
+                                </select> -->
+                                <!--Latter to bind with the service data-->
+                                <!--<select [(ngModel)]="model">
+                                        <option *ngFor="let item of list" [value]="item">{{item}}</option>
+                                    </select>-->
+                            <!-- </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div> -->
+
+
+<!-- <div class="card bg-transparent col-md-7 mr-auto ml-auto mb-md-5" *ngIf="po.purchaseOrderItems.length > 0">
     <div class="card-header">Confirmation Table</div>
     <div class="card-body">
         <table class="table table-striped">
@@ -23,7 +145,7 @@
     </div>
       
     <div *ngIf="po.purchaseOrderItems.length <= 0">
-        <!-- Add some data -->
+
     </div>
 </div>
 
@@ -45,6 +167,6 @@
             <button (click)="addPo($event)" class="btn btn-outline-secondary">Add</button>
         </form>
     </div>
-</div>
+</div> -->
 
 <app-message #messages></app-message>

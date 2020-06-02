@@ -4,26 +4,43 @@ export class PurchaseOrderItem {
     id: String;
     denomination: Number;
     quantity: Number;
+    status: Number;
 
     constructor (obj?: any){
         this.id = obj && obj.id;
         this.denomination = obj && obj.denomination;
         this.quantity = obj && obj.quantity;
+        this.status = obj && obj.status;
     }
 
 }
 
 export class PurchaseOrder{
     id: string;
+    poNumber: string;
     purchaseOrderItems: PurchaseOrderItem[];
+    status: Number;
 
     constructor (obj?: any){
         this.id = obj && obj.id;
         this.purchaseOrderItems = obj && obj.purchaseOrderItems || Array();
+        this.poNumber = obj && obj.poNumber;
+        this.status = obj && obj.status;
     }
 }
 
 export class NewPurchaseOrder extends PurchaseOrder{
+    self: boolean;
+    userId: string;
+
+    constructor (obj?: any){
+        super();
+        this.self = obj && obj.self || false;
+        this.userId = obj && obj.userId || null;
+    }
+}
+
+export class NewPurchaseOrderResult extends NewPurchaseOrder{
     ui_id: string;
 
     constructor (obj?: any){
@@ -33,11 +50,11 @@ export class NewPurchaseOrder extends PurchaseOrder{
 }
 
 export class CreatePurchaseOrderResponse extends ResponseBase{
-    purchaseOrder: NewPurchaseOrder;
+    newPurchaseOrderResult: NewPurchaseOrderResult;
 
     constructor (obj?: any){
         super(obj);
-        this.purchaseOrder = obj && new NewPurchaseOrder(obj.purchaseOrder) || new NewPurchaseOrder();
+        this.newPurchaseOrderResult = obj && new NewPurchaseOrderResult(obj.newPurchaseOrder) || new NewPurchaseOrderResult();
     }
 
 }

@@ -19,21 +19,15 @@ export class UploadComponent implements OnInit {
 
   constructor(private fileUploadService: FileUploadService,
     private notificationService: NotificationService) {
-
   }
 
   ngOnInit() {
     this.notificationService.voucherUploadStatus.subscribe((x: UploadVoucherResponse) => {
-
       if (x.status === true) {
-
       } else {
-
       }
       this.messagesCopmponent.addMessages(x);
-
     });
-
   }
 
   fileToUploaded($event: File) {
@@ -42,9 +36,10 @@ export class UploadComponent implements OnInit {
 
   uploadFile() {
     this.fileUploadService.uploadFiles(this.fileToUpload, "/api/Vouchers/vouchers/Upload").
-      subscribe(x => {       
+      subscribe(x => {
+        this.messagesCopmponent.addMessages(x);
       }, error => {
-        alert("faile");
+        this.messagesCopmponent.addMessages(error);
       });
   }
 

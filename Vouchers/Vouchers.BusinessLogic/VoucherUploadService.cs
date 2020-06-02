@@ -28,7 +28,7 @@ namespace Vouchers.BusinessLogic
 
         }
 
-        public void UploadVoutchersAsync(UploadedFile file)
+        public void ScheduleUploadedVoucherFileProcessor(UploadedFile file)
         {
 
             var t = Task.Run(() =>

@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TakTec.RetailerPlans.Entities\TakTec.RetailerPlans.Entities.csproj" />
+    <ProjectReference Include="..\TakTec.RetailerPlans.Mapper\TakTec.RetailerPlans.Mapper.csproj" />
+    <ProjectReference Include="..\TakTec.RetailerPlans.ViewModels\TakTec.RetailerPlans.ViewModels.csproj" />
+  
+    <Reference Include="EthioArt.Backend.Models">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Backend.Models.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

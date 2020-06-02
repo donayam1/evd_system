@@ -8,9 +8,9 @@ namespace TakTec.RetailerPlans.EntityFramework
 {
     public class RetailerPlanRepository : GenericRepositoryBase<RetailerPlan>, IRetailerPlanRepository
     {
-        public override IQueryable<RetailerPlan> LoadNavigationProperties(IQueryable<RetailerPlan> items)
-        {
-            throw new NotImplementedException();
-        }
+         public override IQueryable<RetailerPlan> LoadNavigationProperties(IQueryable<RetailerPlan> items)
+         {
+             throw new NotImplementedException();
+         }
     }
 }

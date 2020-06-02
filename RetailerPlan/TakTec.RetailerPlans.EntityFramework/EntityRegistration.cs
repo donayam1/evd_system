@@ -10,7 +10,7 @@ namespace TakTec.RetailerPlans.EntityFramework
         public void RegisterEntities(ModelBuilder modelbuilder)
         {
             //RetailerPlan->Commission : one to many
-            //RetailerPlan->Operator : one to one ???
+            //RetailerPlan->Operator : many to one 
             modelbuilder.Entity<RetailerPlan>(x=>{
                 x.HasKey(x=>x.Id);
                 x.HasMany(c=>c.CommissionRates);

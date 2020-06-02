@@ -8,16 +8,16 @@ import { RetailerPlanService } from 'src/app/data/RetailerPlan/Services/retailer
   styleUrls: ['./plan-list.component.css']
 })
 export class PlanListComponent implements OnInit {
-  retailerPlans : RetailerPlanResponse;
+  response : RetailerPlanResponse;
 
   constructor(private retailerPlanService: RetailerPlanService) {
-    this.retailerPlans = new RetailerPlanResponse();
+    this.response = new RetailerPlanResponse();
    }
 
   ngOnInit() {
-    this.retailerPlanService.fetchRetailerPlan().subscribe((response : RetailerPlanResponse)=>{
-    this.retailerPlans = response;
-    console.log(this.retailerPlans)
+    this.retailerPlanService.fetchRetailerPlan().subscribe((data : RetailerPlanResponse)=>{
+    this.response = data;
+    console.log(this.response)
   })
 } 
 

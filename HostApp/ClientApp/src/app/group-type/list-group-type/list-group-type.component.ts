@@ -24,7 +24,7 @@ export class ListGroupTypeComponent implements OnInit {
   ngOnInit() {
     this.grouptypeService.fetchGroupType().subscribe((response : GroupTypesResponse)=>{
      this.grouptype = response;
-     console.log(this.grouptype)
+     //console.log(this.grouptype)
     })
      
   }

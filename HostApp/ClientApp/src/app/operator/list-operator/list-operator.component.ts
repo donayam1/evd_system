@@ -8,13 +8,13 @@ import { Operator, ListOperatorResponse } from "src/app/data/Operator/Models/ope
   styleUrls: ["./list-operator.component.css"],
 })
 export class ListOperatorComponent implements OnInit {
-  operator: ListOperatorResponse;
+  response: ListOperatorResponse;
 
   constructor(private operatorService: OperatorService) {}
 
   ngOnInit() {
-    this.operatorService.fetchOperator().subscribe((data: ListOperatorResponse) => {
-      this.operator = data;
+    this.operatorService.fetchOperator().subscribe((data) => {
+      this.response = data;
       console.log(data)
     });
   }

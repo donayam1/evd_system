@@ -1,4 +1,5 @@
 import { ResponseBase } from "../../Shared/Models/responseBase";
+import { PagedItemResponseBase } from "../../Shared/Models/PagedItemResponseBase";
 
 export class PurchaseOrderItem {
     id: String;
@@ -59,13 +60,10 @@ export class CreatePurchaseOrderResponse extends ResponseBase{
 
 }
 
-export class ListPurchaseOrderResponse extends ResponseBase{
-    purchaseOrders: PurchaseOrder[];
-    totalItems: Number;
-
+export class ListPurchaseOrderResponse extends PagedItemResponseBase{
     constructor(obj?: any){
         super(obj);
-        this.purchaseOrders = obj && obj.purchaseOrders || Array();
-        this.totalItems = obj && obj.totalItems;
+        this.purchaseOrders = obj && obj.purchaseOrders.map(po => new PurchaseOrder(po)) || Array();
     }
+    purchaseOrders: PurchaseOrder[];
 }

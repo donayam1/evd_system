@@ -13,7 +13,7 @@ namespace Vouchers.BusinessLogic.Abstractions
         /// directory and decrypt, verify and insert the upload voucher to the system
         /// database 
         /// </summary>
-        public void UploadVoutchersAsync(UploadedFile file);
+        public void ScheduleUploadedVoucherFileProcessor(UploadedFile file);
 
     }
 }

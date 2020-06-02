@@ -15,6 +15,7 @@ export class ListOperatorComponent implements OnInit {
   ngOnInit() {
     this.operatorService.fetchOperator().subscribe((data: ListOperatorResponse) => {
       this.operator = data;
+      console.log(data)
     });
   }
 }

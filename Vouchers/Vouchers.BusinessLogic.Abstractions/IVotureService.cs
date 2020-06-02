@@ -16,7 +16,7 @@ namespace Vouchers.BusinessLogic.Abstractions
         /// Updates a Voutcher. Chages its status 
         /// make it sold, used, or reserved
         /// </summary>
-        public void UpdateVoutcher();
+        //public void UpdateVoutcher();
 
 
 

@@ -3,7 +3,7 @@ import { Observable, of } from "rxjs";
 import { Operator, ListOperatorResponse, NewOperatorResponse } from "../Models/operator.model";
 import { HttpClient } from "@angular/common/http";
 import { AppConfig } from '../../Configs/Services/app.config';
-import { error } from "util";
+
 
 @Injectable({
   providedIn: "root",
@@ -28,17 +28,29 @@ export class OperatorService {
   }
 
   fetchOperator(): Observable<ListOperatorResponse> {
-    const url = AppConfig.settings.apiServers.authServer + this.url + "/list";
-    return new Observable(observer => {
-      this.http.get<ListOperatorResponse>(url).subscribe(data => {
-        const response = new ListOperatorResponse(data);
-        observer.next(response);
-        observer.complete();
-      }, error => {
-        observer.error(error);
-        observer.complete();
-      });
+    const ListOpResponse: ListOperatorResponse = new ListOperatorResponse();
+    const operator = new Operator({
+      id: '1',
+      name: "ethioTel",
+      uSSDRechargeCode: '*805#',
+      lastUpdatedDate: '6/1/2020',
+      status: 'active',
     });
+    const op :Operator[] = Array();
+    op.push(operator);
+    ListOpResponse.operators = op;
+    return of(ListOpResponse);
+    //const url = AppConfig.settings.apiServers.authServer + this.url + "/list";
+    // return new Observable(observer => {
+    //   this.http.get<ListOperatorResponse>(url).subscribe(data => {
+    //     const response = new ListOperatorResponse(data);
+    //     observer.next(response);
+    //     observer.complete();
+    //   }, error => {
+    //     observer.error(error);
+    //     observer.complete();
+    //   });
+    // });
   }
 
   saveOperator(operator: Operator): Observable<NewOperatorResponse> {

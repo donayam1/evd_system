@@ -9,11 +9,13 @@ using Microsoft.AspNetCore.Authorization;
 using TakTec.RetailerPlans.Entities;
 using TakTec.RetailerPlans.ViewModels;
 using TakTec.RetailerPlans.BusinessLogic.Abstraction;
-
+using TakTec.Core.Security;
 
 namespace TakTec.RetailerPlans.Backend
 {
     [Route("api/retailerPlans/[controller]")]
+    [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName,
+        Policy = TakTec.Core.Security.Policies.ManageOperatorsPolicy)]
     public class RetailerPlanController:ControllersBase
     {
 
@@ -25,6 +27,8 @@ namespace TakTec.RetailerPlans.Backend
             _retailerPlanService = retailerPlanService ?? 
                 throw new ArgumentNullException(nameof(IRetailerPlanService));
         }
+
+        //TODO authorization and identifying user
 
         [HttpGet(template:"list")]
         public IActionResult ListRetailerPlans([FromQuery]PagedItemRequestBase page)
@@ -40,7 +44,7 @@ namespace TakTec.RetailerPlans.Backend
                 else
                 {
                     planList.Status=true;
-                   // planList.RetailerPlans = items.;
+                    planList.RetailerPlans = items;
                 }
                 return SendResult(planList);
             }
@@ -48,12 +52,24 @@ namespace TakTec.RetailerPlans.Backend
         }
 
         [HttpPost(template:"create")]
-        public IActionResult Create([FromBody] RetailerPlanViewModel retailerPlanViewModel)
+        public IActionResult Create([FromBody] NewRetailerPlanViewModel retailerPlanViewModel)
         {
-            var newRetailerPlan = new NewRetailerPlanResponseViewModel();
+            var resp = new NewRetailerPlanResponseViewModel();   
             if(ModelState.IsValid)
             {
-                return SendResult(newRetailerPlan);
+                var newRetailerPlan = (NewRetailerPlanViewModel)_retailerPlanService.CreateorUpdatePlan(retailerPlanViewModel);
+                if(newRetailerPlan == null)
+                {
+                    resp.Status = false;
+                }
+                else
+                {
+                    resp.Status = true;
+                    newRetailerPlan.UI_Id = retailerPlanViewModel.UI_Id;
+                    resp.NewRetailerPlanViewModel = newRetailerPlan;
+                }
+
+                return SendResult(resp);
             }
             return BadRequest(ModelState);
         }
@@ -65,6 +81,16 @@ namespace TakTec.RetailerPlans.Backend
             var retailerPlan = new RetailerPlanResponseViewModel();
             if(ModelState.IsValid)
             {
+                var updatedPlan = _retailerPlanService.CreateorUpdatePlan(retailerPlanViewModel);
+                if(updatedPlan == null)
+                {
+                    retailerPlan.Status = false;
+                }
+                else
+                {
+                    retailerPlan.Status = true;
+                    retailerPlan.RetailerPlanViewModel = updatedPlan;
+                }
                 return SendResult(retailerPlan);
             }
             return BadRequest(ModelState);

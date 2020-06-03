@@ -12,8 +12,13 @@ namespace TakTec.RetailerPlans.Entities
 {
     public class RetailerPlan : EntityBase
     {
-        public RetailerPlan(string ownerId, ResourceTypes ownerType) : base(ownerId, ownerType)
+        public RetailerPlan(string ownerId, ResourceTypes ownerType,int code,string name,CommissionRateType commissionRateType,int operatorID) 
+                : base(ownerId, ownerType)
         {
+            Name = name;
+            Code = code;
+            CommissionRateType = commissionRateType;
+            OperatorId=operatorID;
         }
 
         [Required]
@@ -21,13 +26,14 @@ namespace TakTec.RetailerPlans.Entities
         public string Name { get; set; }
         public double RenewalAmountChargingRate { get; set; }
         public double JoiningAmount { get; set; }
+        public double RenewalAmount { get; set; }
         public CommissionRateType CommissionRateType { get; set; }
         public int OperatorId { get; set; }
-        public ICollection<CommissionRate> CommissionRates{ get; set; }
+        public ICollection<CommissionRate> CommissionRates{ get; set; } = new List<CommissionRate>(); 
 
 
         [ForeignKey("OperatorId")]
-        public virtual Operator Operator{get;set;}
+        public virtual Operator? Operator { get; set; }
         
 
 

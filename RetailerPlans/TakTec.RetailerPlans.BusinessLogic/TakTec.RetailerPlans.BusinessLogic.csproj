@@ -10,6 +10,9 @@
     <ProjectReference Include="..\TakTec.RetailerPlans.BusinessLogic.Abstraction\TakTec.RetailerPlans.BusinessLogic.Abstraction.csproj" />
     <ProjectReference Include="..\TakTec.RetailerPlans.Mapper\TakTec.RetailerPlans.Mapper.csproj" />
     <ProjectReference Include="..\TakTec.RetailerPlans.ViewModels\TakTec.RetailerPlans.ViewModels.csproj" />
+    <ProjectReference Include="..\..\Operators\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj" />
+    <ProjectReference Include="..\..\Operators\TakTec.Operators.Abstractions\TakTec.Operators.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Operators\TakTec.Operators.EntityFramework\TakTec.Operators.EntityFramework.csproj" />
   
 
   <Reference Include="Messages.Logging.Extensions">

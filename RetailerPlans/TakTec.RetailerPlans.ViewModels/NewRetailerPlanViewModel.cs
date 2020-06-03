@@ -4,6 +4,6 @@ namespace TakTec.RetailerPlans.ViewModels
 {
     public class NewRetailerPlanViewModel:RetailerPlanViewModel
     {
-        public int UI_Id { get; set; }
+        public string UI_Id { get; set; }
     }
 }

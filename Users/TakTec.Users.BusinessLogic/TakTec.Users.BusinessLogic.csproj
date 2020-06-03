@@ -10,12 +10,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TakTec.Users.BusinessLogic.Abstractions\TakTec.Users.BusinessLogic.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.Users.Constants\TakTec.Users.Constants.csproj" />
+    <ProjectReference Include="..\TakTec.Users.ViewModels\TakTec.Users.ViewModels.csproj" />
   </ItemGroup>
   
   <ItemGroup>
     <Reference Include="EthioArt.Data.Enumerations">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.UserAccounts.Services.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.UserAccounts.Services.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Messages.Logging.Extensions">
       <HintPath>..\..\HostApp\OtherDeps\Messages.Logging.Extensions.dll</HintPath>

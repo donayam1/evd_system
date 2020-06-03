@@ -9,14 +9,16 @@
           <table class="table table-bordered table-striped" aria-labelledby="tableLabel">
             <thead>
               <tr>
+                <th>Purchase Order Number</th>
                 <th>Denomination</th>
                 <th>Quantity</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let voucher of response.purchaseOrders">
-                <td>{{ voucher.denomination }}</td>
-                <td>{{ voucher.quantity   }}</td>
+              <tr *ngFor="let purchase of response.purchaseOrders">
+                <td>{{purchase.poNumber}} </td>
+                <td>{{ purchase.denomination }}</td>
+                <td>{{ purchase.quantity   }}</td>
               </tr>
             </tbody>
           </table>

@@ -10,6 +10,10 @@ import { Message } from "../../data/Shared/Models/responseBase";
 })
 export class ListGroupTypeComponent implements OnInit {
   grouptype: GroupTypesResponse;
+  allGroupType: GroupTypesResponse;
+  filter: any ={};
+
+
   isError: boolean;
   roleTypes=[]
   messages: Message[];
@@ -22,10 +26,24 @@ export class ListGroupTypeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.grouptypeService.fetchGroupType().subscribe((response : GroupTypesResponse)=>{
-     this.grouptype = response;
-     console.log(this.grouptype)
+    this.grouptypeService.fetchGroupType().subscribe((response)=>{
+     this.grouptype = this.allGroupType = response;
+     //console.log(this.grouptype)
     })
      
   }
+
+  onFilterChange(){
+    var grouptypes = this.allGroupType;
+    if(this.filter.id)
+     grouptypes.groupTypes = grouptypes.groupTypes.filter(gt => gt.id == this.filter.id);
+
+     this.grouptype = grouptypes
+     console.log(this.grouptype)
+  }
+
+  // resetFilter(){
+  //   this.filter = {};
+  //   this.onFilterChange();
+  // }
 }

@@ -21,7 +21,7 @@ export class RetailerPlan extends NamedItem {
         this.renwalAmount = obj && obj.renwalAmount;
         this.renewalAmountChargingRate = obj && obj.renewalAmountChargingRate;
         this.commisionRateType = obj && obj.commisionRateType;
-        this.commissionRates = obj && obj.commissionRates.map(cr => new CommissionRate(cr));
+        this.commissionRates = obj && obj.commissionRates || Array();
         this.operatorId = obj && obj.operatorId;
         this.objectStatus = obj && obj.objectStatus;
     }
@@ -54,4 +54,12 @@ export class NewPlan extends RetailerPlan {
     }
     ui_id: string;
 
+}
+
+export class CreateRetailerPlanResponse extends ResponseBase{
+    newRetailerPlan: NewPlan;
+    constructor(obj?: any){
+        super(obj);
+        this.newRetailerPlan = obj && new NewPlan(obj.retailerPlan) || new NewPlan();
+    }
 }

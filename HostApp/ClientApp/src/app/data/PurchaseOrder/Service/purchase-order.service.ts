@@ -59,7 +59,7 @@ export class PurchaseOrderService {
         observer.next(response);
         observer.complete();
       }, error => {
-        observe.error(error);
+        observer.error(error);
         observer.complete();
       });
     });

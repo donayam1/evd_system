@@ -65,8 +65,6 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             if (request.Self)
             {
                 buyerUser = _userManager.FindByIdAsync(_tokenUserService.UserId).Result;
-
-                
             }
             else {
                 buyerUser = _userManager.FindByIdAsync(request.UserId).Result;
@@ -75,7 +73,6 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                     _logger.AddUnauthorizedError();
                     return false;
                 }
-
             }
 
             if (!_voucherService.AreVouchersAvailable(
@@ -124,7 +121,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             //transer the voucher to the user
             //then the user can sync to get his voucher cards
 
-            AspNetUser? buyerUser = null;
+            AspNetUser? buyerUser ;
             if (request.Self)
             {
                 buyerUser = _accountService.GetUser(_tokenUserService.UserId);// _userManager.FindByIdAsync(_tokenUserService.UserId).Result;

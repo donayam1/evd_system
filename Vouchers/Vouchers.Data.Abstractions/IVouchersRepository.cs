@@ -6,9 +6,7 @@ using Vouchers.Data.Entities;
 namespace Vouchers.Data.Abstractions
 {
     public interface IVouchersRepository: IGenericRepository<Voucher>
-    {
-
-        IQueryable<Voucher> GetFreeVouchers(float Denomination, int quantity);
+    {        
 
     }
 }

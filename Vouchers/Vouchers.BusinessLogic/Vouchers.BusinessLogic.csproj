@@ -41,6 +41,9 @@
     <Reference Include="Messages.Logging.Extensions">
       <HintPath>..\..\HostApp\OtherDeps\Messages.Logging.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Messages.Models">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.Models.dll</HintPath>
+    </Reference>
     <Reference Include="Users.BusinessLogic.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\Users.BusinessLogic.Abstraction.dll</HintPath>
     </Reference>

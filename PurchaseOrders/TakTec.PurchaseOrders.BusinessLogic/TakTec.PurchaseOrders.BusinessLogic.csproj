@@ -7,15 +7,18 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
+
+  </ItemGroup>
+  
+   <ItemGroup>
     <ProjectReference Include="..\..\Vouchers\Vouchers.BusinessLogic.Abstractions\Vouchers.BusinessLogic.Abstractions.csproj" />
     <ProjectReference Include="..\..\Vouchers\Vouchers.Data.Entities\Vouchers.Data.Entities.csproj" />
     <ProjectReference Include="..\TakTec.PurchaseOrders.BusinessLogic.Abstractions\TakTec.PurchaseOrders.BusinessLogic.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.PurchaseOrders.Data.Abstractions\TakTec.PurchaseOrders.Data.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.PurchaseOrders.ObjectMappers\TakTec.PurchaseOrders.ObjectMappers.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
-  </ItemGroup>
+  
   <ItemGroup>
     <Reference Include="AspNetIdentity.Data.Entities">
       <HintPath>..\..\HostApp\OtherDeps\AspNetIdentity.Data.Entities.dll</HintPath>

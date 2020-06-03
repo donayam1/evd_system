@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Users\TakTec.Users.Constants\TakTec.Users.Constants.csproj" />
     <ProjectReference Include="..\Vouchers.BusinessLogic.Abstractions\Vouchers.BusinessLogic.Abstractions.csproj" />
     <ProjectReference Include="..\Vouchers.Configurations\Vouchers.Configurations.csproj" />
     <ProjectReference Include="..\Vouchers.Data.Abstractions\Vouchers.Data.Abstractions.csproj" />
@@ -28,14 +29,17 @@
     <Reference Include="EthioArt.Data.Entities.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
     </Reference>
+    <Reference Include="EthioArt.Extensions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Messages.BusinessLogic.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\Messages.BusinessLogic.Abstraction.dll</HintPath>
     </Reference>
     <Reference Include="Messages.Enumeration">
       <HintPath>..\..\HostApp\OtherDeps\Messages.Enumeration.dll</HintPath>
     </Reference>
-    <Reference Include="Messages.Models">
-      <HintPath>..\..\HostApp\OtherDeps\Messages.Models.dll</HintPath>
+    <Reference Include="Messages.Logging.Extensions">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.Logging.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Users.BusinessLogic.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\Users.BusinessLogic.Abstraction.dll</HintPath>

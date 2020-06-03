@@ -15,6 +15,7 @@ using Vouchers.Data.Entities;
 using Vouchers.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SignalR;
+using TakTec.Users.Constants;
 
 namespace Vouchers.BusinessLogic
 {
@@ -25,6 +26,7 @@ namespace Vouchers.BusinessLogic
         private readonly IStorage _storage;
 
         private readonly IVoucherBatchRepository _voucherBatchRepository;
+        private readonly IUserVoucherRepository _userVoucherRepository;
         //private readonly IServiceProvider _serviceProvider;
         //private readonly IHubContext<VoucherSignalHub> _hubContext;
         private readonly IVoucherStatusNotificationService _voucherStatusNotificationService;
@@ -47,6 +49,8 @@ namespace Vouchers.BusinessLogic
 
             _voucherBatchRepository = _storage.GetRepository<IVoucherBatchRepository>() ??
                 throw new ArgumentNullException(nameof(IVoucherBatchRepository));
+            _userVoucherRepository = _storage.GetRepository<IUserVoucherRepository>() ??
+                throw new ArgumentNullException(nameof(IUserVoucherRepository));
             //_hubContext = hubContext;
             _voucherStatusNotificationService = voucherStatusNotificationService ??
                 throw new ArgumentNullException(nameof(IVoucherStatusNotificationService));
@@ -259,6 +263,9 @@ namespace Vouchers.BusinessLogic
 
             VoucherStatus vs = new VoucherStatus(v.Id,Data.Enumerations.VoucherStatusTypes.Available);
             v.VoucherStatuses.Add(vs);
+
+            UserVoucher userVoucher = new UserVoucher(RoleTypeConstants.RoleNameSupperAdmin, v.Id);
+            _userVoucherRepository.Create(userVoucher);
 
             return v;
         }

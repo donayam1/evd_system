@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="EthioArt.UserAccounts.Services.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.UserAccounts.Services.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Roles.BusinessLogic.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\Roles.BusinessLogic.Abstraction.dll</HintPath>
     </Reference>

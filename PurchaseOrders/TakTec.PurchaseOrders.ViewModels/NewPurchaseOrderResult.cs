@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TakTec.PurchaseOrders.ViewModels
 {
-    public class NewPurchaseOrderResult: NewPurchaseOrderRequest
+    public class NewPurchaseOrderResult: NewPurchaseOrderModel
     {
         public String? UI_Id { get; set; } = default!;
     }

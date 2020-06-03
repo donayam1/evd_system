@@ -102,6 +102,7 @@ gulp.task(
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.EntityFramework/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.EntityFramework.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.ViewModels/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.ViewModels.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.Enumerations/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.Enumerations.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakPoRoot + "TakTec.PurchaseOrders.ServiceRegistrations/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.ServiceRegistrations.dll"]).pipe(gulp.dest("Extensions"));
         
         
         

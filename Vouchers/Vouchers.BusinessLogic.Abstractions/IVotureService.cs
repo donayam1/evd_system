@@ -10,8 +10,10 @@ namespace Vouchers.BusinessLogic.Abstractions
         /// <summary>
         /// Returns Pages List of votures for the current user
         /// </summary>
-        public List<VoucherModel> ListVoutchers(PagedItemRequestBase request);
-        
+        public List<VoucherModel> ListVoutchers(ListVoucherRequest request);
+        bool AreVouchersAvailable(VoucherTransferRequest request, String fromUserRoleName);
+        bool TransferVouchersToUser(VoucherTransferRequest request, String fromUserRoleName, String toUserRole);
+
         /// <summary>
         /// Updates a Voutcher. Chages its status 
         /// make it sold, used, or reserved

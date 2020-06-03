@@ -8,6 +8,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\TakTec.Core.Security\TakTec.Core.Security.csproj" />
+    <ProjectReference Include="..\TakTec.PurchaseOrders.BusinessLogic.Abstractions\TakTec.PurchaseOrders.BusinessLogic.Abstractions.csproj" />
+    <ProjectReference Include="..\TakTec.PurchaseOrders.ViewModels\TakTec.PurchaseOrders.ViewModels.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EthioArt.Backend.Models">

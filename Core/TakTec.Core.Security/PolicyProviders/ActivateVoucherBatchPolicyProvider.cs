@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TakTec.Core.Security.PolicyProviders
 {
-    public class ActivateVoucherPolicyProvider :
+    public class ActivateVoucherBatchPolicyProvider :
                 EthioArt.Security.Abstraction.IAuthorizationPolicyProvider
 
     {
@@ -17,7 +17,7 @@ namespace TakTec.Core.Security.PolicyProviders
             AuthorizationPolicyBuilder authorizationPolicyBuilder = new AuthorizationPolicyBuilder();
             authorizationPolicyBuilder.RequireAssertion(context =>
             {
-                return context.User.HasClaim(EthioArtClaimTypes.Permission, Permissions.ActivateVoucher) ||
+                return context.User.HasClaim(EthioArtClaimTypes.Permission, Permissions.ActivateVoucherBatch) ||
                 context.User.HasClaim(EthioArtClaimTypes.Permission, EthioArtPermissions.DoEveryThing);
             });
 

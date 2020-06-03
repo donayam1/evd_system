@@ -22,7 +22,7 @@ namespace Vouchers.ObjectMapper
             {
                 Id = voucher.Id,
                 Denomination = voucher.Batch?.Denomination ?? 0.0f,
-                PinNumber = voucher.PinNumber,
+                PinNumber = 000,//voucher.PinNumber,
                 SerialNumber = voucher.SerialNumber,
                 VoucherStatus = voucher.VoucherStatuses.Where(x => x.IsCurrent == true).FirstOrDefault()?.Status ??
                 Data.Enumerations.VoucherStatusTypes.Available,

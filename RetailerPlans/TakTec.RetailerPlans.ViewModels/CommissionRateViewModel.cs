@@ -1,11 +1,15 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TakTec.RetailerPlans.ViewModels
 {
     public class CommissionRateViewModel
     {
-        public int Id { get; set; }
-        public double Amount { get; set; }
-        public double Rate { get; set; }
+        [Required]
+        public string Id { get; set; }
+        public double? Amount { get; set; }
+        
+        [Required]
+        public double Rate { get; set; } = default;
     }
 }

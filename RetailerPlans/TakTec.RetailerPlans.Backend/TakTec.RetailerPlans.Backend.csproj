@@ -11,7 +11,7 @@
   <ProjectReference Include="..\TakTec.RetailerPlans.ViewModels\TakTec.RetailerPlans.ViewModels.csproj" />
   <ProjectReference Include="..\TakTec.RetailerPlans.BusinessLogic\TakTec.RetailerPlans.BusinessLogic.csproj" />
   <ProjectReference Include="..\TakTec.RetailerPlans.BusinessLogic.Abstraction\TakTec.RetailerPlans.BusinessLogic.Abstraction.csproj" />
-
+  <ProjectReference Include="..\..\Core\TakTec.Core.Security\TakTec.Core.Security.csproj" />
 
 
   <Reference Include="EthioArt.Backend.Models">

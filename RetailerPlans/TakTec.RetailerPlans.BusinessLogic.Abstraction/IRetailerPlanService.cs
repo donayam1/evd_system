@@ -10,6 +10,7 @@ namespace TakTec.RetailerPlans.BusinessLogic.Abstraction
     {
         RetailerPlanViewModel? CreateorUpdatePlan(RetailerPlanViewModel retailerPlanModel);
        // RetailerPlanViewModel? UpdateRetailerPlan(RetailerPlan retailerPlan);
+        
         List<RetailerPlanViewModel> ListRetailerPlans(int pageNo,int ItemsPerPage);
     }
 }

@@ -19,7 +19,7 @@ export class RetailerPlanService {
       code: "CO1",
       name: "Plan one",
       description: "10% Benefit",
-      commissionRates: {id:"1" ,amount:10 ,rate: 5}
+      commissionRates: [{id:"1" ,amount:10 ,rate: 5}]
     });
 
     const retailerPlan : RetailerPlan[] = Array();

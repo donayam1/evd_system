@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListPurchaseOrderResponse } from 'src/app/data/PurchaseOrder/Model/purchase-order.model';
+import { ListPurchaseOrderResponse, PurchaseOrder } from 'src/app/data/PurchaseOrder/Model/purchase-order.model';
 import { PurchaseOrderService } from 'src/app/data/PurchaseOrder/Service/purchase-order.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class ListPurchaseOrderComponent implements OnInit {
   ngOnInit() {
     this.purchaseOrderService.fetchPurchaseOrder().subscribe((response: ListPurchaseOrderResponse)=>{
       this.response = response;
+      console.log(this.response)
     })
 
   }

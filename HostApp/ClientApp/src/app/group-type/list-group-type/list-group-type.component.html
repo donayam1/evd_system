@@ -31,7 +31,7 @@
             <tr *ngFor="let grouptype of grouptype.groupTypes">
               <td>{{ grouptype.name }}</td>
               <td>{{ grouptype.level }}</td>
-              <td><button class="btn btn-outline-primary" routerLink="/home/groups/edit" >Edit</button></td>
+              <td><button class="btn btn-outline-primary" (click)="editGroup(grouptype)" routerLink="/home/groups/edit" >Edit</button></td>
             </tr>
           </tbody>
         </table>

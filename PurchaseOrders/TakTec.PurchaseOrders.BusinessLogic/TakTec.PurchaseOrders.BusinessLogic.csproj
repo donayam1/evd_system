@@ -2,44 +2,36 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
-
   </ItemGroup>
-  
-   <ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Vouchers\Vouchers.BusinessLogic.Abstractions\Vouchers.BusinessLogic.Abstractions.csproj" />
-    <ProjectReference Include="..\..\Vouchers\Vouchers.Data.Entities\Vouchers.Data.Entities.csproj" />
+    <ProjectReference Include="..\..\Vouchers\Vouchers.Shared.ViewModels\Vouchers.Shared.ViewModels.csproj" />
+    <!--<ProjectReference Include="..\..\Vouchers\Vouchers.Shared.ViewModels\Vouchers.Shared.ViewModels.csproj" />-->
     <ProjectReference Include="..\TakTec.PurchaseOrders.BusinessLogic.Abstractions\TakTec.PurchaseOrders.BusinessLogic.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.PurchaseOrders.Data.Abstractions\TakTec.PurchaseOrders.Data.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.PurchaseOrders.ObjectMappers\TakTec.PurchaseOrders.ObjectMappers.csproj" />
   </ItemGroup>
-  
   <ItemGroup>
-    <Reference Include="AspNetIdentity.Data.Entities">
-      <HintPath>..\..\HostApp\OtherDeps\AspNetIdentity.Data.Entities.dll</HintPath>
-    </Reference>
     <Reference Include="EthioArt.Data.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
     </Reference>
-    <Reference Include="EthioArt.Data.Entities.Abstraction">
-      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    <Reference Include="AspNetIdentity.Data.Entities">
+      <HintPath>..\..\HostApp\OtherDeps\AspNetIdentity.Data.Entities.dll</HintPath>
     </Reference>
     <Reference Include="EthioArt.Syncronization.Abstractions">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Syncronization.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="EthioArt.UserAccounts.Services.Abstractions">
-      <HintPath>..\..\HostApp\OtherDeps\EthioArt.UserAccounts.Services.Abstractions.dll</HintPath>
+    <Reference Include="Users.BusinessLogic.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\Users.BusinessLogic.Abstraction.dll</HintPath>
     </Reference>
     <Reference Include="Messages.Logging.Extensions">
       <HintPath>..\..\HostApp\OtherDeps\Messages.Logging.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Users.BusinessLogic.Abstraction">
-      <HintPath>..\..\HostApp\OtherDeps\Users.BusinessLogic.Abstraction.dll</HintPath>
+    <Reference Include="EthioArt.UserAccounts.Services.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.UserAccounts.Services.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -13,6 +13,7 @@ using EthioArt.Extensions.DateTimeExtensions;
 using Vouchers.Data.Entities;
 using Microsoft.Extensions.Logging;
 using Messages.Logging.Extensions;
+using Vouchers.Shared.ViewModels;
 
 namespace Vouchers.BusinessLogic
 {

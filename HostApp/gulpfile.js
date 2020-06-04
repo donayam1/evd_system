@@ -53,7 +53,7 @@ var TakAccountingRoot = "../Accounting/";
 var TakUserRoot = "../Users/";
 var TakVouchersRoot = "../Vouchers/";
 var TakOperatorsRoot = "../Operators/";
-var TakPoRoot = "../PurchaseOrders";
+var TakPoRoot = "../PurchaseOrders/";
 gulp.task(
     "copy-extensions", function (cb) {
         gulp.src(["./OtherDeps/**"]).pipe(gulp.dest("Extensions"));
@@ -92,6 +92,10 @@ gulp.task(
         gulp.src([TakVouchersRoot + "Vouchers.Configurations/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Configurations.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakVouchersRoot + "Vouchers.Data.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Data.Abstractions.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakVouchersRoot + "Vouchers.ObjectMapper/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.ObjectMapper.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakVouchersRoot + "Vouchers.SignalHub.EndPoints/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.SignalHub.EndPoints.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakVouchersRoot + "Vouchers.Shared.ViewModels/bin/" + version + "/" + dotNetCoreVersion + "/Vouchers.Shared.ViewModels.dll"]).pipe(gulp.dest("Extensions"));
+        
+
 
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.Entities/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.Entities.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.Backend/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.Backend.dll"]).pipe(gulp.dest("Extensions"));

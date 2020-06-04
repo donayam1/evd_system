@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Vouchers\Vouchers.Shared.ViewModels\Vouchers.Shared.ViewModels.csproj" />
     <ProjectReference Include="..\TakTec.PurchaseOrders.Entities\TakTec.PurchaseOrders.Entities.csproj" />
     <ProjectReference Include="..\TakTec.PurchaseOrders.ViewModels\TakTec.PurchaseOrders.ViewModels.csproj" />
   </ItemGroup>

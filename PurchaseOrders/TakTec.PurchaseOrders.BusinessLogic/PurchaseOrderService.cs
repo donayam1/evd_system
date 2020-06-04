@@ -14,7 +14,8 @@ using TakTec.PurchaseOrders.ObjectMappers;
 using TakTec.PurchaseOrders.ViewModels;
 using Users.BusinessLogic.Abstraction;
 using Vouchers.BusinessLogic.Abstractions;
-using Vouchers.Data.Entities;
+using Vouchers.Shared.ViewModels;
+//using Vouchers.Data.Entities;
 using Vouchers.ViewModels;
 
 namespace TakTec.PurchaseOrders.BusinessLogic
@@ -36,10 +37,11 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             IVoucherService voucherService,
             IGlobalSyncronizationStore globalSyncronizationStore,
             UserManager<AspNetUser> userManager,
-            IAccountService accountService) {
+            IAccountService accountService)
+        {
 
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _tokenUserService = tokenUserService ?? 
+            _tokenUserService = tokenUserService ??
                 throw new ArgumentNullException(nameof(tokenUserService));
             _storage = storage ?? throw new ArgumentNullException(nameof(IStorage));
             _purchaseOrderRepository = _storage.GetRepository<IPurchaseOrderRepository>() ??
@@ -48,7 +50,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                 throw new ArgumentNullException(nameof(IVoucherService));
             _globalSyncronizationStore = globalSyncronizationStore ??
                 throw new ArgumentNullException(nameof(globalSyncronizationStore));
-            _userManager = userManager ?? 
+            _userManager = userManager ??
                 throw new ArgumentNullException(nameof(userManager));
             _accountService = accountService ??
                 throw new ArgumentNullException(nameof(accountService));
@@ -59,24 +61,27 @@ namespace TakTec.PurchaseOrders.BusinessLogic
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        bool validate(NewPurchaseOrderModel request) {
+        bool validate(NewPurchaseOrderModel request)
+        {
             //assert items are available    
             AspNetUser? buyerUser = null;
             if (request.Self)
             {
                 buyerUser = _userManager.FindByIdAsync(_tokenUserService.UserId).Result;
             }
-            else {
+            else
+            {
                 buyerUser = _userManager.FindByIdAsync(request.UserId).Result;
                 //assert that the buyer user is under the current user
-                if (buyerUser.OwnerId != _tokenUserService.UserRole) {
+                if (buyerUser.OwnerId != _tokenUserService.UserRole)
+                {
                     _logger.AddUnauthorizedError();
                     return false;
                 }
             }
 
             if (!_voucherService.AreVouchersAvailable(
-                    new Vouchers.ViewModels.VoucherTransferRequest()
+                    new VoucherTransferRequest()
                     { TransferRequestItems = request.Items.Cast<VoucherTransferRequestItem>().ToList() },
                     buyerUser.OwnerId))
             {
@@ -86,17 +91,19 @@ namespace TakTec.PurchaseOrders.BusinessLogic
 
             //calculate total ammount 
             float total = 0;
-            foreach (var item in request.Items) {
+            foreach (var item in request.Items)
+            {
                 total += (item.Denomination * item.Quantity);
             }
 
-           //TODO assert the user has balance 
+            //TODO assert the user has balance 
 
-           
+
             return true;
         }
 
-        public PurchaseOrderModel? CreatePurchaseOrder(NewPurchaseOrderModel request) {
+        public PurchaseOrderModel? CreatePurchaseOrder(NewPurchaseOrderModel request)
+        {
             List<ILocable> locables = request.Items.ConvertAll<ILocable>(x => x);
 
             return (PurchaseOrderModel?)_globalSyncronizationStore.LockAndExecute((x) =>
@@ -107,7 +114,8 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             , request, locables);
         }
 
-        private PurchaseOrderModel? createPurchaseOrder(NewPurchaseOrderModel request) {
+        private PurchaseOrderModel? createPurchaseOrder(NewPurchaseOrderModel request)
+        {
 
             if (!validate(request))
             {
@@ -121,7 +129,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             //transer the voucher to the user
             //then the user can sync to get his voucher cards
 
-            AspNetUser? buyerUser ;
+            AspNetUser? buyerUser;
             if (request.Self)
             {
                 buyerUser = _accountService.GetUser(_tokenUserService.UserId);// _userManager.FindByIdAsync(_tokenUserService.UserId).Result;
@@ -131,16 +139,17 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                 buyerUser = _accountService.GetUser(request.UserId);// _userManager.FindByIdAsync(request.UserId).Result;
             }
 
-            if (buyerUser == null) {
+            if (buyerUser == null)
+            {
                 throw new Exception("Unknowen user");
             }
 
             String buyerUserRole = buyerUser.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
 
-            String userId = _tokenUserService.UserId;            
+            String userId = _tokenUserService.UserId;
             var po = request.ToDomainModel(userId);
 
-            _purchaseOrderRepository.Create(po);
+            //_purchaseOrderRepository.Create(po);
 
             NewPurchaseOrderResult result = new NewPurchaseOrderResult();
             result.UI_Id = request.Id;
@@ -149,7 +158,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
 
             //transer the voucher to the user
             _voucherService.TransferVouchersToUser(
-                new Vouchers.ViewModels.VoucherTransferRequest()
+                new VoucherTransferRequest()
                 { TransferRequestItems = request.Items.Cast<VoucherTransferRequestItem>().ToList() },
                     buyerUser.OwnerId, buyerUserRole
             );
@@ -157,12 +166,15 @@ namespace TakTec.PurchaseOrders.BusinessLogic
 
 
             //then the user can sync to get his voucher cards
-            try {
+            try
+            {
                 _storage.Save();
                 return result;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 _logger.AddUserError("Unknowen error, Please contact the administrator.");
-                _logger.LogError(e.InnerException, e.Message);                    
+                _logger.LogError(e.InnerException, e.Message);
             }
 
             return null;

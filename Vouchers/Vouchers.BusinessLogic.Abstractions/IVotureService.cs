@@ -1,6 +1,7 @@
 ﻿using EthioArt.Backend.Models.Requests;
 using System;
 using System.Collections.Generic;
+using Vouchers.Shared.ViewModels;
 using Vouchers.ViewModels;
 
 namespace Vouchers.BusinessLogic.Abstractions

@@ -60,41 +60,44 @@ namespace TakTec.RetailerPlans.BusinessLogic
 
          private RetailerPlanViewModel CreateNewPlan(RetailerPlan newPlan)
          {
-            _retailerPlanRepository.Create(newPlan);
+            //_retailerPlanRepository.Create(newPlan);
             return newPlan.ToPlanViewModel();
         }
 
          private RetailerPlanViewModel UpdatePlan (RetailerPlan plan)
         {
-            var retPlan = _retailerPlanRepository.WithKey(plan.Id);
-            if(retPlan == null)
-            {
-                return null;
-            }
-            var updatedPlan = new RetailerPlan("", ResourceTypes.GROUP,
-                                plan.Code , plan.Name,
-                                plan.CommissionRateType , plan.OperatorId){
-                                    Description = plan.Description,
-                                    JoiningAmount = plan.JoiningAmount,
-                                    RenewalAmount = plan.RenewalAmount,
-                                    RenewalAmountChargingRate = plan.RenewalAmountChargingRate,
-                                    CommissionRates = plan.CommissionRates//is this possible
-                              };
-            return updatedPlan.ToPlanViewModel();
+            //var retPlan = _retailerPlanRepository.WithKey(plan.Id);
+            //if(retPlan == null)
+            //{
+            //    return null;
+            //}
+            //var updatedPlan = new RetailerPlan("", ResourceTypes.GROUP,
+            //                    plan.Code , plan.Name,
+            //                    plan.CommissionRateType , plan.OperatorId){
+            //                        Description = plan.Description,
+            //                        JoiningAmount = plan.JoiningAmount,
+            //                        RenewalAmount = plan.RenewalAmount,
+            //                        RenewalAmountChargingRate = plan.RenewalAmountChargingRate,
+            //                        CommissionRates = plan.CommissionRates//is this possible
+            //                  };
+            //return updatedPlan.ToPlanViewModel();
+            return null;
         }
 
         public List<RetailerPlanViewModel> ListRetailerPlans(int pageNo, int ItemsPerPage)
         {
-            var plans = _retailerPlanRepository.GetCustomFilters(pageNo,ItemsPerPage).Items.ToList();//.GetCustomFilters<Operator>();
-            if(plans ==null){
-                _logger.AddUserError("There is no Plan in database!");
-                return null;
-            }
-            else{
-                string msg = "There are " + plans.Count + " plans";
-                _logger.AddUserMesage(msg);
-                return plans.ToPlanViewModelList();
-            }
+            //var plans = _retailerPlanRepository.GetCustomFilters(pageNo,ItemsPerPage).Items.ToList();//.GetCustomFilters<Operator>();
+            //if(plans ==null){
+            //    _logger.AddUserError("There is no Plan in database!");
+            //    return null;
+            //}
+            //else{
+            //    string msg = "There are " + plans.Count + " plans";
+            //    _logger.AddUserMesage(msg);
+            //    return plans.ToPlanViewModelList();
+            //}
+
+            return null;
         }
 
        

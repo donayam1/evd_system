@@ -3,8 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\TakTec.RetailerPlans.Enumerations\TakTec.RetailerPlans.Enumerations.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     
   <Reference Include="EthioArt.Data.Entities.Abstraction">
      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>

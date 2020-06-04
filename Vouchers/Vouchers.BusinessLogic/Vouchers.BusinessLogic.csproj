@@ -16,7 +16,7 @@
     <ProjectReference Include="..\Vouchers.Data.Abstractions\Vouchers.Data.Abstractions.csproj" />
     <ProjectReference Include="..\Vouchers.Data.Entities\Vouchers.Data.Entities.csproj" />
     <ProjectReference Include="..\Vouchers.ObjectMapper\Vouchers.ObjectMapper.csproj" />
-    <ProjectReference Include="..\Vouchers.ViewModels\Vouchers.ViewModels.csproj" />
+    <!--<ProjectReference Include="..\Vouchers.Shared.ViewModels\Vouchers.Shared.ViewModels.csproj" />-->
   </ItemGroup>
 
   <ItemGroup>

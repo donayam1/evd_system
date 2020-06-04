@@ -1,6 +1,7 @@
 ﻿using EthioArt.Syncronization.Abstractions;
 using System;
-using Vouchers.ViewModels;
+using Vouchers.Shared.ViewModels;
+//using Vouchers.ViewModels;
 
 namespace TakTec.PurchaseOrders.ViewModels
 {

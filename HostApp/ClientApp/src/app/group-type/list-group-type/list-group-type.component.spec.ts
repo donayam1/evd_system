@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ListGroupTypeComponent } from './list-group-type.component';
 
 describe('ListGroupTypeComponent', () => {

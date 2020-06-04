@@ -1,7 +1,41 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Vouchers\Vouchers.Data.Abstractions\Vouchers.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\TakTec.PurchaseOrders.BusinessLogic.Abstractions\TakTec.PurchaseOrders.BusinessLogic.Abstractions.csproj" />
+    <ProjectReference Include="..\TakTec.PurchaseOrders.ObjectMappers\TakTec.PurchaseOrders.ObjectMappers.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="AspNetIdentity.Data.Entities">
+      <HintPath>..\..\HostApp\OtherDeps\AspNetIdentity.Data.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Data.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+    </Reference>
+     <Reference Include="EthioArt.Syncronization.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Syncronization.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Users.BusinessLogic.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\Users.BusinessLogic.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="Messages.Logging.Extensions">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.Logging.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.UserAccounts.Services.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.UserAccounts.Services.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Vouchers.BusinessLogic.Abstractions">
+      <HintPath>..\..\Vouchers\Vouchers.BusinessLogic.Abstractions\bin\Debug\netcoreapp3.0\Vouchers.BusinessLogic.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Vouchers.Shared.ViewModels">
+      <HintPath>..\..\Vouchers\Vouchers.Shared.ViewModels\bin\Debug\netcoreapp3.0\Vouchers.Shared.ViewModels.dll</HintPath>
+    </Reference><!---->
+  </ItemGroup>
 
 </Project>

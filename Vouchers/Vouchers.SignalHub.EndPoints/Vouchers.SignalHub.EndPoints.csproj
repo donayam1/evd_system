@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vouchers.BusinessLogic\Vouchers.BusinessLogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--<FrameworkReference Include="Microsoft.AspNetCore.App" />-->
+    <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="5.0.0" />
+  </ItemGroup>
+
+</Project>

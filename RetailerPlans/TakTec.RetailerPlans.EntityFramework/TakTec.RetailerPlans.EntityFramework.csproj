@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -12,6 +12,7 @@
       <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />
       <ProjectReference Include="..\TakTec.RetailerPlans.Abstractions\TakTec.RetailerPlans.Abstractions.csproj" />
       <ProjectReference Include="..\TakTec.RetailerPlans.Entities\TakTec.RetailerPlans.Entities.csproj" />
+
    </ItemGroup>
 
 
@@ -20,6 +21,10 @@
       <Reference Include="EthioArt.Data.Abstraction">
          <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
       </Reference>
+
+    </ItemGroup>
+  
+    <ItemGroup>
       <Reference Include="EthioArt.Data.Entities.Abstraction">
          <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
       </Reference>

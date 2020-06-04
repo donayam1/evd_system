@@ -1,0 +1,115 @@
+<div class="card bg-light ml-md-0 mr-md-0">
+    <div class="card-body">
+        <form>
+            <h5 class="form-text card-title mt-md-3 mb-md-4 text-md-center">Edit Retailer Plan</h5>
+            <hr class="border-bottom"/>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-row form-group">
+                        <label for="planName" class="col-form-label col-form-label-sm">Name:</label>
+                        <input type="text" class="form-control form-control-sm" name="planName" id="planName" placeholder="New Plan Name" value="{{np.name}}" [(ngModel)]="np.name">
+                    </div>
+                    <div class="form-row form-group">
+                        <label for="planCode" class="col-form-label col-form-label-sm">Code:</label>
+                        <input type="text" class="form-control form-control-sm" name="planCode" id="planCode" placeholder="Self Given New Plan Code" value="{{np.code}}" [(ngModel)]="np.code">
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="operator" class="col-form-label col-form-label-sm">Operator:</label>
+                    <select class="form-control form-control-sm" name="operator" id="operator" aria-readonly="true">
+                        <option selected class="text-muted disabled">Select your providing operator</option>
+                        <option value="1">Operator 1</option>
+                        <option value="2">Operator 2</option>
+                        <option value="3">Operator 3</option>
+                    </select>
+                    <div class="card bg-transparent">
+                        <div class="card-body">
+                            <p class="card-text">Operator's Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 align-self-md-center">
+                    <div class="form-group">
+                        <label for="description" class="col-form-label col-form-label-sm">Description:</label>
+                        <input type="text" class="form-control form-control-sm text-body" name="description" id="description" placeholder="Brief description of your plan. This is viewed by your subscribers." value="{{np.description}}" [(ngModel)]="np.description">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-row form-group">
+                        <label for="joiningAmount" class="col-form-label col-form-label-sm">Joining Amount:</label>
+                        <input type="number" class="form-control form-control-sm" name="joiningAmount" id="joiningAmount" placeholder="Joining Amount" value="{{np.joiningAmount}}" [(ngModel)]="np.joiningAmount" readonly>
+                    </div>
+                    <div class="form-row form-group">
+                        <label for="planRenewalAmount" class="col-form-label col-form-label-sm">Renewal Amount:</label>
+                        <input type="number" class="form-control form-control-sm" name="planRenewalAmount" id="planRenewalAmount" placeholder="Renewal Amount" value="{{np.renwalAmount}}" [(ngModel)]="np.renwalAmount" readonly>
+                    </div>
+                    <div class="form-row form-group">
+                        <label for="renewalRate" class="col-form-label col-form-label-sm">Renewal Rate:</label>
+                        <select class="form-control form-control-sm" name="renewalRate" id="renewalRate" value="{{selectedRate}}" [(ngModel)]="np.renewalAmountChargingRate" aria-readonly="true">
+                            <option selected class="text-muted disabled">Select the period you would like to have this plan renewed</option>
+                            <option *ngFor="let item of renewalRate" [value]="item">{{item}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 align-self-md-center">
+                    <label for="commissionType" class="col-form-label col-form-label-sm">Commission Type:</label>
+                    <select class="form-control form-control-sm" name="commissionType" id="commissionType" value="{{selectedType}}" [(ngModel)]="np.commisionRateType" aria-readonly="true">
+                        <option selected class="text-muted disabled">Select how you want to give out commissions</option>
+                        <option *ngFor="let item of commissionType" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <!-- <div *ngIf="selectedType === 'Flat Commission'">
+                        <div class="form-row form-group">
+                            <label for="amount" class="col-form-label col-form-label-sm">Amount:</label>
+                            <input type="number" class="form-control form-control-sm" name="amount" id="amount" placeholder="Per-commission Amount" [(ngModel)]="cr.amount">
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="commissionRate" class="col-form-label col-form-label-sm">Commission Rate:</label>
+                            <input type="number" class="form-control form-control-sm" name="commisionRate" id="commissionRate" placeholder="Commission Rate per Amount" [ngModel]="cr.rate">
+                        </div>
+                    </div>
+                    <div *ngIf="selectedType === 'Per-recharge Commission'">
+                        <div class="form-row form-group">
+                            <label for="perRechargeAmount" class="col-form-label col-form-label-sm">Per-recharge Amount:</label>
+                            <input type="number" class="form-control form-control-sm" name="amount" id="amount" placeholder="Per-commission Amount" [(ngModel)]="cr.amount">
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="commissionRate" class="col-form-label col-form-label-sm">Commission Rate:</label>
+                            <input type="number" class="form-control form-control-sm" name="commisionRate" id="commissionRate" placeholder="Commission Rate per Amount" [ngModel]="cr.rate">
+                        </div>
+                        <button class="btn btn-outline-secondary btn-sm" (click)="addCr($event)">Add</button>
+                        <div class="card bg-transparent mt-md-3" *ngIf="crs.length > 0">
+                            <table class="card-body table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Amount</th>
+                                        <th>Rate</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of crs">
+                                        <td>{{item.amount}}</td>
+                                        <td>{{item.rate}}</td>
+                                        <td>
+                                            <button class="btn btn-outline-secondary btn-sm" (click)="delete(item)">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="float-md-right">
+                <button class="btn btn-primary btn-sm  mr-md-3 mt-md-4" (click)="updatePlan($event)">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+<app-message #messages></app-message>

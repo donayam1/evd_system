@@ -10,15 +10,28 @@
             <thead>
               <tr>
                 <th>Purchase Order Number</th>
-                <th>Denomination</th>
-                <th>Quantity</th>
+                <th>Purchase Order Items</th>
+                <th>Date</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let purchase of response.purchaseOrders">
                 <td>{{purchase.poNumber}} </td>
-                <td>{{ purchase.denomination }}</td>
-                <td>{{ purchase.quantity   }}</td>
+                <td>
+                  {{purchase.purchaseOrderItems.length}}
+                  <table class="table table-striped table-bordered table-hover">
+                    <th>Denomination</th>
+                    <th>Quantity</th>
+                    <tbody>
+                      <tr ng-repeat="purchaseItem in purchase.purchaseOrderItems">
+                        <td>{{(purchaseItem || {}).denomination}}</td>
+                        <td>{{(purchaseItem || {}).quantity}} </td>
+                      </tr>
+                    </tbody>
+                    <tbody></tbody>
+                  </table>
+                </td>
+                <td>{{purchase.date }}</td>
               </tr>
             </tbody>
           </table>

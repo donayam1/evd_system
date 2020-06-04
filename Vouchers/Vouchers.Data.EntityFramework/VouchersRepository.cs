@@ -18,5 +18,6 @@ namespace Vouchers.Data.EntityFramework
             return items.Include(x=>x.Batch)
                         .Include(x=>x.VoucherStatuses);
         }
+        
     }
 }

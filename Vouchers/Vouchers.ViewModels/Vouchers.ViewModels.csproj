@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vouchers.Data.Enumerations\Vouchers.Data.Enumerations.csproj" />
+    <ProjectReference Include="..\Vouchers.Shared.ViewModels\Vouchers.Shared.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

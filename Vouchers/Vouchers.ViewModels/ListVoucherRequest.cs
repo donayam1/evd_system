@@ -12,6 +12,9 @@ namespace Vouchers.ViewModels
         /// If Batch is specified 
         /// </summary>
         public String? BatchId { get; set; } = default!;
-        public VoucherStatusTypes VoucherStatus { get; set; } = default!; 
+        public VoucherStatusTypes VoucherStatus { get; set; } = default!;
+        public bool IsSyncing { get; set; } = false;
+        public String? FromDate { get; set; }
+        public String? ToDate { get; set; }
     }
 }

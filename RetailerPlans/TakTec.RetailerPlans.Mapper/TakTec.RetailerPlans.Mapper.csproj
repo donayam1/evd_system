@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TakTec.RetailerPlans.Entities\TakTec.RetailerPlans.Entities.csproj" />
+    <ProjectReference Include="..\TakTec.RetailerPlans.Enumerations\TakTec.RetailerPlans.Enumerations.csproj" />
     <ProjectReference Include="..\TakTec.RetailerPlans.ViewModels\TakTec.RetailerPlans.ViewModels.csproj" />
 
     <Reference Include="EthioArt.Data.Entities.Abstraction">

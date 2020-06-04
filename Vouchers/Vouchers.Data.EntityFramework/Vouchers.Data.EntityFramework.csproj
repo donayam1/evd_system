@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="ExtCore.Data.EntityFramework" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
-
+    <ProjectReference Include="..\..\Users\TakTec.Users.Constants\TakTec.Users.Constants.csproj" />
     <ProjectReference Include="..\Vouchers.Data.Abstractions\Vouchers.Data.Abstractions.csproj" />
   </ItemGroup>
 

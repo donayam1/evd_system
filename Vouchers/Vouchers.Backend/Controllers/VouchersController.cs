@@ -35,7 +35,7 @@ namespace Vouchers.Backend.Controllers
         }
 
         [HttpGet]      
-        public IActionResult Get([FromQuery] PagedItemRequestBase request) {
+        public IActionResult Get([FromQuery] ListVoucherRequest request) {
             if (ModelState.IsValid) {
 
                 var res = _voucherService.ListVoutchers(request);

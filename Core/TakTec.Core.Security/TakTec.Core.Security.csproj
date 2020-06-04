@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Users\TakTec.Users.Constants\TakTec.Users.Constants.csproj" />
     <ProjectReference Include="..\TaKTec.Core.APIs\TaKTec.Core.APIs.csproj" />
   </ItemGroup>
 

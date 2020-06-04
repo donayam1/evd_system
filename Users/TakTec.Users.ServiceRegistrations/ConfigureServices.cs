@@ -1,4 +1,5 @@
-﻿using ExtCore.Infrastructure.Actions;
+﻿using EthioArt.UserAccounts.Services.Abstractions;
+using ExtCore.Infrastructure.Actions;
 using Microsoft.Extensions.DependencyInjection;
 using Roles.BusinessLogic.Abstraction;
 using System;
@@ -12,7 +13,10 @@ namespace TakTec.Users.ServiceRegistrations
 
         public void Execute(IServiceCollection services, IServiceProvider serviceProvider)
         {
-            services.AddScoped< IManageRoleTypeValidator, ManageRoleTypeValidator   > ();
+
+            services.AddScoped<IManageRoleTypeValidator, ManageRoleTypeValidator>();
+            services.AddScoped<IUserTokenClaimContributingServcie, UserRoleTypeTokenClaimContributingServcie>();
+        
         }
     }
 }

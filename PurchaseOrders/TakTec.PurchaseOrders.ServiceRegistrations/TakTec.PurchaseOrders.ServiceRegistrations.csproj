@@ -5,10 +5,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="ExtCore.Infrastructure" Version="5.0.0" />
-    <ProjectReference Include="..\..\Vouchers\Vouchers.BusinessLogic\Vouchers.BusinessLogic.csproj" />
-    <ProjectReference Include="..\TakTec.Operators.BusinessLogic\TakTec.Operators.BusinessLogic.csproj" />
+
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TakTec.PurchaseOrders.BusinessLogic\TakTec.PurchaseOrders.BusinessLogic.csproj" />
+  </ItemGroup>-->
+
 </Project>
+

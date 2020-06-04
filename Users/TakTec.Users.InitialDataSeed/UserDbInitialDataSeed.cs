@@ -52,33 +52,30 @@ namespace TakTec.Users.InitialDataSeed
                 UserId = "1",
                 ClaimType=  "permission",
                 ClaimValue = "DoEveryThing"
-            },
-            new AspNetUserClaim(){
-                UserId = "1",
-                ClaimType=  "Address",
-                ClaimValue = @"{ 'street_address': 'curchel street', 'locality': 'addis ababa', 'postal_code': 12345, 'country': 'Ethiopia' }"
             }
+            
 
 
         };
 
         public static List<AspNetRoleType> RoleTypes = new List<AspNetRoleType>()
         {
-            new AspNetRoleType(RoleTypeConstants.SystemAdminLevel,"SupperAdmin"){ 
+            new AspNetRoleType(RoleTypeConstants.RoleLevelSystemAdmin, RoleTypeConstants.RoleLevelNameSystemAdmin){ //"SupperAdmin"
                 Id = "1"
             },
-            new AspNetRoleType(RoleTypeConstants.SystemAccounts,"SystemAccounts"){
+            new AspNetRoleType(RoleTypeConstants.RoleLevelSystemAccounts,RoleTypeConstants.RoleLevelNameSystemAccounts){ //"SystemAccounts"
                 Id = "100"
             },
-            new AspNetRoleType(RoleTypeConstants.RetailerLevel,"Retailer"){
+            new AspNetRoleType(RoleTypeConstants.RoleLevelRetailer,RoleTypeConstants.RoleLevelNameRetailer ){ //"Retailer"
                 Id = "10000"
             }
         };
 
         public static List<AspNetRole> Roles = new List<AspNetRole>()
         {
-            new AspNetRole("1","SupperAdmin","1",ResourceTypes.USER){
-                Id = "1"
+            new AspNetRole("1",RoleTypeConstants.RoleNameSupperAdmin,"1",ResourceTypes.USER){
+                Id = "1",
+                CreatorUserId = "1"
             }
         };
 

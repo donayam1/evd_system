@@ -10,13 +10,16 @@
   <ItemGroup>
     <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
     <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />
+    <ProjectReference Include="..\..\PurchaseOrders\TakTec.PurchaseOrders.Entities\TakTec.PurchaseOrders.Entities.csproj" />
     <ProjectReference Include="..\Vouchers.Data.Entities\Vouchers.Data.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+
     <Reference Include="EthioArt.Data.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
     </Reference>
+
     <Reference Include="EthioArt.Data.Entities.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
     </Reference>

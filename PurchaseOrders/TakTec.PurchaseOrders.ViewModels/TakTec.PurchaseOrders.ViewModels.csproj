@@ -6,12 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Vouchers\Vouchers.Shared.ViewModels\Vouchers.Shared.ViewModels.csproj" />
+    <!--<ProjectReference Include="..\..\Vouchers\Vouchers.ViewModels\Vouchers.ViewModels.csproj" />-->
     <ProjectReference Include="..\TakTec.PurchaseOrders.Enumerations\TakTec.PurchaseOrders.Enumerations.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="EthioArt.Backend.Models">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Backend.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Syncronization.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Syncronization.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
 

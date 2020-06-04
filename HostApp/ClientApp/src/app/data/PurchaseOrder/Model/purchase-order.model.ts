@@ -20,12 +20,14 @@ export class PurchaseOrder{
     id: string;
     poNumber: string;
     purchaseOrderItems: PurchaseOrderItem[];
+    date: string;
     status: Number;
 
     constructor (obj?: any){
         this.id = obj && obj.id;
-        this.purchaseOrderItems = obj && obj.purchaseOrderItems || Array();
+        this.purchaseOrderItems = obj && obj.purchaseOrderItems.map(poI => new PurchaseOrderItem(poI) ) || Array();
         this.poNumber = obj && obj.poNumber;
+        this.date = obj && obj.date;
         this.status = obj && obj.status;
     }
 }

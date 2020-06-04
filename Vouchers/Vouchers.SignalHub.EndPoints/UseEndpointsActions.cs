@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Vouchers.BusinessLogic;
 
-namespace Vouchers.Backend.Actions
+namespace Vouchers.SignalHub.EndPoints
 {
     public class UseEndpointsActions :ExtCore.Mvc.Infrastructure.Actions.IUseEndpointsAction
     {

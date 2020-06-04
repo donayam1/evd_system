@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -6,24 +6,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-  <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <ProjectReference Include="..\TakTec.RetailerPlans.Abstractions\TakTec.RetailerPlans.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.RetailerPlans.BusinessLogic.Abstraction\TakTec.RetailerPlans.BusinessLogic.Abstraction.csproj" />
     <ProjectReference Include="..\TakTec.RetailerPlans.Mapper\TakTec.RetailerPlans.Mapper.csproj" />
     <ProjectReference Include="..\TakTec.RetailerPlans.ViewModels\TakTec.RetailerPlans.ViewModels.csproj" />
     <ProjectReference Include="..\..\Operators\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj" />
     <ProjectReference Include="..\..\Operators\TakTec.Operators.Abstractions\TakTec.Operators.Abstractions.csproj" />
-    <ProjectReference Include="..\..\Operators\TakTec.Operators.EntityFramework\TakTec.Operators.EntityFramework.csproj" />
+  </ItemGroup>
+  <ItemGroup>
   
 
-  <Reference Include="Messages.Logging.Extensions">
+    <Reference Include="EthioArt.Data.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+    </Reference>
+  
+
+    <Reference Include="Messages.Logging.Extensions">
       <HintPath>..\..\HostApp\OtherDeps\Messages.Logging.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="EthioArt.Data.Enumerations">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
-    </Reference>
-    <Reference Include="EthioArt.Data.Abstraction">
-      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
     </Reference>
     <Reference Include="EthioArt.Data.Entities">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.dll</HintPath>

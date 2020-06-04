@@ -16,8 +16,14 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Reference Include="AspNetIdentity.Data.Entities">
+      <HintPath>..\..\HostApp\OtherDeps\AspNetIdentity.Data.Entities.dll</HintPath>
+    </Reference>
     <Reference Include="EthioArt.Data.Enumerations">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Security.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Security.Abstraction.dll</HintPath>
     </Reference>
     <Reference Include="EthioArt.UserAccounts.Services.Abstractions">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.UserAccounts.Services.Abstractions.dll</HintPath>

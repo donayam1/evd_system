@@ -9,11 +9,18 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Vouchers\Vouchers.Data.Abstractions\Vouchers.Data.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.PurchaseOrders.Entities\TakTec.PurchaseOrders.Entities.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="EthioArt.Data.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+    </Reference>
     <Reference Include="EthioArt.Data.Entities.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Data.EntityFramework">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.EntityFramework.dll</HintPath>
     </Reference>
   </ItemGroup>
 

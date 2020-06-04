@@ -8,6 +8,8 @@ import { ListGroupTypeComponent } from './list-group-type/list-group-type.compon
 import { EditGroupTypeComponent } from './edit-group-type/edit-group-type.component';
 import { HomeComponent } from './home/home.component';
 import { MessagesModule } from '../messages/messages.module';
+import { StoreModule } from '@ngrx/store';
+import { GroupTypeReducers } from '../data/GroupType/Reducers/groupType.reducers';
 
 @NgModule({
   declarations: [CreateGroupTypeComponent, ListGroupTypeComponent, EditGroupTypeComponent, HomeComponent],
@@ -15,7 +17,8 @@ import { MessagesModule } from '../messages/messages.module';
     CommonModule,
     GroupTypeRoutingModule,
     FormsModule,
-    MessagesModule
+    MessagesModule,
+    StoreModule.forFeature("groupTypes",GroupTypeReducers)
   ]
 })
 export class GroupTypeModule { }

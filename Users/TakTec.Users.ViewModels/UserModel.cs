@@ -14,5 +14,6 @@ namespace TakTec.Users.ViewModels
         public String LastName { get; set; } = default!;//   String
        
 
+
     }
 }

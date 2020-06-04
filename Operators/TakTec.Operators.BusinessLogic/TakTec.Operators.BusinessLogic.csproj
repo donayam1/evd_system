@@ -6,12 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 
     <ProjectReference Include="..\TakTec.Operators.Abstractions\TakTec.Operators.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.Operators.BusinessLogic.Abstraction\TakTec.Operators.BusinessLogic.Abstraction.csproj" />
     <ProjectReference Include="..\TakTec.Operators.ViewModel\TakTec.Operators.ViewModel.csproj" />
     <ProjectReference Include="..\TakTec.Operators.Mapper\TakTec.Operators.Mapper.csproj" />
+    <Reference Include="EthioArt.Data.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+    </Reference>
 
 
     <Reference Include="Messages.Logging.Extensions">
@@ -19,9 +22,6 @@
     </Reference>
     <Reference Include="EthioArt.Data.Enumerations">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
-    </Reference>
-    <Reference Include="EthioArt.Data.Abstraction">
-      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
     </Reference>
     <Reference Include="EthioArt.Data.Entities">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.dll</HintPath>

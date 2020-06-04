@@ -1,24 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <Nullable>Enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
-    
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
     <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
     <PackageReference Include="ExtCore.Data.EntityFramework" Version="5.0.0" />
+    <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />
+    <ProjectReference Include="..\TakTec.Operators.Abstractions\TakTec.Operators.Abstractions.csproj" />
+    <ProjectReference Include="..\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj" />
+  </ItemGroup>
 
-     <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />
-
-     <ProjectReference Include="..\TakTec.Operators.Abstractions\TakTec.Operators.Abstractions.csproj" />
-
-     <ProjectReference Include="..\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj" />
+  <ItemGroup>
 
   <Reference Include="EthioArt.Data.Abstraction">
-     <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+    <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
   </Reference>
+
   <Reference Include="EthioArt.Data.Entities.Abstraction">
      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
   </Reference>

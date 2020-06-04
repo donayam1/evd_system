@@ -5,20 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-  <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  <ProjectReference Include="..\TakTec.RetailerPlans.Abstractions\TakTec.RetailerPlans.Abstractions.csproj" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\TakTec.RetailerPlans.Abstractions\TakTec.RetailerPlans.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.RetailerPlans.BusinessLogic.Abstraction\TakTec.RetailerPlans.BusinessLogic.Abstraction.csproj" />
     <ProjectReference Include="..\TakTec.RetailerPlans.Mapper\TakTec.RetailerPlans.Mapper.csproj" />
     <ProjectReference Include="..\TakTec.RetailerPlans.ViewModels\TakTec.RetailerPlans.ViewModels.csproj" />
     <ProjectReference Include="..\..\Operators\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj" />
     <ProjectReference Include="..\..\Operators\TakTec.Operators.Abstractions\TakTec.Operators.Abstractions.csproj" />
-    
+  </ItemGroup>
+  <ItemGroup>
+  
+
     <Reference Include="EthioArt.Data.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
     </Reference>
   
 
-  <Reference Include="Messages.Logging.Extensions">
+    <Reference Include="Messages.Logging.Extensions">
       <HintPath>..\..\HostApp\OtherDeps\Messages.Logging.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="EthioArt.Data.Enumerations">

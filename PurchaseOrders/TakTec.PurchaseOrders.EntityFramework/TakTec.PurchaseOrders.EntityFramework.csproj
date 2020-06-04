@@ -9,7 +9,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TakTec.PurchaseOrders.Data.Abstractions\TakTec.PurchaseOrders.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Vouchers\Vouchers.Data.Abstractions\Vouchers.Data.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.PurchaseOrders.Entities\TakTec.PurchaseOrders.Entities.csproj" />
   </ItemGroup>
   <ItemGroup>

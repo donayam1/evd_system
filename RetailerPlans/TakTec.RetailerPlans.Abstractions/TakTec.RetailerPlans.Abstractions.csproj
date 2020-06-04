@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
-   <ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\TakTec.Retailerplans.Entities\TakTec.RetailerPlans.Entities.csproj" />
     <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
-
     <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />
-
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="EthioArt.Data.Abstraction">
-       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
     </Reference>
     <Reference Include="EthioArt.Data.Entities.Abstraction">
        <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>

@@ -100,9 +100,9 @@ gulp.task(
 
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.Entities/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.Entities.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.Backend/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.Backend.dll"]).pipe(gulp.dest("Extensions"));
-        gulp.src([TakPoRoot + "TakTec.PurchaseOrders.BusinessLogic/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.BusinessLogic.dll"]).pipe(gulp.dest("Extensions"));
-        gulp.src([TakPoRoot + "TakTec.PurchaseOrders.BusinessLogic.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.BusinessLogic.Abstractions.dll"]).pipe(gulp.dest("Extensions"));
-        gulp.src([TakPoRoot + "TakTec.PurchaseOrders.Data.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.Data.Abstractions.dll"]).pipe(gulp.dest("Extensions"));
+        //gulp.src([TakPoRoot + "TakTec.PurchaseOrders.BusinessLogic/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.BusinessLogic.dll"]).pipe(gulp.dest("Extensions"));
+        //gulp.src([TakPoRoot + "TakTec.PurchaseOrders.BusinessLogic.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.BusinessLogic.Abstractions.dll"]).pipe(gulp.dest("Extensions"));
+        //gulp.src([TakPoRoot + "TakTec.PurchaseOrders.Data.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.Data.Abstractions.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.Entities/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.Entities.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.EntityFramework/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.EntityFramework.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.ViewModels/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.ViewModels.dll"]).pipe(gulp.dest("Extensions"));

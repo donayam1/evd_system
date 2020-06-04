@@ -20,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="AspNetIdentity.Data.Entities">
+      <HintPath>..\..\HostApp\OtherDeps\AspNetIdentity.Data.Entities.dll</HintPath>
+    </Reference>
     <Reference Include="EthioArt.Backend.Models">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Backend.Models.dll</HintPath>
     </Reference>
@@ -31,6 +34,12 @@
     </Reference>
     <Reference Include="EthioArt.Extensions">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Syncronization.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Syncronization.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.UserAccounts.Services.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.UserAccounts.Services.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Messages.BusinessLogic.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\Messages.BusinessLogic.Abstraction.dll</HintPath>

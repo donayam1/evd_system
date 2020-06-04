@@ -19,7 +19,7 @@ namespace TakTec.RetailerPlans.Entities
             Amount = amount;
             Rate = rate;
         }
-        public double? Amount { get; set; }
+        public double Amount { get; set; } = 0;
         
         public double Rate { get; set; }=default;
     }

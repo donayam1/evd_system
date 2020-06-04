@@ -38,14 +38,24 @@ namespace TakTec.RetailerPlans.BusinessLogic
         public RetailerPlanViewModel CreateorUpdatePlan(RetailerPlanViewModel retailerPlanModel)
         {
             //TODO create and update
+
+            // RetailerPlan retPlan = retailerPlanModel.ToPlanDomailModel();
+            // if(!ValidatePlan(retPlan)){
+            //     _logger.AddUserError("invalid ");
+            // }
+            // else
+            // {
+            //     if(retPlan.s)
+            // }
             throw new NotImplementedException();
         }
 
         private bool ValidatePlan(RetailerPlan plan)
         {
             bool isValidOperator = _operatorRepository.Exists(plan.Operator.Id);
-            bool isValidJoinAmount = plan.JoiningAmount > 0;
-            bool isValidRenwalAMount = plan.RenewalAmount > 0;
+
+            bool isValidJoinAmount = plan.JoiningAmount >= 0;
+            bool isValidRenwalAMount = plan.RenewalAmount >= 0;
             bool isValidCommissionRate = plan.CommissionRateType == CommissionRateType.FLAT_COMMISSION ||
                                          plan.CommissionRateType == CommissionRateType.PER_RECHARGE_COMMISSION;   
 
@@ -64,23 +74,27 @@ namespace TakTec.RetailerPlans.BusinessLogic
             return newPlan.ToPlanViewModel();
         }
 
-         private RetailerPlanViewModel UpdatePlan (RetailerPlan plan)
+         private RetailerPlanViewModel UpdatePlan (string id,string name, int code,string description)
         {
-            var retPlan = _retailerPlanRepository.WithKey(plan.Id);
+            var retPlan = _retailerPlanRepository.WithKey(id);
             if(retPlan == null)
             {
                 return null;
             }
-            var updatedPlan = new RetailerPlan("", ResourceTypes.GROUP,
-                                plan.Code , plan.Name,
-                                plan.CommissionRateType , plan.OperatorId){
-                                    Description = plan.Description,
-                                    JoiningAmount = plan.JoiningAmount,
-                                    RenewalAmount = plan.RenewalAmount,
-                                    RenewalAmountChargingRate = plan.RenewalAmountChargingRate,
-                                    CommissionRates = plan.CommissionRates//is this possible
-                              };
-            return updatedPlan.ToPlanViewModel();
+
+            retPlan.Name = name;
+            retPlan.Code = code;
+            retPlan.Description = description;
+            // var updatedPlan = new RetailerPlan("", ResourceTypes.GROUP,
+            //                     plan.Code , plan.Name,
+            //                     plan.CommissionRateType , plan.OperatorId){
+            //                         Description = plan.Description,
+            //                         JoiningAmount = plan.JoiningAmount,
+            //                         RenewalAmount = plan.RenewalAmount,
+            //                         RenewalAmountChargingRate = plan.RenewalAmountChargingRate,
+            //                         CommissionRates = plan.CommissionRates//is this possible
+            //                   };
+            return retPlan.ToPlanViewModel();
         }
 
         public List<RetailerPlanViewModel> ListRetailerPlans(int pageNo, int ItemsPerPage)

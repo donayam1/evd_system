@@ -125,6 +125,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.PurchaseOrders.Busin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.PurchaseOrders.BusinessLogic", "PurchaseOrders\TakTec.PurchaseOrders.BusinessLogic\TakTec.PurchaseOrders.BusinessLogic.csproj", "{5D1B5051-462D-4691-B548-3FE8C2C94E4B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakTec.Users.Backend", "Users\TakTec.Users.Backend\TakTec.Users.Backend.csproj", "{4EFD5799-91C5-4034-A75C-A49400AEE0BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -343,6 +345,10 @@ Global
 		{5D1B5051-462D-4691-B548-3FE8C2C94E4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D1B5051-462D-4691-B548-3FE8C2C94E4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D1B5051-462D-4691-B548-3FE8C2C94E4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EFD5799-91C5-4034-A75C-A49400AEE0BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EFD5799-91C5-4034-A75C-A49400AEE0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EFD5799-91C5-4034-A75C-A49400AEE0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EFD5799-91C5-4034-A75C-A49400AEE0BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -400,6 +406,7 @@ Global
 		{73341581-2F64-4BFC-9DED-62B7287EB88A} = {8ADC5C78-0750-4DF4-B035-4B08E6318D9B}
 		{71F2FC7D-AA20-48F1-B41D-0B57B7DE2FB1} = {8ADC5C78-0750-4DF4-B035-4B08E6318D9B}
 		{5D1B5051-462D-4691-B548-3FE8C2C94E4B} = {8ADC5C78-0750-4DF4-B035-4B08E6318D9B}
+		{4EFD5799-91C5-4034-A75C-A49400AEE0BD} = {CC389892-81C9-4710-962C-3F5610F847F7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9E686B4-CC76-435F-B915-E2FA0F0D7C71}

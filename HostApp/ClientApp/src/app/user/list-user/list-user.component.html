@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i>Users List
+        </div>
+        <div class="card-body">
+          <table
+            class="table table-bordered table-striped"
+            aria-labelledby="tableLabel"
+          >
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Status</th>
+                <th>Detail</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of response.users">
+                <td>{{ user.firstName }}  {{user.middleName}} </td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phoneNumber }}</td>
+                <td>{{user.userStatus}} </td>
+                <td>
+                  <button
+                    class="btn btn-outline-primary" routerLink="/home/user/detail">
+                    Veiw
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

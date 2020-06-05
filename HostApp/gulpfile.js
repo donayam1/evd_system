@@ -69,6 +69,7 @@ gulp.task(
         gulp.src([TakUserRoot + "TakTec.Users.Constants/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.Constants.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakUserRoot + "TakTec.Users.ViewModels/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.ViewModels.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakUserRoot + "TakTec.Users.BusinessLogic.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.BusinessLogic.Abstractions.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakUserRoot + "TakTec.Users.Backend/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.Backend.dll"]).pipe(gulp.dest("Extensions"));
         
 
         gulp.src([TakOperatorsRoot + "TakTec.Operators.Backend/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Operators.Backend.dll"]).pipe(gulp.dest("Extensions"));

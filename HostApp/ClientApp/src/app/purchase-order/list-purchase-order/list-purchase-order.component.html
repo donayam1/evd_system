@@ -6,7 +6,7 @@
           <i class="fa fa-align-justify"></i>Purchase Orders
         </div>
         <div class="card-body">
-          <table class="table table-bordered table-striped" aria-labelledby="tableLabel">
+          <table class="table table-bordered table-striped" >
             <thead>
               <tr>
                 <th>Purchase Order Number</th>
@@ -18,14 +18,14 @@
               <tr *ngFor="let purchase of response.purchaseOrders">
                 <td>{{purchase.poNumber}} </td>
                 <td>
-                  {{purchase.purchaseOrderItems.length}}
-                  <table class="table table-striped table-bordered table-hover">
+                  
+                  <table class="table  table-bordered  table-sm">
                     <th>Denomination</th>
                     <th>Quantity</th>
                     <tbody>
-                      <tr ng-repeat="purchaseItem in purchase.purchaseOrderItems">
-                        <td>{{(purchaseItem || {}).denomination}}</td>
-                        <td>{{(purchaseItem || {}).quantity}} </td>
+                      <tr *ngFor="let purchaseItem of purchase.purchaseOrderItems; index as i">
+                        <td>{{purchaseItem.denomination}}</td>
+                        <td>{{purchaseItem.quantity}} </td>
                       </tr>
                     </tbody>
                     <tbody></tbody>

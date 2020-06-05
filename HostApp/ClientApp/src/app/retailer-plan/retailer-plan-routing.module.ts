@@ -6,7 +6,7 @@ import { PlanListComponent } from './plan-list/plan-list.component';
 import { EditPlanComponent } from './edit-plan/edit-plan.component';
 
 const routes: Routes = [
-  {path: '', component: PlanHomeComponent , children:[
+  {path: '', component: PlanHomeComponent, children:[
     {path: 'list', component: PlanListComponent},
     { path: 'create', component: CreatePlanComponent },
     { path: 'edit', component: EditPlanComponent }

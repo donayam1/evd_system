@@ -28,33 +28,33 @@ export class GrouptypeService {
   }
 
   fetchGroupType(): Observable<GroupTypesResponse>{
-    // const url =  AppConfig.settings.apiServers.authServer + this.url;
-    // const observer = Observable.create(observer=>{
-    //     this.http.get<GroupTypesResponse>(url).subscribe(data=>{
-    //       const response = new GroupTypesResponse(data);
-    //       observer.next(response);
-    //       observer.complete();
-    //     },error=>{
-    //       observer.error(error);
-    //       observer.complete();
-    //     });
-    // })
-    //  return observer;
-    let groupTypesResponse = new GroupTypesResponse();
-    groupTypesResponse.status = true;
+    const url =  AppConfig.settings.apiServers.authServer + this.url;
+    const observer = Observable.create(observer=>{
+        this.http.get<GroupTypesResponse>(url).subscribe(data=>{
+          const response = new GroupTypesResponse(data);
+          observer.next(response);
+          observer.complete();
+        },error=>{
+          observer.error(error);
+          observer.complete();
+        });
+    })
+     return observer;
+    // let groupTypesResponse = new GroupTypesResponse();
+    // groupTypesResponse.status = true;
 
-    let gt = new GroupType({
-      id: "1", name: "ethioTel", level: 100, status: "active"});
+    // let gt = new GroupType({
+    //   id: "1", name: "ethioTel", level: 100, status: "active"});
 
-      let gt1 = new GroupType({
-        id: "2", name: "tack", level: 1, status: "active"});
+    //   let gt1 = new GroupType({
+    //     id: "2", name: "tack", level: 1, status: "active"});
 
-    const gpt :GroupType[] = Array();
-    gpt.push(gt,gt1);
-    groupTypesResponse.groupTypes = gpt
+    // const gpt :GroupType[] = Array();
+    // gpt.push(gt,gt1);
+    // groupTypesResponse.groupTypes = gpt
     
 
-    return of(groupTypesResponse);
+    // return of(groupTypesResponse);
   }
 
   saveGroupTypes(grouptypes: GroupType[]): Observable<GroupTypesResponse> {

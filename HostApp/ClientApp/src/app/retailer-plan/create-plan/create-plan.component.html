@@ -16,11 +16,9 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="operator" class="col-form-label col-form-label-sm">Operator:</label>
-                    <select class="form-control form-control-sm" name="operator" id="operator">
+                    <select class="form-control form-control-sm" name="operator" id="operator" (change)="operatorSelected($event)">
                         <option selected class="text-muted disabled">Select your providing operator</option>
-                        <option value="1">Operator 1</option>
-                        <option value="2">Operator 2</option>
-                        <option value="3">Operator 3</option>
+                        <option *ngFor="let item of opList.operators" [value]="item.id">{{item.name}}</option>
                     </select>
                     <div class="card bg-transparent">
                         <div class="card-body">

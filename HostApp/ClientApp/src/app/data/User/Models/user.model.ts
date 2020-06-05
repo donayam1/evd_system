@@ -17,7 +17,7 @@ export class NewUser extends User{
         this.email = obj && obj.email;
         this.phoneNumber = obj && obj.phoneNumber;
         this.firstName = obj && obj.firstName;
-        this.middleName = obj && obj.middleName;
+        this.middleName = obj && obj.middleName || "";
         this.lastName = obj && obj.lastName;
         this.rankId = obj && obj.rankId;
         this.planId = obj && obj.planId;
@@ -50,10 +50,10 @@ export class PremissionGroup{
 }
 
 export class NewUserResponse extends ResponseBase{
-    newUser: User;
+    newUser: NewUser;
 
     constructor(obj?: any){
         super(obj);
-        this.newUser = obj &&  new User(obj) || new User();
+        this.newUser = obj &&  new NewUser(obj) || new NewUser();
     }
 }

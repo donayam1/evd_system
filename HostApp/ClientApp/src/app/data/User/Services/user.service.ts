@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { NewUserResponse, NewUser } from '../Models/user.model';
 import { AppConfig } from '../../Configs/Services/app.config';
 import { Message } from '../../Shared/Models/responseBase';
+import { ObjectStatus } from '../../Shared/Models/newObjectStatus.model';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,41 @@ private readonly api = "";
     // return new Observable(observer => {
     //   this.http.post<NewUserResponse>(url, user).subscribe(x => {
     //     observer.next(new NewUserResponse(x));
+    //     observer.complete();
+    //   }, error => {
+    //     observer.error(error);
+    //     observer.complete();
+    //   });
+    // });
+  }
+
+  getUser(id: string){
+    //Mock Data
+    const userResponse: NewUserResponse = new NewUserResponse();
+    const user = new NewUser({
+      id: '1',
+      UserName: 'User-01',
+      picUrl: "",
+      email: 'example@example.com',
+      phoneNumber: 12343445567,
+      firstName: 'Abebe',
+      middleName: 'Belete',
+      lastName: 'Kebede',
+      rankId: '12',
+      planId: '1',
+      objectStatus: ObjectStatus.NEW
+    });
+    userResponse.newUser = user;
+    userResponse.status = true;
+    console.log(userResponse);
+    return of(userResponse);
+
+    //Later to be used with the api
+    // const url = AppConfig.settings.apiServers.authServer + this.api + "/edit";
+    // return new Observable(observer => {
+    //   this.http.get<NewUserResponse>(url).subscribe(x => {
+    //     const response = new NewUserResponse(x);
+    //     observer.next(response);
     //     observer.complete();
     //   }, error => {
     //     observer.error(error);

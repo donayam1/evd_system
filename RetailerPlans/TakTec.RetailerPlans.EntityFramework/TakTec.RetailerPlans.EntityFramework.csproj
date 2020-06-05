@@ -6,20 +6,25 @@
   </PropertyGroup>
 
    <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />    
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
       <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
       <PackageReference Include="ExtCore.Data.EntityFramework" Version="5.0.0" />
       <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />
       <ProjectReference Include="..\TakTec.RetailerPlans.Abstractions\TakTec.RetailerPlans.Abstractions.csproj" />
       <ProjectReference Include="..\TakTec.RetailerPlans.Entities\TakTec.RetailerPlans.Entities.csproj" />
+
+   </ItemGroup>
+
+
+
+   <ItemGroup>
+      <Reference Include="EthioArt.Data.Abstraction">
+         <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+      </Reference>
+
     </ItemGroup>
   
     <ItemGroup>
-
-      <Reference Include="EthioArt.Data.Abstraction">
-        <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
-      </Reference>
-
       <Reference Include="EthioArt.Data.Entities.Abstraction">
          <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
       </Reference>

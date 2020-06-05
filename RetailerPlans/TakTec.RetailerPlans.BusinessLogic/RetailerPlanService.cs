@@ -38,14 +38,64 @@ namespace TakTec.RetailerPlans.BusinessLogic
         public RetailerPlanViewModel CreateorUpdatePlan(RetailerPlanViewModel retailerPlanModel)
         {
             //TODO create and update
-            throw new NotImplementedException();
+                
+             RetailerPlan retPlan = retailerPlanModel.ToPlanDomailModel(retailerPlanModel.CommissionRateViewModels);
+             if(!ValidatePlan(retPlan))
+             {
+                _logger.AddUserError("Invalid request");
+             }
+             
+            RetailerPlan plan1;
+             
+            //create plan
+            if(retailerPlanModel.Status == ObjectStatusEnum.NEW)
+            {
+                var rp = _retailerPlanRepository.All()
+                            .Where(x=>x.Code == retPlan.Code || x.Name == retPlan.Name)
+                            .FirstOrDefault();
+                if(rp != null){
+                    _logger.AddUserError("Plan already exists!");
+                    plan1 = null;
+                }
+                plan1 = CreateNewPlan(retPlan);
+            }
+
+
+            //update plan
+            var retailerPlan = _retailerPlanRepository.WithKey(retailerPlanModel.Id);
+            if(retPlan == null)
+            {
+                _logger.AddUserError("Plan does not exist!!");
+                return null;
+            }
+
+            plan1 = UpdatePlan(retPlan);
+
+            
+
+            if (plan1 != null)
+            {
+                try
+                {
+                    _storage.Save();
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e.InnerException, e.Message);
+                    _logger.AddUserError("Unknowen error. Please contact administrator.");
+                    return null;
+                }
+            }
+            return plan1.ToPlanViewModel();
+
         }
 
         private bool ValidatePlan(RetailerPlan plan)
         {
             bool isValidOperator = _operatorRepository.Exists(plan.Operator.Id);
-            bool isValidJoinAmount = plan.JoiningAmount > 0;
-            bool isValidRenwalAMount = plan.RenewalAmount > 0;
+
+            bool isValidJoinAmount = plan.JoiningAmount >= 0;
+            bool isValidRenwalAMount = plan.RenewalAmount >= 0;
             bool isValidCommissionRate = plan.CommissionRateType == CommissionRateType.FLAT_COMMISSION ||
                                          plan.CommissionRateType == CommissionRateType.PER_RECHARGE_COMMISSION;   
 
@@ -58,46 +108,47 @@ namespace TakTec.RetailerPlans.BusinessLogic
             return false;
         }
 
-         private RetailerPlanViewModel CreateNewPlan(RetailerPlan newPlan)
+         private RetailerPlan CreateNewPlan(RetailerPlan newPlan)
          {
-            //_retailerPlanRepository.Create(newPlan);
-            return newPlan.ToPlanViewModel();
+            _retailerPlanRepository.Create(newPlan);
+            return newPlan;
         }
 
-         private RetailerPlanViewModel UpdatePlan (RetailerPlan plan)
+         private RetailerPlan UpdatePlan (RetailerPlan retailerPlan)
         {
-            //var retPlan = _retailerPlanRepository.WithKey(plan.Id);
-            //if(retPlan == null)
-            //{
-            //    return null;
-            //}
-            //var updatedPlan = new RetailerPlan("", ResourceTypes.GROUP,
-            //                    plan.Code , plan.Name,
-            //                    plan.CommissionRateType , plan.OperatorId){
-            //                        Description = plan.Description,
-            //                        JoiningAmount = plan.JoiningAmount,
-            //                        RenewalAmount = plan.RenewalAmount,
-            //                        RenewalAmountChargingRate = plan.RenewalAmountChargingRate,
-            //                        CommissionRates = plan.CommissionRates//is this possible
-            //                  };
-            //return updatedPlan.ToPlanViewModel();
-            return null;
+            //find other plans with same name or code
+            var p = _retailerPlanRepository.All().Where(x =>
+                            (x.Code == retailerPlan.Code || x.Name == retailerPlan.Name)&&
+                            (x.Id != retailerPlan.Id)).FirstOrDefault();
+            if(p != null)
+            {
+                _logger.AddUserError("Redundant plan");
+                return null;
+            }
+
+            var result = _retailerPlanRepository.WithKey(retailerPlan.Id);
+            result.Name = retailerPlan.Name;
+            result.Code = retailerPlan.Code;
+            result.Description = retailerPlan.Description;
+            
+            _retailerPlanRepository.Edit(result);
+            return result;
         }
 
         public List<RetailerPlanViewModel> ListRetailerPlans(int pageNo, int ItemsPerPage)
         {
-            //var plans = _retailerPlanRepository.GetCustomFilters(pageNo,ItemsPerPage).Items.ToList();//.GetCustomFilters<Operator>();
-            //if(plans ==null){
-            //    _logger.AddUserError("There is no Plan in database!");
-            //    return null;
-            //}
-            //else{
-            //    string msg = "There are " + plans.Count + " plans";
-            //    _logger.AddUserMesage(msg);
-            //    return plans.ToPlanViewModelList();
-            //}
+            var plans = _retailerPlanRepository.GetCustomFilters(pageNo,ItemsPerPage).Items.ToList();
+            if(plans ==null){
+                _logger.AddUserError("There is no Plan in database!");
+                return null;
+            }
+           
+            string msg = "There are " + plans.Count + " plans";
+            _logger.AddUserMesage(msg);
+            return plans.ToPlanViewModelList();
+            
 
-            return null;
+           
         }
 
        

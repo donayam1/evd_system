@@ -2,7 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>Enable</Nullable>
   </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\TakTec.Retailerplans.Entities\TakTec.RetailerPlans.Entities.csproj" />
     <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
@@ -18,6 +20,9 @@
     <Reference Include="EthioArt.Data.Enumerations">
        <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
     </Reference>
+   <Reference Include="EthioArt.Data.EntityFramework">
+         <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.EntityFramework.dll</HintPath>
+      </Reference>
   </ItemGroup>
 
 </Project>

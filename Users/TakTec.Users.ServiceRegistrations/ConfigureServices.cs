@@ -17,7 +17,7 @@ namespace TakTec.Users.ServiceRegistrations
 
             services.AddScoped<IManageRoleTypeValidator, ManageRoleTypeValidator>();
             services.AddScoped<IUserTokenClaimContributingServcie, UserRoleTypeTokenClaimContributingServcie>();
-            services.AddScoped<IEVDUserRegistrationService, EVDUserRegistrationService>();
+            services.AddScoped<IEVDUserService, EVDUserService>();
             services.AddScoped<INewUserValidator, AssertUserLoggedInValidator>();
 
         }

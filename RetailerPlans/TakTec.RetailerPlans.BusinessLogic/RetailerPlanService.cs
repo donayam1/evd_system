@@ -117,9 +117,8 @@ namespace TakTec.RetailerPlans.BusinessLogic
          private RetailerPlan UpdatePlan (RetailerPlan retailerPlan)
         {
             //find other plans with same name or code
-            var p = _retailerPlanRepository.All().Where(x =>
-                            (x.Code == retailerPlan.Code || x.Name == retailerPlan.Name)&&
-                            (x.Id != retailerPlan.Id)).FirstOrDefault();
+            var p = _retailerPlanRepository.WithCodeorWithName(retailerPlan);
+                            
             if(p != null)
             {
                 _logger.AddUserError("Redundant plan");

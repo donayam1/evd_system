@@ -12,5 +12,13 @@ namespace TakTec.RetailerPlans.EntityFramework
          {
              throw new NotImplementedException();
          }
+
+         public RetailerPlan WithCodeorWithName(RetailerPlan retailerPlan)
+         {
+             var plan = All().Where(x =>
+                        (x.Code == retailerPlan.Code || x.Name == retailerPlan.Name)&&
+                        (x.Id != retailerPlan.Id)).FirstOrDefault();
+             return plan;
+         }
     }
 }

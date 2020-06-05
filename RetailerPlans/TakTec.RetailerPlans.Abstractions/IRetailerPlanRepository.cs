@@ -9,6 +9,6 @@ namespace TakTec.RetailerPlans.Abstractions
 {
     public interface IRetailerPlanRepository:IGenericRepository<RetailerPlan>
     {
-
+        RetailerPlan WithCodeorWithName(RetailerPlan retailerPlan);
     }
 }

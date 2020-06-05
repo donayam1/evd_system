@@ -13,6 +13,8 @@ using TakTec.Operators.Abstractions;
 using TakTec.RetailerPlans.Enumerations;
 using EthioArt.Data.Enumerations;
 using System.Linq;
+using TakTec.Users.Constants;
+using Users.BusinessLogic.Abstraction;
 
 namespace TakTec.RetailerPlans.BusinessLogic
 {
@@ -23,9 +25,10 @@ namespace TakTec.RetailerPlans.BusinessLogic
         private readonly ILogger<IRetailerPlanService> _logger;
         private readonly IStorage _storage;
         private readonly IOperatorRepository _operatorRepository; 
+        private readonly ITokenUserService _tokenUserService;
 
 
-        public RetailerPlanService(IStorage storage,ILogger<IRetailerPlanService> logger)
+        public RetailerPlanService(IStorage storage,ILogger<IRetailerPlanService> logger,ITokenUserService tokenUserService)
         {
             _storage = storage ?? throw new ArgumentNullException(nameof(storage));
             _retailerPlanRepository = _storage.GetRepository<IRetailerPlanRepository>()??
@@ -33,47 +36,39 @@ namespace TakTec.RetailerPlans.BusinessLogic
             _operatorRepository = _storage.GetRepository<IOperatorRepository>()??
                                      throw new ArgumentNullException(nameof(IOperatorRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _tokenUserService = tokenUserService ?? throw new ArgumentNullException(nameof(tokenUserService));
+
         }
 
-        public RetailerPlanViewModel CreateorUpdatePlan(RetailerPlanViewModel retailerPlanModel)
+        public RetailerPlanViewModel? CreateorUpdatePlan(RetailerPlanViewModel retailerPlanModel)
         {
             //TODO create and update
-                
-             RetailerPlan retPlan = retailerPlanModel.ToPlanDomailModel(retailerPlanModel.CommissionRateViewModels);
-             if(!ValidatePlan(retPlan))
-             {
+            RetailerPlan retPlan = retailerPlanModel.ToPlanDomailModel();
+
+            if(!(isValidRequest(retPlan)|| ValidatePlan(retPlan,retailerPlanModel.Status)))
+            {
                 _logger.AddUserError("Invalid request");
-             }
-             
-            RetailerPlan plan1;
-             
-            //create plan
-            if(retailerPlanModel.Status == ObjectStatusEnum.NEW)
-            {
-                var rp = _retailerPlanRepository.All()
-                            .Where(x=>x.Code == retPlan.Code || x.Name == retPlan.Name)
-                            .FirstOrDefault();
-                if(rp != null){
-                    _logger.AddUserError("Plan already exists!");
-                    plan1 = null;
-                }
-                plan1 = CreateNewPlan(retPlan);
-            }
-
-
-            //update plan
-            var retailerPlan = _retailerPlanRepository.WithKey(retailerPlanModel.Id);
-            if(retPlan == null)
-            {
-                _logger.AddUserError("Plan does not exist!!");
                 return null;
             }
 
-            plan1 = UpdatePlan(retPlan);
+            RetailerPlan? plan;
 
-            
+            switch (retailerPlanModel.Status)
+            {
+                case ObjectStatusEnum.NEW:
+                    plan = CreateNewPlan(retPlan);
+                    break;
+                case ObjectStatusEnum.EDITTED:
+                    plan = UpdatePlan(retPlan);
+                    break;
+                case ObjectStatusEnum.REMOVED:
+                    plan = RemovePlan(retPlan);
+                    break;
+                default:
+                    return retailerPlanModel;
+            }
 
-            if (plan1 != null)
+            if (plan != null)
             {
                 try
                 {
@@ -86,11 +81,44 @@ namespace TakTec.RetailerPlans.BusinessLogic
                     return null;
                 }
             }
-            return plan1.ToPlanViewModel();
+            var planViewModel = plan.ToPlanViewModel();
+            return planViewModel;
+                
+            
 
         }
+        private bool ValidatePlan(RetailerPlan plan,ObjectStatusEnum status)
+        {
+            //TODO check if the owner of the plan exists ie the user is valid user or not
 
-        private bool ValidatePlan(RetailerPlan plan)
+            RetailerPlan _plan = _retailerPlanRepository.WithCodeorWithName(plan);
+            if(status != ObjectStatusEnum.NEW)
+            {
+                bool exists = _retailerPlanRepository.Exists(plan.Id);
+                if(!exists)
+                {
+                    _logger.AddUserError("Plan does not exist!");
+                    return false;
+                }
+                if(_plan != null)
+                {
+                    _logger.AddUserError("Plan with name"+_plan.Name+" and code"+_plan.Code+"exists!");
+                    return false;
+                }
+            }
+
+            else if(status == ObjectStatusEnum.NEW)
+            {
+                if(_plan != null)
+                {
+                    _logger.AddUserError("Plan with name"+_plan.Name+" and code"+_plan.Code+"exists!");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool isValidRequest(RetailerPlan plan)
         {
             bool isValidOperator = _operatorRepository.Exists(plan.Operator.Id);
 
@@ -116,15 +144,6 @@ namespace TakTec.RetailerPlans.BusinessLogic
 
          private RetailerPlan UpdatePlan (RetailerPlan retailerPlan)
         {
-            //find other plans with same name or code
-            var p = _retailerPlanRepository.WithCodeorWithName(retailerPlan);
-                            
-            if(p != null)
-            {
-                _logger.AddUserError("Redundant plan");
-                return null;
-            }
-
             var result = _retailerPlanRepository.WithKey(retailerPlan.Id);
             result.Name = retailerPlan.Name;
             result.Code = retailerPlan.Code;
@@ -134,10 +153,15 @@ namespace TakTec.RetailerPlans.BusinessLogic
             return result;
         }
 
-        public List<RetailerPlanViewModel> ListRetailerPlans(int pageNo, int ItemsPerPage)
+        public List<RetailerPlanViewModel>? ListRetailerPlans(int pageNo, int ItemsPerPage)
         {
-            var plans = _retailerPlanRepository.GetCustomFilters(pageNo,ItemsPerPage).Items.ToList();
-            if(plans ==null){
+            string? userRole = _tokenUserService.UserRole;
+            var plans = _retailerPlanRepository.Getplans(userRole)
+                                               .Skip(ItemsPerPage*(pageNo-1))
+                                               .Take(ItemsPerPage)
+                                               .ToList();
+            if(plans ==null)
+            {
                 _logger.AddUserError("There is no Plan in database!");
                 return null;
             }
@@ -148,6 +172,9 @@ namespace TakTec.RetailerPlans.BusinessLogic
             
 
            
+        }
+        private RetailerPlan? RemovePlan(RetailerPlan plan){
+            return null;
         }
 
        

@@ -13,12 +13,16 @@
   <ItemGroup>
     <ProjectReference Include="..\TakTec.Users.BusinessLogic.Abstractions\TakTec.Users.BusinessLogic.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.Users.Constants\TakTec.Users.Constants.csproj" />
+    <ProjectReference Include="..\TakTec.Users.ObjectMappers\TakTec.Users.ObjectMappers.csproj" />
     <ProjectReference Include="..\TakTec.Users.ViewModels\TakTec.Users.ViewModels.csproj" />
   </ItemGroup>
   
   <ItemGroup>
     <Reference Include="AspNetIdentity.Data.Entities">
       <HintPath>..\..\HostApp\OtherDeps\AspNetIdentity.Data.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Backend.Models">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Backend.Models.dll</HintPath>
     </Reference>
     <Reference Include="EthioArt.Data.Entities.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>

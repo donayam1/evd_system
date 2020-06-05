@@ -11,22 +11,25 @@ using Users.BusinessLogic.Abstraction;
 using EthioArt.UserAccounts.Models;
 using System.Threading.Tasks;
 using ExtCore.Data.Abstractions;
+using AspNetIdentity.Data.Entities;
+using EthioArt.Backend.Models.Requests;
+using TakTec.Users.ObjectMappers;
 
 namespace TakTec.Users.BusinessLogic
 {
-    public class EVDUserRegistrationService:
-        IEVDUserRegistrationService
+    public class EVDUserService:
+        IEVDUserService
     {
         private readonly IAccountService _accountService;
         private readonly ITokenUserService _tokenUserService;
         private readonly IRoleTypeService _roleTypeService;
-        private readonly ILogger<IEVDUserRegistrationService> _logger;
+        private readonly ILogger<IEVDUserService> _logger;
         private readonly IStorage _storage;
 
-        public EVDUserRegistrationService(IAccountService accountService,
+        public EVDUserService(IAccountService accountService,
             ITokenUserService tokenUserService,
             IRoleTypeService roleTypeService,
-            ILogger<IEVDUserRegistrationService> logger,
+            ILogger<IEVDUserService> logger,
             IStorage storage) {
             _accountService = accountService ?? 
                 throw new ArgumentNullException(nameof(accountService));
@@ -34,44 +37,13 @@ namespace TakTec.Users.BusinessLogic
                 throw new ArgumentNullException(nameof(tokenUserService));
             _roleTypeService = roleTypeService ??
                 throw new ArgumentNullException(nameof(roleTypeService));
-            _logger = logger ?? throw new ArgumentNullException(nameof(ILogger<IEVDUserRegistrationService>));
+            _logger = logger ?? throw new ArgumentNullException(nameof(ILogger<IEVDUserService>));
             _storage = storage ?? throw new ArgumentNullException(nameof(IStorage));
         }
 
-        //bool ValidateRequest(NewUserModel request) {
-
-        //    var userRole = _accountService.GetUserRole(_tokenUserService.UserId);
-        //    var requestedRole = _roleTypeService.GetRoleType(request.RoleTypeId);
-
-        //    if (userRole == null || requestedRole == null) {
-        //        _logger.LogError($" User Role Type = {userRole} and Requested Role Type ={requestedRole}");
-        //        return false;
-        //    }
-
-        //    if (requestedRole.Rank > userRole.AspNetRoleType?.Rank)
-        //    {
-        //        _logger.AddUnauthorizedError();
-        //        return false;
-        //    }
-            
-        //    return true;
-        //}
+        
 
         public async Task<RegisterUserResult?> RegisterUserAsync(NewUserModel request) {
-            
-            //if (!ValidateRequest(request)) {
-            //    return;    
-            //}
-
-            //var userRole = _accountService.GetUserRole(_tokenUserService.UserId);
-            //var requestedRole = _roleTypeService.GetRoleType(request.RoleTypeId);
-
-            //RegisterUserRequest req = new RegisterUserRequest() { 
-            //      Email = request.Email,
-            //      Password = "00000",
-            //      RoleTypeId = request.RankId
-            //};
-
             request.Password = "000000";
             var res= await _accountService.CreateUser(request);
             if (res != null)
@@ -88,15 +60,12 @@ namespace TakTec.Users.BusinessLogic
                 }
             }
             return res;
-            
-            //if (requestedRole.Rank == userRole.AspNetRoleType?.Rank) { 
-            //    // create an alies user
-            //}
-            //else // create a lower rank user 
-            //{ 
-            //}
-            //request.RankId
-
         }
+
+        public List<ListUserModel> ListUsers(PagedItemRequestBase request) {
+            return  _accountService.ListUsers(request).ToViewModel();
+        }
+
+
     }
 }

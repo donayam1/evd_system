@@ -1,9 +1,14 @@
+import { OperatorService } from 'src/app/data/Operator/Services/operator.service';
+import { OperatorState, SelectCurrentOperator } from './../../data/Operator/Reducer/operator.reducer';
+import { Store, State } from '@ngrx/store';
+import { Operator, ListOperatorResponse } from 'src/app/data/Operator/Models/operator.model';
 import { ObjectStatus } from 'src/app/data/Shared/Models/newObjectStatus.model';
 import { RetailerPlanService } from 'src/app/data/RetailerPlan/Services/retailer-plan.service';
 import { NewPlan, CommissionRate } from './../../data/RetailerPlan/Models/retailer-plan.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageComponent } from 'src/app/messages/message/message.component';
 import { ArrayType } from '@angular/compiler';
+import { SelectOperatorAction } from 'src/app/data/Operator/Action/operator.actions';
 
 @Component({
   selector: 'app-create-plan',
@@ -14,6 +19,7 @@ export class CreatePlanComponent implements OnInit {
   np: NewPlan;
   cr: CommissionRate;
   crs: CommissionRate[];
+  opList: ListOperatorResponse;
   commissionType: Array<string>;
   renewalRate: Array<string>;
   selectedType: string;
@@ -24,12 +30,18 @@ export class CreatePlanComponent implements OnInit {
   @ViewChild('messages', {static: true})
   messagesComponent: MessageComponent;
 
-  constructor(private retailerPlanService: RetailerPlanService) {
+  constructor(private retailerPlanService: RetailerPlanService, private opService: OperatorService, private store: Store<OperatorState>, private state: State<OperatorState>) {
     this.np = new NewPlan();
     this.cr = new CommissionRate();
     this.crs = Array();
     this.commissionType = ['Flat Commission', 'Per-recharge Commission'];
     this.renewalRate = ['Per Day', 'Per Week', 'Per Month', 'Per Year'];
+  }
+
+  operatorSelected(operator: Operator){
+    let opSelectAction = new SelectOperatorAction(operator);
+    this.store.dispatch(opSelectAction);
+    let currentOperator = SelectCurrentOperator(this.state.value);
   }
 
   checkRenewalRate($event?: any){
@@ -93,6 +105,10 @@ export class CreatePlanComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.opService.fetchOperator().subscribe((data) => {
+      this.opList = data;
+      console.log(data)
+    });
   }
 
 }

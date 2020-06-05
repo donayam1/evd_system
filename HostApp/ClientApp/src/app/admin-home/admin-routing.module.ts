@@ -12,7 +12,8 @@ const AdminRoutes: Routes = [
       { path: 'operators', loadChildren: '../operator/operator.module#OperatorModule' },
       { path: 'vouchers', loadChildren: '../vouchers/vouchers.module#VouchersModule' },
       { path: 'retailarPlans', loadChildren: '../retailer-plan/retailer-plan.module#RetailerPlanModule' },
-      { path: 'po', loadChildren: '../purchase-order/purchase-order.module#PurchaseOrderModule' }
+      { path: 'po', loadChildren: '../purchase-order/purchase-order.module#PurchaseOrderModule' },
+      { path: 'user', loadChildren: '../user/user.module#UserModule' },
 
       
     ]

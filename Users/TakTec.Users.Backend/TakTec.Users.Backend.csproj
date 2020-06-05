@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\TakTec.Core.Security\TakTec.Core.Security.csproj" />
+    <ProjectReference Include="..\TakTec.Users.BusinessLogic.Abstractions\TakTec.Users.BusinessLogic.Abstractions.csproj" />
+  </ItemGroup>
+  
+  
+  <ItemGroup>
+    <Reference Include="EthioArt.Backend.Models">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Backend.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.UserAccounts.Models">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.UserAccounts.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="Messages.BusinessLogic.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.BusinessLogic.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="Messages.Models">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.Models.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

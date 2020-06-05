@@ -1,5 +1,6 @@
 import { NamedItem } from "../../Shared/Models/nameditem.model";
 import { ResponseBase } from "../../Shared/Models/responseBase";
+import { PagedItemResponseBase } from "../../Shared/Models/PagedItemResponseBase";
 
 export class CommissionRate {
     constructor(obj? : any){
@@ -36,14 +37,12 @@ export class RetailerPlan extends NamedItem {
     objectStatus: number;
 }
 
-export class RetailerPlanResponse extends ResponseBase{
+export class RetailerPlanResponse extends PagedItemResponseBase{
     constructor(obj? : any){
         super(obj);
-        this.totalItems = obj && obj.totalItems;
         this.retailerPlans = obj && obj.retailerPlans.map(rp => new RetailerPlan(rp))
 
     }
-    totalItems: number;
     retailerPlans: RetailerPlan[]
 }
 

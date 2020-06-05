@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <ProjectReference Include="..\TakTec.Users.ViewModels\TakTec.Users.ViewModels.csproj" />
   </ItemGroup>
 
@@ -13,8 +14,8 @@
     <Reference Include="AspNetIdentity.Data.Entities">
       <HintPath>..\..\HostApp\OtherDeps\AspNetIdentity.Data.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="EthioArt.Backend.Models">
-      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Backend.Models.dll</HintPath>
+    <Reference Include="EthioArt.Security.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Security.Abstraction.dll</HintPath>
     </Reference>
     <Reference Include="EthioArt.UserAccounts.Models">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.UserAccounts.Models.dll</HintPath>

@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Roles.BusinessLogic.Abstraction;
 using System;
 using TakTec.Users.BusinessLogic;
+using TakTec.Users.BusinessLogic.Abstractions;
 
 namespace TakTec.Users.ServiceRegistrations
 {
@@ -16,7 +17,9 @@ namespace TakTec.Users.ServiceRegistrations
 
             services.AddScoped<IManageRoleTypeValidator, ManageRoleTypeValidator>();
             services.AddScoped<IUserTokenClaimContributingServcie, UserRoleTypeTokenClaimContributingServcie>();
-        
+            services.AddScoped<IEVDUserService, EVDUserService>();
+            services.AddScoped<INewUserValidator, AssertUserLoggedInValidator>();
+
         }
     }
 }

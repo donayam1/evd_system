@@ -15,7 +15,9 @@ namespace Vouchers.Data.EntityFramework
     {
         public override IQueryable<UserVoucher> LoadNavigationProperties(IQueryable<UserVoucher> items)
         {
-            return items.Include(x=>x.Voucher);
+            return items.Include(x=>x.Voucher)
+                .ThenInclude(x=>x.VoucherStatuses)
+                .Include(x => x.Voucher).ThenInclude(x=>x.Batch);
         }
 
         private IQueryable<UserVoucher> GetFreeVouchers(String userRoleName) {

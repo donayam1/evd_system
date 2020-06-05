@@ -5,7 +5,7 @@ import { PagedItemResponseBase } from "../../Shared/Models/PagedItemResponseBase
 export class Operator extends NamedItem {
   constructor(obj?: any) {
     super(obj);
-    this.uSSDRechargeCode = obj && obj.uSSDRechargeCode;
+    this.uSSDRechargeCode = obj && obj.ussdRechargeCode;
     this.status = obj && obj.status;
     this.lastUpdatedDate = obj && obj.lastUpdatedDate;
   }
@@ -18,7 +18,7 @@ export class ListOperatorResponse extends PagedItemResponseBase {
 
   constructor(obj?: any) {
     super(obj);
-    this.operators = obj && obj.operators.map(op => new Operator(op));
+    this.operators = obj && obj.operators.map(op => new Operator(op)) || Array();
   }
   operators: Operator[];
 }

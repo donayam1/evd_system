@@ -19,6 +19,9 @@
     <Reference Include="AspNetIdentity.Data.Entities">
       <HintPath>..\..\HostApp\OtherDeps\AspNetIdentity.Data.Entities.dll</HintPath>
     </Reference>
+    <Reference Include="EthioArt.Data.Entities.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    </Reference>
     <Reference Include="EthioArt.Data.Enumerations">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
     </Reference>
@@ -36,6 +39,9 @@
     </Reference>
     <Reference Include="Roles.ViewModels">
       <HintPath>..\..\HostApp\OtherDeps\Roles.ViewModels.dll</HintPath>
+    </Reference>
+    <Reference Include="Users.BusinessLogic.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\Users.BusinessLogic.Abstraction.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -24,6 +24,9 @@
     <Reference Include="EthioArt.APIs">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.APIs.dll</HintPath>
     </Reference>
+    <Reference Include="EthioArt.Clients.Mappers">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Clients.Mappers.dll</HintPath>
+    </Reference>
     <Reference Include="EthioArt.Clients.ViewModels">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Clients.ViewModels.dll</HintPath>
     </Reference>

@@ -1,4 +1,5 @@
-﻿using Messages.BusinessLogic.Abstraction;
+﻿using EthioArt.Backend.Models.Requests;
+using Messages.BusinessLogic.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,7 +9,7 @@ using TakTec.Core.Security;
 using TakTec.PurchaseOrders.BusinessLogic.Abstractions;
 using TakTec.PurchaseOrders.ViewModels;
 
-namespace TakTec.PurchaseOrders.Backend
+namespace TakTec.PurchaseOrders.Backend.Controllers
 {
     [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName)]
     public class PurchaseOrderController: PurchaseOrderControllersBase
@@ -22,7 +23,7 @@ namespace TakTec.PurchaseOrders.Backend
             _purchaseOrderService = purchaseOrderService ??
                 throw new ArgumentNullException(nameof(purchaseOrderService));
         }
-
+        [HttpPost]
         public IActionResult CreatePurcaseOrder([FromBody]NewPurchaseOrderModel request) {
             if (ModelState.IsValid) {
                 NewPurchaseOrderResponse response =
@@ -36,11 +37,35 @@ namespace TakTec.PurchaseOrders.Backend
                     response.NewPurchaseOrder = (NewPurchaseOrderResult)res;
                 }
 
-                SendResult(response);
+                return SendResult(response);
 
             }
             return BadRequest(ModelState);
         }
-        
+
+        [HttpGet]
+        public IActionResult ListPurcaseOrder([FromQuery]PagedItemRequestBase request)
+        {
+            if (ModelState.IsValid)
+            {
+                ListPurchaseOrderResponse response =
+                    new ListPurchaseOrderResponse();
+                var res = _purchaseOrderService.ListPuchaseOrders(request);
+                if (res == null)
+                {
+                    response.Status = false;
+                }
+                else
+                {
+                    response.Status = true;
+                    response.PurcahseOrders = res;
+                }
+
+                return SendResult(response);
+
+            }
+            return BadRequest(ModelState);
+        }
+
     }
 }

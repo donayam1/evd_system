@@ -6,9 +6,9 @@ namespace TakTec.Core.Security
     {
         public const String ManageKeysPolicy = "ManageKeysPolicy";
 
-        public const String UploadVoucherPolicy = "UploadVoucherPolicy";
-        //public const String ListVoucherPolicy = "ListVoucherPolicy";
-        public const String ActivateVoucherPolicy = "ActivateVoucherPolicy";
+        public const String UploadVoucherBatchPolicy = "UploadVoucherBatchPolicy";
+        public const String ListVoucherBatchPolicy = "UploadVoucherBatchPolicy";
+        public const String ActivateVoucherBatchPolicy = "ActivateVoucherBatchPolicy";
 
         public const String ManageOperatorsPolicy = "ManageOperatorsPolicy";
     }

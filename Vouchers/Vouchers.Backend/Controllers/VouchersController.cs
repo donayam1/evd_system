@@ -51,7 +51,7 @@ namespace Vouchers.Backend.Controllers
         }
 
         [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName,
-                   Policy = TakTec.Core.Security.Policies.UploadVoucherPolicy)]
+                   Policy = TakTec.Core.Security.Policies.UploadVoucherBatchPolicy)]
         [HttpPost, DisableRequestSizeLimit]
         public IActionResult Upload()
         {

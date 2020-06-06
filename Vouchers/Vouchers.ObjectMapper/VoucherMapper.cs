@@ -34,5 +34,24 @@ namespace Vouchers.ObjectMapper
             return vouchers.Select(x => x.ToViewModel()).ToList();
         }
 
+        public static VoucherBatchModel ToViewModel(this VoucherBatch batch) {
+            VoucherBatchModel model = new VoucherBatchModel()
+            {
+                Id = batch.Id,
+                Batch = batch.Batch,
+                Denomination = batch.Denomination,
+                PurchaserOrderNumber = batch.PurchaserOrderNumber,
+                Quantity = batch.Quantity,
+                StartSequence = batch.StartSequence + "",
+                StopDate = batch.StopDate.ToSharedDateString()
+            };
+            return model;
+        }
+
+        public static List<VoucherBatchModel> ToViewModel(this List<VoucherBatch> batchs) {
+            return batchs.Select(x => x.ToViewModel()).ToList();
+        }
+
+
     }
 }

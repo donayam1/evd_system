@@ -8,8 +8,13 @@ import { MessagesModule } from '../messages/messages.module';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+<<<<<<< HEAD
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditUserPermissionComponent } from './edit-user-permission/edit-user-permission.component';
+=======
+import { StoreModule } from '@ngrx/store';
+import { UserReducers } from '../data/User/Reducers/user.resucers';
+>>>>>>> b0454453ab8223747702e11228c7149dad315fad
 
 @NgModule({
   declarations: [CreateUserComponent, UserHomeComponent, ListUserComponent, UserDetailComponent, EditUserComponent, EditUserPermissionComponent],
@@ -17,7 +22,8 @@ import { EditUserPermissionComponent } from './edit-user-permission/edit-user-pe
     CommonModule,
     UserRoutingModule,
     FormsModule,
-    MessagesModule
+    MessagesModule,
+    StoreModule.forFeature("users", UserReducers)
   ]
 })
 export class UserModule { }

@@ -10,7 +10,7 @@ namespace TakTec.Core.Security.PolicyProviders
     public class UploadVoucherBatchPolicyProvider :
                 EthioArt.Security.Abstraction.IAuthorizationPolicyProvider
     {
-        public string Name => Policies.UploadVoucherPolicy;
+        public string Name => Policies.UploadVoucherBatchPolicy;
         /// <summary>
         /// User is memeber of supper admin group and has upload voucher permission 
         /// or user has DoEverything Claim and belongs to supper admin group.

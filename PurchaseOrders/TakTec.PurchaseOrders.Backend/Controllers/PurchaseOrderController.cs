@@ -1,4 +1,5 @@
-﻿using Messages.BusinessLogic.Abstraction;
+﻿using EthioArt.Backend.Models.Requests;
+using Messages.BusinessLogic.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -41,6 +42,30 @@ namespace TakTec.PurchaseOrders.Backend.Controllers
             }
             return BadRequest(ModelState);
         }
-        
+
+        [HttpGet]
+        public IActionResult ListPurcaseOrder([FromQuery]PagedItemRequestBase request)
+        {
+            if (ModelState.IsValid)
+            {
+                ListPurchaseOrderResponse response =
+                    new ListPurchaseOrderResponse();
+                var res = _purchaseOrderService.ListPuchaseOrders(request);
+                if (res == null)
+                {
+                    response.Status = false;
+                }
+                else
+                {
+                    response.Status = true;
+                    response.PurcahseOrders = res;
+                }
+
+                return SendResult(response);
+
+            }
+            return BadRequest(ModelState);
+        }
+
     }
 }

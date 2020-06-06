@@ -18,7 +18,8 @@ namespace Vouchers.ServiceRegistrations
             services.AddScoped<IVoucherService, VoucherService>();
             services.AddScoped<IVoucherUploadService, VoucherUploadService>();
             services.AddTransient<IVoucherFileProcessor, VoucherFileProcessor>();
-            
+            services.AddScoped<IVoucherBatchService, VoucherBatchService>();
+
             services.AddSingleton< IVoucherFileProcessorTaskes, VoucherFileProcessorTaskes > ();
             services.AddScoped<IVoucherStatusNotificationService, VoucherStatusNotificationService>();
             services.AddHostedService<MyBackGroudService>();

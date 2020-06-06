@@ -65,9 +65,9 @@ namespace TakTec.Users.InitialDataSeed
             new AspNetRoleType(RoleTypeConstants.RoleLevelSystemAdmin, RoleTypeConstants.RoleLevelNameSystemAdmin){ //"SupperAdmin"
                 Id = "1"
             },
-            new AspNetRoleType(RoleTypeConstants.RoleLevelSystemAccounts,RoleTypeConstants.RoleLevelNameSystemAccounts){ //"SystemAccounts"
-                Id = "100"
-            },
+            //new AspNetRoleType(RoleTypeConstants.RoleLevelSystemAccounts,RoleTypeConstants.RoleLevelNameSystemAccounts){ //"SystemAccounts"
+            //    Id = "100"
+            //},
             new AspNetRoleType(RoleTypeConstants.RoleLevelRetailer,RoleTypeConstants.RoleLevelNameRetailer ){ //"Retailer"
                 Id = "10000"
             }

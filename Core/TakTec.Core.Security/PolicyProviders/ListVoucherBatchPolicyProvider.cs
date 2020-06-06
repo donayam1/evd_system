@@ -7,10 +7,10 @@ using TakTec.Users.Constants;
 
 namespace TakTec.Core.Security.PolicyProviders
 {
-    public class UploadVoucherBatchPolicyProvider :
+    public class ListVoucherBatchPolicyProvider :
                 EthioArt.Security.Abstraction.IAuthorizationPolicyProvider
     {
-        public string Name => Policies.UploadVoucherBatchPolicy;
+        public string Name => Policies.ListVoucherBatchPolicy;
         /// <summary>
         /// User is memeber of supper admin group and has upload voucher permission 
         /// or user has DoEverything Claim and belongs to supper admin group.
@@ -23,7 +23,11 @@ namespace TakTec.Core.Security.PolicyProviders
             {
                 return
                 context.User.HasClaim(EthioArtClaimTypes.Role, RoleTypeConstants.RoleNameSupperAdmin) &&
-                (context.User.HasClaim(EthioArtClaimTypes.Permission, Permissions.UploadVoucherBatch) ||
+                (context.User.HasClaim(EthioArtClaimTypes.Permission, Permissions.ListVoucherBatches)
+                || context.User.HasClaim(EthioArtClaimTypes.Permission, Permissions.UploadVoucherBatch)
+                || context.User.HasClaim(EthioArtClaimTypes.Permission, Permissions.ActivateVoucherBatch)
+                || context.User.HasClaim(EthioArtClaimTypes.Permission, Permissions.ManageVoucherBatch)
+                ||
                 context.User.HasClaim(EthioArtClaimTypes.Permission, EthioArtPermissions.DoEveryThing)) 
                 ;
             });

@@ -42,10 +42,10 @@ namespace Vouchers.Data.EntityFramework
                 denomination,  batchId, isApproved).Take(quantity);
         }
        
-        public int CountSystemFreeVouchers(float denomination, int quantity,
+        public int CountSystemFreeVouchers(float denomination, 
             String? batchId = null, bool isApproved = true)
         {
-            return GetFreeSystemVouchers( denomination, quantity,
+            return GetFreeSystemVouchers( denomination,
                 batchId, isApproved).Count();
         }
 

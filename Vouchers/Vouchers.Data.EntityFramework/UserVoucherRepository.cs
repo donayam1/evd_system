@@ -55,9 +55,9 @@ namespace Vouchers.Data.EntityFramework
             return this.GetFreeUserVouchers(userRoleName, denomination,batchId,isApproved).Take(quantity);
         }
 
-        public int CountUserFreeVouchers(String userRoleName, float denomination, int quantity,
+        public int CountUserFreeVouchers(String userRoleName, float denomination, 
             String? batchId = null, bool isApproved = true) {
-            return GetFreeUserVouchers(userRoleName, denomination, quantity,batchId,isApproved).Count();
+            return GetFreeUserVouchers(userRoleName, denomination, batchId,isApproved).Count();
         }
 
 

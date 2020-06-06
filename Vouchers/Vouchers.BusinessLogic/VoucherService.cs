@@ -89,9 +89,14 @@ namespace Vouchers.BusinessLogic
 
         public bool AreVouchersAvailable(VoucherTransferRequest request, String fromUserRoleName) {
             foreach (var v in request.TransferRequestItems) {
-                if (_userVoucherRepository.CountUserFreeVouchers(fromUserRoleName, v.Denomination, v.Quantity) < v.Quantity) {
-                    _logger.AddUserError($"{v.Quantity} vouchers of {v.Denomination} birr not avaiable.");
-                    return false;
+                int userVouchers = _userVoucherRepository.CountUserFreeVouchers(fromUserRoleName, v.Denomination);
+                if (userVouchers < v.Quantity) {
+                    int systemFreeVouchers =_vouchersRepository.CountSystemFreeVouchers(v.Denomination, null, isApproved: true);
+                    if ((systemFreeVouchers + userVouchers) < v.Quantity)
+                    {
+                        _logger.AddUserError($"{v.Quantity} vouchers of {v.Denomination} birr not avaiable.");
+                        return false;
+                    }
                 }
             }
 

@@ -11,7 +11,7 @@ namespace Vouchers.Data.Abstractions
         IQueryable<Voucher> GetFreeSystemVouchers(float denomination, String? batchId = null, bool isApproved = true);
         IQueryable<Voucher> GetFreeSystemVouchers(float denomination, int quantity,
             String? batchId = null, bool isApproved = true);
-        int CountSystemFreeVouchers(float denomination, int quantity,
+        int CountSystemFreeVouchers(float denomination,
             String? batchId = null, bool isApproved = true);
     }
 }

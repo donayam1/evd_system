@@ -14,7 +14,7 @@ namespace Vouchers.Data.Abstractions
         IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, String? batchId = null, bool isApproved = true);
         IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, float denomination, String? batchId = null, bool isApproved = true);
         IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, float denomination, int quantity, String? batchId = null, bool isApproved = true);
-        int CountUserFreeVouchers(String userRoleName, float denomination, int quantity, String? batchId = null, bool isApproved = true);
+        int CountUserFreeVouchers(String userRoleName, float denomination, String? batchId = null, bool isApproved = true);
 
 
 

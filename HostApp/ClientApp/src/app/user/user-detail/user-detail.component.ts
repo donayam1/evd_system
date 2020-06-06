@@ -21,15 +21,15 @@ import { Users } from 'src/app/data/User/Models/user.model';
 })
 export class UserDetailComponent implements OnInit {
   //user: NewUser;
-  isError: boolean;
-  messages: Message[];
-  selectedgt: GroupType;
-  selectedrp: RetailerPlan;
-  selectedGt: GroupType;
-  selectedRp: RetailerPlan;
-  gtList: GroupTypesResponse;
-  rpList: RetailerPlanResponse;
-  userPermissions: PermissionGroup;
+  // isError: boolean;
+  // messages: Message[];
+  // selectedgt: GroupType;
+  // selectedrp: RetailerPlan;
+  // selectedGt: GroupType;
+  // selectedRp: RetailerPlan;
+  // gtList: GroupTypesResponse;
+  // rpList: RetailerPlanResponse;
+  // userPermissions: PermissionGroup;
   
   // constructor(private userService: UserService, private gtServ: GrouptypeService, private rpServ: RetailerPlanService, private store: Store<OperatorState>, private state: State<OperatorState>) {
   //   this.user = new NewUser();

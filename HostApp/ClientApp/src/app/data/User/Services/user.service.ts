@@ -15,8 +15,21 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   fetchUser():Observable<ListUserResponse>{
-    const userResponse: ListUserResponse = new ListUserResponse();
-    const users = new Users({
+    // const url = AppConfig.settings.apiServers.authServer + this.api;
+    // return new Observable(observer => {
+    //   this.http.get<ListUserResponse>(url).subscribe(data => {
+    //     const response = new ListUserResponse(data);
+    //     console.dir(response)
+    //     observer.next(response);
+    //     observer.complete();
+    //   },error => {
+    //     observer.error(error);
+    //     observer.complete();
+    //   })
+    // })
+
+     const userResponse: ListUserResponse = new ListUserResponse();
+    const users = new Users([{
      Id: "1",
      UserName: "nat",
      email: "nat@gmail.com",
@@ -25,24 +38,14 @@ export class UserService {
      middleName: "teshome",
      lastName: "gudeta",
      userStatus: "Active"   
-    });
+    }]);
 
     const usersList: Users[] = Array();
     usersList.push(users);
     userResponse.users = usersList;
+    console.log(userResponse)
     return of(userResponse)
 
-    // const url = AppConfig.settings.apiServers.authServer + this.api + "/list";
-    // return new Observable(observer => {
-    //   this.http.get<ListUserResponse>(url).subscribe(data => {
-    //     const response = new ListUserResponse(data);
-    //     observer.next(response);
-    //     observer.complete();
-    //   },error => {
-    //     observer.error(error);
-    //     observer.complete();
-    //   })
-    // })
 
   }
 

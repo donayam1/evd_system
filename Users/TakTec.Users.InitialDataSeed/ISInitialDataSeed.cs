@@ -23,6 +23,9 @@ using EthioArt.Security.ClaimsCollection;
 using EthioArt.Clients.ViewModels;
 using IdentityServer4;
 using TaKTec.Core.APIs;
+using EthioArt.Clients.Mappers;
+using IdentityServer4.EntityFramework.Entities;
+using Client = IdentityServer4.Models.Client;
 
 namespace TakTec.Users.InitialDataSeed
 {
@@ -238,30 +241,30 @@ namespace TakTec.Users.InitialDataSeed
                 var config = sp.GetService<IConfiguration>();//TODO check for null services
                 config.GetSection("SystemAccounts").Bind(accounts);
 
-                ISystemAccountSetUpService _systemAccountSetUpService =
-                    sp.GetService<ISystemAccountSetUpService>();
+                //ISystemAccountSetUpService _systemAccountSetUpService =
+                //    sp.GetService<ISystemAccountSetUpService>();
 
-                foreach (var v in accounts)
-                {
-                    try
-                    {
-                        var res = _systemAccountSetUpService.SetUpNewAccount(v).Result;
-                        if (res != null)
-                        {
-                            logger.LogInformation($"client_id ={res.ClientId}\n" +
-                                $"client_secreate{res.ClientSecreate}\n" +
-                                $"user_id = {res.UserId}\nuser_name = {res.UserName}\n" +
-                                $"role_id = {res.RoleId}\n" +
-                                $"role_name = {res.RoleName}\n");
-                        }
-                    }
-                    catch (Exception e) {
-                        logger.LogError(e.InnerException,e.Message);
-                    }
-                }
+                //foreach (var v in accounts)
+                //{
+                //    try
+                //    {
+                //        var res = _systemAccountSetUpService.SetUpNewAccount(v).Result;
+                //        if (res != null)
+                //        {
+                //            logger.LogInformation($"client_id ={res.ClientId}\n" +
+                //                $"client_secreate{res.ClientSecreate}\n" +
+                //                $"user_id = {res.UserId}\nuser_name = {res.UserName}\n" +
+                //                $"role_id = {res.RoleId}\n" +
+                //                $"role_name = {res.RoleName}\n");
+                //        }
+                //    }
+                //    catch (Exception e) {
+                //        logger.LogError(e.InnerException,e.Message);
+                //    }
+                //}
 
 
-            //}
+          
 
 
 
@@ -271,28 +274,37 @@ namespace TakTec.Users.InitialDataSeed
             //List<ClientWithXClaim> clients = new List<ClientWithXClaim>();
             //var config = serviceProvider.GetService<IConfiguration>();//TODO check for null services
             //config.GetSection("clients").Bind(clients);
-            //var clientsDbset = sc.Set<x.Client>();
-            //foreach (var v in clients)  //ClientsData.Clients
-            //{
-            //    var client = (Client)v;
-            //    var clientd = client.ToEntity();
+            var clientsDbset = sc.Set<x.Client>();
+            foreach (var v in accounts)  //ClientsData.Clients
+            {
+                
+                var client = v.Client.ToDomainModel();
+                var clientd = client.ToEntity();
 
-            //    foreach (var cs in clientd.ClientSecrets)
-            //    {
-            //        cs.Value = cs.Value.Sha256();
-            //    }
-            //    foreach (var s in v.ClaimsX)
-            //    {
-            //        x.ClientClaim cl = new x.ClientClaim(clientd.Id, s.Type, s.Value)
-            //        {
-            //        };
-            //        clientd.Claims.Add(cl);
-            //    }
-            //    clientsDbset.Add(clientd);
-            //}
+                ClientSecret secret = new ClientSecret("secret".Sha256(), clientd.Id)
+                {
+                    //Value = secreat.Sha256(),
+                    Expiration = DateTime.Now + TimeSpan.FromDays(365.5 * 10)//TODO calculate expiration time properly
+                };
+
+                //foreach (var cs in clientd.ClientSecrets)
+                //{
+                //    cs.Value = cs.Value.Sha256();
+                //}g
+                clientd.ClientSecrets.Add(secret);
+
+                foreach (var s in client.Claims)
+                {
+                    x.ClientClaim cl = new x.ClientClaim(clientd.Id, s.Type, s.Value)
+                    {
+                    };
+                    clientd.Claims.Add(cl);
+                }
+                clientsDbset.Add(clientd);
+            }
 
 
-        var apiResDbSet = sc.Set<x.ApiResource>();
+            var apiResDbSet = sc.Set<x.ApiResource>();
             foreach (var v in ApiResourceData.ApiResources) {
                 apiResDbSet.Add(v);
                

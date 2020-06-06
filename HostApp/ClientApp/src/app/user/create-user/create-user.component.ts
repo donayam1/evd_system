@@ -29,6 +29,8 @@ export class CreateUserComponent implements OnInit {
     this.nUser = new NewUser();
     this.selectedRp = new RetailerPlan();
     this.selectedGt = new GroupType();
+    this.gtList = new GroupTypesResponse();
+    this.rpList = new RetailerPlanResponse();
     this.gtTriggered = false;
     this.rpTriggered = false;
   }

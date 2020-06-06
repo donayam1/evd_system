@@ -14,6 +14,19 @@ export class OperatorService {
   constructor(private http: HttpClient) { }
 
   getOperator(id: String) {
+    // const url = AppConfig.settings.apiServers.authServer + this.url;
+    // const observer = Observable.create(observer => {
+    //   this.http.get<NewOperatorResponse>(url).subscribe(data => {
+    //     const response = new NewOperatorResponse(data);
+    //     observer.next(response);
+    //     observer.complete();
+    //   }, error => {
+    //     observer.error(error);
+    //     observer.complete();
+    //   });
+    // })
+    // return observer;
+
     const operatorResponse: NewOperatorResponse = new NewOperatorResponse();
     const operator = new Operator({
       id: '1',
@@ -40,6 +53,7 @@ export class OperatorService {
     //op.push(operator);
     //ListOpResponse.operators = op;
     //return of(ListOpResponse);
+
     const url = AppConfig.settings.apiServers.authServer + this.url + "/list";
      return new Observable(observer => {
        this.http.get<ListOperatorResponse>(url).subscribe(data => {

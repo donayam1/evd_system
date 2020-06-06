@@ -13,7 +13,7 @@ import { GroupTypeState, selectCurrentGroupType } from "src/app/data/GroupType/R
 })
 export class ListGroupTypeComponent implements OnInit {
   grouptype: GroupTypesResponse;
-  allGroupType: GroupTypesResponse;
+  //allGroupType: GroupTypesResponse;
   filter: any ={};
 
 
@@ -33,21 +33,21 @@ export class ListGroupTypeComponent implements OnInit {
 
   ngOnInit() {
     this.grouptypeService.fetchGroupType().subscribe((response)=>{
-     this.grouptype = this.allGroupType = response;
+     this.grouptype  = response;
      //console.log(this.grouptype)
 
     })
      
   }
 
-  onFilterChange(){
-    var grouptypes = this.allGroupType;
-    if(this.filter.id)
-     grouptypes.groupTypes = grouptypes.groupTypes.filter(gt => gt.id === this.filter.id);
+  // onFilterChange(){
+  //   var grouptypes = this.allGroupType;
+  //   if(this.filter.id)
+  //    grouptypes.groupTypes = grouptypes.groupTypes.filter(gt => gt.id === this.filter.id);
 
-     this.grouptype = grouptypes
-     console.log(this.grouptype)
-  }
+  //    this.grouptype = grouptypes
+  //    console.log(this.grouptype)
+  // }
 
   editGroup(groupType: GroupType){
        let groupTypeSelectedAction = new SelectGroupTypeAction(groupType);

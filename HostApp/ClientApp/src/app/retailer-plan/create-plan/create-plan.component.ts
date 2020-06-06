@@ -20,12 +20,14 @@ export class CreatePlanComponent implements OnInit {
   cr: CommissionRate;
   crs: CommissionRate[];
   opList: ListOperatorResponse;
+  selectedOp: Operator;
   commissionType: Array<string>;
   renewalRate: Array<string>;
   selectedType: string;
   selectedRenewalRate: string;
   idCounter = -1;
   crId = 0;
+  opTriggered: boolean;
 
   @ViewChild('messages', {static: true})
   messagesComponent: MessageComponent;
@@ -33,15 +35,23 @@ export class CreatePlanComponent implements OnInit {
   constructor(private retailerPlanService: RetailerPlanService, private opService: OperatorService, private store: Store<OperatorState>, private state: State<OperatorState>) {
     this.np = new NewPlan();
     this.cr = new CommissionRate();
-    this.crs = Array();
+    this.crs = Array() || null;
+    this.opTriggered = false;
+    this.opList = new ListOperatorResponse();
     this.commissionType = ['Flat Commission', 'Per-recharge Commission'];
     this.renewalRate = ['Per Day', 'Per Week', 'Per Month', 'Per Year'];
   }
 
   operatorSelected(operator: Operator){
-    let opSelectAction = new SelectOperatorAction(operator);
-    this.store.dispatch(opSelectAction);
-    let currentOperator = SelectCurrentOperator(this.state.value);
+    this.opService.getOperator(operator.id).subscribe(x => {
+      this.selectedOp = x.operator;
+      console.log(x);
+    });
+    this.opTriggered = true;
+    
+    // let opSelectAction = new SelectOperatorAction(operator);
+    // this.store.dispatch(opSelectAction);
+    // let currentOperator = SelectCurrentOperator(this.state.value);
   }
 
   checkRenewalRate($event?: any){
@@ -91,6 +101,7 @@ export class CreatePlanComponent implements OnInit {
     this.addCr();
     this.np.objectStatus = ObjectStatus.NEW;
     this.np.commissionRates = this.crs;
+    this.np.operatorId = this.selectedOp.id;
     this.retailerPlanService.createRetailerPlan(this.np).subscribe(x => {
       this.messagesComponent.addMessages(x);
       if(x.status === true){

@@ -59,6 +59,7 @@ export class PurchaseOrderService {
     po.ui_id = purchaseOrder.id;
     po.id = '23';
     po.self = purchaseOrder.self;
+    po.isExternal = purchaseOrder.isExternal;
     po.userId = purchaseOrder.userId;
     po.poNumber = purchaseOrder.poNumber;
     po.purchaseOrderItems = purchaseOrder.purchaseOrderItems;

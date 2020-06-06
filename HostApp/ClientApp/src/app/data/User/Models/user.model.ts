@@ -52,7 +52,7 @@ export class NewUser extends User {
         this.email = obj && obj.email;
         this.phoneNumber = obj && obj.phoneNumber;
         this.firstName = obj && obj.firstName;
-        this.middleName = obj && obj.middleName;
+        this.middleName = obj && obj.middleName || "";
         this.lastName = obj && obj.lastName;
         this.rankId = obj && obj.rankId;
         this.planId = obj && obj.planId;
@@ -72,7 +72,7 @@ export class Permission {
     }
 }
 
-export class PremissionGroup {
+export class PermissionGroup {
     permissions: Permission[];
     name: string;
     description: string;
@@ -84,12 +84,16 @@ export class PremissionGroup {
     }
 }
 
-export class NewUserResponse extends ResponseBase {
-    newUser: User;
+// export class PermissionGroupResponse extends ResponseBase{
+//     user: NewUser;
+// }
+
+export class NewUserResponse extends ResponseBase{
+    newUser: NewUser;
 
     constructor(obj?: any) {
         super(obj);
-        this.newUser = obj && new User(obj) || new User();
+        this.newUser = obj &&  new NewUser(obj) || new NewUser();
     }
 }
 
@@ -97,7 +101,7 @@ export class NewUserResponse extends ResponseBase {
 export class ListUserResponse extends PagedItemResponseBase {
     constructor(obj?: any) {
         super(obj);
-        this.users = obj && obj.users.map(user => new Users(user)) || Array();
+        this.users = obj && obj.users.map(u => new Users(u)) || Array();
     }
     users: Users[];
 }

@@ -7,19 +7,19 @@
                 <div class="col-md-6">
                     <div class="form-row form-group">
                         <label for="username" class="col-form-label col-form-label-sm">Userame:</label>
-                        <input type="text" class="form-control form-control-sm" name="username" id="username" placeholder="Username" [(ngModel)]="nUser.UserName">
+                        <input type="text" class="form-control form-control-sm" name="username" id="username" placeholder="Username" [(ngModel)]="nUser.UserName" required>
                     </div>
                     <div class="form-row form-group">
                         <label for="email" class="col-form-label col-form-label-sm">Email:</label>
-                        <input type="email" class="form-control form-control-sm" name="email" id="email" placeholder="myemail@example.com" [(ngModel)]="nUser.email">
+                        <input type="email" class="form-control form-control-sm" name="email" id="email" placeholder="myemail@example.com" [(ngModel)]="nUser.email" required>
                     </div>
                     <div class="form-row form-group">
                         <label for="phonenumber" class="col-form-label col-form-label-sm">Phone Number:</label>
-                        <input type="number" class="form-control form-control-sm" name="phonenumber" id="phonenumber" placeholder="User's Phone Number" [(ngModel)]="nUser.phoneNumber">
+                        <input type="number" class="form-control form-control-sm" name="phonenumber" id="phonenumber" placeholder="User's Phone Number" [(ngModel)]="nUser.phoneNumber" required>
                     </div>
                     <div class="form-row form-group">
                         <label for="firstname" class="col-form-label col-form-label-sm">First Name:</label>
-                        <input type="text" class="form-control form-control-sm" name="firstname" id="firstname" placeholder="First Name" [(ngModel)]="nUser.firstName">
+                        <input type="text" class="form-control form-control-sm" name="firstname" id="firstname" placeholder="First Name" [(ngModel)]="nUser.firstName" required>
                     </div>
                     <div class="form-row form-group">
                         <label for="middlename" class="col-form-label col-form-label-sm">Middle Name:</label>
@@ -27,13 +27,13 @@
                     </div>
                     <div class="form-row form-group">
                         <label for="lastname" class="col-form-label col-form-label-sm">Last Name:</label>
-                        <input type="text" class="form-control form-control-sm" name="lastname" id="lastname" placeholder="Last Name" [(ngModel)]="nUser.lastName">
+                        <input type="text" class="form-control form-control-sm" name="lastname" id="lastname" placeholder="Last Name" [(ngModel)]="nUser.lastName" required>
                     </div>
                 </div>
                 <div class="col-md-6 pl-md-5">
                     <div class="form-row form-group">
                         <label for="grouptype" class="col-form-label col-form-label-sm">Group Type:</label>
-                        <select class="form-control form-control-sm" name="grouptype" id="grouptype" (change)="gtSelected($event)">
+                        <select class="form-control form-control-sm" name="grouptype" id="grouptype" (change)="gtSelected($event)" required>
                             <option selected class="text-muted disabled">Select the users group type</option>
                             <option *ngFor="let item of gtList.groupTypes" [value]="item.id">{{item.name}}</option>
                         </select>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-row form-group">
                         <label for="retailerplan" class="col-form-label col-form-label-sm">Retailer Plan:</label>
-                        <select class="form-control form-control-sm" name="retailerplan" id="retailerplan" (change)="rpSelected($event)">
+                        <select class="form-control form-control-sm" name="retailerplan" id="retailerplan" (change)="rpSelected($event)" required>
                             <option selected class="text-muted disabled">Select the users group type</option>
                             <option *ngFor="let item of rpList.retailerPlans" [value]="item.id">{{item.name}}</option>
                         </select>

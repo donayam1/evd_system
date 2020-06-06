@@ -14,6 +14,7 @@ const AdminRoutes: Routes = [
       { path: 'retailarPlans', loadChildren: '../retailer-plan/retailer-plan.module#RetailerPlanModule' },
       { path: 'po', loadChildren: '../purchase-order/purchase-order.module#PurchaseOrderModule' },
       { path: 'user', loadChildren: '../user/user.module#UserModule' },
+      {path: 'vouchersBatch' , loadChildren: '../voucher-batch/voucher-batch.module#VoucherBatchModule' }
 
       
     ]

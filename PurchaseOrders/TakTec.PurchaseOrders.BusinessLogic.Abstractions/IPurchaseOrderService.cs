@@ -2,13 +2,15 @@
 using System;
 using System.Collections.Generic;
 using TakTec.PurchaseOrders.ViewModels;
+using Vouchers.ViewModels;
 
 namespace TakTec.PurchaseOrders.BusinessLogic.Abstractions
 {
     public interface IPurchaseOrderService
     {
-
-        PurchaseOrderModel? CreatePurchaseOrder(NewPurchaseOrderModel request);
+        CreatePurchaseOrdreResult? CreatePurchaseOrder(NewPurchaseOrderModel request);
         List<PurchaseOrderModel> ListPuchaseOrders(PagedItemRequestBase request);
+        PeekVoucherResult? PeekVoucher(PeekVoucherRequest request);
+
     }
 }

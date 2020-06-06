@@ -8,6 +8,7 @@ using System.Text;
 using TakTec.Core.Security;
 using TakTec.PurchaseOrders.BusinessLogic.Abstractions;
 using TakTec.PurchaseOrders.ViewModels;
+using System.Linq;
 
 namespace TakTec.PurchaseOrders.Backend.Controllers
 {
@@ -23,7 +24,7 @@ namespace TakTec.PurchaseOrders.Backend.Controllers
             _purchaseOrderService = purchaseOrderService ??
                 throw new ArgumentNullException(nameof(purchaseOrderService));
         }
-        [HttpPost]
+        [HttpPost(template:"CreatePurchaseOrder")]
         public IActionResult CreatePurcaseOrder([FromBody]NewPurchaseOrderModel request) {
             if (ModelState.IsValid) {
                 NewPurchaseOrderResponse response =
@@ -34,7 +35,7 @@ namespace TakTec.PurchaseOrders.Backend.Controllers
                 }
                 else{
                     response.Status = true;
-                    response.NewPurchaseOrder = (NewPurchaseOrderResult)res;
+                    response.NewPurchaseOrder = (NewPurchaseOrderResult)res.PurchaseOrder;
                 }
 
                 return SendResult(response);
@@ -66,6 +67,32 @@ namespace TakTec.PurchaseOrders.Backend.Controllers
             }
             return BadRequest(ModelState);
         }
+
+        [HttpPost]
+        [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName,
+                   Policy = TakTec.Core.Security.Policies.PeekAVoucherPolicy)]
+        public IActionResult OpenVoucher([FromBody]PeekVoucherRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var res = _purchaseOrderService.PeekVoucher(request);
+                PeekVoucherResponse response = new PeekVoucherResponse();
+                if (res != null)
+                {
+                    response.Status = false;
+                }
+                else {
+                    response.Status = true;
+                    response.PurchaseOrder = res.PurchaseOrder;
+                    response.Voucher = res.Vouchers.FirstOrDefault();
+                }
+
+                return SendResult(response);
+
+            }
+            return BadRequest(ModelState);
+        }
+
 
     }
 }

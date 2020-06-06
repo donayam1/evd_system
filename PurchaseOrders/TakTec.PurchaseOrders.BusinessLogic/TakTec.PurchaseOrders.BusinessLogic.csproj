@@ -8,7 +8,9 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Users\TakTec.Users.Constants\TakTec.Users.Constants.csproj" />
     <ProjectReference Include="..\..\Vouchers\Vouchers.Data.Abstractions\Vouchers.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Vouchers\Vouchers.ObjectMapper\Vouchers.ObjectMapper.csproj" />
     <ProjectReference Include="..\TakTec.PurchaseOrders.BusinessLogic.Abstractions\TakTec.PurchaseOrders.BusinessLogic.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.PurchaseOrders.ObjectMappers\TakTec.PurchaseOrders.ObjectMappers.csproj" />
   </ItemGroup>

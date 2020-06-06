@@ -8,6 +8,6 @@ namespace Vouchers.BusinessLogic.Abstractions
 {
     public interface IVoucherFileProcessor
     {
-        Task ProcessFile(String path);
+        Task ProcessFile(String path,String poId);
     }
 }

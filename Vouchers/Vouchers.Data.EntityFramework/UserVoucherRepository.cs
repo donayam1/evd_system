@@ -20,31 +20,44 @@ namespace Vouchers.Data.EntityFramework
                 .Include(x => x.Voucher).ThenInclude(x=>x.Batch);
         }
 
-        private IQueryable<UserVoucher> GetFreeVouchers(String userRoleName) {
-            return this.All().Where(x=>
+        private IQueryable<UserVoucher> GetFreeVouchers(String userRoleName,
+            String? batchId = null,bool isApproved = true) {
+
+            var items = this.All().Where(x=>
                     x.Voucher.VoucherStatuses.Where(x => x.IsCurrent).FirstOrDefault().Status ==
                         Enumerations.VoucherStatusTypes.Available
-                        &&x.Voucher.Batch.IsAproved == true
+                        &&x.Voucher.Batch.IsAproved == isApproved
                         && x.OwnerId == userRoleName);
+
+            if (!String.IsNullOrWhiteSpace(batchId))  
+            {
+                items = items.Where(x => x.Voucher.BatchId == batchId);
+            }
+            
+            return items;
         }
 
 
-        public IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName)
+        public IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName,
+            String? batchId = null, bool isApproved = true)
         {
-            return GetFreeVouchers(userRoleName);
+            return GetFreeVouchers(userRoleName,batchId,isApproved);
         }
-        public IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, float denomination)
+        public IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, float denomination,
+            String? batchId = null, bool isApproved = true)
         {
-            return GetFreeUserVouchers(userRoleName).Where(x => x.Voucher.Batch.Denomination == denomination);
+            return GetFreeUserVouchers(userRoleName,batchId,isApproved).Where(x => x.Voucher.Batch.Denomination == denomination);
         }
 
-        public IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, float denomination, int quantity)
+        public IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, float denomination,
+            int quantity,String? batchId = null, bool isApproved = true)
         {
-            return this.GetFreeUserVouchers(userRoleName, denomination).Take(quantity);
+            return this.GetFreeUserVouchers(userRoleName, denomination,batchId,isApproved).Take(quantity);
         }
 
-        public int CountUserFreeVouchers(String userRoleName, float denomination, int quantity) {
-            return GetFreeUserVouchers(userRoleName, denomination, quantity).Count();
+        public int CountUserFreeVouchers(String userRoleName, float denomination, int quantity,
+            String? batchId = null, bool isApproved = true) {
+            return GetFreeUserVouchers(userRoleName, denomination, quantity,batchId,isApproved).Count();
         }
 
 
@@ -52,21 +65,26 @@ namespace Vouchers.Data.EntityFramework
 
 
 
-        public IQueryable<UserVoucher> GetFreeSystemVouchers()
-        {
-            return GetFreeUserVouchers(RoleTypeConstants.RoleNameSupperAdmin);
-        }
-        public IQueryable<UserVoucher> GetFreeSystemVouchers(float denomination) {
-            return this.GetFreeUserVouchers(RoleTypeConstants.RoleNameSupperAdmin, denomination);
-        }
-        public IQueryable<UserVoucher> GetFreeSystemVouchers(float denomination,int quantity)
-        {
-            return this.GetFreeUserVouchers(RoleTypeConstants.RoleNameSupperAdmin,denomination,quantity);
-        }
+        //public IQueryable<UserVoucher> GetFreeSystemVouchers(String? batchId = null, bool isApproved = true)
+        //{
+        //    return GetFreeUserVouchers(RoleTypeConstants.RoleNameSupperAdmin,batchId,isApproved);
+        //}
+        //public IQueryable<UserVoucher> GetFreeSystemVouchers(float denomination, String? batchId = null, bool isApproved = true) {
+        //    return this.GetFreeUserVouchers(RoleTypeConstants.RoleNameSupperAdmin, denomination,
+        //        batchId,isApproved);
+        //}
+        //public IQueryable<UserVoucher> GetFreeSystemVouchers(float denomination,int quantity,
+        //    String? batchId = null, bool isApproved = true)
+        //{
+        //    return this.GetFreeUserVouchers(RoleTypeConstants.RoleNameSupperAdmin,
+        //        denomination,quantity,batchId,isApproved);
+        //}
 
-        public int CountSystemFreeVouchers(String userRoleName, float denomination, int quantity) {
-            return CountUserFreeVouchers(RoleTypeConstants.RoleNameSupperAdmin, denomination, quantity);
-        }
+        //public int CountSystemFreeVouchers(float denomination, int quantity,
+        //    String? batchId = null, bool isApproved = true) {
+        //    return CountUserFreeVouchers(RoleTypeConstants.RoleNameSupperAdmin, denomination, quantity,
+        //        batchId, isApproved);
+        //}
 
 
     }

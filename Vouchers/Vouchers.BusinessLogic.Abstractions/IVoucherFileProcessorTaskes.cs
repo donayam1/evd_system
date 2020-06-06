@@ -10,7 +10,7 @@ namespace Vouchers.BusinessLogic.Abstractions
     public interface IVoucherFileProcessorTaskes
     {
          void Enqueue(UploadedFile voucherFileProcessor);       
-         Task<UploadedFile> DeQueue(CancellationToken token);
+         Task<UploadedFile?> DeQueue(CancellationToken token);
         
     }
 }

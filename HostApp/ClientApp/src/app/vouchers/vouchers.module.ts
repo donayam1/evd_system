@@ -7,6 +7,7 @@ import { FileUploadModule } from '../file-upload/file-upload.module';
 import { HomeComponent } from './home/home.component';
 import { ListVouchersComponent } from './list-vouchers/list-vouchers.component';
 import { MessagesModule } from '../messages/messages.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [UploadComponent, HomeComponent, ListVouchersComponent],
@@ -14,7 +15,8 @@ import { MessagesModule } from '../messages/messages.module';
     CommonModule,
     VouchersRoutingModule,
     FileUploadModule,
-    MessagesModule
+    MessagesModule,
+    FormsModule
   ],
   exports: [
     UploadComponent

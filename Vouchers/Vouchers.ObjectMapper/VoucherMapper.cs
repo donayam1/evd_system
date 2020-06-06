@@ -30,6 +30,15 @@ namespace Vouchers.ObjectMapper
             };
             return vm;
         }
+        public static VoucherModel ToSalesViewModel(this Voucher voucher) {
+            var res = voucher.ToViewModel();
+            res.PinNumber = voucher.PinNumber;
+            return res;
+        }
+        public static List<VoucherModel> ToSalesViewModel(this List<Voucher> vouchers) {
+            return vouchers.Select(x => x.ToSalesViewModel()).ToList();
+        }
+
         public static List<VoucherModel> ToViewModel(this List<Voucher> vouchers) {
             return vouchers.Select(x => x.ToViewModel()).ToList();
         }
@@ -40,7 +49,7 @@ namespace Vouchers.ObjectMapper
                 Id = batch.Id,
                 Batch = batch.Batch,
                 Denomination = batch.Denomination,
-                PurchaserOrderNumber = batch.PurchaserOrderNumber,
+                PurchaserOrderNumber = batch.PurchaserOrderId,
                 Quantity = batch.Quantity,
                 StartSequence = batch.StartSequence + "",
                 StopDate = batch.StopDate.ToSharedDateString()

@@ -13,9 +13,13 @@ using TakTec.PurchaseOrders.BusinessLogic.Abstractions;
 using TakTec.PurchaseOrders.Data.Abstractions;
 using TakTec.PurchaseOrders.ObjectMappers;
 using TakTec.PurchaseOrders.ViewModels;
+using TakTec.Users.Constants;
 using Users.BusinessLogic.Abstraction;
 using Vouchers.BusinessLogic.Abstractions;
+using Vouchers.Data.Entities;
+using Vouchers.ObjectMapper;
 using Vouchers.Shared.ViewModels;
+using Vouchers.ViewModels;
 //using Vouchers.Data.Entities;
 //using Vouchers.ViewModels;
 
@@ -62,7 +66,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        bool validate(NewPurchaseOrderModel request)
+        bool validate(InternalPurchaseOrderRequest request)
         {
             //assert items are available    
             AspNetUser? buyerUser = null;
@@ -80,6 +84,16 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                     return false;
                 }
             }
+
+            if (request.IsExternalOrder) {
+                if (_tokenUserService.UserRole != RoleTypeConstants.RoleNameSupperAdmin) {
+                    _logger.AddUnauthorizedError();
+                    _logger.LogError($"Role {_tokenUserService.UserRole} trying to make an external Po request");
+                    return false;
+                 }
+                return true;
+            }
+
 
             if (!_voucherService.AreVouchersAvailable(
                     new VoucherTransferRequest()
@@ -102,20 +116,35 @@ namespace TakTec.PurchaseOrders.BusinessLogic
 
             return true;
         }
+        public CreatePurchaseOrdreResult? CreatePurchaseOrder(NewPurchaseOrderModel request) {
+            InternalPurchaseOrderRequest request1 = new InternalPurchaseOrderRequest()
+            {
+                BatchId = null,
+                IsExternalOrder = request.IsExternalOrder,
+                IsApproved = true,
+                Id = request.Id,
+                Items = request.Items,
+                PurchaseOrderNumber = request.PurchaseOrderNumber,
+                Self = request.Self,
+                UserId = request.UserId
+            };
 
-        public PurchaseOrderModel? CreatePurchaseOrder(NewPurchaseOrderModel request)
+            return this.CreatePurchaseOrder(request1);            
+        }
+
+        private CreatePurchaseOrdreResult? CreatePurchaseOrder(InternalPurchaseOrderRequest request)
         {
             List<ILocable> locables = request.Items.ConvertAll<ILocable>(x => x);
 
-            return (PurchaseOrderModel?)_globalSyncronizationStore.LockAndExecute((x) =>
+            return (CreatePurchaseOrdreResult?)_globalSyncronizationStore.LockAndExecute((x) =>
             {
-                PurchaseOrderModel? res = this.createPurchaseOrder(request);
+                CreatePurchaseOrdreResult? res = this.createPurchaseOrder(request);
                 return res;
             }
             , request, locables);
         }
 
-        private PurchaseOrderModel? createPurchaseOrder(NewPurchaseOrderModel request)
+        private CreatePurchaseOrdreResult? createPurchaseOrder(InternalPurchaseOrderRequest request)
         {
 
             if (!validate(request))
@@ -147,25 +176,45 @@ namespace TakTec.PurchaseOrders.BusinessLogic
 
             String buyerUserRole = buyerUser.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
 
+            CreatePurchaseOrdreResult result = new CreatePurchaseOrdreResult();
+
             String userId = _tokenUserService.UserId;
             var po = request.ToDomainModel(userId, buyerUserRole);
 
             //TODO this is the line causing confilct fix it.
             _purchaseOrderRepository.Create(po);
 
+            result.PurchaseOrder = po.ToNewPoViewModel();
             //NewPurchaseOrderResult result = new NewPurchaseOrderResult();
             //result.UI_Id = request.Id;
 
+            if (request.IsExternalOrder)
+            {
+                
+            }
+            else {
 
+                //transer the voucher to the user
+                List<Voucher?>? vouchers = _voucherService.TransferVouchersToUser(
+                     new VoucherTransferRequest()
+                     {
+                         PurchaseOrderId = po.Id,
+                         BatchId = request.BatchId,
+                         IsApproved = request.IsApproved,
+                          
+                         TransferRequestItems = request.Items.Cast<VoucherTransferRequestItem>().ToList()
+                     },
+                     buyerUser.OwnerId, buyerUserRole
+                 );
 
-            //transer the voucher to the user
-            _voucherService.TransferVouchersToUser(
-                new VoucherTransferRequest()
-                { TransferRequestItems = request.Items.Cast<VoucherTransferRequestItem>().ToList() },
-                    buyerUser.OwnerId, buyerUserRole
-            );
+                    if (vouchers == null) {
+                        _logger.LogError("Error transfering vouchers to user.");
+                        return null;
+                    }
 
+                result.Vouchers = vouchers;//.Select(x=>x.Voucher).ToList();
 
+            }
 
             //then the user can sync to get his voucher cards
             try
@@ -179,8 +228,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                 _logger.LogError(e.InnerException, e.Message);
                 return null;
             }
-
-            return po.ToNewPoViewModel();
+            return result;
         }
 
         public List<PurchaseOrderModel> ListPuchaseOrders(PagedItemRequestBase request) {
@@ -190,6 +238,48 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                 .Skip(request.Page-1).Take(request.ItemsPerPage)
                 .ToList().ToViewModel();
         }
+
+        
+
+        public PeekVoucherResult? PeekVoucher(PeekVoucherRequest request) {
+            var batch = _voucherService.GetBatch(request.BatchId);
+            if (batch == null) {
+                return null;
+            }
+
+
+            PurchaseOrderItemModel item = new PurchaseOrderItemModel() { 
+                Quantity = 1,
+                 Denomination = batch.Denomination
+            };
+
+            InternalPurchaseOrderRequest poReq = new InternalPurchaseOrderRequest()
+            {
+                IsExternalOrder = true,
+                Self = true,
+                IsApproved = false,
+                PurchaseOrderNumber = Guid.NewGuid().ToString(),
+                BatchId = request.BatchId,
+                Items  = new List<PurchaseOrderItemModel>() { 
+                    item
+                },
+                Id = Guid.NewGuid().ToString()                  
+            };
+
+            var res = this.CreatePurchaseOrder(poReq);
+            if (res == null) {
+                return null;
+            }
+
+            PeekVoucherResult result = new PeekVoucherResult() { 
+                PurchaseOrder = res.PurchaseOrder,
+                 Vouchers = res.Vouchers.ToSalesViewModel()
+            };
+
+            return result;//.UserVouchers?.FirstOrDefault()?.Voucher?.ToSalesViewModel();
+        }
+
+
 
     }
 }

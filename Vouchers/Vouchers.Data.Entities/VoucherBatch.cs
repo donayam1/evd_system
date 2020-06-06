@@ -7,14 +7,14 @@ namespace Vouchers.Data.Entities
     public class VoucherBatch:EntityBase 
     {
         public VoucherBatch(
-            String purchaserOrderNumber,
+            String purchaserOrderId,
             String batch,
             DateTime stopDate,
             int startSequence,
             int quantity,
             float denomination
             ) :base("",EthioArt.Data.Enumerations.ResourceTypes.SITE) {
-            this.PurchaserOrderNumber = purchaserOrderNumber;
+            this.PurchaserOrderId = purchaserOrderId;
             this.Batch = batch;
             this.StopDate = stopDate;
             this.StartSequence = startSequence;
@@ -25,8 +25,13 @@ namespace Vouchers.Data.Entities
         /// <summary>
         /// The purchase order number from the incomming 
         /// voture file.
+        /// 
+        /// The external purchase order number under with this batch 
+        /// was bought 
+        /// 
+        /// TODO, chage it to purchase order Id
         /// </summary>
-        public String PurchaserOrderNumber { get; set; }
+        public String PurchaserOrderId { get; set; }
 
         /// <summary>
         /// The batch number from the incomming voture file 
@@ -63,6 +68,6 @@ namespace Vouchers.Data.Entities
 
         public List<Voucher> Vouchers { get; set; } = new List<Voucher>();
 
-
+        
     }
 }

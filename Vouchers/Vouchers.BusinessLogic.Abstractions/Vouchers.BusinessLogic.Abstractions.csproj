@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vouchers.Data.Entities\Vouchers.Data.Entities.csproj" />
     <ProjectReference Include="..\Vouchers.ViewModels\Vouchers.ViewModels.csproj" />
   </ItemGroup>
 

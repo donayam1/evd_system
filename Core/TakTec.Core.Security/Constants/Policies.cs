@@ -11,5 +11,7 @@ namespace TakTec.Core.Security
         public const String ActivateVoucherBatchPolicy = "ActivateVoucherBatchPolicy";
 
         public const String ManageOperatorsPolicy = "ManageOperatorsPolicy";
+
+        public const String PeekAVoucherPolicy = "PeekAVoucherPolicy";
     }
 }

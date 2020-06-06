@@ -58,26 +58,21 @@ namespace Vouchers.BusinessLogic
         }
 
 
-        public async Task ProcessFile(String path)
+        public async Task ProcessFile(String path, String poId)
         {
-
-
             UploadVoucherResponse response0 = new UploadVoucherResponse()
             {
                 Status = false,
             };
             try
             {
-
-
-
                 using StreamReader f = new StreamReader(path);
 
                 String line;
                 Boolean readingHeader = true;
                 Boolean endFound = false;
                 int lineNumber = 0;
-                VoucherBatch batch = new VoucherBatch("", "", DateTime.Now, 0, 0, 0);
+                VoucherBatch batch = new VoucherBatch(poId, "", DateTime.Now, 0, 0, 0);
                 while ((line = f.ReadLine()) != null)
                 {
                     lineNumber++;
@@ -106,6 +101,7 @@ namespace Vouchers.BusinessLogic
                             break;
                         }
                         Voucher v = GetVoucher(line, lineNumber, batch.Id);
+                        //CreateUserVoucher(poId, v.Id);
                         batch.Vouchers.Add(v);
                     }
                 }
@@ -114,9 +110,6 @@ namespace Vouchers.BusinessLogic
                 {
                     _logger.LogWarning($"Voucher file {path} does not have end tag");
                 }
-
-
-
 
 
                 _voucherBatchRepository.Create(batch);
@@ -152,8 +145,6 @@ namespace Vouchers.BusinessLogic
             }
           
             await this._voucherStatusNotificationService.NotifyUploadVoucherStatus(response0);
-
-
         }
 
         bool validateVoucherBatch(VoucherBatch batch) {
@@ -188,7 +179,7 @@ namespace Vouchers.BusinessLogic
                     }
                     break;
                 case VoucherFileParameterTypes.PoNo:
-                    batch.PurchaserOrderNumber = line;
+                    batch.PurchaserOrderId = line;
                     break;
                 case VoucherFileParameterTypes.Quantity:
                     bool res0 = int.TryParse(line, out int quantity);
@@ -229,7 +220,7 @@ namespace Vouchers.BusinessLogic
         }
 
 
-        public Voucher GetVoucher(String fileLine, int lineNumber, String batchId)
+        private Voucher GetVoucher(String fileLine, int lineNumber, String batchId)
         {
 
             String[] items = fileLine.Split(" ");
@@ -264,11 +255,18 @@ namespace Vouchers.BusinessLogic
             VoucherStatus vs = new VoucherStatus(v.Id,Data.Enumerations.VoucherStatusTypes.Available);
             v.VoucherStatuses.Add(vs);
 
-            UserVoucher userVoucher = new UserVoucher(RoleTypeConstants.RoleNameSupperAdmin, v.Id);
-            _userVoucherRepository.Create(userVoucher);
+            //UserVoucher userVoucher = new UserVoucher("",RoleTypeConstants.RoleNameSupperAdmin, v.Id);
+            //_userVoucherRepository.Create(userVoucher);
 
             return v;
         }
+
+        //private void CreateUserVoucher(String poId,String voucherId) {
+        //    UserVoucher userVoucher = new UserVoucher(poId, RoleTypeConstants.RoleNameSupperAdmin, voucherId);
+        //    _userVoucherRepository.Create(userVoucher);
+        //}
+
+
 
         private VoucherFileParameterTypes getType(String parameter0, out String value)
         {

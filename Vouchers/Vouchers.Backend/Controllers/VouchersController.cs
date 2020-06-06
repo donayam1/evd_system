@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using TakTec.Core.Security;
 using EthioArt.Security.Constants;
 using EthioArt.Backend.Models.Responses;
+using Microsoft.AspNetCore.Http;
 
 namespace Vouchers.Backend.Controllers
 {
@@ -34,6 +35,20 @@ namespace Vouchers.Backend.Controllers
                 throw new ArgumentNullException(nameof(IVoucherService));
         }
 
+        [HttpGet(template: "Statistics")]
+        public IActionResult GetVoucherStatistics()
+        {
+            if (ModelState.IsValid) {
+                var res = _voucherService.GetVoucherStatistics();
+                VoucherStatisticsResponse response = new VoucherStatisticsResponse();
+                response.Status = true;
+                response.VoucherStatistics = res;
+                return SendResult(response);
+            }
+            return BadRequest(ModelState);
+        }
+
+
         [HttpGet]      
         public IActionResult Get([FromQuery] ListVoucherRequest request) {
             if (ModelState.IsValid) {
@@ -53,25 +68,35 @@ namespace Vouchers.Backend.Controllers
         [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName,
                    Policy = TakTec.Core.Security.Policies.UploadVoucherBatchPolicy)]
         [HttpPost, DisableRequestSizeLimit]
-        public IActionResult Upload()
+        public IActionResult Upload(IFormCollection data0)
         {
-            ResponseBase response = new ResponseBase()
+            if (ModelState.IsValid)
             {
-                Status = false
-            };
-            UploadedFile file = this.UploadTheFile();
-            if (file.Status == true)
-            {
-                _voucherUploadService.ScheduleUploadedVoucherFileProcessor(file);
-                response.Status = true;                
+                ResponseBase response = new ResponseBase()
+                {
+                    Status = false
+                };
+                UploadVoucherBatchData data = new UploadVoucherBatchData();
+                var poId = data0["purchaseOrderId"];
+                UploadedFile file = this.UploadTheFile();
+                if (file.Status == true)
+                {
+                    file.PurchaseOrderId = data.PurchaseOrderId;
+                    _voucherUploadService.ScheduleUploadedVoucherFileProcessor(file);
+                    response.Status = true;
+                }
+                else
+                {
+                    response.Status = false;
+                }
+                return SendResult(response);
             }
-            else
-            {
-                response.Status = false;
-            }
-            return SendResult(response);
+            return BadRequest(ModelState);
 
         }
+
+
+        
 
     }
 }

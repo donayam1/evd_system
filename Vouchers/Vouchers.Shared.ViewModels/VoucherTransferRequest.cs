@@ -12,6 +12,10 @@ namespace Vouchers.Shared.ViewModels
     }
     public class VoucherTransferRequest
     {
+        public String? BatchId { get; set; }
+        public bool IsApproved { get; set; } = true;
+        public String PurchaseOrderId { get; set; } = default!;
+
         public List<VoucherTransferRequestItem> TransferRequestItems { get; set; }
             = new List<VoucherTransferRequestItem>();
     }

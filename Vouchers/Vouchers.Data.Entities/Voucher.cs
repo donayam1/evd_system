@@ -21,9 +21,16 @@ namespace Vouchers.Data.Entities
         public int SerialNumber { get; set; }        
         public int PinNumber { get; set; }
 
+        /// <summary>
+        /// Indicates the voucher is free and available in the system pull 
+        /// </summary>
+        public bool IsInSystemPool { get; set; } = true;
+
         [ForeignKey(nameof(BatchId))]
         public VoucherBatch? Batch { get; set; }
         public List<VoucherStatus> VoucherStatuses { get; set; } = new List<VoucherStatus>();
+
+        public List<UserVoucher> UserVouchers { get; set; } = new List<UserVoucher>();
 
     }
 }

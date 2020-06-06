@@ -11,17 +11,17 @@ namespace Vouchers.Data.Abstractions
          IGenericRepository<UserVoucher>
     {
 
-        IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName);
-        IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, float denomination);
-        IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, float denomination, int quantity);
-        int CountUserFreeVouchers(String userRoleName, float denomination, int quantity);
+        IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, String? batchId = null, bool isApproved = true);
+        IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, float denomination, String? batchId = null, bool isApproved = true);
+        IQueryable<UserVoucher> GetFreeUserVouchers(String userRoleName, float denomination, int quantity, String? batchId = null, bool isApproved = true);
+        int CountUserFreeVouchers(String userRoleName, float denomination, int quantity, String? batchId = null, bool isApproved = true);
 
 
 
-        IQueryable<UserVoucher> GetFreeSystemVouchers();
-        IQueryable<UserVoucher> GetFreeSystemVouchers(float denomination);
-        IQueryable<UserVoucher> GetFreeSystemVouchers(float denomination, int quantity);
-        int CountSystemFreeVouchers(String userRoleName, float denomination, int quantity);
+        //IQueryable<UserVoucher> GetFreeSystemVouchers(String? batchId = null, bool isApproved = true);
+        //IQueryable<UserVoucher> GetFreeSystemVouchers(float denomination, String? batchId = null, bool isApproved = true);
+        //IQueryable<UserVoucher> GetFreeSystemVouchers(float denomination, int quantity, String? batchId = null, bool isApproved = true);
+        //int CountSystemFreeVouchers(float denomination, int quantity, String? batchId = null, bool isApproved = true);
 
 
     }

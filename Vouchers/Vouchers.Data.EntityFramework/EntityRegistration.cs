@@ -24,6 +24,8 @@ namespace Vouchers.Data.EntityFramework
 
             modelbuilder.Entity<UserVoucher>(x => {
                 x.HasKey(x => x.Id);
+                //x.HasIndex(x => x.VoucherId)
+                //    .IsUnique();
                 x.ToTable(nameof(UserVoucher) + "s");
             });
 

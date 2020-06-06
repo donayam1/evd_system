@@ -11,5 +11,6 @@ namespace Vouchers.ViewModels
         }
         public String? FullPath { get; set; }
         public bool Status { get; set; }
+        public String PurchaseOrderId { get; set; } = default!;
     }
 }

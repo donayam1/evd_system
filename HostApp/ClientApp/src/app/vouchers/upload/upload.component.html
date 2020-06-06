@@ -1,6 +1,46 @@
 
-<app-file-upload (fileToUploadedEvent)="fileToUploaded($event)"></app-file-upload>
+<div class="container">
+    <form>
+    <div class="row">
+        
+    </div>
+</form>
+<div class="container">
+    <form>
+        <div class="form-group row">
+            <label for="inputName" class="col-sm-1-12 col-form-label"></label>
+            <div class="col-sm-1-12">
+                <!-- <input type="text" class="form-control" name="inputName" id="inputName" placeholder=""> -->
+                <div class="row">
+                    <div class="col-sm-4">
+                        <select [(ngModel)]="currPo" class="from-control" >
+                            <option *ngFor="let item of purchaseOrders" [ngValue]="item" >{{item.poNumber}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        {{currPo|json}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <fieldset class="form-group row">
+            <legend class="col-form-legend col-sm-1-12">Group name</legend>
+            <div class="col-sm-1-12">
+                <app-file-upload (fileToUploadedEvent)="fileToUploaded($event)"></app-file-upload>
+            </div>
+        </fieldset>
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-10">
+                <input type="button" (click)="uploadFile()"  value="Upload"/>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
 
-<input type="button" (click)="uploadFile()"  value="Upload"/>
+
+<!-- <app-file-upload (fileToUploadedEvent)="fileToUploaded($event)"></app-file-upload> -->
+
+<!-- <input type="button" (click)="uploadFile()"  value="Upload"/> -->
 
 <app-message #messages></app-message>

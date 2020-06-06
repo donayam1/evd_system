@@ -9,7 +9,7 @@ namespace TakTec.Core.Security
         
         public const String ListVoucher = "LV";
         public const String SeeAVoucher = "SAV";
-
+        public const String PeekAVoucherPermission = "PAP";
 
         public const String ManageVoucherBatch = "MVB";
         public const String UploadVoucherBatch = "UVB";        

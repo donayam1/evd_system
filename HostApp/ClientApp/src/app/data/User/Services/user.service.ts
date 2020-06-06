@@ -9,39 +9,41 @@ import { Message } from '../../Shared/Models/responseBase';
   providedIn: 'root'
 })
 export class UserService {
-  private readonly api = "";
+  private readonly api = "/api/evd/users/user";
 
   constructor(private http: HttpClient) { }
 
   fetchUser():Observable<ListUserResponse>{
-    const userResponse: ListUserResponse = new ListUserResponse();
-    const users = new Users({
-     Id: "1",
-     UserName: "nat",
-     email: "nat@gmail.com",
-     phoneNumber: "0910935858",
-     firstName: "natty",
-     middleName: "teshome",
-     lastName: "gudeta",
-     userStatus: "Active"   
-    });
+    const url = AppConfig.settings.apiServers.authServer + this.api;
+    return new Observable(observer => {
+      this.http.get<ListUserResponse>(url).subscribe(data => {
+        const response = new ListUserResponse(data);
+        console.dir(response)
+        observer.next(response);
+        observer.complete();
+      },error => {
+        observer.error(error);
+        observer.complete();
+      })
+    })
 
-    const usersList: Users[] = Array();
-    usersList.push(users);
-    userResponse.users = usersList;
-    return of(userResponse)
+     // const userResponse: ListUserResponse = new ListUserResponse();
+    // const users = new Users({
+    //  Id: "1",
+    //  UserName: "nat",
+    //  email: "nat@gmail.com",
+    //  phoneNumber: "0910935858",
+    //  firstName: "natty",
+    //  middleName: "teshome",
+    //  lastName: "gudeta",
+    //  userStatus: "Active"   
+    // });
 
-    // const url = AppConfig.settings.apiServers.authServer + this.api + "/list";
-    // return new Observable(observer => {
-    //   this.http.get<ListUserResponse>(url).subscribe(data => {
-    //     const response = new ListUserResponse(data);
-    //     observer.next(response);
-    //     observer.complete();
-    //   },error => {
-    //     observer.error(error);
-    //     observer.complete();
-    //   })
-    // })
+    // const usersList: Users[] = Array();
+    // usersList.push(users);
+    // userResponse.users = usersList;
+    // return of(userResponse)
+
 
   }
 

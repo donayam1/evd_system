@@ -8,13 +8,15 @@ import { MessagesModule } from '../messages/messages.module';
 import { FormsModule } from '@angular/forms';
 import { ListPurchaseOrderComponent } from './list-purchase-order/list-purchase-order.component';
 
+
 @NgModule({
   declarations: [CreatePurchaseOrderComponent, PurchaseOrderHomeComponent, ListPurchaseOrderComponent],
   imports: [
     CommonModule,
     PurchaseOrderRoutingModule,
     MessagesModule,
-    FormsModule
+    FormsModule,
+  
   ]
 })
 export class PurchaseOrderModule { }

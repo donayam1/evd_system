@@ -10,6 +10,9 @@ import { PurchaseOrderService } from 'src/app/data/PurchaseOrder/Service/purchas
 export class ListPurchaseOrderComponent implements OnInit {
 
   response: ListPurchaseOrderResponse;
+  query: any = {
+    pageSize: 2
+  };
 
   constructor(private purchaseOrderService: PurchaseOrderService) { 
     this.response = new ListPurchaseOrderResponse();
@@ -20,7 +23,15 @@ export class ListPurchaseOrderComponent implements OnInit {
       this.response = response;
       console.log(this.response)
     })
+  }
 
+  onPageChange(page){
+    this.query.page = page;
+    this.purchaseOrderService.fetchPurchaseOrder().subscribe((response: ListPurchaseOrderResponse)=>{
+      this.response = response;
+      console.log(this.response)
+    })
+    
   }
 
 }

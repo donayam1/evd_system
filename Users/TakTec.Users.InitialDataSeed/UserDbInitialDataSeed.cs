@@ -23,7 +23,9 @@ namespace TakTec.Users.InitialDataSeed
               SecurityStamp = Guid.NewGuid().ToString("D"),
               ConcurrencyStamp = "e6acdd10-fb58-4524-b791-e873b379c9d4",
               Id = "1",
-              IsBankAccountCreated = true
+              IsBankAccountCreated = true,
+              OwnerType = ResourceTypes.GROUP,
+              OwnerId =RoleTypeConstants.RoleNameSupperAdmin,
            }
         };
 

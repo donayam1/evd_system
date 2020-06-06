@@ -8,7 +8,7 @@ using TakTec.Core.Security;
 using TakTec.PurchaseOrders.BusinessLogic.Abstractions;
 using TakTec.PurchaseOrders.ViewModels;
 
-namespace TakTec.PurchaseOrders.Backend
+namespace TakTec.PurchaseOrders.Backend.Controllers
 {
     [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName)]
     public class PurchaseOrderController: PurchaseOrderControllersBase
@@ -22,7 +22,7 @@ namespace TakTec.PurchaseOrders.Backend
             _purchaseOrderService = purchaseOrderService ??
                 throw new ArgumentNullException(nameof(purchaseOrderService));
         }
-
+        [HttpPost]
         public IActionResult CreatePurcaseOrder([FromBody]NewPurchaseOrderModel request) {
             if (ModelState.IsValid) {
                 NewPurchaseOrderResponse response =
@@ -36,7 +36,7 @@ namespace TakTec.PurchaseOrders.Backend
                     response.NewPurchaseOrder = (NewPurchaseOrderResult)res;
                 }
 
-                SendResult(response);
+                return SendResult(response);
 
             }
             return BadRequest(ModelState);

@@ -13,6 +13,7 @@
     <ProjectReference Include="..\TakTec.RetailerPlans.ViewModels\TakTec.RetailerPlans.ViewModels.csproj" />
     <ProjectReference Include="..\..\Operators\TakTec.Operators.Entities\TakTec.Operators.Entities.csproj" />
     <ProjectReference Include="..\..\Operators\TakTec.Operators.Abstractions\TakTec.Operators.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Users\TakTec.Users.Constants\TakTec.Users.Constants.csproj" />
   </ItemGroup>
   <ItemGroup>
   
@@ -39,6 +40,9 @@
     </Reference>
     <Reference Include="EthioArt.Sorters.Abstractions">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Sorters.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Users.BusinessLogic.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\Users.BusinessLogic.Abstraction.dll</HintPath>
     </Reference>
     
   </ItemGroup>

@@ -12,7 +12,7 @@
       <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />
       <ProjectReference Include="..\TakTec.RetailerPlans.Abstractions\TakTec.RetailerPlans.Abstractions.csproj" />
       <ProjectReference Include="..\TakTec.RetailerPlans.Entities\TakTec.RetailerPlans.Entities.csproj" />
-
+      <ProjectReference Include="..\..\Users\TakTec.Users.Constants\TakTec.Users.Constants.csproj" />
    </ItemGroup>
 
 

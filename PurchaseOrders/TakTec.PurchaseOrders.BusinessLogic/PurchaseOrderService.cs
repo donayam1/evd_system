@@ -1,4 +1,5 @@
 ﻿using AspNetIdentity.Data.Entities;
+using EthioArt.Backend.Models.Requests;
 using EthioArt.Syncronization.Abstractions;
 using EthioArt.UserAccounts.Services.Abstractions;
 using ExtCore.Data.Abstractions;
@@ -147,7 +148,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             String buyerUserRole = buyerUser.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
 
             String userId = _tokenUserService.UserId;
-            var po = request.ToDomainModel(userId);
+            var po = request.ToDomainModel(userId, buyerUserRole);
 
             //TODO this is the line causing confilct fix it.
             _purchaseOrderRepository.Create(po);
@@ -181,5 +182,14 @@ namespace TakTec.PurchaseOrders.BusinessLogic
 
             return po.ToNewPoViewModel();
         }
+
+        public List<PurchaseOrderModel> ListPuchaseOrders(PagedItemRequestBase request) {
+            var userRole =_tokenUserService.UserRole;
+            return _purchaseOrderRepository.WithOwnerItemId(userRole)
+                .OrderBy(x=>x.DatabaseAddedDateTime)
+                .Skip(request.Page-1).Take(request.ItemsPerPage)
+                .ToList().ToViewModel();
+        }
+
     }
 }

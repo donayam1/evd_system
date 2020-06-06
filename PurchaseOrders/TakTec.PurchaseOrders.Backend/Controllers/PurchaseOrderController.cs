@@ -44,24 +44,24 @@ namespace TakTec.PurchaseOrders.Backend.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListPurcaseOrder([FromBody]PagedItemRequestBase request)
+        public IActionResult ListPurcaseOrder([FromQuery]PagedItemRequestBase request)
         {
             if (ModelState.IsValid)
             {
-                //NewPurchaseOrderResponse response =
-                //    new NewPurchaseOrderResponse();
-                //var res = _purchaseOrderService.(request);
-                //if (res == null)
-                //{
-                //    response.Status = false;
-                //}
-                //else
-                //{
-                //    response.Status = true;
-                //    response.NewPurchaseOrder = (NewPurchaseOrderResult)res;
-                //}
+                ListPurchaseOrderResponse response =
+                    new ListPurchaseOrderResponse();
+                var res = _purchaseOrderService.ListPuchaseOrders(request);
+                if (res == null)
+                {
+                    response.Status = false;
+                }
+                else
+                {
+                    response.Status = true;
+                    response.PurcahseOrders = res;
+                }
 
-                //return SendResult(response);
+                return SendResult(response);
 
             }
             return BadRequest(ModelState);

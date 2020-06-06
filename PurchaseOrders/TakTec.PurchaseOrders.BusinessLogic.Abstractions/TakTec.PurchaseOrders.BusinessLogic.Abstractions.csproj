@@ -9,4 +9,10 @@
     <ProjectReference Include="..\TakTec.PurchaseOrders.ViewModels\TakTec.PurchaseOrders.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="EthioArt.Backend.Models">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Backend.Models.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

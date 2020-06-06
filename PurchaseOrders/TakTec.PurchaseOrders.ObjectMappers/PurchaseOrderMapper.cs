@@ -35,9 +35,10 @@ namespace TakTec.PurchaseOrders.ObjectMappers
             return itemModels.Select(x => x.ToDomainModel(poId)).ToList();
         }
 
-        public static PurchaseOrder ToDomainModel(this NewPurchaseOrderModel newPurchaseOrder,String creatorUserId) {
+        public static PurchaseOrder ToDomainModel(this NewPurchaseOrderModel newPurchaseOrder,
+            String creatorUserId,String ownerRoleName) {
 
-            String ownerId = newPurchaseOrder.Self ? creatorUserId : newPurchaseOrder.UserId;
+            String ownerId = ownerRoleName;// newPurchaseOrder.Self ? creatorUserId : newPurchaseOrder.UserId;
             PurchaseOrder purchaseOrder = new PurchaseOrder(creatorUserId, ownerId, newPurchaseOrder.PurchaseOrderNumber);
             purchaseOrder.OrderItems = newPurchaseOrder.Items.ToDomainModel(purchaseOrder.Id);
 

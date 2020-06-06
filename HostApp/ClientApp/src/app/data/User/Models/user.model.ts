@@ -97,7 +97,7 @@ export class NewUserResponse extends ResponseBase {
 export class ListUserResponse extends PagedItemResponseBase {
     constructor(obj?: any) {
         super(obj);
-        this.users = obj && obj.users.map(user => new Users(user)) || Array();
+        this.users = obj && obj.users.map(u => new Users(u)) || Array();
     }
     users: Users[];
 }

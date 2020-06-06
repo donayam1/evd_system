@@ -8,6 +8,8 @@ import { MessagesModule } from '../messages/messages.module';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { StoreModule } from '@ngrx/store';
+import { UserReducers } from '../data/User/Reducers/user.resucers';
 
 @NgModule({
   declarations: [CreateUserComponent, UserHomeComponent, ListUserComponent, UserDetailComponent],
@@ -15,7 +17,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     CommonModule,
     UserRoutingModule,
     FormsModule,
-    MessagesModule
+    MessagesModule,
+    StoreModule.forFeature("users", UserReducers)
   ]
 })
 export class UserModule { }

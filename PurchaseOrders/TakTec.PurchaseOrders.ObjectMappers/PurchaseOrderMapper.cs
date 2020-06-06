@@ -14,6 +14,22 @@ namespace TakTec.PurchaseOrders.ObjectMappers
             return item;
         }
 
+        public static PurchaseOrderItemModel ToViewModel(this PurchaseOrderItem item)
+        {
+            PurchaseOrderItemModel res = new PurchaseOrderItemModel()
+            {
+                Denomination = item.Denomination,
+                Id = item.Id,
+                Quantity = item.Quantity,
+                OwnerId = item.OwnerId
+            };
+            return res;
+        }
+
+        public static List<PurchaseOrderItemModel> ToViewModel(this List<PurchaseOrderItem> items) {
+            return items.Select(x => x.ToViewModel()).ToList();
+        }
+
         public static List<PurchaseOrderItem> ToDomainModel(this List<PurchaseOrderItemModel> itemModels, String poId)
         {
             return itemModels.Select(x => x.ToDomainModel(poId)).ToList();
@@ -29,7 +45,38 @@ namespace TakTec.PurchaseOrders.ObjectMappers
         }
 
 
+        public static PurchaseOrderModel ToViewModel(this PurchaseOrder purchaseOrder)
+        {
+            PurchaseOrderModel model = new PurchaseOrderModel()
+            {
+                 Id = purchaseOrder.Id,
+                 PurchaseOrderNumber = purchaseOrder.PurchaseOrderNumber,
+                 Items = purchaseOrder.OrderItems.ToViewModel()
+            };
 
- 
+            
+            return model;
+        }
+        public static NewPurchaseOrderResult ToNewPoViewModel(this PurchaseOrder purchaseOrder)
+        {
+            NewPurchaseOrderResult model = new NewPurchaseOrderResult()
+            {
+                Id = purchaseOrder.Id,
+                PurchaseOrderNumber = purchaseOrder.PurchaseOrderNumber,
+                Items = purchaseOrder.OrderItems.ToViewModel()
+            };
+
+
+            return model;
+        }
+        
+
+        public static List<PurchaseOrderModel> ToViewModel(this List<PurchaseOrder> purchaseOrders) {
+            return purchaseOrders.Select(x => x.ToViewModel()).ToList();
+        }
+
+
+
+
     }
 }

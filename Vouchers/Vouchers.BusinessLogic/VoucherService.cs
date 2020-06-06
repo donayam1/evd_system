@@ -99,7 +99,7 @@ namespace Vouchers.BusinessLogic
             //Transfer the vouchers to the user
             foreach (var v in allVouchers) {
                 v.IsCurrent = false;
-
+               
                 var userVoucher = new UserVoucher(toUserRole, v.VoucherId) {
                     IsCurrent = true
                 };

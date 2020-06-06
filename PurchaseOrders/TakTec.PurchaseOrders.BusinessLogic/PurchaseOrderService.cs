@@ -152,8 +152,8 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             //TODO this is the line causing confilct fix it.
             _purchaseOrderRepository.Create(po);
 
-            NewPurchaseOrderResult result = new NewPurchaseOrderResult();
-            result.UI_Id = request.Id;
+            //NewPurchaseOrderResult result = new NewPurchaseOrderResult();
+            //result.UI_Id = request.Id;
 
 
 
@@ -170,15 +170,16 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             try
             {
                 _storage.Save();
-                return result;
+                //return result;
             }
             catch (Exception e)
             {
                 _logger.AddUserError("Unknowen error, Please contact the administrator.");
                 _logger.LogError(e.InnerException, e.Message);
+                return null;
             }
 
-            return null;
+            return po.ToNewPoViewModel();
         }
     }
 }

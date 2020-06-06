@@ -34,6 +34,7 @@ export class PurchaseOrder{
 
 export class NewPurchaseOrder extends PurchaseOrder{
     self: boolean;
+    isExternal: boolean;
     userId: string;
 
     constructor (obj?: any){

@@ -9,9 +9,10 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { EditUserPermissionComponent } from './edit-user-permission/edit-user-permission.component';
 
 @NgModule({
-  declarations: [CreateUserComponent, UserHomeComponent, ListUserComponent, UserDetailComponent, EditUserComponent],
+  declarations: [CreateUserComponent, UserHomeComponent, ListUserComponent, UserDetailComponent, EditUserComponent, EditUserPermissionComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

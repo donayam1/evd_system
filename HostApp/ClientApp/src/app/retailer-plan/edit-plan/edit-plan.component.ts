@@ -2,6 +2,8 @@ import { RetailerPlanService } from 'src/app/data/RetailerPlan/Services/retailer
 import { NewPlan } from './../../data/RetailerPlan/Models/retailer-plan.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageComponent } from 'src/app/messages/message/message.component';
+import { ListOperatorResponse, Operator } from 'src/app/data/Operator/Models/operator.model';
+import { OperatorService } from 'src/app/data/Operator/Services/operator.service';
 
 @Component({
   selector: 'app-edit-plan',
@@ -14,12 +16,16 @@ export class EditPlanComponent implements OnInit {
   renewalRate: Array<string>;
   selectedType: string;
   selectedRate: string;
+  opList: ListOperatorResponse;
+  selectedOp: Operator;
 
   @ViewChild('messages', {static: true})
   messageComponent: MessageComponent;
 
-  constructor(private retailerPlanService: RetailerPlanService) {
+  constructor(private retailerPlanService: RetailerPlanService, private opService: OperatorService) {
     this.np = new NewPlan();
+    this.opList = new ListOperatorResponse();
+    this.selectedOp = new Operator();
     this.commissionType = ['Flat Commission', 'Per-recharge Commission'];
     this.renewalRate = ['Per Day', 'Per Week', 'Per Month', 'Per Year'];
   }
@@ -58,8 +64,18 @@ export class EditPlanComponent implements OnInit {
         }
 
         this.np = x.newRetailerPlan;
+        this.opService.getOperator(this.np.operatorId).subscribe(x =>{
+          if(x.status === true){
+            this.selectedOp = x.operator;
+          }
+        })
       }
     }, err =>{});
+
+    this.opService.fetchOperator().subscribe((data) => {
+      this.opList = data;
+      console.log(data)
+    });
   }
 
 }

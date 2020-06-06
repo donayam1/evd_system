@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NewUserResponse, NewUser, ListUserResponse, Users } from '../Models/user.model';
+import { NewUserResponse, NewUser, ListUserResponse, Users, PermissionGroup, Permission } from '../Models/user.model';
 import { AppConfig } from '../../Configs/Services/app.config';
 import { Message } from '../../Shared/Models/responseBase';
 import { ObjectStatus } from '../../Shared/Models/newObjectStatus.model';
@@ -66,7 +66,7 @@ export class UserService {
     //     nu.firstName = user.firstName;
     //     nu.lastName = user.lastName;
     //     nu.rankId = user.rankId;
-    //     nu.planId = '2';
+    //     nu.planId = user.planId;
     //     nu.objectStatus = user.objectStatus;
 
     //     response.newUser = nu;
@@ -119,5 +119,22 @@ export class UserService {
     //     observer.complete();
     //   });
     // });
+  }
+
+  getUserPermission(){
+    //Mock data
+    let adminPermission = new PermissionGroup();
+    adminPermission.name = 'Administrator Permissions';
+    adminPermission.description = 'This set of permissions are valid authorities given for Administrators.';
+
+    let pr1 = new Permission({value: 'pr-1', name: 'validate users', description: 'you can validate new users.'});
+    let pr2 = new Permission({value: 'pr-2', name: 'upload voucher', description: 'you can upload voucher lists.'});
+    let pr3 = new Permission({value: 'pr-3', name: 'approve po', description: 'you can approve stalling purchase orders'});
+
+    let prg: Permission[] = Array();
+    prg.push(pr1, pr2, pr3);
+    adminPermission.permissions = prg;
+
+    return of(adminPermission);
   }
 }

@@ -1,20 +1,192 @@
-<div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-header">
-          <i class="fa fa-align-justify"></i>Users Detail
-        </div>
-        <div class="card-body">
-        <div class="row">
-            <dt class="col-sm-2">Name:</dt>
-            <dd class="col-sm-10"> Natty Teshom</dd>
-            <dt class="col-sm-2">Email:</dt>
-            <dd class="col-sm-10">nat@gmail</dd>
-        </div>
-         
-      
+<div class="container-fluid">
+  <ul class="nav nav-tabs" id="userprofiletab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link" id="summaries-tab" data-toggle="tab" [routerLink]="['./']" role="tab" aria-controls="summaries">Summary</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="edituserdata-tab" data-toggle="tab" routerLink="/home/user/edit" role="tab" aria-controls="edituserdata">Edit User Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="editpermissions-tab" data-toggle="tab" routerLink="/home/user/permissions" role="tab" aria-controls="editpermissions">Change Permissions</a>
+    </li>
+  </ul>
 
+  <!-- <div class="tab-content" id="userprofiletabContent"> -->
+    <div class="tab-pane fade show my-md-4 ml-md-4" id="summary" role="tabpanel" aria-labelledby="summaries-tab">
+      <h5 class="header">
+        <u class="fa fa-align-justify">{{user.UserName}}'s Profile Summary</u>
+      </h5>
+      <dt class="col-sm-3 small font-weight-bold">Name:</dt>
+      <dd class="col-sm-10 small font-italic">{{user.firstName}} ({{user.middleName}}) {{user.lastName}}</dd>
+      <dt class="col-sm-3 small font-weight-bold">Email:</dt>
+      <dd class="col-sm-10 small font-italic">{{user.email}}</dd>
+    </div>
+    <!-- <div class="tab-pane fade show" id="edituserdata" role="tabpanel" aria-labelledby="edituserdata-tab"> -->
+      <!-- <div class="card bg-white ml-md-0 mr-md-0">
+        <div class="card-body">
+            <form>
+                <h5 class="from-text card-title mt-md-3 mb-md-4 text-md-left ml-md-2">Edit {{user.UserName}}'s Data</h5>
+                <hr class="border-bottom"/>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-row form-group">
+                            <label for="username" class="col-form-label col-form-label-sm">Userame:</label>
+                            <input type="text" class="form-control form-control-sm" name="username" id="username" placeholder="Username" [(ngModel)]="user.UserName" required>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="email" class="col-form-label col-form-label-sm">Email:</label>
+                            <input type="email" class="form-control form-control-sm" name="email" id="email" placeholder="myemail@example.com" [(ngModel)]="user.email" required>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="phonenumber" class="col-form-label col-form-label-sm">Phone Number:</label>
+                            <input type="number" class="form-control form-control-sm" name="phonenumber" id="phonenumber" placeholder="User's Phone Number" [(ngModel)]="user.phoneNumber" required>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="firstname" class="col-form-label col-form-label-sm">First Name:</label>
+                            <input type="text" class="form-control form-control-sm" name="firstname" id="firstname" placeholder="First Name" [(ngModel)]="user.firstName" required>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="middlename" class="col-form-label col-form-label-sm">Middle Name:</label>
+                            <input type="text" class="form-control form-control-sm" name="middlename" id="middlename" placeholder="Middle Name" [(ngModel)]="user.middleName">
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="lastname" class="col-form-label col-form-label-sm">Last Name:</label>
+                            <input type="text" class="form-control form-control-sm" name="lastname" id="lastname" placeholder="Last Name" [(ngModel)]="user.lastName" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pl-md-5">
+                        <div class="form-row form-group">
+                            <label for="grouptype" class="col-form-label col-form-label-sm">Group Type:</label>
+                            <select class="form-control form-control-sm" name="grouptype" id="grouptype" (change)="gtSelected($event)" required>
+                                <option selected class="">{{selectedgt.name}}</option>
+                                <option *ngFor="let item of gtList.groupTypes" [value]="item.id">{{item.name}}</option>
+                            </select>
+                            <div class="card bg-transparent mt-md-3">
+                                <div class="card-body">
+                                    <p class="card-text card-title">Grouptype Attributes</p>
+                                    <p class="small">Level: <b>{{selectedgt.level}}</b></p>
+                                    <p class="small">Type Name: <b>{{selectedgt.name}}</b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="retailerplan" class="col-form-label col-form-label-sm">Retailer Plan:</label>
+                            <select class="form-control form-control-sm" name="retailerplan" id="retailerplan" (change)="rpSelected($event)" required>
+                                <option selected class="text-muted disabled">{{selectedrp.name}}</option>
+                                <option *ngFor="let item of rpList.retailerPlans" [value]="item.id">{{item.name}}</option>
+                            </select>
+                            <div class="card bg-transparent mt-md-3">
+                                <div class="card-body">
+                                    <p class="card-text card-title">Retailer Plan Attributes</p>
+                                    <p class="small">Plan Name: <b>{{selectedrp.name}}</b></p>
+                                    <p class="small">Plan Code: <b>{{selectedrp.code}}</b></p>
+                                    <p class="small">Commission Type: <b>{{selectedrp.commisionRateType}}</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="float-md-right">
+                    <button class="btn btn-primary btn-sm" (click)="updateUser($event)">Update</button>
+                </div>
+            </form>
+        </div>
+      </div>
+      <app-message #messages></app-message> -->
+    <!-- </div> -->
+    <!-- <div class="tab-pane fade show" id="edituserpermissions" role="tabpanel" aria-labelledby="editpermissions-tab">
+      <p>Edit permissions works!</p>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <u class="fa fa-align-justify">{{user.UserName}}'s Profile Summary</u>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <dt class="col-sm-3 small font-weight-bold">Name:</dt>
+          <dd class="col-sm-10 small font-italic">
+            {{user.firstName}} ({{user.middleName}}) {{user.lastName}}
+          </dd>
+          <dt class="col-sm-3 small font-weight-bold">Email:</dt>
+          <dd class="col-sm-10 small font-italic">{{user.email}}</dd>
         </div>
       </div>
     </div>
   </div>
+</div> -->
+
+<!-- <div class="card bg-light ml-md-0 mr-md-0">
+  <div class="card-body">
+      <form>
+          <h5 class="from-text card-title mt-md-3 mb-md-4 text-md-left ml-md-2">Edit {{user.UserName}}'s Data</h5>
+          <hr class="border-bottom"/>
+          <div class="form-row">
+              <div class="col-md-6">
+                  <div class="form-row form-group">
+                      <label for="username" class="col-form-label col-form-label-sm">Userame:</label>
+                      <input type="text" class="form-control form-control-sm" name="username" id="username" placeholder="Username" [(ngModel)]="user.UserName" required>
+                  </div>
+                  <div class="form-row form-group">
+                      <label for="email" class="col-form-label col-form-label-sm">Email:</label>
+                      <input type="email" class="form-control form-control-sm" name="email" id="email" placeholder="myemail@example.com" [(ngModel)]="user.email" required>
+                  </div>
+                  <div class="form-row form-group">
+                      <label for="phonenumber" class="col-form-label col-form-label-sm">Phone Number:</label>
+                      <input type="number" class="form-control form-control-sm" name="phonenumber" id="phonenumber" placeholder="User's Phone Number" [(ngModel)]="user.phoneNumber" required>
+                  </div>
+                  <div class="form-row form-group">
+                      <label for="firstname" class="col-form-label col-form-label-sm">First Name:</label>
+                      <input type="text" class="form-control form-control-sm" name="firstname" id="firstname" placeholder="First Name" [(ngModel)]="user.firstName" required>
+                  </div>
+                  <div class="form-row form-group">
+                      <label for="middlename" class="col-form-label col-form-label-sm">Middle Name:</label>
+                      <input type="text" class="form-control form-control-sm" name="middlename" id="middlename" placeholder="Middle Name" [(ngModel)]="user.middleName">
+                  </div>
+                  <div class="form-row form-group">
+                      <label for="lastname" class="col-form-label col-form-label-sm">Last Name:</label>
+                      <input type="text" class="form-control form-control-sm" name="lastname" id="lastname" placeholder="Last Name" [(ngModel)]="user.lastName" required>
+                  </div>
+              </div>
+              <div class="col-md-6 pl-md-5">
+                  <div class="form-row form-group">
+                      <label for="grouptype" class="col-form-label col-form-label-sm">Group Type:</label>
+                      <select class="form-control form-control-sm" name="grouptype" id="grouptype" (change)="gtSelected($event)" required>
+                          <option selected class="">{{selectedgt.name}}</option>
+                          <option *ngFor="let item of gtList.groupTypes" [value]="item.id">{{item.name}}</option>
+                      </select>
+                      <div class="card bg-transparent mt-md-3">
+                          <div class="card-body">
+                              <p class="card-text card-title">Grouptype Attributes</p>
+                              <p class="small">Level: <b>{{selectedgt.level}}</b></p>
+                              <p class="small">Type Name: <b>{{selectedgt.name}}</b></p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-row form-group">
+                      <label for="retailerplan" class="col-form-label col-form-label-sm">Retailer Plan:</label>
+                      <select class="form-control form-control-sm" name="retailerplan" id="retailerplan" (change)="rpSelected($event)" required>
+                          <option selected class="text-muted disabled">{{selectedrp.name}}</option>
+                          <option *ngFor="let item of rpList.retailerPlans" [value]="item.id">{{item.name}}</option>
+                      </select>
+                      <div class="card bg-transparent mt-md-3">
+                          <div class="card-body">
+                              <p class="card-text card-title">Retailer Plan Attributes</p>
+                              <p class="small">Plan Name: <b>{{selectedrp.name}}</b></p>
+                              <p class="small">Plan Code: <b>{{selectedrp.code}}</b></p>
+                              <p class="small">Commission Type: <b>{{selectedrp.commisionRateType}}</b></p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="float-md-right">
+              <button class="btn btn-primary btn-sm" (click)="updateUser($event)">Update</button>
+          </div>
+      </form>
+  </div>
+</div>
+<app-message #messages></app-message> -->

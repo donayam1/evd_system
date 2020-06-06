@@ -64,7 +64,7 @@ export class Permission {
     }
 }
 
-export class PremissionGroup {
+export class PermissionGroup {
     permissions: Permission[];
     name: string;
     description: string;
@@ -75,6 +75,10 @@ export class PremissionGroup {
         this.description = obj && obj.description;
     }
 }
+
+// export class PermissionGroupResponse extends ResponseBase{
+//     user: NewUser;
+// }
 
 export class NewUserResponse extends ResponseBase{
     newUser: NewUser;

@@ -34,6 +34,10 @@ export class EditUserComponent implements OnInit {
     this.messages = Array();
     this.selectedgt = new GroupType();
     this.selectedrp = new RetailerPlan();
+    this.selectedGt = new GroupType();
+    this.selectedRp = new RetailerPlan();
+    this.gtList = new GroupTypesResponse();
+    this.rpList = new RetailerPlanResponse();
   }
 
   ngOnInit() {

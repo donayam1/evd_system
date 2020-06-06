@@ -37,6 +37,7 @@ export class CreatePlanComponent implements OnInit {
     this.cr = new CommissionRate();
     this.crs = Array() || null;
     this.opTriggered = false;
+    this.opList = new ListOperatorResponse();
     this.commissionType = ['Flat Commission', 'Per-recharge Commission'];
     this.renewalRate = ['Per Day', 'Per Week', 'Per Month', 'Per Year'];
   }

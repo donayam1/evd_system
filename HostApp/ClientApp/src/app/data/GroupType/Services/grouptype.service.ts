@@ -44,13 +44,22 @@ export class GrouptypeService {
     // groupTypesResponse.status = true;
 
     // let gt = new GroupType({
-    //   id: "1", name: "ethioTel", level: 100, status: "active"});
+    //   id: "1", name: "System Admin", level: 100, status: "active"});
 
     //   let gt1 = new GroupType({
-    //     id: "2", name: "tack", level: 1, status: "active"});
+    //     id: "2", name: "Super Admin", level: 99, status: "active"});
+
+    //     let gt2 = new GroupType({
+    //       id: "3", name: "Master Distributer", level: 98, status: "active"});
+
+    //       let gt3 = new GroupType({
+    //         id: "4", name: "Sub Distributer", level: 50, status: "active"});
+
+    //         let gt4 = new GroupType({
+    //           id: "3", name: "Retailer", level: 10, status: "active"});
 
     // const gpt :GroupType[] = Array();
-    // gpt.push(gt,gt1);
+    // gpt.push(gt,gt1, gt2, gt3, gt4);
     // groupTypesResponse.groupTypes = gpt
     
 

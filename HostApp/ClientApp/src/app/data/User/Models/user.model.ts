@@ -2,21 +2,16 @@ import { User } from './../../Account/Models/user.model';
 import { ResponseBase } from 'src/app/data/Shared/Models/responseBase';
 import { NamedItem } from "../../Shared/Models/nameditem.model";
 import { PagedItemResponseBase } from '../../Shared/Models/PagedItemResponseBase';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { THIS_EXPR, ThrowStmt } from '@angular/compiler/src/output/output_ast';
 
 
 export class Users extends User {
-    email: string;
-    phoneNumber: string;
-    firstName: string;
-    middleName: string;
-    lastName: string;
-    rankId: string;
-    planId: string;
-    userStatus: string;
-    objectStatus: number;
     constructor(obj?: any) {
         super(obj);
+        this.groupName = obj && obj.groupName;
+        this.groupTypeName = obj && obj.groupTypeName;
+        this.userName = obj && obj.userName;
+        this.roleTypeId = obj && obj.roleTypeId;
         this.email = obj && obj.email;
         this.phoneNumber = obj && obj.phoneNumber;
         this.firstName = obj && obj.firstName;
@@ -27,6 +22,19 @@ export class Users extends User {
         this.objectStatus = obj && obj.objectStatus;
         this.userStatus = obj && obj.userStatus
     }
+    groupName: string;
+    groupTypeName: string;
+    userName: string;
+    roleTypeId: string;
+    email: string;
+    phoneNumber: string;
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    rankId: string;
+    planId: string;
+    userStatus: string;
+    objectStatus: number;
 }
 
 export class NewUser extends User {
@@ -89,8 +97,7 @@ export class NewUserResponse extends ResponseBase {
 export class ListUserResponse extends PagedItemResponseBase {
     constructor(obj?: any) {
         super(obj);
-        this.users = obj && obj.users.map(user => new Users(user));
-
+        this.users = obj && obj.users.map(user => new Users(user)) || Array();
     }
     users: Users[];
 }

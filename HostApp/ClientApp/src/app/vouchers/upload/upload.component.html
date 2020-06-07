@@ -18,7 +18,36 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        {{currPo|json}}
+                        <table class="table table-bordered table-striped" >
+                            <thead>
+                              <tr>
+                                <th>Purchase Order Number</th>
+                                <th>Purchase Order Items</th>
+                                <th>Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let purchase of purchaseOrders">
+                                <td>{{purchase.purchaseOrderNumber}} </td>
+                                <td>
+                                  
+                                  <table class="table  table-bordered  table-sm">
+                                    <th>Denomination</th>
+                                    <th>Quantity</th>
+                                    <tbody>
+                                      <tr *ngFor="let purchaseItem of purchase.items; index as i">
+                                        <td>{{purchaseItem.denomination}}</td>
+                                        <td>{{purchaseItem.quantity}} </td>
+                                      </tr>
+                                    </tbody>
+                                    <tbody></tbody>
+                                  </table>
+                                </td>
+                                <td>{{purchase.date }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        <!-- {{currPo|json}} -->
                     </div>
                 </div>
             </div>

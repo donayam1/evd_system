@@ -195,5 +195,47 @@ namespace Vouchers.BusinessLogic
             return _voucherBatchRepository.WithKey(id);
         }
 
+
+        public VoucherModel? CheckOutVoucher(CheckOutVoucherRequest request) {                        
+            var roleName = _tokenUserService.UserRole;
+
+            var voucher = _userVoucherRepository.WithOwnerItemId(roleName)
+                .Where(x =>  x.IsCurrent == true &&
+                    x.VoucherId == request.Id).FirstOrDefault();
+            if (voucher == null)
+            {
+                _logger.AddUserError("Voucher not found.");
+                return null;
+            }
+
+            var cVs = voucher.Voucher?.VoucherStatuses.Where(x => x.IsCurrent).FirstOrDefault();
+            if (cVs == null) {
+                _logger.LogError("Voucher current status not found.");
+                throw new Exception("Internal Server Error, Please contact the admin.");
+            }
+
+            if (cVs.Status != Data.Enumerations.VoucherStatusTypes.Sold) {
+                cVs.Status = Data.Enumerations.VoucherStatusTypes.Sold;
+                cVs.IsCurrent = false;
+                VoucherStatus vs = new VoucherStatus(voucher.Id, Data.Enumerations.VoucherStatusTypes.Sold) { 
+                    CreatorUserId = _tokenUserService.UserId
+                };
+                voucher.Voucher?.VoucherStatuses.Add(vs);
+            }
+
+            
+
+            try {
+                _storage.Save();
+                return voucher.Voucher.ToSalesViewModel();
+            } catch (Exception e) {
+                _logger.LogError(e, $"{e.Message} - {e.InnerException}");
+            }
+
+
+            return null;
+
+        }
+
     }
 }

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ListVoucherBatchResponse } from 'src/app/data/VoucherBatch/Models/voucherBatch.model';
 import { VoucherBatchService } from 'src/app/data/VoucherBatch/Services/voucher-batch.service';
 import { VoucherBatch } from '../../data/VoucherBatch/Models/voucherBatch.model';
-import { Voucher } from 'src/app/data/Voucher/Models/voucherUpload.services';
+// import { Voucher } from 'src/app/data/Voucher/Models/voucherUpload.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listvoucher-batch',
@@ -12,11 +13,12 @@ import { Voucher } from 'src/app/data/Voucher/Models/voucherUpload.services';
 export class ListvoucherBatchComponent implements OnInit {
 
   response: ListVoucherBatchResponse;
-  voucher:Voucher;
+  // voucher:Voucher;
 
-  constructor(private voucherBatchService: VoucherBatchService) {
+  constructor(private voucherBatchService: VoucherBatchService,
+    private router:Router) {
     this.response = new ListVoucherBatchResponse();
-    this.voucher = new Voucher(); 
+    // this.voucher = new Voucher(); 
   }
 
   ngOnInit() {
@@ -38,10 +40,11 @@ export class ListvoucherBatchComponent implements OnInit {
 
   takeSamepl(batch: VoucherBatch) {
     this.voucherBatchService.takeSample(batch.id).subscribe(x => {
-      if(x.status === true)
-      {
-        this.voucher = x.voucher;
+      if (x.status === true) {
+        // this.router.navigateByUrl(['../','peek','home', x.voucher.id]);
       }
+
+
     });
   }
 

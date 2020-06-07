@@ -15,14 +15,16 @@ export class Voucher {
         this.stopDate = obj && obj.stopDate;
         this.denomination = obj && obj.denomination;
         this.voucherStatus = obj && obj.voucherStatus;
+        this.batchNumber = obj && obj.batchNumber;
     }
 
-    id: number;
+    id: string;
     serialNumber: number;
     pinNumber: number;
     stopDate: string;
     denomination: number;
     voucherStatus: number;
+    batchNumber: String;
 
 }
 
@@ -34,6 +36,17 @@ export class ListVoucherResponse extends PagedItemResponseBase {
     }
 
     vouchers: Voucher[];
+
+
+}
+
+export class CheckOutVoucherResponse extends ResponseBase {
+    constructor(obj?: any) {
+        super(obj);
+        this.voucher = obj &&  new Voucher(obj.voucher);
+    }
+
+    voucher: Voucher;
 
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FileUploadService } from '../../data/Files/Services/fileupload.service';
 import { NotificationService } from '../../data/Notification/Services/notification.services';
-import { UploadVoucherResponse } from '../../data/Voucher/Models/voucherUpload.services';
+import { UploadVoucherResponse } from '../../data/Voucher/Models/voucherUpload.models';
 import { MessageComponent } from '../../messages/message/message.component';
 import { PurchaseOrder, ListPurchaseOrdersRequest } from '../../data/PurchaseOrder/Model/purchase-order.model';
 import { PurchaseOrderService } from '../../data/PurchaseOrder/Service/purchase-order.service';

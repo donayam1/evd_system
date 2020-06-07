@@ -9,18 +9,23 @@
           <table class="table table-bordered table-striped" aria-labelledby="tableLabel">
             <thead>
               <tr>
+                <th>Batch Number</th>
                 <th>Serial Number </th>
                 <th>Denomination</th>
                 <th>Expiration Date</th>
                 <th>Status </th>
+                <td></td>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let voucher of response.vouchers">
+                <td>{{ voucher.batchNumber  }}</td>
                 <td>{{ voucher.serialNumber  }}</td>
                 <td>{{ voucher.denomination }}</td>
                 <td>{{ voucher.stopDate   }}</td>
                 <td>{{ voucher.voucherStatus }}</td>
+                <td> <a (click)="checkOutVoucher(voucher)" [routerLink]="['../view']">View</a>                  
+                </td>
               </tr>
             </tbody>
           </table>

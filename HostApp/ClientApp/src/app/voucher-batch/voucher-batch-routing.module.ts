@@ -6,7 +6,8 @@ import { ListvoucherBatchComponent } from './listvoucher-batch/listvoucher-batch
 const routes: Routes = [
   {
     path: '' , component: HomeComponent, children: [
-      {path:'list' , component: ListvoucherBatchComponent }
+      {path: 'list' , component: ListvoucherBatchComponent },
+      {path: 'peek/:id', loadChildren: "../vouchers/vouchers.module#VouchersModule" }
     ]
   }
 ];

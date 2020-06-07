@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { ListVoucherResponse, Voucher } from '../Models/voucherUpload.services';
+import { ListVoucherResponse, Voucher, CheckOutVoucherResponse } from '../Models/voucherUpload.models';
 import { AppConfig } from '../../Configs/Services/app.config';
 
 @Injectable({
@@ -29,6 +29,23 @@ export class VoucherService {
     return new Observable(observer => {
       this.http.get<ListVoucherResponse>(url).subscribe(data => {
         const response = new ListVoucherResponse(data);
+        observer.next(response);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      });
+    });
+  }
+  checkOutVoucher(id: string): Observable<CheckOutVoucherResponse> {
+    const theapi = "/api/vouchers/VoucherCheckOut";
+    const req = {
+      id: id
+    };
+    const url = AppConfig.settings.apiServers.authServer + theapi;
+    return new Observable(observer => {
+      this.http.post<CheckOutVoucherResponse>(url, req).subscribe(data => {
+        const response = new CheckOutVoucherResponse(data);
         observer.next(response);
         observer.complete();
       }, error => {

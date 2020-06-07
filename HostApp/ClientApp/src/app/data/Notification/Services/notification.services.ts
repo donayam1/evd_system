@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from "@angular/core";
 
 import * as signalR from "@aspnet/signalr";
 import { NamedItem } from '../../Shared/Models/nameditem.model';
-import { UploadVoucherResponse } from "../../Voucher/Models/voucherUpload.services";
+import { UploadVoucherResponse } from "../../Voucher/Models/voucherUpload.models";
 
 @Injectable({
     providedIn: 'root'

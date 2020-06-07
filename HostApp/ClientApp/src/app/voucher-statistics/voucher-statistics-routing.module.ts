@@ -4,8 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { ListVoucherStatisticsComponent } from './list-voucher-statistics/list-voucher-statistics.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent , children:[
-    {path: "list" , component: ListVoucherStatisticsComponent}
+  {path: '', component: ListVoucherStatisticsComponent , children:[
+    {path: "home" , component: HomeComponent}
   ]}
 ];
 

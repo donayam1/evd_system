@@ -1,7 +1,7 @@
 import { PagedItemResponseBase } from "../../Shared/Models/PagedItemResponseBase";
 import { ResponseBase } from "../../Shared/Models/responseBase";
 import { PurchaseOrder } from '../../PurchaseOrder/Model/purchase-order.model';
-import { Voucher } from '../../Voucher/Models/voucherUpload.services';
+import { Voucher } from '../../Voucher/Models/voucherUpload.models';
 
 
 export class VoucherBatch {

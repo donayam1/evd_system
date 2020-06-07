@@ -77,7 +77,7 @@ namespace TakTec.PurchaseOrders.Backend.Controllers
             {
                 var res = _purchaseOrderService.PeekVoucher(request);
                 PeekVoucherResponse response = new PeekVoucherResponse();
-                if (res != null)
+                if (res == null)
                 {
                     response.Status = false;
                 }

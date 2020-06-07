@@ -287,7 +287,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
 
             PeekVoucherResult result = new PeekVoucherResult() { 
                 PurchaseOrder = res.PurchaseOrder,
-                 Vouchers = res.Vouchers.ToSalesViewModel()
+                Vouchers = res.Vouchers.ToViewModel()
             };
 
             return result;//.UserVouchers?.FirstOrDefault()?.Voucher?.ToSalesViewModel();

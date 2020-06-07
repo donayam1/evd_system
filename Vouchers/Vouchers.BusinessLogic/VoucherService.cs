@@ -86,12 +86,17 @@ namespace Vouchers.BusinessLogic
                 ToViewModel();
         }
 
-
+        /// <summary>
+        /// TODO add the logic for not activated batches. For a pick request 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="fromUserRoleName"></param>
+        /// <returns></returns>
         public bool AreVouchersAvailable(VoucherTransferRequest request, String fromUserRoleName) {
             foreach (var v in request.TransferRequestItems) {
-                int userVouchers = _userVoucherRepository.CountUserFreeVouchers(fromUserRoleName, v.Denomination);
+                int userVouchers = _userVoucherRepository.CountUserFreeVouchers(fromUserRoleName, v.Denomination,request.BatchId);
                 if (userVouchers < v.Quantity) {
-                    int systemFreeVouchers =_vouchersRepository.CountSystemFreeVouchers(v.Denomination, null, isApproved: true);
+                    int systemFreeVouchers =_vouchersRepository.CountSystemFreeVouchers(v.Denomination, request.BatchId, isApproved: true);
                     if ((systemFreeVouchers + userVouchers) < v.Quantity)
                     {
                         _logger.AddUserError($"{v.Quantity} vouchers of {v.Denomination} birr not avaiable.");

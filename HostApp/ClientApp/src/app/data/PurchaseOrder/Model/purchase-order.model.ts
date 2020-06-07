@@ -1,5 +1,7 @@
 import { ResponseBase } from "../../Shared/Models/responseBase";
 import { PagedItemResponseBase } from "../../Shared/Models/PagedItemResponseBase";
+import { extend } from 'webdriver-js-extender';
+import { PagedItemRequestBase } from '../../Shared/Models/PagedItemRequestBase';
 
 export class PurchaseOrderItem {
     id: String;
@@ -70,4 +72,14 @@ export class ListPurchaseOrderResponse extends PagedItemResponseBase{
         this.purchaseOrders = obj && obj.purchaseOrders && obj.purchaseOrders.map(po => new PurchaseOrder(po)) || Array();
     }
     purchaseOrders: PurchaseOrder[];
+}
+
+export class ListPurchaseOrdersRequest extends PagedItemRequestBase {
+    
+    isExternalOrder:boolean;
+    constructor(obj?: any){
+        super(obj);
+        this.isExternalOrder = obj && obj.isExternalOrder || false;
+    }
+   
 }

@@ -13,7 +13,7 @@
                 <!-- <input type="text" class="form-control" name="inputName" id="inputName" placeholder=""> -->
                 <div class="row">
                     <div class="col-sm-4">
-                        <select [(ngModel)]="currPo" class="from-control" >
+                        <select [(ngModel)]="currPo" class="from-control" name="selectPo">
                             <option *ngFor="let item of purchaseOrders" [ngValue]="item" >{{item.purchaseOrderNumber}}</option>
                         </select>
                     </div>

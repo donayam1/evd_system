@@ -3,7 +3,7 @@ import { FileUploadService } from '../../data/Files/Services/fileupload.service'
 import { NotificationService } from '../../data/Notification/Services/notification.services';
 import { UploadVoucherResponse } from '../../data/Voucher/Models/voucherUpload.services';
 import { MessageComponent } from '../../messages/message/message.component';
-import { PurchaseOrder } from '../../data/PurchaseOrder/Model/purchase-order.model';
+import { PurchaseOrder, ListPurchaseOrdersRequest } from '../../data/PurchaseOrder/Model/purchase-order.model';
 import { PurchaseOrderService } from '../../data/PurchaseOrder/Service/purchase-order.service';
 
 @Component({
@@ -35,7 +35,8 @@ export class UploadComponent implements OnInit {
       }
       this.messagesCopmponent.addMessages(x);
     });
-    this.poService.fetchPurchaseOrder().subscribe(x => {
+    const req = new ListPurchaseOrdersRequest ({isExternalOrder: true});
+    this.poService.fetchPurchaseOrder(req).subscribe(x => {
         this.purchaseOrders = x.purchaseOrders;
     });
   }

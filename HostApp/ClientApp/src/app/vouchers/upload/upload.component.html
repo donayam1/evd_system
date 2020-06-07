@@ -1,72 +1,60 @@
-
 <div class="container">
     <form>
-    <div class="row">
-        
-    </div>
-</form>
-<div class="container">
-    <form>
-        <div class="form-group row">
-            <label for="inputName" class="col-sm-1-12 col-form-label"></label>
-            <div class="col-sm-1-12">
-                <!-- <input type="text" class="form-control" name="inputName" id="inputName" placeholder=""> -->
-                <div class="row">
-                    <div class="col-sm-4">
-                        <select [(ngModel)]="currPo" class="from-control" name="selectPo">
-                            <option *ngFor="let item of purchaseOrders" [ngValue]="item" >{{item.purchaseOrderNumber}}</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-6">
-                        <table class="table table-bordered table-striped" >
-                            <thead>
-                              <tr>
-                                <th>Purchase Order Number</th>
-                                <th>Purchase Order Items</th>
-                                <th>Date</th>
-                              </tr>
-                            </thead>
+        <div class="col-md-8 mr-md-auto ml-md-auto">
+            <div class="form-row form-group">
+                <label for="po" class="col-form-label col-form-label-sm">Purchase Order</label>
+                <select class="form-control form-control-sm form-inline" name="selectPO" [(ngModel)]="currPo" (change)="poCheck()">
+                    <option selected class="text-muted disabled">Select Purchase Order</option>
+                    <option *ngFor="let item of purchaseOrders" [ngValue]="item" >{{item.purchaseOrderNumber}}</option>
+                </select>
+            </div>
+            <div class="col-sm-auto" *ngIf="isTriggered != false">
+                <table class="table table-bordered table-striped small" >
+                    <thead>
+                      <tr>
+                        <th>Purchase Order Number</th>
+                        <th>Purchase Order Items</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{currPo.purchaseOrderNumber}} </td>
+                        <td>
+                          
+                          <table class="table  table-bordered  table-sm">
+                            <th>Denomination</th>
+                            <th>Quantity</th>
                             <tbody>
-                              <tr *ngFor="let purchase of purchaseOrders">
-                                <td>{{purchase.purchaseOrderNumber}} </td>
-                                <td>
-                                  
-                                  <table class="table  table-bordered  table-sm">
-                                    <th>Denomination</th>
-                                    <th>Quantity</th>
-                                    <tbody>
-                                      <tr *ngFor="let purchaseItem of purchase.items; index as i">
-                                        <td>{{purchaseItem.denomination}}</td>
-                                        <td>{{purchaseItem.quantity}} </td>
-                                      </tr>
-                                    </tbody>
-                                    <tbody></tbody>
-                                  </table>
-                                </td>
-                                <td>{{purchase.date }}</td>
+                              <tr *ngFor="let purchaseItem of currPo.items; index as i">
+                                <td>{{purchaseItem.denomination}}</td>
+                                <td>{{purchaseItem.quantity}} </td>
                               </tr>
                             </tbody>
+                            <tbody></tbody>
                           </table>
-                        <!-- {{currPo|json}} -->
-                    </div>
-                </div>
+                        </td>
+                        <td>{{currPo.date }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
             </div>
         </div>
-        <fieldset class="form-group row">
-            <legend class="col-form-legend col-sm-1-12">Group name</legend>
-            <div class="col-sm-1-12">
-                <app-file-upload (fileToUploadedEvent)="fileToUploaded($event)"></app-file-upload>
-            </div>
-        </fieldset>
-        <div class="form-group row">
-            <div class="offset-sm-2 col-sm-10">
-                <input type="button" (click)="uploadFile()"  value="Upload"/>
+        <div class="mt-md-4">
+            <fieldset class="form-group row">
+                <label class="lead col-sm-1-12">Export Voucher</label>
+                <div class="btn-sm small">
+                    <app-file-upload (fileToUploadedEvent)="fileToUploaded($event)"></app-file-upload>
+                </div>
+            </fieldset>
+            <div class="form-group row">
+                <div class="">
+                    <button class="btn btn-outline-primary btn-sm" type="button" (click)="uploadFile()" value="Upload">Export</button>
+                </div>
             </div>
         </div>
     </form>
 </div>
-</div>
-
 
 <!-- <app-file-upload (fileToUploadedEvent)="fileToUploaded($event)"></app-file-upload> -->
 

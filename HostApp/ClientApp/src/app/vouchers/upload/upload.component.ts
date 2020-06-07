@@ -17,6 +17,7 @@ export class UploadComponent implements OnInit {
   isError: boolean;
   currPo: PurchaseOrder;
   purchaseOrders: PurchaseOrder[];
+  isTriggered: boolean;
 
   @ViewChild('messages', { static: true })
   messagesCopmponent: MessageComponent;
@@ -26,6 +27,7 @@ export class UploadComponent implements OnInit {
     private poService: PurchaseOrderService) {
       this.currPo = new PurchaseOrder();
       this.purchaseOrders = Array();
+      this.isTriggered = false;
   }
 
   ngOnInit() {
@@ -39,6 +41,10 @@ export class UploadComponent implements OnInit {
     this.poService.fetchPurchaseOrder(req).subscribe(x => {
         this.purchaseOrders = x.purchaseOrders;
     });
+  }
+
+  poCheck(){
+    return this.isTriggered = true;
   }
 
   fileToUploaded($event: File) {

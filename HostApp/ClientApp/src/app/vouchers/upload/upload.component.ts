@@ -53,7 +53,7 @@ export class UploadComponent implements OnInit {
     }
   ];
 
-    this.fileUploadService.uploadFiles(this.fileToUpload, "/api/Vouchers/vouchers/Upload",
+    this.fileUploadService.uploadFiles(this.fileToUpload, "/api/Vouchers/vouchers", ///Upload
     data).
       subscribe(x => {
         this.messagesCopmponent.addMessages(x);

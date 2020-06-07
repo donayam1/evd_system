@@ -14,7 +14,7 @@ namespace Vouchers.BusinessLogic
         private readonly ConcurrentQueue<UploadedFile> _tasks;        
         private SemaphoreSlim _signal = new SemaphoreSlim(0);
         public VoucherFileProcessorTaskes() {
-            //_tasks = new ConcurrentQueue<UploadedFile>();
+            _tasks = new ConcurrentQueue<UploadedFile>();
             //this.Enqueue(new UploadedFile(false, ""));
         }
         public void Enqueue(UploadedFile voucherFileProcessor) {

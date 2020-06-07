@@ -20,7 +20,7 @@ import { UserState, SelectCurrentUser } from 'src/app/data/User/Reducers/user.re
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
-  user: Users;
+  // user: Users;
   isError: boolean;
   messages: Message[];
   selectedgt: GroupType;
@@ -31,74 +31,75 @@ export class UserDetailComponent implements OnInit {
   rpList: RetailerPlanResponse;
   userPermissions: PermissionGroup;
   
-  constructor(private userService: UserService, private gtServ: GrouptypeService, private rpServ: RetailerPlanService, private store: Store<OperatorState>, private state: State<OperatorState>) {
-    this.user = new Users();
-    this.isError = false;
-    this.messages = Array();
-    this.selectedgt = new GroupType();
-    this.selectedrp = new RetailerPlan();
-    this.selectedGt = new GroupType();
-    this.selectedRp = new RetailerPlan();
-    this.gtList = new GroupTypesResponse();
-    this.rpList = new RetailerPlanResponse();
-    this.userPermissions = new PermissionGroup();
+  // constructor(private userService: UserService, private gtServ: GrouptypeService, private rpServ: RetailerPlanService, private store: Store<OperatorState>, private state: State<OperatorState>) {
+  //   this.user = new Users();
+  //   this.isError = false;
+  //   this.messages = Array();
+  //   this.selectedgt = new GroupType();
+  //   this.selectedrp = new RetailerPlan();
+  //   this.selectedGt = new GroupType();
+  //   this.selectedRp = new RetailerPlan();
+  //   this.gtList = new GroupTypesResponse();
+  //   this.rpList = new RetailerPlanResponse();
+  //   this.userPermissions = new PermissionGroup();
 
-  }
-
-  ngOnInit() {
-    this.userService.getUser(this.user.Id).subscribe(x => {
-      if (x.status === true){
-        this.user = x.newUser;
-        this.gtServ.getGroupType(x.newUser.roleTypeId).subscribe(x => {
-          if (x.status === true){
-            this.selectedgt = x.groupType;
-          }
-          else{
-            this.isError = true;
-            this.messages = x.messages
-          }
-        }, err => {this.isError = true;})
-        this.rpServ.getRetailerPlan(x.newUser.planId).subscribe(x => {
-          if (x.status === true){
-            this.selectedrp = x.newRetailerPlan;
-          }
-          else{
-            this.isError = true;
-            this.messages = x.messages;
-          }
-        }, err => {this.isError = true;})
-        this.userService.getUserPermission().subscribe(x => {
-          this.userPermissions = x;
-          console.log(this.userPermissions);
-        });
-      }
-      else{
-        this.isError = true;
-        this.messages = x.messages;
-      }
-    }, err => {
-      this.isError = true;
-    })
-
-    this.gtServ.fetchGroupType().subscribe(x => {
-      this.gtList = x;
-      console.log(x);
-    });
-
-    this.rpServ.fetchRetailerPlan().subscribe(x => {
-      this.rpList = x;
-      console.log(x);
-    });
-  }
-  // user: Users;
-  // constructor(private userService: UserService,
-  //             private state: State<UserState> ) {
-  //               this.user = new Users();
-  //              }
+  // }
 
   // ngOnInit() {
-  //   // this.user = SelectCurrentUser(this.state.value);
+  //   this.userService.getUser(this.user.Id).subscribe(x => {
+  //     if (x.status === true){
+  //       this.user = x.newUser;
+  //       this.gtServ.getGroupType(x.newUser.roleTypeId).subscribe(x => {
+  //         if (x.status === true){
+  //           this.selectedgt = x.groupType;
+  //         }
+  //         else{
+  //           this.isError = true;
+  //           this.messages = x.messages
+  //         }
+  //       }, err => {this.isError = true;})
+  //       this.rpServ.getRetailerPlan(x.newUser.planId).subscribe(x => {
+  //         if (x.status === true){
+  //           this.selectedrp = x.newRetailerPlan;
+  //         }
+  //         else{
+  //           this.isError = true;
+  //           this.messages = x.messages;
+  //         }
+  //       }, err => {this.isError = true;})
+  //       this.userService.getUserPermission().subscribe(x => {
+  //         this.userPermissions = x;
+  //         console.log(this.userPermissions);
+  //       });
+  //     }
+  //     else{
+  //       this.isError = true;
+  //       this.messages = x.messages;
+  //     }
+  //   }, err => {
+  //     this.isError = true;
+  //   })
+
+  //   this.gtServ.fetchGroupType().subscribe(x => {
+  //     this.gtList = x;
+  //     console.log(x);
+  //   });
+
+  //   this.rpServ.fetchRetailerPlan().subscribe(x => {
+  //     this.rpList = x;
+  //     console.log(x);
+  //   });
   // }
+  user: Users;
+  constructor(private userService: UserService,
+              private state: State<UserState> ) {
+                this.user = new Users();
+               }
+
+  ngOnInit() {
+    this.user = SelectCurrentUser(this.state.value);
+    console.log(this.user)
+  }
 
   // gtSelected(gt: GroupType){
   //   this.gtServ.getGroupType(gt.id).subscribe(x => {

@@ -11,6 +11,7 @@ import { RetailerPlan, RetailerPlanResponse } from 'src/app/data/RetailerPlan/Mo
 import { findIndex } from 'rxjs/operators';
 import { GrouptypeService } from 'src/app/data/GroupType/Services/grouptype.service';
 import { RetailerPlanService } from 'src/app/data/RetailerPlan/Services/retailer-plan.service';
+import { SelectCurrentUser, UserState } from 'src/app/data/User/Reducers/user.resucers';
 
 @Component({
   selector: 'app-edit-user',
@@ -28,7 +29,9 @@ export class EditUserComponent implements OnInit {
   gtList: GroupTypesResponse;
   rpList: RetailerPlanResponse;
 
-  constructor(private userServide: UserService, private gtServ: GrouptypeService, private rpServ: RetailerPlanService, private store: Store<OperatorState>, private state: State<OperatorState>) {
+  constructor(private userServide: UserService, private gtServ: 
+    GrouptypeService, private rpServ: RetailerPlanService, 
+    private store: Store<UserState>, private state: State<UserState>) {
     this.user = new Users();
     this.isError = false;
     this.messages = Array();
@@ -41,35 +44,40 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userServide.getUser('1').subscribe(x => {
-      if (x.status === true){
-        this.user = x.newUser;
-        this.gtServ.getGroupType(x.newUser.roleTypeId).subscribe(x => {
-          if (x.status === true){
-            this.selectedgt = x.groupType;
-          }
-          else{
-            this.isError = true;
-            this.messages = x.messages
-          }
-        }, err => {this.isError = true;})
-        this.rpServ.getRetailerPlan(x.newUser.planId).subscribe(x => {
-          if (x.status === true){
-            this.selectedrp = x.newRetailerPlan;
-          }
-          else{
-            this.isError = true;
-            this.messages = x.messages;
-          }
-        }, err => {this.isError = true;})
-      }
-      else{
-        this.isError = true;
-        this.messages = x.messages;
-      }
-    }, err => {
-      this.isError = true;
-    })
+    const cUser = SelectCurrentUser(this.state.value);
+    console.dir(cUser);
+    if(cUser != null){
+      this.user = cUser;
+    }
+    // this.userServide.getUser('1').subscribe(x => {
+    //   if (x.status === true){
+    //     this.user = x.newUser;
+    //     this.gtServ.getGroupType(x.newUser.roleTypeId).subscribe(x => {
+    //       if (x.status === true){
+    //         this.selectedgt = x.groupType;
+    //       }
+    //       else{
+    //         this.isError = true;
+    //         this.messages = x.messages
+    //       }
+    //     }, err => {this.isError = true;})
+    //     this.rpServ.getRetailerPlan(x.newUser.planId).subscribe(x => {
+    //       if (x.status === true){
+    //         this.selectedrp = x.newRetailerPlan;
+    //       }
+    //       else{
+    //         this.isError = true;
+    //         this.messages = x.messages;
+    //       }
+    //     }, err => {this.isError = true;})
+    //   }
+    //   else{
+    //     this.isError = true;
+    //     this.messages = x.messages;
+    //   }
+    // }, err => {
+    //   this.isError = true;
+    // })
 
     this.gtServ.fetchGroupType().subscribe(x => {
       this.gtList = x;

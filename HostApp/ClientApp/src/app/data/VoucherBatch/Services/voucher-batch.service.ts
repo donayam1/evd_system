@@ -9,7 +9,7 @@ import { AppConfig } from '../../Configs/Services/app.config';
 })
 export class VoucherBatchService {
 
-  private readonly api = "/api/vouchers/VoucherBatchs/ListBatchs/"
+  private readonly api = "/api/vouchers/VoucherBatchs"
 
   constructor(private http: HttpClient) { }
 

@@ -22,7 +22,7 @@ export class VoucherBatch {
 export class ListVoucherBatchResponse extends PagedItemResponseBase{
     constructor(obj? : any){
         super(obj);
-        this.voucherBatch = obj && obj.voucherBatch.map(vouchBatch => new VoucherBatch(vouchBatch)) || Array();
+        this.voucherBatch = obj && obj.voucherBatch && obj.voucherBatch.map(vouchBatch => new VoucherBatch(vouchBatch)) || Array();
     }
 
     voucherBatch: VoucherBatch[]; 

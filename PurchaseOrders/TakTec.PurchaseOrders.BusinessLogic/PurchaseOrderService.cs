@@ -85,6 +85,11 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                 }
             }
 
+            if (request.Items.Count() <= 0) {
+                _logger.AddUserError("No items specified.");
+                return false;
+            }
+
             if (request.IsExternalOrder) {
                 if (_tokenUserService.UserRole != RoleTypeConstants.RoleNameSupperAdmin) {
                     _logger.AddUnauthorizedError();

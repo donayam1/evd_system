@@ -77,7 +77,7 @@ export class UserService {
     // return of(response);
 
     //Later to be used with the api.
-    const url = AppConfig.settings.apiServers.authServer + this.api + "/Create";
+    const url = AppConfig.settings.apiServers.authServer + this.api;
     return new Observable(observer => {
       this.http.post<NewUserResponse>(url, user).subscribe(x => {
         observer.next(new NewUserResponse(x));

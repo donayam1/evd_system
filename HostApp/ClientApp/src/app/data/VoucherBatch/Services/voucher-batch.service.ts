@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ListVoucherBatchResponse } from '../Models/voucherBatch.model';
+import { ListVoucherBatchResponse, PeekVoucherResponse } from '../Models/voucherBatch.model';
 import { AppConfig } from '../../Configs/Services/app.config';
 import { ResponseBase } from '../../Shared/Models/responseBase';
 
@@ -49,15 +49,15 @@ export class VoucherBatchService {
 
   }
 
-  takeSample(batchId: String) {
+  takeSample(batchId: String): Observable<PeekVoucherResponse> {
     const theapi = "/api/purchaseOrders/purchaseOrder";
     const url = AppConfig.settings.apiServers.authServer + theapi;
     return new Observable(observer => {
       const obj = {
         batchId: batchId
       };
-      this.http.post<ResponseBase>(url, obj).subscribe(data => {
-        const response = new ResponseBase(data);
+      this.http.post<PeekVoucherResponse>(url, obj).subscribe(data => {
+        const response = new PeekVoucherResponse(data);
         console.log(response);
         observer.next(response);
         observer.complete();

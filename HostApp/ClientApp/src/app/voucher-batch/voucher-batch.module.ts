@@ -4,12 +4,17 @@ import { CommonModule } from '@angular/common';
 import { VoucherBatchRoutingModule } from './voucher-batch-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ListvoucherBatchComponent } from './listvoucher-batch/listvoucher-batch.component';
+import { VouchersModule } from '../vouchers/vouchers.module';
+import { VoucherComponent } from './voucher/voucher.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ListvoucherBatchComponent, HomeComponent],
+  declarations: [ListvoucherBatchComponent, HomeComponent, VoucherComponent],
   imports: [
     CommonModule,
     VoucherBatchRoutingModule,
+    VouchersModule,
+    FormsModule
   ]
 })
 export class VoucherBatchModule { }

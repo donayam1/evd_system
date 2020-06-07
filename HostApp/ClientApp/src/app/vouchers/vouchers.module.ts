@@ -8,10 +8,10 @@ import { HomeComponent } from './home/home.component';
 import { ListVouchersComponent } from './list-vouchers/list-vouchers.component';
 import { MessagesModule } from '../messages/messages.module';
 import { FormsModule } from '@angular/forms';
-import { VoucherComponent } from './voucher/voucher.component';
+
 
 @NgModule({
-  declarations: [UploadComponent, HomeComponent, ListVouchersComponent, VoucherComponent],
+  declarations: [UploadComponent, HomeComponent, ListVouchersComponent],
   imports: [
     CommonModule,
     VouchersRoutingModule,

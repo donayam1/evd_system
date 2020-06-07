@@ -102,7 +102,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
 
             if (!_voucherService.AreVouchersAvailable(
                     new VoucherTransferRequest()
-                    { TransferRequestItems = request.Items.Cast<VoucherTransferRequestItem>().ToList() },
+                    { TransferRequestItems = request.Items.Cast<VoucherTransferRequestItem>().ToList(), BatchId = request.BatchId },
                     buyerUser.OwnerId))
             {
                 _logger.AddUserError("Requested vouchers are not available");
@@ -261,7 +261,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
 
             InternalPurchaseOrderRequest poReq = new InternalPurchaseOrderRequest()
             {
-                IsExternalOrder = true,
+                IsExternalOrder = false,
                 Self = true,
                 IsApproved = false,
                 PurchaseOrderNumber = Guid.NewGuid().ToString(),

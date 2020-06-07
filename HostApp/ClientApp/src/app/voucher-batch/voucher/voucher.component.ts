@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { VoucherService } from 'src/app/data/Voucher/Services/voucher.service';
-import { Voucher } from 'src/app/data/Voucher/Models/voucherUpload.services';
+import { Component, OnInit, Input } from '@angular/core';
+import { Voucher } from '../../data/Voucher/Models/voucherUpload.services';
 
 @Component({
   selector: 'app-voucher',
@@ -8,6 +7,8 @@ import { Voucher } from 'src/app/data/Voucher/Models/voucherUpload.services';
   styleUrls: ['./voucher.component.css']
 })
 export class VoucherComponent implements OnInit {
+  
+  @Input()
   voucher: Voucher;
 
   constructor() {

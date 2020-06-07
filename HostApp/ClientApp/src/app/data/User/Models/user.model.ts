@@ -1,9 +1,6 @@
 import { User } from './../../Account/Models/user.model';
 import { ResponseBase } from 'src/app/data/Shared/Models/responseBase';
-import { NamedItem } from "../../Shared/Models/nameditem.model";
 import { PagedItemResponseBase } from '../../Shared/Models/PagedItemResponseBase';
-import { THIS_EXPR, ThrowStmt } from '@angular/compiler/src/output/output_ast';
-
 
 export class Users extends User {
     constructor(obj?: any) {
@@ -101,7 +98,7 @@ export class NewUserResponse extends ResponseBase{
 export class ListUserResponse extends PagedItemResponseBase {
     constructor(obj?: any) {
         super(obj);
-        this.users = obj && obj.users.map(u => new Users(u)) || Array();
+        this.users = obj && obj.users && obj.users.map(u => new Users(u)) || Array();
     }
     users: Users[];
 }

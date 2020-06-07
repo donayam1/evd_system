@@ -5,7 +5,7 @@ namespace TakTec.Operators.ViewModel
 {
     public class NewOperatorResponseViewModel:ResponseBase
     {
-        public NewOperatorViewModel newOperatorViewModel{get;set;}=default;
+        public NewOperatorViewModel NewOperatorViewModel { get; set; } = default!;
         
     }
 }

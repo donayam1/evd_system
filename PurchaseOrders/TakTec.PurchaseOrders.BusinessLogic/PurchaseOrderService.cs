@@ -106,10 +106,10 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                 IsApproved = request.IsApproved
             };
             String buyserUserRoleName = buyerUser.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
-
+            String buyerUserOwnerRoleName = buyerUser.AspNetUserRoles.FirstOrDefault().AspNetRole.OwnerId;
             if (!_voucherService.AreVouchersAvailable(
                     transerRequest,
-                    buyerUser.OwnerId, buyserUserRoleName))
+                    buyerUserOwnerRoleName, buyserUserRoleName))
             {
                 _logger.AddUserError("Requested vouchers are not available");
                 return false;
@@ -186,6 +186,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             }
 
             String buyerUserRole = buyerUser.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
+            String buyerUserOwnerRoleName = buyerUser.AspNetUserRoles.FirstOrDefault().AspNetRole.OwnerId;
 
             CreatePurchaseOrdreResult result = new CreatePurchaseOrdreResult();
 
@@ -217,7 +218,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
 
                 List<Voucher?>? vouchers = _voucherService.TransferVouchersToUser(
                      voucherTransferReqeust,
-                     buyerUser.OwnerId, buyerUserRole
+                     buyerUserOwnerRoleName, buyerUserRole
                  );
 
                     if (vouchers == null) {

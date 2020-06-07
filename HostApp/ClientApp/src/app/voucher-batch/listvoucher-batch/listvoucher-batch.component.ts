@@ -42,6 +42,9 @@ export class ListvoucherBatchComponent implements OnInit {
     this.voucherBatchService.takeSample(batch.id).subscribe(x => {
       if (x.status === true) {
         // this.router.navigateByUrl(['../','peek','home', x.voucher.id]);
+        alert("Success")
+      } else {
+        alert("Error");
       }
 
 

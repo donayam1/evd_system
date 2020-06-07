@@ -71,7 +71,7 @@ namespace TakTec.Operators.BusinessLogic
                     return null;
                 }
             }
-            var oper = op.ToViewModel();
+            var oper = op.ToNewOperatorViewModel(operatorVM.Id);
 
             return oper;
 
@@ -80,7 +80,7 @@ namespace TakTec.Operators.BusinessLogic
 
         private bool isValidOperator(Operator op,ObjectStatusEnum Status)
         {
-            Operator? _operator = _operatorRepository.withUSSDRechargeCode(op);
+            Operator? _operator = _operatorRepository.WithName(op.Name);
             if(Status != ObjectStatusEnum.NEW)
             {
                 bool exists = _operatorRepository.Exists(op.Id);
@@ -89,11 +89,11 @@ namespace TakTec.Operators.BusinessLogic
                     _logger.AddUserError("Operator does not exist!");
                     return false;
                 }
-                if(_operator != null)
-                {
-                    _logger.AddUserError("Operator with USSD recharge code"+op.USSDRechargeCode+"or Name "+op.Name+"aleady exists");
-                    return false;
-                }
+                //if(_operator != null)
+                //{
+                //    _logger.AddUserError("Operator with USSD recharge code"+op.USSDRechargeCode+"or Name "+op.Name+"aleady exists");
+                //    return false;
+                //}
             }
             else if(Status == ObjectStatusEnum.NEW)
             {

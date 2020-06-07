@@ -11,7 +11,8 @@ namespace TakTec.Operators.Abstractions
     public interface IOperatorRepository : IGenericRepository<Operator>
     {
         //IQueryable<Operator> LoadNavigationProperties(IQueryable<Operator> items);
-        Operator? withUSSDRechargeCode(Operator op);
+        //Operator? withUSSDRechargeCode(Operator op);
+        Operator? WithName(String name);
     }
 
 

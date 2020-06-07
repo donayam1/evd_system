@@ -3,6 +3,7 @@ import { Operator } from "src/app/data/Operator/Models/operator.model";
 import { OperatorService } from "src/app/data/Operator/Services/operator.service";
 import { State } from '@ngrx/store';
 import { MessageComponent } from "src/app/messages/message/message.component";
+import { ObjectStatus } from '../../data/Shared/Models/newObjectStatus.model';
 
 @Component({
   selector: "app-create-operator",
@@ -15,7 +16,7 @@ export class CreateOperatorComponent implements OnInit {
   @ViewChild('messages', {static: true})
   messagesComponent: MessageComponent;
   constructor(private operatorService: OperatorService) {
-    this.operator = new Operator();
+    this.operator = new Operator({status: ObjectStatus.NEW});
   }
 
   saveOperator() {

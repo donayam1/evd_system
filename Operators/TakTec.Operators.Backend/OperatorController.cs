@@ -53,21 +53,20 @@ namespace TakTec.Operators.Backend
         }
 
         [HttpPost(template:"create")]
-        public IActionResult Create([FromBody] NewOperatorViewModel op)
+        public IActionResult Create([FromBody] OperatorViewModel op)
         {
             NewOperatorResponseViewModel resp = new NewOperatorResponseViewModel();
             
             if (ModelState.IsValid)
             {
-                var newOperator =  (NewOperatorViewModel)_operatorService.CreateorUpdateOperator(op);
+                var newOperator =  _operatorService.CreateorUpdateOperator(op);
                 if (newOperator == null)
                 {
                     resp.Status = false;
                 }
                 else {
                     resp.Status = true;
-                    newOperator.UI_Id = op.UI_Id;
-                    resp.newOperatorViewModel = newOperator;
+                    resp.NewOperatorViewModel = (NewOperatorViewModel)newOperator;
                 }
 
                 return SendResult(resp);

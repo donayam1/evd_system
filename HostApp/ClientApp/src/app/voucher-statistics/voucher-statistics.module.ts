@@ -10,6 +10,9 @@ import { HomeComponent } from './home/home.component';
   imports: [
     CommonModule,
     VoucherStatisticsRoutingModule
+  ],
+  exports: [
+    ListVoucherStatisticsComponent
   ]
 })
 export class VoucherStatisticsModule { }

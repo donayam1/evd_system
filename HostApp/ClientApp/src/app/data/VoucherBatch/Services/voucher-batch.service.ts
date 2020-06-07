@@ -14,7 +14,7 @@ export class VoucherBatchService {
   constructor(private http: HttpClient) { }
 
   fetchVoucherBatch(): Observable<ListVoucherBatchResponse>{
-    const url = AppConfig.settings.apiServers.authServer + this.api + "?batchStatus=20";
+    const url = AppConfig.settings.apiServers.authServer + this.api ;
     return new Observable(observer =>{
       this.http.get<ListVoucherBatchResponse>(url).subscribe(data =>{
         const response = new ListVoucherBatchResponse(data);

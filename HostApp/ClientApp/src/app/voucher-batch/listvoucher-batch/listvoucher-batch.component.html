@@ -19,8 +19,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let vb of response">
-                <td>{{ vb.purchaserOrderNumber }}</td>
+              <tr *ngFor="let vb of response.voucherBatches">
+                <td>{{ vb.purchaserOrderId }}</td>
                 <td>{{vb.batch}} </td>
                 <td>{{vb.startSequence}} </td>
                 <td>{{vb.denomination }}</td>

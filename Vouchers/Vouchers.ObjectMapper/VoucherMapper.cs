@@ -46,10 +46,11 @@ namespace Vouchers.ObjectMapper
         public static VoucherBatchModel ToViewModel(this VoucherBatch batch) {
             VoucherBatchModel model = new VoucherBatchModel()
             {
+                
                 Id = batch.Id,
                 Batch = batch.Batch,
                 Denomination = batch.Denomination,
-                PurchaserOrderNumber = batch.PurchaserOrderId,
+                PurchaseOrderId = batch.PurchaserOrderId,
                 Quantity = batch.Quantity,
                 StartSequence = batch.StartSequence + "",
                 StopDate = batch.StopDate.ToSharedDateString()

@@ -66,7 +66,7 @@ export class CreatePurchaseOrderResponse extends ResponseBase{
 export class ListPurchaseOrderResponse extends PagedItemResponseBase{
     constructor(obj?: any){
         super(obj);
-        this.purchaseOrders = obj && obj.purchaseOrders.map(po => new PurchaseOrder(po)) || Array();
+        this.purchaseOrders = obj && obj.purchaseOrders && obj.purchaseOrders.map(po => new PurchaseOrder(po)) || Array();
     }
     purchaseOrders: PurchaseOrder[];
 }

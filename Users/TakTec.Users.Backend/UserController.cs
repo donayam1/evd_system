@@ -52,7 +52,7 @@ namespace TakTec.Users.Backend
                 ListUsersResponse response = new ListUsersResponse()
                 {
                     Status = true,
-                    Result = x
+                    Users = x
                 };
                 return SendResult(response);
             }

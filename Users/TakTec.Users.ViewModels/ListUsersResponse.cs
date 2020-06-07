@@ -7,7 +7,7 @@ namespace TakTec.Users.ViewModels
 {
     public class ListUsersResponse:ResponseBase 
     {
-        public List<ListUserModel> Result { get; set; } 
+        public List<ListUserModel> Users { get; set; } 
             = new List<ListUserModel>();
     }
 }

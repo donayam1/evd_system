@@ -8,5 +8,6 @@ namespace TakTec.Operators.ViewModel
          public string Id{get;set;}
          public string Name { get; set; }
          public string USSDRechargeCode { get; set; }
+         public ObjectStatusEnum Status { get; set; }
     }
 }

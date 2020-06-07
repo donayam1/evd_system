@@ -21,6 +21,15 @@ namespace TakTec.Operators.EntityFramework
         {
             return items;
         }
+
+        public Operator? withUSSDRechargeCode(Operator op)
+        {
+            var _operator = All().Where(x => 
+                                (x.USSDRechargeCode == op. USSDRechargeCode) ||
+                                (x.Name == op.Name))
+                                .FirstOrDefault();
+            return _operator;
+        }
         
         
     }

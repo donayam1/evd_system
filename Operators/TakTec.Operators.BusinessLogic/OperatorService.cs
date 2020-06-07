@@ -22,40 +22,112 @@ namespace TakTec.Operators.BusinessLogic
         private readonly IOperatorRepository _operatorRepository;
         private readonly ILogger<IOperatorService> _logger;
         private readonly IStorage _storage;
-        public OperatorService(IStorage storage, ILogger<IOperatorService> Logger){
+
+        public OperatorService(IStorage storage, ILogger<IOperatorService> logger)
+        {
             _storage = storage ?? throw new ArgumentNullException(nameof(storage));
             _operatorRepository = _storage.GetRepository<IOperatorRepository>() ??
-                throw new ArgumentNullException(nameof(IOperatorService));
-            _logger= Logger ??
-                throw new ArgumentNullException(nameof(ILogger<IOperatorService>));
+                                throw new ArgumentNullException(nameof(IOperatorService));
+            _logger= logger ?? throw new ArgumentNullException(nameof(logger));
         }
-        public NewOperatorViewModel? CreateOperator(OperatorViewModel _operator)
+
+        public OperatorViewModel? CreateorUpdateOperator(OperatorViewModel operatorVM)
         {
-            String UiId = _operator.Id;
-            //bool exists= _operatorRepository.Exists(_operator.Id);
-            //if(exists){
-            //    _logger.AddUserError("Operator already exists");
-            //    return null;
-            //}
-            //else{
+            Operator _operator = operatorVM.ToDomainModel();
+            // validation
+            if(!isValidOperator(_operator,operatorVM.Status))
+            {
+                _logger.AddUserError("Invalid Request");
+                return null;
+            }
 
-            var oper = _operator.ToDomainModel();
-            _operatorRepository.Create(oper);
-            _storage.Save();
-            _logger.AddUserMesage("Operator Created successfully!");
-            var newOPViewModel = oper.ToNewOperatorViewModel(UiId);// OperatorMapper.ToNewOperatorViewModel(_operator, UiId);
-            return newOPViewModel;// return viewmodel
+            Operator? op;
 
-            //}
-            
+            switch(operatorVM.Status)
+            {
+                case ObjectStatusEnum.NEW:
+                    op = CreateOperator(_operator);
+                    break;
+                case ObjectStatusEnum.EDITTED:
+                    op = UpdateOperator(_operator);
+                    break;
+                case ObjectStatusEnum.REMOVED:
+                    op = RemoveOperator(_operator);
+                    break;
+                default:
+                    return operatorVM;
+            }
+
+            if(op != null)
+            {
+                try
+                {
+                    _storage.Save();
+                }
+                catch(Exception e)
+                {
+                    _logger.LogError(e.InnerException,e.Message);
+                    _logger.AddUserError("Unknown error. Please contact administrator");
+                    return null;
+                }
+            }
+            var oper = op.ToViewModel();
+
+            return oper;
+
         }
+
+
+        private bool isValidOperator(Operator op,ObjectStatusEnum Status)
+        {
+            Operator? _operator = _operatorRepository.withUSSDRechargeCode(op);
+            if(Status != ObjectStatusEnum.NEW)
+            {
+                bool exists = _operatorRepository.Exists(op.Id);
+                if(!exists)
+                {
+                    _logger.AddUserError("Operator does not exist!");
+                    return false;
+                }
+                if(_operator != null)
+                {
+                    _logger.AddUserError("Operator with USSD recharge code"+op.USSDRechargeCode+"or Name "+op.Name+"aleady exists");
+                    return false;
+                }
+            }
+            else if(Status == ObjectStatusEnum.NEW)
+            {
+                if(_operator!=null)
+                {
+                     _logger.AddUserError("Operator with USSD recharge code"+op.USSDRechargeCode+"or Name "+op.Name+"aleady exists");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
+        private Operator CreateOperator(Operator op)
+        {
+            _operatorRepository.Create(op);
+            return op;
+        }
+
+
+
+        private Operator UpdateOperator(Operator op)
+        {
+            var _operator = _operatorRepository.WithKey(op.Id);
+            _operator.Name = op.Name;
+            _operator.USSDRechargeCode = op.USSDRechargeCode;
+            _operatorRepository.Edit(_operator);
+            return _operator;
+        }
+
+
 
         public List<OperatorViewModel>? ListOperator(int pageNo, int NumberOfItemsPerPage)
         {
-            // var items = _operatorRepository.All()
-            //             .Skip(NumberOfItemsPerPage * (pageNo - 1))
-            //             .Take(NumberOfItemsPerPage)
-            //             .ToList();
             var items = _operatorRepository.GetCustomFilters(pageNo,NumberOfItemsPerPage).Items.ToList();//.GetCustomFilters<Operator>();
             if(items ==null){
                 _logger.AddUserError("There is no operator in database!");
@@ -68,21 +140,10 @@ namespace TakTec.Operators.BusinessLogic
             }
         }
 
-        public OperatorViewModel? UpdateOperator(OperatorViewModel op)
-        {
 
-            bool exists= _operatorRepository.Exists(op.Id);
-            if(!exists){
-                _logger.AddUserError("Operator does not exist!");
-                return null;
-            }
-            else{
-                var oper = op.ToDomainModel();
-                _operatorRepository.Edit(op.ToDomainModel());
-                _logger.AddUserMesage("Operator Updated successfully!");
-                var opVM = oper.ToViewModel();// OperatorMapper.ToViewModel(oper.);
-                return opVM;// return viewmodel
-            }
+        public Operator? RemoveOperator (Operator op)
+        {
+            return null;
         }
     }
 }

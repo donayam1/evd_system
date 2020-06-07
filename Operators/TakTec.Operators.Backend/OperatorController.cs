@@ -53,28 +53,29 @@ namespace TakTec.Operators.Backend
         }
 
         [HttpPost(template:"create")]
-        public IActionResult Create([FromBody] OperatorViewModel op)
+        public IActionResult Create([FromBody] NewOperatorViewModel op)
         {
             NewOperatorResponseViewModel resp = new NewOperatorResponseViewModel();
             
             if (ModelState.IsValid)
             {
-                var newOperator =  _operatorService.CreateOperator(op);
+                var newOperator =  (NewOperatorViewModel)_operatorService.CreateorUpdateOperator(op);
                 if (newOperator == null)
                 {
                     resp.Status = false;
-                    //resp.Messages = _userMessageLogges.UserErrorMessages;
                 }
                 else {
                     resp.Status = true;
+                    newOperator.UI_Id = op.UI_Id;
                     resp.newOperatorViewModel = newOperator;
                 }
-                //resp.Messages=_userMessageLogges.UserMessages;
 
                 return SendResult(resp);
             }
             return BadRequest(ModelState);
         }
+
+
         [HttpPost(template:"update")]
         public IActionResult Update([FromBody] OperatorViewModel op)
         {
@@ -82,17 +83,16 @@ namespace TakTec.Operators.Backend
 
             if(ModelState.IsValid)
             {
-                var UpdatedOp = _operatorService.UpdateOperator(op);
+                var UpdatedOp = _operatorService.CreateorUpdateOperator(op);
                 if (UpdatedOp == null)
                 {
                     resp.Status = false;
-                    // resp.Messages=_userMessageLogges.UserErrorMessages;
                 }
-                else {
+                else
+                {
                     resp.Status = true;
                     resp.Operator = UpdatedOp;
                 }
-               // resp.Messages=_userMessageLogges.UserMessages;
                 
                 return SendResult(resp);
             }

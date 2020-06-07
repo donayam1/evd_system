@@ -16,6 +16,7 @@
                 <th>Denomination</th>
                 <th>Quantity</th>
                 <th>Stop Date </th>
+                <th>Activate</th>
               </tr>
             </thead>
             <tbody>
@@ -26,6 +27,9 @@
                 <td>{{vb.denomination }}</td>
                 <td>{{vb.quantity}} </td>
                 <td>{{vb.stopDate   }}</td>
+                <td><button (click)="activateBatch(vb)">Activate</button>
+                  <button (click)="takeSamepl(vb)">Take Sample</button>
+                </td>
               </tr>
             </tbody>
           </table>

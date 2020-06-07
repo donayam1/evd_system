@@ -3,6 +3,7 @@ import { PagedItemResponseBase } from "../../Shared/Models/PagedItemResponseBase
 
 export class VoucherBatch {
     constructor(obj?: any){
+        this.id = obj && obj.id;
         this.purchaserOrderId = obj && obj.purchaserOrderId;
         this.batch = obj && obj.batch;
         this.startSequence = obj && obj.startSequence;
@@ -11,6 +12,7 @@ export class VoucherBatch {
         this.denomination = obj && obj.denomination;
     }
 
+    id: String;
     purchaserOrderId: string;
     batch: string;
     stopDate: string;

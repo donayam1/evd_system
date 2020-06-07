@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { VoucherService } from 'src/app/data/Voucher/Services/voucher.service';
+import { Voucher } from 'src/app/data/Voucher/Models/voucherUpload.services';
 
 @Component({
   selector: 'app-voucher',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./voucher.component.css']
 })
 export class VoucherComponent implements OnInit {
+  voucher: Voucher;
 
-  constructor() { }
+  constructor() {
+    this.voucher = new Voucher();
+  }
 
   ngOnInit() {
+    
   }
 
 }

@@ -7,7 +7,7 @@ namespace TakTec.PurchaseOrders.ViewModels
 {
     public class ListPurchaseOrderResponse:ResponseBase 
     {
-        public List<PurchaseOrderModel> PurcahseOrders { get; set; } 
+        public List<PurchaseOrderModel> PurchaseOrders { get; set; } 
             = new List<PurchaseOrderModel>();
     }
 }

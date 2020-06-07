@@ -59,7 +59,7 @@ namespace TakTec.PurchaseOrders.Backend.Controllers
                 else
                 {
                     response.Status = true;
-                    response.PurcahseOrders = res;
+                    response.PurchaseOrders = res;
                 }
 
                 return SendResult(response);

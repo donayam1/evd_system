@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <select [(ngModel)]="currPo" class="from-control" >
-                            <option *ngFor="let item of purchaseOrders" [ngValue]="item" >{{item.poNumber}}</option>
+                            <option *ngFor="let item of purchaseOrders" [ngValue]="item" >{{item.purchaseOrderNumber}}</option>
                         </select>
                     </div>
                     <div class="col-sm-6">

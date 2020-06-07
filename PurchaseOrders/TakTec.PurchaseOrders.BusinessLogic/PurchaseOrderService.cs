@@ -72,11 +72,11 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             AspNetUser? buyerUser = null;
             if (request.Self)
             {
-                buyerUser = _userManager.FindByIdAsync(_tokenUserService.UserId).Result;
+                buyerUser = _accountService.GetUser(_tokenUserService.UserId);
             }
             else
             {
-                buyerUser = _userManager.FindByIdAsync(request.UserId).Result;
+                buyerUser = _accountService.GetUser(request.UserId);
                 //assert that the buyer user is under the current user
                 if (buyerUser.OwnerId != _tokenUserService.UserRole)
                 {
@@ -99,11 +99,17 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                 return true;
             }
 
+            var transerRequest = new VoucherTransferRequest()
+            {
+                TransferRequestItems = request.Items.Cast<VoucherTransferRequestItem>().ToList(),
+                BatchId = request.BatchId,
+                IsApproved = request.IsApproved
+            };
+            String buyserUserRoleName = buyerUser.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
 
             if (!_voucherService.AreVouchersAvailable(
-                    new VoucherTransferRequest()
-                    { TransferRequestItems = request.Items.Cast<VoucherTransferRequestItem>().ToList(), BatchId = request.BatchId },
-                    buyerUser.OwnerId))
+                    transerRequest,
+                    buyerUser.OwnerId, buyserUserRoleName))
             {
                 _logger.AddUserError("Requested vouchers are not available");
                 return false;
@@ -200,15 +206,17 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             else {
 
                 //transer the voucher to the user
+                var voucherTransferReqeust = new VoucherTransferRequest()
+                {
+                    PurchaseOrderId = po.Id,
+                    BatchId = request.BatchId,
+                    IsApproved = request.IsApproved,
+
+                    TransferRequestItems = request.Items.Cast<VoucherTransferRequestItem>().ToList()
+                };
+
                 List<Voucher?>? vouchers = _voucherService.TransferVouchersToUser(
-                     new VoucherTransferRequest()
-                     {
-                         PurchaseOrderId = po.Id,
-                         BatchId = request.BatchId,
-                         IsApproved = request.IsApproved,
-                          
-                         TransferRequestItems = request.Items.Cast<VoucherTransferRequestItem>().ToList()
-                     },
+                     voucherTransferReqeust,
                      buyerUser.OwnerId, buyerUserRole
                  );
 

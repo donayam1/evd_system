@@ -14,7 +14,7 @@ namespace Vouchers.BusinessLogic.Abstractions
         /// Returns Pages List of votures for the current user
         /// </summary>
         public List<VoucherModel> ListVoutchers(ListVoucherRequest request);
-        bool AreVouchersAvailable(VoucherTransferRequest request, String fromUserRoleName);
+        bool AreVouchersAvailable(VoucherTransferRequest request, String fromUserRoleName,String buyerUserRoleName);
         List<Voucher?>? TransferVouchersToUser(VoucherTransferRequest request, String fromUserRoleName, String toUserRole);
         VoucherBatch? GetBatch(String id);
         

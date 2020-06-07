@@ -92,11 +92,16 @@ namespace Vouchers.BusinessLogic
         /// <param name="request"></param>
         /// <param name="fromUserRoleName"></param>
         /// <returns></returns>
-        public bool AreVouchersAvailable(VoucherTransferRequest request, String fromUserRoleName) {
+        public bool AreVouchersAvailable(VoucherTransferRequest request, String fromUserRoleName,String buyerUserRoleName) //,String requestorUserRole
+        {
             foreach (var v in request.TransferRequestItems) {
-                int userVouchers = _userVoucherRepository.CountUserFreeVouchers(fromUserRoleName, v.Denomination,request.BatchId);
+                int userVouchers = 0;
+                if (!fromUserRoleName.Equals(buyerUserRoleName)) {
+                    userVouchers = _userVoucherRepository.CountUserFreeVouchers(fromUserRoleName, v.Denomination, request.BatchId, request.IsApproved);
+                }
+                
                 if (userVouchers < v.Quantity) {
-                    int systemFreeVouchers =_vouchersRepository.CountSystemFreeVouchers(v.Denomination, request.BatchId, isApproved: true);
+                    int systemFreeVouchers =_vouchersRepository.CountSystemFreeVouchers(v.Denomination, request.BatchId, request.IsApproved);
                     if ((systemFreeVouchers + userVouchers) < v.Quantity)
                     {
                         _logger.AddUserError($"{v.Quantity} vouchers of {v.Denomination} birr not avaiable.");
@@ -126,9 +131,16 @@ namespace Vouchers.BusinessLogic
             List<Voucher?> allVouchers = new List<Voucher?>();
 
             foreach (var v in request.TransferRequestItems) {
-                List<Voucher?> userVouchers = _userVoucherRepository.
-                    GetFreeUserVouchers(fromUserRoleName, v.Denomination,v.Quantity,
-                    request.BatchId,request.IsApproved).Select(x=>x.Voucher).ToList();
+                List<Voucher?> userVouchers = new List<Voucher?>();
+
+                if (!fromUserRoleName.Equals(toUserRole)) // user does not buy form his own stock, he already ownes the stock
+                {
+                  var vouchers =  _userVoucherRepository.
+                        GetFreeUserVouchers(fromUserRoleName, v.Denomination, v.Quantity,
+                        request.BatchId, request.IsApproved).Select(x => x.Voucher).ToList();
+                    userVouchers.AddRange(vouchers);
+                }
+
                 if (userVouchers.Count() < v.Quantity) {
                     _logger.LogWarning($"user {fromUserRoleName} has no stocked vouchers of {v.Denomination}birr-{v.Quantity}. Checking system stock. ");
 
@@ -158,8 +170,11 @@ namespace Vouchers.BusinessLogic
                     v.IsInSystemPool = false;                    
                 }
                 else {
-                    var currStatus =v.UserVouchers.Where(x => x.IsCurrent == true).FirstOrDefault();
-                    currStatus.IsCurrent = false;
+                    //var currStatus =v.UserVouchers.Where(x => x.IsCurrent == true).FirstOrDefault();
+                    //if (currStatus == null) {
+                    //    throw new ArgumentNullException($"Current status for voucher <->{v.Id} not found");
+                    //}
+                    //currStatus.IsCurrent = false;
                 }
 
                 var userVoucher = new UserVoucher(request.PurchaseOrderId, toUserRole, v.Id)

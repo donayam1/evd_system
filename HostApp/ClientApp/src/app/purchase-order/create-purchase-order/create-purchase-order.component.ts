@@ -5,7 +5,7 @@ import { PurchaseOrderService } from 'src/app/data/PurchaseOrder/Service/purchas
 import { PurchaseOrder, PurchaseOrderItem, NewPurchaseOrder } from 'src/app/data/PurchaseOrder/Model/purchase-order.model';
 import { Message } from 'src/app/data/Shared/Models/responseBase';
 import { MessageComponent } from 'src/app/messages/message/message.component';
-import { ListUserResponse, NewUser } from 'src/app/data/User/Models/user.model';
+import { ListUserResponse, Users } from 'src/app/data/User/Models/user.model';
 
 @Component({
   selector: 'app-create-purchase-order',
@@ -15,7 +15,7 @@ import { ListUserResponse, NewUser } from 'src/app/data/User/Models/user.model';
 export class CreatePurchaseOrderComponent implements OnInit {
   po: NewPurchaseOrder;
   uList: ListUserResponse;
-  selectedUser: NewUser;
+  selectedUser: Users;
   currentPoItem: PurchaseOrderItem;
   isSelf: boolean;
   isEx: boolean;
@@ -50,7 +50,7 @@ export class CreatePurchaseOrderComponent implements OnInit {
     return this.po.isExternal = true;
   }
 
-  checkUser(user: NewUser){
+  checkUser(user: Users){
     this.uService.getUser(user.Id).subscribe(x => {
       this.selectedUser = x.newUser;
     })

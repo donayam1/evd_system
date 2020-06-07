@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListVoucherBatchResponse } from 'src/app/data/VoucherBatch/Models/voucherBatch.model';
 import { VoucherBatchService } from 'src/app/data/VoucherBatch/Services/voucher-batch.service';
+import { VoucherBatch } from '../../data/VoucherBatch/Models/voucherBatch.model';
 
 @Component({
   selector: 'app-listvoucher-batch',
@@ -21,5 +22,20 @@ export class ListvoucherBatchComponent implements OnInit {
       console.log(data);
     })
   }
+  activateBatch(batch:VoucherBatch){
+    this.voucherBatchService.activateVoucherBatch(batch.id).subscribe(x=> {
+      if(x.status === true){
+        alert("sucess");
+      }
+      else {
+        alert("error");
+      }
+    });
+  }
+  
+  takeSamepl(batch:VoucherBatch){
+
+  }
+
 
 }

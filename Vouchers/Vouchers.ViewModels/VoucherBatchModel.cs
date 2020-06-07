@@ -7,7 +7,7 @@ namespace Vouchers.ViewModels
     public class VoucherBatchModel
     {
         
-        public String PurchaserOrderNumber { get; set; } = default!;
+        public String PurchaseOrderId { get; set; } = default!;
         public String? Id { get; set; }
 
         public String Batch { get; set; } = default!;

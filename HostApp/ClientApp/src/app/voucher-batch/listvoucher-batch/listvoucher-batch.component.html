@@ -16,16 +16,20 @@
                 <th>Denomination</th>
                 <th>Quantity</th>
                 <th>Stop Date </th>
+                <th>Activate</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let vb of response.voucherBatch">
-                <td>{{ vb.purchaserOrderNumber }}</td>
+              <tr *ngFor="let vb of response.voucherBatches">
+                <td>{{ vb.purchaserOrderId }}</td>
                 <td>{{vb.batch}} </td>
                 <td>{{vb.startSequence}} </td>
                 <td>{{vb.denomination }}</td>
                 <td>{{vb.quantity}} </td>
                 <td>{{vb.stopDate   }}</td>
+                <td><button (click)="activateBatch(vb)">Activate</button>
+                  <button (click)="takeSamepl(vb)">Take Sample</button>
+                </td>
               </tr>
             </tbody>
           </table>

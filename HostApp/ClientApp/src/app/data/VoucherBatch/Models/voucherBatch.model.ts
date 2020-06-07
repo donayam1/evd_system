@@ -2,16 +2,18 @@ import { PagedItemResponseBase } from "../../Shared/Models/PagedItemResponseBase
 
 
 export class VoucherBatch {
-    constructor(obj? : any){
-        this.purchaserOrderNumber = obj && obj.purchaserOrderNumber;
+    constructor(obj?: any){
+        this.id = obj && obj.id;
+        this.purchaserOrderId = obj && obj.purchaserOrderId;
         this.batch = obj && obj.batch;
         this.startSequence = obj && obj.startSequence;
         this.stopDate = obj && obj.stopDate;
         this.quantity = obj && obj.quantity;
-        this.denomination =obj && obj.denomination;
+        this.denomination = obj && obj.denomination;
     }
 
-    purchaserOrderNumber: string;
+    id: String;
+    purchaserOrderId: string;
     batch: string;
     stopDate: string;
     startSequence: string;
@@ -22,8 +24,8 @@ export class VoucherBatch {
 export class ListVoucherBatchResponse extends PagedItemResponseBase{
     constructor(obj? : any){
         super(obj);
-        this.voucherBatch = obj && obj.voucherBatch && obj.voucherBatch.map(vouchBatch => new VoucherBatch(vouchBatch)) || Array();
+        this.voucherBatches = obj && obj.voucherBatches.map(vouchBatch => new VoucherBatch(vouchBatch)) || Array();
     }
 
-    voucherBatch: VoucherBatch[]; 
+    voucherBatches: VoucherBatch[]; 
 }

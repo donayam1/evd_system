@@ -10,7 +10,7 @@ import { AppConfig } from '../../Configs/Services/app.config';
 })
 export class PurchaseOrderService {
 
-  private readonly api = "/api/purchaseOrders/purshaseOrder";
+  private readonly api = "/api/purchaseOrders/purchaseOrder";
 
   constructor(private http:HttpClient) { }
 

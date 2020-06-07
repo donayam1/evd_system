@@ -7,7 +7,7 @@ export class GroupType extends NamedItem {
         super(obj);
         // this.id = obj && obj.id;
         // this.name = obj && obj.name;
-        this.level = obj && obj.level || -1;
+        this.level = obj && obj.level;
         this.objectStatus = obj && obj.objectStatus;
     }
 

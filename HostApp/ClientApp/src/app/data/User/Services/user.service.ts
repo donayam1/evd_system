@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NewUserResponse, NewUser, ListUserResponse, Users, PermissionGroup, Permission } from '../Models/user.model';
+import { NewUserResponse, ListUserResponse, Users, PermissionGroup, Permission } from '../Models/user.model';
 import { AppConfig } from '../../Configs/Services/app.config';
 import { Message } from '../../Shared/Models/responseBase';
 import { ObjectStatus } from '../../Shared/Models/newObjectStatus.model';
@@ -49,7 +49,7 @@ export class UserService {
 
   }
 
-  createUser(user: NewUser): Observable<NewUserResponse> {
+  createUser(user: Users): Observable<NewUserResponse> {
     //Mock Data
     // let response = new NewUserResponse();
     // response.status = true;
@@ -92,7 +92,7 @@ export class UserService {
   getUser(id: string){
     //Mock Data
     const userResponse: NewUserResponse = new NewUserResponse();
-    const user = new NewUser({
+    const user = new Users({
       id: '1',
       UserName: 'User-01',
       picUrl: "",

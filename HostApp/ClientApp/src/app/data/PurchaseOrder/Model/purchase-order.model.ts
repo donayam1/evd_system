@@ -41,6 +41,7 @@ export class NewPurchaseOrder extends PurchaseOrder{
         super();
         this.self = obj && obj.self || false;
         this.userId = obj && obj.userId || null;
+        this.isExternal = obj && obj.isExternal || false;
     }
 }
 
@@ -66,7 +67,7 @@ export class CreatePurchaseOrderResponse extends ResponseBase{
 export class ListPurchaseOrderResponse extends PagedItemResponseBase{
     constructor(obj?: any){
         super(obj);
-        this.purchaseOrders = obj && obj.purchaseOrders.map(po => new PurchaseOrder(po)) || Array();
+        this.purchaseOrders = obj && obj.purchaseOrders && obj.purchaseOrders.map(po => new PurchaseOrder(po)) || Array();
     }
     purchaseOrders: PurchaseOrder[];
 }

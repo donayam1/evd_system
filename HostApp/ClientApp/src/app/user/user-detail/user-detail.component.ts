@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NewUser, PermissionGroup } from 'src/app/data/User/Models/user.model';
+import { Users, PermissionGroup } from 'src/app/data/User/Models/user.model';
 import { Message } from 'src/app/data/Shared/Models/responseBase';
 import { GroupType, GroupTypesResponse } from 'src/app/data/GroupType/Models/grouptype..models';
 import { RetailerPlan, RetailerPlanResponse } from 'src/app/data/RetailerPlan/Models/retailer-plan.model';
@@ -12,7 +12,7 @@ import { ObjectStatus } from 'src/app/data/Shared/Models/newObjectStatus.model';
 // import { UserService } from 'src/app/data/User/Services/user.service';
 // import { State } from '@ngrx/store';
 import { UserState, SelectCurrentUser } from 'src/app/data/User/Reducers/user.resucers';
-import { Users } from 'src/app/data/User/Models/user.model';
+//import { Users } from 'src/app/data/User/Models/user.model';
 
 @Component({
   selector: 'app-user-detail',
@@ -20,7 +20,7 @@ import { Users } from 'src/app/data/User/Models/user.model';
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
-  user: NewUser;
+  user: Users;
   isError: boolean;
   messages: Message[];
   selectedgt: GroupType;
@@ -32,7 +32,7 @@ export class UserDetailComponent implements OnInit {
   userPermissions: PermissionGroup;
   
   constructor(private userService: UserService, private gtServ: GrouptypeService, private rpServ: RetailerPlanService, private store: Store<OperatorState>, private state: State<OperatorState>) {
-    this.user = new NewUser();
+    this.user = new Users();
     this.isError = false;
     this.messages = Array();
     this.selectedgt = new GroupType();
@@ -49,7 +49,7 @@ export class UserDetailComponent implements OnInit {
     this.userService.getUser('1').subscribe(x => {
       if (x.status === true){
         this.user = x.newUser;
-        this.gtServ.getGroupType(x.newUser.rankId).subscribe(x => {
+        this.gtServ.getGroupType(x.newUser.roleTypeId).subscribe(x => {
           if (x.status === true){
             this.selectedgt = x.groupType;
           }

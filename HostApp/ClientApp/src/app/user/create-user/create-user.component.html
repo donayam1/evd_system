@@ -38,7 +38,7 @@
                             <!-- <option selected class="text-muted disabled">Select the users group type</option> -->
                             <option *ngFor="let item of gtList.groupTypes" [ngValue]="item">{{item.name}}</option>
                         </select>
-                        <div class="card bg-transparent mt-md-3" *ngIf="selectedGt.level != -1">
+                        <div class="card bg-transparent mt-md-3">
                             <div class="card-body">
                                 <p class="card-text card-title">Grouptype Attributes</p>
                                 <p class="small">Level: <b>{{selectedGt.level}}</b></p>
@@ -49,10 +49,10 @@
                     <div class="form-row form-group">
                         <label for="retailerplan" class="col-form-label col-form-label-sm">Retailer Plan:</label>
                         <select class="form-control form-control-sm" name="retailerplan" id="retailerplan" [(ngModel)]="selectedRp" required>
-                            <option selected class="text-muted disabled">Select the users group type</option>
+                            <option selected class="text-muted disabled">Select the users retailer plan</option>
                             <option *ngFor="let item of rpList.retailerPlans" [ngValue]="item">{{item.name}}</option>
                         </select>
-                        <div class="card bg-transparent mt-md-3" *ngIf="rpTriggered != false">
+                        <div class="card bg-transparent mt-md-3">
                             <div class="card-body">
                                 <p class="card-text card-title">Retailer Plan Attributes</p>
                                 <p class="small">Plan Name: <b>{{selectedRp.name}}</b></p>

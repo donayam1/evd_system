@@ -17,10 +17,11 @@ export class Users extends User {
         this.firstName = obj && obj.firstName;
         this.middleName = obj && obj.middleName;
         this.lastName = obj && obj.lastName;
-        this.rankId = obj && obj.rankId;
+        //this.rankId = obj && obj.rankId;
         this.planId = obj && obj.planId;
         this.objectStatus = obj && obj.objectStatus;
-        this.userStatus = obj && obj.userStatus
+        this.userStatus = obj && obj.userStatus;
+        this.password = obj && obj.password;
     }
     groupName: string;
     groupTypeName: string;
@@ -31,34 +32,35 @@ export class Users extends User {
     firstName: string;
     middleName: string;
     lastName: string;
-    rankId: string;
+    //rankId: string;
     planId: string;
     userStatus: string;
     objectStatus: number;
+    password: string;
 }
 
-export class NewUser extends User {
-    email: string;
-    phoneNumber: string;
-    firstName: string;
-    middleName: string;
-    lastName: string;
-    rankId: string;
-    planId: string;
-    objectStatus: number;
+// export class NewUser extends User {
+//     email: string;
+//     phoneNumber: string;
+//     firstName: string;
+//     middleName: string;
+//     lastName: string;
+//     rankId: string;
+//     planId: string;
+//     objectStatus: number;
 
-    constructor(obj?: any) {
-        super(obj);
-        this.email = obj && obj.email;
-        this.phoneNumber = obj && obj.phoneNumber;
-        this.firstName = obj && obj.firstName;
-        this.middleName = obj && obj.middleName || "";
-        this.lastName = obj && obj.lastName;
-        this.rankId = obj && obj.rankId;
-        this.planId = obj && obj.planId;
-        this.objectStatus = obj && obj.objectStatus;
-    }
-}
+//     constructor(obj?: any) {
+//         super(obj);
+//         this.email = obj && obj.email;
+//         this.phoneNumber = obj && obj.phoneNumber;
+//         this.firstName = obj && obj.firstName;
+//         this.middleName = obj && obj.middleName || "";
+//         this.lastName = obj && obj.lastName;
+//         this.rankId = obj && obj.rankId;
+//         this.planId = obj && obj.planId;
+//         this.objectStatus = obj && obj.objectStatus;
+//     }
+// }
 
 export class Permission {
     value: string;
@@ -89,11 +91,11 @@ export class PermissionGroup {
 // }
 
 export class NewUserResponse extends ResponseBase{
-    newUser: NewUser;
+    newUser: Users;
 
     constructor(obj?: any) {
         super(obj);
-        this.newUser = obj &&  new NewUser(obj) || new NewUser();
+        this.newUser = obj &&  new Users(obj) || new Users();
     }
 }
 

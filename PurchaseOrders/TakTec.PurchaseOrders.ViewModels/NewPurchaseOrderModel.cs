@@ -9,7 +9,7 @@ namespace TakTec.PurchaseOrders.ViewModels
     public class NewPurchaseOrderModel: PurchaseOrderModel
     {
         public Boolean Self { get; set; } = default!; //if the request is made for the current user or on behalf of another user
-        public String UserId { get; set; } = default!;
+        public String? UserId { get; set; } = default!;
         /// <summary>
         /// Only system admin is allowed to make an external request 
         /// </summary>

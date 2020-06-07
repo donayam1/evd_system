@@ -41,7 +41,7 @@ namespace TakTec.RetailerPlans.Backend
                 }
                 else
                 {
-                    planList.Status=true;
+                    planList.Status=true;  
                     planList.RetailerPlans = items;
                 }
                 return SendResult(planList);

@@ -77,7 +77,7 @@ namespace TakTec.RetailerPlans.BusinessLogic
                 catch (Exception e)
                 {
                     _logger.LogError(e.InnerException, e.Message);
-                    _logger.AddUserError("Unknowen error. Please contact administrator.");
+                    _logger.AddUserError("Unknown error. Please contact administrator.");
                     return null;
                 }
             }

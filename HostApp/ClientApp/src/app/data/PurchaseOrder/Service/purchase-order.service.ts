@@ -10,7 +10,7 @@ import { AppConfig } from '../../Configs/Services/app.config';
 })
 export class PurchaseOrderService {
 
-  private readonly api = "/api/purchaseOrders/purchaseOrder";
+  private readonly api = "/api/purchaseOrders/purchaseOrder/CreatePurchaseOrder";
 
   constructor(private http:HttpClient) { }
 
@@ -47,30 +47,30 @@ export class PurchaseOrderService {
   
 
   createPurchaseOrder(purchaseOrder: NewPurchaseOrder):Observable<CreatePurchaseOrderResponse>{
-    let response = new CreatePurchaseOrderResponse();
-    response.status = true;
-    let mes = new Message();
-    mes.messageCode = '30';
-    mes.messageType = 1;
-    mes.systemMessage = "working";
-    response.messages.push(mes);
+    // let response = new CreatePurchaseOrderResponse();
+    // response.status = true;
+    // let mes = new Message();
+    // mes.messageCode = '30';
+    // mes.messageType = 1;
+    // mes.systemMessage = "working";
+    // response.messages.push(mes);
 
-    let po = new NewPurchaseOrderResult();
-    po.ui_id = purchaseOrder.id;
-    po.id = '23';
-    po.self = purchaseOrder.self;
-    po.isExternal = purchaseOrder.isExternal;
-    po.userId = purchaseOrder.userId;
-    po.poNumber = purchaseOrder.poNumber;
-    po.purchaseOrderItems = purchaseOrder.purchaseOrderItems;
+    // let po = new NewPurchaseOrderResult();
+    // po.ui_id = purchaseOrder.id;
+    // po.id = '23';
+    // po.self = purchaseOrder.self;
+    // po.isExternalOrder = purchaseOrder.isExternalOrder;
+    // po.userId = purchaseOrder.userId;
+    // po.poNumber = purchaseOrder.poNumber;
+    // po.purchaseOrderItems = purchaseOrder.purchaseOrderItems;
 
-    response.newPurchaseOrderResult = po;
+    // response.newPurchaseOrderResult = po;
 
-    return of(response);
+    // return of(response);
 
     //Later to be used with the api
-    /*
-    const url = AppConfig.settings.apiServers.authServer + this.url;
+    
+    const url = AppConfig.settings.apiServers.authServer + this.api;
     return new Observable(observer => {
       this.http.post<CreatePurchaseOrderResponse>(url, purchaseOrder).subscribe(result => {
         const response = new CreatePurchaseOrderResponse(result);
@@ -81,7 +81,7 @@ export class PurchaseOrderService {
         observer.complete();
       });
     });
-    */
+    
 
 
   }

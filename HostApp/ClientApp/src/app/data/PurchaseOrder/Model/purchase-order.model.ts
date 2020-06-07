@@ -18,7 +18,7 @@ export class PurchaseOrderItem {
 
 export class PurchaseOrder{
     id: string;
-    poNumber: string;
+    purchaseOrderNumber: string;
     purchaseOrderItems: PurchaseOrderItem[];
     date: string;
     status: Number;
@@ -26,7 +26,7 @@ export class PurchaseOrder{
     constructor (obj?: any){
         this.id = obj && obj.id;
         this.purchaseOrderItems = obj && obj.purchaseOrderItems.map(poI => new PurchaseOrderItem(poI) ) || Array();
-        this.poNumber = obj && obj.poNumber;
+        this.purchaseOrderNumber = obj && obj.purchaseOrderNumber;
         this.date = obj && obj.date;
         this.status = obj && obj.status;
     }
@@ -34,14 +34,14 @@ export class PurchaseOrder{
 
 export class NewPurchaseOrder extends PurchaseOrder{
     self: boolean;
-    isExternal: boolean;
+    isExternalOrder: boolean;
     userId: string;
 
     constructor (obj?: any){
         super();
         this.self = obj && obj.self || false;
         this.userId = obj && obj.userId || null;
-        this.isExternal = obj && obj.isExternal || false;
+        this.isExternalOrder = obj && obj.isExternal || false;
     }
 }
 

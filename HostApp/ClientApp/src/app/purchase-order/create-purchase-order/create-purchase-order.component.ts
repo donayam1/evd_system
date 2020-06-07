@@ -47,7 +47,7 @@ export class CreatePurchaseOrderComponent implements OnInit {
 
   isExternal($event){
     this.isEx = true;
-    return this.po.isExternal = true;
+    return this.po.isExternalOrder = true;
   }
 
   checkUser(user: Users){
@@ -75,15 +75,18 @@ export class CreatePurchaseOrderComponent implements OnInit {
       this.po.userId = this.selectedUser.Id;
     }
     if (this.isEx === true){
-      this.po.isExternal = true;
+      this.po.isExternalOrder = true;
     }
     else{
-      this.po.isExternal = false;
+      this.po.isExternalOrder = false;
     }
     this.po.status = ObjectStatus.NEW;
+    this.po.userId = '12';
+    console.dir(this.po);
     this.poService.createPurchaseOrder(this.po).subscribe((x)=>{
       this.messages.addMessages(x);
       if(x.status === true){
+        
         console.log(this.po);   
       }
     },err=>{});

@@ -13,5 +13,7 @@ namespace TakTec.PurchaseOrders.ViewModels
         public String FromDate { get; set; } = default!;
         public String ToDate { get; set; } = default!;
 
+        public bool IsExternalOrder { get; set; } = false;
+
     }
 }

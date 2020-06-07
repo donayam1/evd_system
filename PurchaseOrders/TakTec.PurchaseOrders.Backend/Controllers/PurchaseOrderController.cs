@@ -45,7 +45,7 @@ namespace TakTec.PurchaseOrders.Backend.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListPurcaseOrder([FromQuery]PagedItemRequestBase request)
+        public IActionResult ListPurcaseOrder([FromQuery]ListPurchaseOrderRequest request)
         {
             if (ModelState.IsValid)
             {

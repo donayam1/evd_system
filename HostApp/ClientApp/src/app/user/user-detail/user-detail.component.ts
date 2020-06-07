@@ -46,7 +46,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUser('1').subscribe(x => {
+    this.userService.getUser(this.user.Id).subscribe(x => {
       if (x.status === true){
         this.user = x.newUser;
         this.gtServ.getGroupType(x.newUser.roleTypeId).subscribe(x => {

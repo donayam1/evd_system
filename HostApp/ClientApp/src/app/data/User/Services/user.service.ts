@@ -89,39 +89,39 @@ export class UserService {
     });
   }
 
-  getUser(id: string){
+  getUser(id: string):Observable<NewUserResponse>{
     //Mock Data
-    const userResponse: NewUserResponse = new NewUserResponse();
-    const user = new Users({
-      id: '1',
-      UserName: 'User-01',
-      picUrl: "",
-      email: 'example@example.com',
-      phoneNumber: 12343445567,
-      firstName: 'Abebe',
-      middleName: 'Belete',
-      lastName: 'Kebede',
-      rankId: '12',
-      planId: '1',
-      objectStatus: ObjectStatus.NEW
-    });
-    userResponse.newUser = user;
-    userResponse.status = true;
-    console.log(userResponse);
-    return of(userResponse);
+    // const userResponse: NewUserResponse = new NewUserResponse();
+    // const user = new Users({
+    //   id: '1',
+    //   UserName: 'User-01',
+    //   picUrl: "",
+    //   email: 'example@example.com',
+    //   phoneNumber: 12343445567,
+    //   firstName: 'Abebe',
+    //   middleName: 'Belete',
+    //   lastName: 'Kebede',
+    //   rankId: '12',
+    //   planId: '1',
+    //   objectStatus: ObjectStatus.NEW
+    // });
+    // userResponse.newUser = user;
+    // userResponse.status = true;
+    // console.log(userResponse);
+    // return of(userResponse);
 
     //Later to be used with the api
-    // const url = AppConfig.settings.apiServers.authServer + this.api + "/edit";
-    // return new Observable(observer => {
-    //   this.http.get<NewUserResponse>(url).subscribe(x => {
-    //     const response = new NewUserResponse(x);
-    //     observer.next(response);
-    //     observer.complete();
-    //   }, error => {
-    //     observer.error(error);
-    //     observer.complete();
-    //   });
-    // });
+    const url = AppConfig.settings.apiServers.authServer + this.api;
+    return new Observable(observer => {
+      this.http.get<NewUserResponse>(url).subscribe(x => {
+        const response = new NewUserResponse(x);
+        observer.next(response);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      });
+    });
   }
 
   getUserPermission(){

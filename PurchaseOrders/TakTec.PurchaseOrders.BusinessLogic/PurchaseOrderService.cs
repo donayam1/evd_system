@@ -85,6 +85,11 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                 }
             }
 
+            if (request.Items.Count() <= 0) {
+                _logger.AddUserError("No items specified.");
+                return false;
+            }
+
             if (request.IsExternalOrder) {
                 if (_tokenUserService.UserRole != RoleTypeConstants.RoleNameSupperAdmin) {
                     _logger.AddUnauthorizedError();
@@ -231,9 +236,10 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             return result;
         }
 
-        public List<PurchaseOrderModel> ListPuchaseOrders(PagedItemRequestBase request) {
+        public List<PurchaseOrderModel> ListPuchaseOrders(ListPurchaseOrderRequest request) {
             var userRole =_tokenUserService.UserRole;
             return _purchaseOrderRepository.WithOwnerItemId(userRole)
+                .Where(x=>x.IsExternalOrder == request.IsExternalOrder)
                 .OrderBy(x=>x.DatabaseAddedDateTime)
                 .Skip(request.Page-1).Take(request.ItemsPerPage)
                 .ToList().ToViewModel();

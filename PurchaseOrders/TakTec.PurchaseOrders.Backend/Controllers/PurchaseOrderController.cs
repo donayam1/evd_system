@@ -45,7 +45,7 @@ namespace TakTec.PurchaseOrders.Backend.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListPurcaseOrder([FromQuery]PagedItemRequestBase request)
+        public IActionResult ListPurcaseOrder([FromQuery]ListPurchaseOrderRequest request)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace TakTec.PurchaseOrders.Backend.Controllers
                 else
                 {
                     response.Status = true;
-                    response.PurcahseOrders = res;
+                    response.PurchaseOrders = res;
                 }
 
                 return SendResult(response);

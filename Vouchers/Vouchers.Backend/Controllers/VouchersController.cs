@@ -81,7 +81,7 @@ namespace Vouchers.Backend.Controllers
                 UploadedFile file = this.UploadTheFile();
                 if (file.Status == true)
                 {
-                    file.PurchaseOrderId = data.PurchaseOrderId;
+                    file.PurchaseOrderId = poId.ToString();
                     _voucherUploadService.ScheduleUploadedVoucherFileProcessor(file);
                     response.Status = true;
                 }

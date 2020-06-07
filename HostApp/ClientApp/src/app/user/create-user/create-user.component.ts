@@ -1,6 +1,6 @@
 import { ObjectStatus } from './../../data/Shared/Models/newObjectStatus.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NewUser } from 'src/app/data/User/Models/user.model';
+import { Users } from 'src/app/data/User/Models/user.model';
 import { MessageComponent } from 'src/app/messages/message/message.component';
 import { UserService } from 'src/app/data/User/Services/user.service';
 import { GrouptypeService } from 'src/app/data/GroupType/Services/grouptype.service';
@@ -14,7 +14,7 @@ import { RetailerPlanResponse, RetailerPlan } from 'src/app/data/RetailerPlan/Mo
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
-  nUser: NewUser;
+  nUser: Users;
   gtList: GroupTypesResponse;
   rpList: RetailerPlanResponse;
   selectedRp: RetailerPlan;
@@ -25,8 +25,9 @@ export class CreateUserComponent implements OnInit {
   @ViewChild('messages', {static: true})
   messagesComponent: MessageComponent;
   
-  constructor(private userService: UserService, private gtService: GrouptypeService, private rpService: RetailerPlanService) {
-    this.nUser = new NewUser();
+  constructor(private userService: UserService, private gtService: GrouptypeService,
+     private rpService: RetailerPlanService) {
+    this.nUser = new Users();
     this.selectedRp = new RetailerPlan();
     this.selectedGt = new GroupType();
     this.gtList = new GroupTypesResponse();
@@ -37,8 +38,11 @@ export class CreateUserComponent implements OnInit {
 
   ngOnInit() {
     this.gtService.fetchGroupType().subscribe(x => {
-      this.gtList = x;
-      console.log(x);
+      if(x.status === true){
+        this.gtList = x;
+        this.selectedGt = x.groupTypes[0];
+        console.log(x);
+      }
     });
 
     this.rpService.fetchRetailerPlan().subscribe(x => {
@@ -65,8 +69,11 @@ export class CreateUserComponent implements OnInit {
 
   createUser($event?: any){
     this.nUser.objectStatus = ObjectStatus.NEW;
-    this.nUser.rankId = this.selectedGt.id;
+    this.nUser.roleTypeId = this.selectedGt.id;
+    this.nUser.groupName = this.selectedGt.name;
     this.nUser.planId = this.selectedRp.id;
+    this.nUser.groupTypeName = this.selectedGt.name;
+    this.nUser.password = '000000';
     this.userService.createUser(this.nUser).subscribe(x => {
       this.messagesComponent.addMessages(x);
       if(x.status === true){

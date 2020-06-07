@@ -11,17 +11,24 @@
                             <label class="form-check-label col-form-label-sm" for="self-purchase">Self</label>
                         </div>
                         <div class="form-row form-group form-check form-check-inline col-md-auto">
-                            <input class="form-check-input" type="checkbox" value="" name="isExternal" id="isExternal" (change)='isExternal($event)' [(ngModel)]="po.isExternal">
-                            <label class="form-check-label col-form-label-sm" for="self-purchase">is external</label>
+                            <input class="form-check-input" type="checkbox" value="" name="isExternal" id="isExternal" (change)='isExternal($event)' [(ngModel)]="po.isExternalOrder">
+                            <label class="form-check-label col-form-label-sm" for="self-purchase">Is External Order</label>
                         </div>
                     </div>
                     <div class="col-md-7 ml-md-4 float-md-right align-self-center">
                         <div class="form-group form-row">
                             <label class="col-md-3 col-form-label col-form-label-sm" for="on-behalf-user-list">Users:</label>
-                            <select class="form-control form-control-sm mr-md-auto col-md-7" name="on-behalf-user-list" id="on-behalf-user-list" (change)="checkUser($event)" [(ngModel)]="po.userId">
+                            <select class="form-control form-control-sm mr-md-auto col-md-7" name="on-behalf-user-list" id="on-behalf-user-list" [(ngModel)]="selectedUser">
                                 <option selected>Select a user</option>
-                                <option *ngFor="let item of uList.users" [value]="item.Id">{{item.UserName}}</option>
+                                <option *ngFor="let item of uList.users" [ngValue]="item">{{item.email}}</option>
                             </select>
+                            <div class="card bg-transparent mt-md-3">
+                                <div class="card-body" *ngIf="selectedUser != null">
+                                    <p class="card-text card-title">User Attributes</p>
+                                    <p class="small">Email: <b>{{selectedUser.email}}</b></p>
+                                    <!-- <p class="small">Type Name: <b>{{selectedUser.name}}</b></p> -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -30,7 +37,7 @@
                     <div class="col-md-4"></div>
                     <div class="form-group form-row col-md-8 float-md-right mr-md-0">
                         <label for="poNumber" class="col-md-auto col-form-label-sm">PO Number:</label>
-                        <input type="text" class="col-md-6 form-control form-control-sm text-center" name="poNumber" id="poNumber" placeholder="new PO number" [(ngModel)]="po.poNumber"> 
+                        <input type="text" class="col-md-6 form-control form-control-sm text-center" name="poNumber" id="poNumber" placeholder="new PO number" [(ngModel)]="po.purchaseOrderNumber"> 
                     </div>
                 </div>
                 
@@ -51,7 +58,7 @@
             </form>
         </div>
     </div>
-    <div class="card bg-transparent col-md-auto mr-md-auto mb-md-5" *ngIf="po.purchaseOrderItems.length > 0">
+    <div class="card bg-transparent col-md-auto mr-md-auto mb-md-5" *ngIf="po.items.length > 0">
         <div class="card-header">Confirmation Table</div>
         <div class="card-body">
             <table class="table table-striped">
@@ -63,7 +70,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of po.purchaseOrderItems">
+                    <tr *ngFor="let item of po.items">
                         <td>{{item.denomination}}</td>
                         <td>{{item.quantity}}</td>
                         <td><button (click)="deletePo(item)" class="btn btn-danger">delete</button></td>
@@ -75,7 +82,7 @@
             <button (click) = "createPo($event)" class="btn btn-primary float-md-right mr-md-4">Submit</button>
         </div>
           
-        <div *ngIf="po.purchaseOrderItems.length <= 0">
+        <div *ngIf="po.items.length <= 0">
     
         </div>
     </div>

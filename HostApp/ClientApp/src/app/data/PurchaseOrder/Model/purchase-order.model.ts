@@ -1,5 +1,7 @@
 import { ResponseBase } from "../../Shared/Models/responseBase";
 import { PagedItemResponseBase } from "../../Shared/Models/PagedItemResponseBase";
+import { extend } from 'webdriver-js-extender';
+import { PagedItemRequestBase } from '../../Shared/Models/PagedItemRequestBase';
 
 export class PurchaseOrderItem {
     id: String;
@@ -18,15 +20,15 @@ export class PurchaseOrderItem {
 
 export class PurchaseOrder{
     id: string;
-    poNumber: string;
-    purchaseOrderItems: PurchaseOrderItem[];
+    purchaseOrderNumber: string;
+    items: PurchaseOrderItem[];
     date: string;
     status: Number;
 
     constructor (obj?: any){
         this.id = obj && obj.id;
-        this.purchaseOrderItems = obj && obj.purchaseOrderItems.map(poI => new PurchaseOrderItem(poI) ) || Array();
-        this.poNumber = obj && obj.poNumber;
+        this.items = obj && obj.items.map(poI => new PurchaseOrderItem(poI) ) || Array();
+        this.purchaseOrderNumber = obj && obj.purchaseOrderNumber;
         this.date = obj && obj.date;
         this.status = obj && obj.status;
     }
@@ -34,13 +36,14 @@ export class PurchaseOrder{
 
 export class NewPurchaseOrder extends PurchaseOrder{
     self: boolean;
-    isExternal: boolean;
+    isExternalOrder: boolean;
     userId: string;
 
     constructor (obj?: any){
         super();
         this.self = obj && obj.self || false;
         this.userId = obj && obj.userId || null;
+        this.isExternalOrder = obj && obj.isExternal || false;
     }
 }
 
@@ -69,4 +72,14 @@ export class ListPurchaseOrderResponse extends PagedItemResponseBase{
         this.purchaseOrders = obj && obj.purchaseOrders && obj.purchaseOrders.map(po => new PurchaseOrder(po)) || Array();
     }
     purchaseOrders: PurchaseOrder[];
+}
+
+export class ListPurchaseOrdersRequest extends PagedItemRequestBase {
+    
+    isExternalOrder:boolean;
+    constructor(obj?: any){
+        super(obj);
+        this.isExternalOrder = obj && obj.isExternalOrder || false;
+    }
+   
 }

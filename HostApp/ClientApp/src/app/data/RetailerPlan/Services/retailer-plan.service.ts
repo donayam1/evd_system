@@ -19,6 +19,7 @@ export class RetailerPlanService {
 
   fetchRetailerPlan():Observable<RetailerPlanResponse>{
     const RpResponse : RetailerPlanResponse = new RetailerPlanResponse();
+    RpResponse.status = true;
     const retailerPlan1 = new RetailerPlan({
       id: '1',
       code: "CO1",

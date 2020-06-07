@@ -3,9 +3,9 @@ export class PagedItemRequestBase {
     page: number;
     itemsPerPage: number;
 
-    constractor(obj?: any) {
-        this.page = obj && obj.page;
-        this.itemsPerPage = obj && obj.itemsPerPage;
+    constructor(obj?: any) {
+        this.page = obj && obj.page || 1;
+        this.itemsPerPage = obj && obj.itemsPerPage || 10;
     }
 
 }

@@ -5,7 +5,7 @@ import { PurchaseOrderService } from 'src/app/data/PurchaseOrder/Service/purchas
 import { PurchaseOrder, PurchaseOrderItem, NewPurchaseOrder } from 'src/app/data/PurchaseOrder/Model/purchase-order.model';
 import { Message } from 'src/app/data/Shared/Models/responseBase';
 import { MessageComponent } from 'src/app/messages/message/message.component';
-import { ListUserResponse, NewUser } from 'src/app/data/User/Models/user.model';
+import { ListUserResponse, Users } from 'src/app/data/User/Models/user.model';
 
 @Component({
   selector: 'app-create-purchase-order',
@@ -15,7 +15,7 @@ import { ListUserResponse, NewUser } from 'src/app/data/User/Models/user.model';
 export class CreatePurchaseOrderComponent implements OnInit {
   po: NewPurchaseOrder;
   uList: ListUserResponse;
-  selectedUser: NewUser;
+  selectedUser: Users;
   currentPoItem: PurchaseOrderItem;
   isSelf: boolean;
   isEx: boolean;
@@ -47,10 +47,10 @@ export class CreatePurchaseOrderComponent implements OnInit {
 
   isExternal($event){
     this.isEx = true;
-    return this.po.isExternal = true;
+    return this.po.isExternalOrder = true;
   }
 
-  checkUser(user: NewUser){
+  checkUser(user: Users){
     this.uService.getUser(user.Id).subscribe(x => {
       this.selectedUser = x.newUser;
     })
@@ -60,7 +60,7 @@ export class CreatePurchaseOrderComponent implements OnInit {
     this.idCounter--;
     this.currentPoItem.id = this.idCounter + "";
     this.currentPoItem.status = ObjectStatus.NEW;
-    this.po.purchaseOrderItems.push (new PurchaseOrderItem(this.currentPoItem));
+    this.po.items.push (new PurchaseOrderItem(this.currentPoItem));
     this.currentPoItem.denomination = 10;
     this.currentPoItem.quantity = 1;
   }
@@ -75,22 +75,25 @@ export class CreatePurchaseOrderComponent implements OnInit {
       this.po.userId = this.selectedUser.Id;
     }
     if (this.isEx === true){
-      this.po.isExternal = true;
+      this.po.isExternalOrder = true;
     }
     else{
-      this.po.isExternal = false;
+      this.po.isExternalOrder = false;
     }
     this.po.status = ObjectStatus.NEW;
+    this.po.userId = '12';
+    console.dir(this.po);
     this.poService.createPurchaseOrder(this.po).subscribe((x)=>{
       this.messages.addMessages(x);
       if(x.status === true){
+        
         console.log(this.po);   
       }
     },err=>{});
   }
 
   deletePo(item: PurchaseOrderItem){
-    const index = this.po.purchaseOrderItems.findIndex(x => x.id === item.id);
-    this.po.purchaseOrderItems.splice(index, 1);
+    const index = this.po.items.findIndex(x => x.id === item.id);
+    this.po.items.splice(index, 1);
   }
 }

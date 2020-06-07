@@ -9,7 +9,7 @@ import { AppConfig } from '../../Configs/Services/app.config';
 })
 export class VoucherStatisticsService {
   
- private readonly api = "api/vouchers/vouchers/Statistics";
+ private readonly api = "/api/vouchers/vouchers/Statistics";
 
   constructor(private http: HttpClient) { }
 

@@ -60,7 +60,7 @@ export class CreatePurchaseOrderComponent implements OnInit {
     this.idCounter--;
     this.currentPoItem.id = this.idCounter + "";
     this.currentPoItem.status = ObjectStatus.NEW;
-    this.po.purchaseOrderItems.push (new PurchaseOrderItem(this.currentPoItem));
+    this.po.items.push (new PurchaseOrderItem(this.currentPoItem));
     this.currentPoItem.denomination = 10;
     this.currentPoItem.quantity = 1;
   }
@@ -93,7 +93,7 @@ export class CreatePurchaseOrderComponent implements OnInit {
   }
 
   deletePo(item: PurchaseOrderItem){
-    const index = this.po.purchaseOrderItems.findIndex(x => x.id === item.id);
-    this.po.purchaseOrderItems.splice(index, 1);
+    const index = this.po.items.findIndex(x => x.id === item.id);
+    this.po.items.splice(index, 1);
   }
 }

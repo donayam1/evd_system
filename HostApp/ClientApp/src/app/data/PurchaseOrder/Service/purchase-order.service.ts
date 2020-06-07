@@ -10,7 +10,7 @@ import { AppConfig } from '../../Configs/Services/app.config';
 })
 export class PurchaseOrderService {
 
-  private readonly api = "/api/purchaseOrders/purchaseOrder/CreatePurchaseOrder";
+  private readonly api = "/api/purchaseOrders/purchaseOrder";
 
   constructor(private http:HttpClient) { }
 
@@ -70,7 +70,7 @@ export class PurchaseOrderService {
 
     //Later to be used with the api
     
-    const url = AppConfig.settings.apiServers.authServer + this.api;
+    const url = AppConfig.settings.apiServers.authServer + this.api + "/CreatePurchaseOrder";
     return new Observable(observer => {
       this.http.post<CreatePurchaseOrderResponse>(url, purchaseOrder).subscribe(result => {
         const response = new CreatePurchaseOrderResponse(result);

@@ -58,7 +58,7 @@
             </form>
         </div>
     </div>
-    <div class="card bg-transparent col-md-auto mr-md-auto mb-md-5" *ngIf="po.purchaseOrderItems.length > 0">
+    <div class="card bg-transparent col-md-auto mr-md-auto mb-md-5" *ngIf="po.items.length > 0">
         <div class="card-header">Confirmation Table</div>
         <div class="card-body">
             <table class="table table-striped">
@@ -70,7 +70,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of po.purchaseOrderItems">
+                    <tr *ngFor="let item of po.items">
                         <td>{{item.denomination}}</td>
                         <td>{{item.quantity}}</td>
                         <td><button (click)="deletePo(item)" class="btn btn-danger">delete</button></td>
@@ -82,7 +82,7 @@
             <button (click) = "createPo($event)" class="btn btn-primary float-md-right mr-md-4">Submit</button>
         </div>
           
-        <div *ngIf="po.purchaseOrderItems.length <= 0">
+        <div *ngIf="po.items.length <= 0">
     
         </div>
     </div>

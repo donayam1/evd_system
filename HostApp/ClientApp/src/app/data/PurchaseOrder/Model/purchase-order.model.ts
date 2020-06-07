@@ -19,13 +19,13 @@ export class PurchaseOrderItem {
 export class PurchaseOrder{
     id: string;
     purchaseOrderNumber: string;
-    purchaseOrderItems: PurchaseOrderItem[];
+    items: PurchaseOrderItem[];
     date: string;
     status: Number;
 
     constructor (obj?: any){
         this.id = obj && obj.id;
-        this.purchaseOrderItems = obj && obj.purchaseOrderItems.map(poI => new PurchaseOrderItem(poI) ) || Array();
+        this.items = obj && obj.items.map(poI => new PurchaseOrderItem(poI) ) || Array();
         this.purchaseOrderNumber = obj && obj.purchaseOrderNumber;
         this.date = obj && obj.date;
         this.status = obj && obj.status;

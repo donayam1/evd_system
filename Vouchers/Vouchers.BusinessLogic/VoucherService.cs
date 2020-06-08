@@ -44,7 +44,7 @@ namespace Vouchers.BusinessLogic
         }
 
         public List<VoucherStatistics> GetVoucherStatistics() {
-            String role = _tokenUserService.UserRole;
+            String? role = _tokenUserService.UserRole;
             List<VoucherStatistics> stats = new List<VoucherStatistics>();
             if (role == RoleTypeConstants.RoleNameSupperAdmin) {
                 var res0 = _vouchersRepository.GetFreeSystemVouchers().GroupBy(x => x.Batch.Denomination)
@@ -71,16 +71,23 @@ namespace Vouchers.BusinessLogic
 
         public List<VoucherModel> ListVoutchers(ListVoucherRequest request)
         {
-            String role = _tokenUserService.UserRole;
-            var items = _userVoucherRepository.WithOwnerItemId(role, true, request.IsSyncing,
+            String? role = _tokenUserService.UserRole;
+            var items0 = _userVoucherRepository.WithOwnerItemId(role, true, request.IsSyncing,
                 request.FromDate?.FromSharedDateTimeString(),
-                request.ToDate?.FromSharedDateTimeString()).
-                Select(x => x.Voucher);
+                request.ToDate?.FromSharedDateTimeString());//.
 
+
+            if (!String.IsNullOrWhiteSpace(request.PurchaseOrderId))
+            {
+                items0 = items0.Where(x => x.PurchaseOrderId == request.PurchaseOrderId);
+            }
+
+            var items = items0.Select(x => x.Voucher);
+                     
             if (!String.IsNullOrWhiteSpace(request.BatchId)) {
                 items = items.Where(x => x.BatchId == request.BatchId);
             }
-
+           
             return items.OrderBy(x=>x.DatabaseAddedDateTime).
                 ToList().
                 ToViewModel();
@@ -227,7 +234,7 @@ namespace Vouchers.BusinessLogic
 
             try {
                 _storage.Save();
-                return voucher.Voucher.ToSalesViewModel();
+                return voucher.Voucher?.ToSalesViewModel();
             } catch (Exception e) {
                 _logger.LogError(e, $"{e.Message} - {e.InnerException}");
             }

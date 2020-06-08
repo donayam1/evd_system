@@ -81,7 +81,7 @@ namespace TakTec.RetailerPlans.BusinessLogic
                     return null;
                 }
             }
-            var planViewModel = plan.ToPlanViewModel();
+            var planViewModel = plan.ToNewPlanViewModel(retailerPlanModel.Id);
             return planViewModel;
                 
             

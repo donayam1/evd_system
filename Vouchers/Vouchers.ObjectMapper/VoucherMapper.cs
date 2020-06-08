@@ -39,7 +39,7 @@ namespace Vouchers.ObjectMapper
             return vouchers.Select(x => x.ToSalesViewModel()).ToList();
         }
 
-        public static List<VoucherModel> ToViewModel(this List<Voucher> vouchers) {
+        public static List<VoucherModel> ToViewModel(this List<Voucher?> vouchers) {
             return vouchers.Select(x => x.ToViewModel()).ToList();
         }
 

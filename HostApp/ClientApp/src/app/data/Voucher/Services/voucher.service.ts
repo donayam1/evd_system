@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { ListVoucherResponse, Voucher, CheckOutVoucherResponse } from '../Models/voucherUpload.models';
+import { ListVoucherResponse, Voucher, CheckOutVoucherResponse, 
+  ListVouchersRequest } from '../Models/voucherUpload.models';
 import { AppConfig } from '../../Configs/Services/app.config';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class VoucherService {
 
   constructor(private http: HttpClient) { }
 
-  fetchVoucher(): Observable<ListVoucherResponse> {
+  fetchVoucher(request?: ListVouchersRequest): Observable<ListVoucherResponse> {
     // const ListVouchResponse: ListVoucherResponse = new ListVoucherResponse();
     // const voucher = new Voucher({
     //   serialNumber: 1209343,

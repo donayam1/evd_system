@@ -50,12 +50,13 @@ namespace TakTec.RetailerPlans.Backend
         }
 
         [HttpPost(template:"create")]
-        public IActionResult Create([FromBody] NewRetailerPlanViewModel retailerPlanViewModel)
+        public IActionResult Create([FromBody] RetailerPlanViewModel retailerPlanViewModel)
         {
             var resp = new NewRetailerPlanResponseViewModel();   
             if(ModelState.IsValid)
             {
-                var newRetailerPlan = (NewRetailerPlanViewModel)_retailerPlanService.CreateorUpdatePlan(retailerPlanViewModel);
+                var newRetailerPlan = (NewRetailerPlanViewModel?)_retailerPlanService.
+                    CreateorUpdatePlan(retailerPlanViewModel);
                 if(newRetailerPlan == null)
                 {
                     resp.Status = false;
@@ -63,7 +64,6 @@ namespace TakTec.RetailerPlans.Backend
                 else
                 {
                     resp.Status = true;
-                    newRetailerPlan.UI_Id = retailerPlanViewModel.UI_Id;
                     resp.NewRetailerPlanViewModel = newRetailerPlan;
                 }
 

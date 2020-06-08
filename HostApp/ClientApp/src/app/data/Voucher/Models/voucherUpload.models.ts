@@ -1,5 +1,6 @@
 import { ResponseBase } from '../../Shared/Models/responseBase';
 import { PagedItemResponseBase } from '../../Shared/Models/PagedItemResponseBase';
+import { PagedItemRequestBase } from '../../Shared/Models/PagedItemRequestBase';
 
 export class UploadVoucherResponse extends ResponseBase {
     constructor(obj?: any) {
@@ -43,10 +44,22 @@ export class ListVoucherResponse extends PagedItemResponseBase {
 export class CheckOutVoucherResponse extends ResponseBase {
     constructor(obj?: any) {
         super(obj);
-        this.voucher = obj &&  new Voucher(obj.voucher);
+        this.voucher = obj && new Voucher(obj.voucher);
     }
 
     voucher: Voucher;
 
 
+}
+
+export class ListVouchersRequest extends PagedItemRequestBase {
+    purchaseOrderId: string;
+    batchId: string;
+    voucherStatus: number;
+    constructor(obj?: any) {
+        super(obj);
+        this.purchaseOrderId = obj && obj.purchaseOrderId;
+        this.voucherStatus = obj && obj.voucherStatus;
+        this.batchId = obj && obj.batchId;
+    }
 }

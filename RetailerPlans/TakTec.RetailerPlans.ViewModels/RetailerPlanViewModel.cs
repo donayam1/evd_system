@@ -7,22 +7,17 @@ namespace TakTec.RetailerPlans.ViewModels
 {
     public class RetailerPlanViewModel
     {
-        [Required]
-        public string Id { get; set; }
-        public int Code { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        [Required]
+        public string? Id { get; set; }
+        public int Code { get; set; } // TODO change this to String
+        public string Name { get; set; } = default!;
+        public string Description { get; set; } = default!;
         public double JoinAmount { get; set; }
-        [Required]
         public double RenewalAmount  { get; set; }
-        [Required]
         public double  RenewalAmountChargingRate { get; set; }
-        [Required]
-        public CommissionRateType CommissionRateType { get; set; } 
-        public List<CommissionRateViewModel> CommissionRateViewModels { get; set; } = default;
+        public CommissionRateType CommissionRateType { get; set; } = CommissionRateType.FLAT_COMMISSION;
+        public List<CommissionRateViewModel> CommissionRateViewModels { get; set; } = new List<CommissionRateViewModel>();
         public int OperatorId { get; set; }
-        public ObjectStatusEnum Status { get; set; }
+        public ObjectStatusEnum Status { get; set; } = ObjectStatusEnum.UNCHANGED;
        
     }
 }

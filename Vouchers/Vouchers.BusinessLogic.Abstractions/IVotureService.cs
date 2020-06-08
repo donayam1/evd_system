@@ -25,7 +25,7 @@ namespace Vouchers.BusinessLogic.Abstractions
         //public void UpdateVoutcher();
 
 
-        VoucherModel CheckOutVoucher(CheckOutVoucherRequest request);
+        VoucherModel? CheckOutVoucher(CheckOutVoucherRequest request);
 
     }
 }

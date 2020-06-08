@@ -6,7 +6,10 @@
           <i class="fa fa-align-justify"></i>Purchase Orders
         </div>
         <div class="card-body">
-          <table class="table table-bordered table-striped" >
+
+          <app-purchase-order  *ngFor="let purchase of response.purchaseOrders" [purchaseOrder]="purchase"></app-purchase-order>
+
+          <!-- <table class="table table-bordered table-striped" >
             <thead>
               <tr>
                 <th>Purchase Order Number</th>
@@ -34,8 +37,9 @@
                 <td>{{purchase.date }}</td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
          
+
         </div>
       </div>
     </div>

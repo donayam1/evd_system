@@ -7,6 +7,7 @@ import { PurchaseOrderHomeComponent } from './purchase-order-home/purchase-order
 import { MessagesModule } from '../messages/messages.module';
 import { FormsModule } from '@angular/forms';
 import { ListPurchaseOrderComponent } from './list-purchase-order/list-purchase-order.component';
+import { PoItemModule } from '../po-item/po-item.module';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { ListPurchaseOrderComponent } from './list-purchase-order/list-purchase-
     PurchaseOrderRoutingModule,
     MessagesModule,
     FormsModule,
-  
+    PoItemModule
   ]
 })
 export class PurchaseOrderModule { }

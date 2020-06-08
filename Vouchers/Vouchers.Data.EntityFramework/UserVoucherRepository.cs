@@ -17,7 +17,9 @@ namespace Vouchers.Data.EntityFramework
         {
             return items.Include(x=>x.Voucher)
                 .ThenInclude(x=>x.VoucherStatuses)
-                .Include(x => x.Voucher).ThenInclude(x=>x.Batch);
+                .Include(x => x.Voucher).ThenInclude(x => x.Batch)
+                .Include(x => x.Voucher).ThenInclude(x => x.UserVouchers)
+                ;
         }
 
         private IQueryable<UserVoucher> GetFreeVouchers(String userRoleName,
@@ -26,6 +28,7 @@ namespace Vouchers.Data.EntityFramework
             var items = this.All().Where(x=>
                     x.Voucher.VoucherStatuses.Where(x => x.IsCurrent).FirstOrDefault().Status ==
                         Enumerations.VoucherStatusTypes.Available
+                        &&x.Voucher.UserVouchers.Where(z=>z.OwnerId == userRoleName && z.IsCurrent == true).Count()>0
                         &&x.Voucher.Batch.IsAproved == isApproved
                         && x.OwnerId == userRoleName);
 

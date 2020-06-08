@@ -9,7 +9,8 @@
                 </select>
             </div>
             <div class="col-sm-auto" *ngIf="isTriggered != false">
-                <table class="table table-bordered table-striped small" >
+              <app-purchase-order [purchaseOrder]="currPo"></app-purchase-order>
+                <!-- <table class="table table-bordered table-striped small" >
                     <thead>
                       <tr>
                         <th>Purchase Order Number</th>
@@ -37,7 +38,8 @@
                         <td>{{currPo.date }}</td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table> -->
+
             </div>
         </div>
         <div class="mt-md-4">

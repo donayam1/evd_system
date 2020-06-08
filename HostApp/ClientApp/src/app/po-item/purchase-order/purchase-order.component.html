@@ -1,0 +1,27 @@
+<table class="table table-bordered table-striped" >
+    <thead>
+      <tr>
+        <th>Purchase Order Number</th>
+        <th>Purchase Order Items</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr >
+        <td>{{purchaseOrder.purchaseOrderNumber}} </td>
+        <td>
+          <table class="table  table-bordered  table-sm">
+            <th>Denomination</th>
+            <th>Quantity</th>
+            <tbody>
+              <tr *ngFor="let purchaseItem of purchaseOrder.items; index as i">
+                <td>{{purchaseItem.denomination}}</td>
+                <td>{{purchaseItem.quantity}} </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td>{{purchaseOrder.date }}</td>
+      </tr>
+    </tbody>
+  </table>

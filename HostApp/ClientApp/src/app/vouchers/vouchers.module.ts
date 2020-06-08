@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { VoucherComponent } from './voucher/voucher.component';
 import { StoreModule } from '@ngrx/store';
 import { VoucherReducers } from '../data/Voucher/Reducers/vouchers.reducers';
+import { PoItemModule } from '../po-item/po-item.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { VoucherReducers } from '../data/Voucher/Reducers/vouchers.reducers';
     FileUploadModule,
     MessagesModule,
     FormsModule,
-    StoreModule.forFeature("vouchers", VoucherReducers)
+    StoreModule.forFeature("vouchers", VoucherReducers),
+    PoItemModule
   ],
   exports: [
     UploadComponent

@@ -20,79 +20,77 @@ export class CreatePurchaseOrderComponent implements OnInit {
   isSelf: boolean;
   isEx: boolean;
   idCounter = -1;
-  @ViewChild('messages', {static: true})
+  @ViewChild('messages', { static: true })
   messages: MessageComponent;
-  
+
   constructor(private poService: PurchaseOrderService, private uService: UserService) {
     this.po = new NewPurchaseOrder();
     this.currentPoItem = new PurchaseOrderItem();
     this.uList = new ListUserResponse();
     this.isSelf = false;
     this.isEx = false;
-   }
+  }
 
   ngOnInit() {
     this.uService.fetchUser().subscribe(x => {
-      if (x.status === true){
+      if (x.status === true) {
         this.uList = x;
         console.log(x);
       }
     })
   }
 
-  isChecked($event){
+  isChecked($event) {
     this.isSelf = true;
     return this.po.self = true;
   }
 
-  isExternal($event){
+  isExternal($event) {
     this.isEx = true;
     return this.po.isExternalOrder = true;
   }
 
-  checkUser(user: Users){
+  checkUser(user: Users) {
     this.uService.getUser(user.Id).subscribe(x => {
       this.selectedUser = x.newUser;
     })
   }
 
-  addPo($event?: any){
+  addPo($event?: any) {
     this.idCounter--;
     this.currentPoItem.id = this.idCounter + "";
     this.currentPoItem.status = ObjectStatus.NEW;
-    this.po.items.push (new PurchaseOrderItem(this.currentPoItem));
+    this.po.items.push(new PurchaseOrderItem(this.currentPoItem));
     this.currentPoItem.denomination = 10;
     this.currentPoItem.quantity = 1;
   }
 
-  createPo($event?: any){
-    if (this.isSelf === true){
+  createPo($event?: any) {
+    if (this.isSelf === true) {
       this.po.self = true;
       this.po.userId = null;
-    }
-    else{
+    } else {
       this.po.self = false;
       this.po.userId = this.selectedUser.Id;
     }
-    if (this.isEx === true){
+    if (this.isEx === true) {
       this.po.isExternalOrder = true;
-    }
-    else{
+    } else {
       this.po.isExternalOrder = false;
     }
     this.po.status = ObjectStatus.NEW;
-    this.po.userId = '12';
+    this.po.userId = this.selectedUser.Id;
     console.dir(this.po);
-    this.poService.createPurchaseOrder(this.po).subscribe((x)=>{
+    this.poService.createPurchaseOrder(this.po).subscribe((x) => {
       this.messages.addMessages(x);
-      if(x.status === true){
-        
-        console.log(this.po);   
+      if (x.status === true) {
+
+        console.log(this.po);
       }
-    },err=>{});
+    }, err => { });
   }
 
-  deletePo(item: PurchaseOrderItem){
+  deletePo(item: PurchaseOrderItem) {
     const index = this.po.items.findIndex(x => x.id === item.id);
     this.po.items.splice(index, 1);
   }

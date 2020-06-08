@@ -77,8 +77,12 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             else
             {
                 buyerUser = _accountService.GetUser(request.UserId);
+                if (buyerUser == null) {
+                    _logger.AddUserError("Unknowner buyer user.");
+                    return false;
+                }
                 //assert that the buyer user is under the current user
-                if (buyerUser.OwnerId != _tokenUserService.UserRole)
+                if (buyerUser.AspNetUserRoles.FirstOrDefault().AspNetRole.Name != _tokenUserService.UserRole)
                 {
                     _logger.AddUnauthorizedError();
                     return false;

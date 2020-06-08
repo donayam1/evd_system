@@ -99,7 +99,8 @@ namespace Vouchers.BusinessLogic
         /// <param name="request"></param>
         /// <param name="fromUserRoleName"></param>
         /// <returns></returns>
-        public bool AreVouchersAvailable(VoucherTransferRequest request, String fromUserRoleName,String buyerUserRoleName) //,String requestorUserRole
+        public bool AreVouchersAvailable(VoucherTransferRequest request, 
+            String fromUserRoleName,String buyerUserRoleName) //,String requestorUserRole
         {
             foreach (var v in request.TransferRequestItems) {
                 int userVouchers = 0;
@@ -147,6 +148,7 @@ namespace Vouchers.BusinessLogic
                         request.BatchId, request.IsApproved).Select(x => x.Voucher).ToList();
                     userVouchers.AddRange(vouchers);
                 }
+                allVouchers.AddRange(userVouchers);
 
                 if (userVouchers.Count() < v.Quantity) {
                     _logger.LogWarning($"user {fromUserRoleName} has no stocked vouchers of {v.Denomination}birr-{v.Quantity}. Checking system stock. ");
@@ -167,7 +169,8 @@ namespace Vouchers.BusinessLogic
 
                     allVouchers.AddRange(systemStockes);
                 }
-                allVouchers.AddRange(userVouchers);
+               
+
             }
 
             //Transfer the vouchers to the user
@@ -177,16 +180,17 @@ namespace Vouchers.BusinessLogic
                     v.IsInSystemPool = false;                    
                 }
                 else {
-                    //var currStatus =v.UserVouchers.Where(x => x.IsCurrent == true).FirstOrDefault();
-                    //if (currStatus == null) {
-                    //    throw new ArgumentNullException($"Current status for voucher <->{v.Id} not found");
-                    //}
-                    //currStatus.IsCurrent = false;
+                    var currStatus = v.UserVouchers.Where(x => x.IsCurrent == true).FirstOrDefault();
+                    if (currStatus == null)
+                    {
+                        throw new ArgumentNullException($"Current status for voucher <->{v.Id} not found");
+                    }
+                    currStatus.IsCurrent = false;
                 }
 
                 var userVoucher = new UserVoucher(request.PurchaseOrderId, toUserRole, v.Id)
                 {
-
+                    IsCurrent = true
                 };
                 _userVoucherRepository.Create(userVoucher);
 

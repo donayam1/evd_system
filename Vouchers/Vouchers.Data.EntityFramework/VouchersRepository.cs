@@ -16,6 +16,7 @@ namespace Vouchers.Data.EntityFramework
         public override IQueryable<Voucher> LoadNavigationProperties(IQueryable<Voucher> items)
         {
             return items.Include(x=>x.Batch)
+                        .Include(x=>x.UserVouchers)
                         .Include(x=>x.VoucherStatuses);
         }
 

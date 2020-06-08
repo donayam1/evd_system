@@ -19,11 +19,15 @@ namespace Vouchers.Data.EntityFramework
                 x.HasOne(x => x.Batch)
                     .WithMany(z => z.Vouchers)
                     .HasForeignKey(w => w.BatchId);
+                x.HasMany(z => z.UserVouchers);
                 x.ToTable(nameof(Voucher) + "s");
             });
 
             modelbuilder.Entity<UserVoucher>(x => {
                 x.HasKey(x => x.Id);
+                x.HasOne(x => x.Voucher)
+                 .WithMany(x => x.UserVouchers)
+                    .HasForeignKey(x => x.VoucherId);
                 //x.HasIndex(x => x.VoucherId)
                 //    .IsUnique();
                 x.ToTable(nameof(UserVoucher) + "s");

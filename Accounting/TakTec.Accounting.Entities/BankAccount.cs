@@ -13,7 +13,7 @@ namespace TakTec.Accounting.Entities
         }
 
         public String AccountId { get; set; }
-
+        public String BankId { get; set; }
 
     }
 }

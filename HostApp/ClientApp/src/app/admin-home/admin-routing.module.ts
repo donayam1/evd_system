@@ -16,6 +16,8 @@ const AdminRoutes: Routes = [
       { path: 'user', loadChildren: '../user/user.module#UserModule' },
       {path: 'vouchersBatch' , loadChildren: '../voucher-batch/voucher-batch.module#VoucherBatchModule' },
       {path: 'voucherStatistics', loadChildren: "../voucher-statistics/voucher-statistics.module#VoucherStatisticsModule"},
+      {path: 'configBank' , loadChildren: "../configure-bank/configure-bank.module#ConfigureBankModule"},
+      {path: 'moneyDeposit' , loadChildren: "../money-deposit/money-deposit.module#MoneyDepositModule"},
       { path: 'banks', loadChildren: '../configure-bank/configure-bank.module#ConfigureBankModule' }
        
       

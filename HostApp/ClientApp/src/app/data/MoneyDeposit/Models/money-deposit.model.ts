@@ -1,6 +1,5 @@
 import { ResponseBase } from "../../Shared/Models/responseBase";
 
-
 export class MoneyDeposit {
     constructor(obj?: any){
         this.id = obj && obj.id;

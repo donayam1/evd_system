@@ -64,7 +64,50 @@ namespace TakTec.Accounting.BusinessLogic
 
         }
 
-       
+        public bool ApproveMoneyDeposit(ApproveMoneyDepositRequest request)
+        {
+            var mdReq = _moneyDepositRepository.WithKey(request.Id);
+            if (mdReq == null)
+            {
+                _logger.AddUserError("Money Deposit request not found.");
+                return false;
+            }
+
+            //check if the current user has this amount air time 
+            var currUserAirTime = _airTimeRepository.
+                WithOwnerItemId(_tokenUserService.UserRole).FirstOrDefault();
+            if (currUserAirTime == null)
+            {
+                return false;
+            }
+            var toUser = _accountService.GetUser(mdReq.ForUserId);
+            if (toUser == null)
+            {
+                return false;
+            }
+
+            //String fromUserRoleName = fromUser.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
+            String toUserRoleName = toUser.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
+            var toUserAirTime = _airTimeRepository.WithOwnerItemId(toUserRoleName).FirstOrDefault();
+            if (toUserAirTime == null)
+            {
+                return false;
+            }
+
+            List<ILocable> locables = new List<ILocable>() {
+                currUserAirTime,
+                toUserAirTime
+            };
+
+            return _globalSyncronizationStore.LockAndExecute((x) =>
+            {
+                bool res = this.approveMoneyDeposit(request).Result;
+                return res;
+            }
+            , request, locables);
+
+        }
+
 
         async Task<bool> validateApproveRequest(ApproveMoneyDepositRequest request) {
             var mdReq = _moneyDepositRepository.WithKey(request.Id);
@@ -104,43 +147,8 @@ namespace TakTec.Accounting.BusinessLogic
 
             return true;
         }
-        public async Task<bool> ApproveMoneyDeposit(ApproveMoneyDepositRequest request) {
-            var mdReq = _moneyDepositRepository.WithKey(request.Id);
-            if (mdReq == null)
-            {
-                _logger.AddUserError("Money Deposit request not found.");
-                return false;
-            }
-
-            //check if the current user has this amount air time 
-            var currUserAirTime = _airTimeRepository.
-                WithOwnerItemId(_tokenUserService.UserRole).FirstOrDefault();
-            if (currUserAirTime == null)
-            {
-                return false;
-            }
-
-            var toUserAirTime = _airTimeRepository.WithOwnerItemId(mdReq.ForUserId).FirstOrDefault();
-            if (toUserAirTime == null)
-            {
-                return false;
-            }
-
-            List<ILocable> locables = new List<ILocable>() { 
-                currUserAirTime,
-                toUserAirTime
-            };
-
-            return _globalSyncronizationStore.LockAndExecute((x) =>
-            {
-                bool res =  this.approveMoneyDeposit(request).Result;
-                return res;
-            }
-            ,request,  locables);
-
-        }
-
-        public async Task<bool> approveMoneyDeposit(ApproveMoneyDepositRequest request) {
+        
+        async Task<bool> approveMoneyDeposit(ApproveMoneyDepositRequest request) {
 
             if (! await validateApproveRequest(request)) {
                 _logger.AddUserError("Invalid request");
@@ -157,6 +165,11 @@ namespace TakTec.Accounting.BusinessLogic
                 Enumerations.AirTimeUpdateCauseType.MONEY_DEPOSIT,
                 mdReq.Id,false);
 
+            if (res == false) {
+                _logger.AddUserError("Air time transfer failed");
+                return false;
+            }
+
             try
             {
                 _storage.Save();
@@ -169,43 +182,6 @@ namespace TakTec.Accounting.BusinessLogic
 
             return false;
         }
-
-        // bool transerAirTime(String fromUserId, String toUserId, decimal airTime,
-        //      Enumerations.AirTimeUpdateCauseType airTimeUpdateCauseType,
-        //      String airTimeCouseId,
-        //      bool isCredit
-        //      ) {
-
-        //    //check if the current user has this amount air time 
-        //    var currUserAirTime = _airTimeRepository.
-        //        WithOwnerItemId(_tokenUserService.UserRole).FirstOrDefault();
-        //    if (currUserAirTime == null)
-        //    {
-        //        return false;
-        //    }
-
-        //    var toUserAirTime = _airTimeRepository.WithOwnerItemId(toUserId).FirstOrDefault();
-        //    if (toUserAirTime == null)
-        //    {
-        //        return false;
-        //    }
-
-        //    if (currUserAirTime.Amount < airTime)
-        //    {
-        //        _logger.AddUserError($"Insefficient airtime error. User airtime = {currUserAirTime.Amount}, trying to transfer {airTime}.");
-        //        return false;
-        //    }
-
-        //    AirTimeUpdate airTimeUpdate = new AirTimeUpdate(
-        //        airTimeUpdateCauseType, airTimeCouseId,
-        //        airTime,isCredit, toUserAirTime.Id);
-
-        //    currUserAirTime.Amount -= airTime;
-        //    toUserAirTime.Amount += airTime;
-            
-
-        //    return true;
-        //}
 
         decimal CalculateAirTime(RetailerPlan plan, decimal amount) {
             switch (plan.CommissionRateType) {
@@ -249,14 +225,6 @@ namespace TakTec.Accounting.BusinessLogic
 
             return this._airTimeService.CalculateAirTime(rate.Rate, amount);            
         }
-
-        //decimal CalculateAirTime(double rate, decimal amount) {
-
-        //    decimal res = (((decimal)rate * amount) / 100) + amount;
-        //    return res;
-        //}
-
-
 
     }
 }

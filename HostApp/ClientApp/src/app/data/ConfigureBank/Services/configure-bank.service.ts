@@ -15,17 +15,27 @@ export class ConfigureBankService {
   constructor(private http: HttpClient) { }
 
   fetchConfigureBank():Observable<ListConfigureBankResponse> {
-    const url = AppConfig.settings.apiServers.authServer + this.api;
-    return new Observable(observer => {
-      this.http.get<ListConfigureBankResponse>(url).subscribe(data => {
-        const response = new ListConfigureBankResponse(data);
-        observer.next(response);
-        observer.complete();
-      }, error => {
-        observer.error(error);
-        observer.complete();
-      });
-    });
+    
+    const configBanklist =  new ListConfigureBankResponse();
+    const configureBank = new Bank({
+      id: "1" , name: 'Commercial Bank'
+    })
+     const cb: Bank[] = Array();
+     cb.push(configureBank);
+     configBanklist.configureBank = cb;
+     return of(configBanklist);
+
+    // const url = AppConfig.settings.apiServers.authServer + this.api;
+    // return new Observable(observer => {
+    //   this.http.get<ListConfigureBankResponse>(url).subscribe(data => {
+    //     const response = new ListConfigureBankResponse(data);
+    //     observer.next(response);
+    //     observer.complete();
+    //   }, error => {
+    //     observer.error(error);
+    //     observer.complete();
+    //   });
+    // });
 
   }
 
@@ -75,7 +85,7 @@ export class ConfigureBankService {
     res.bank = bank;
     res.status = true;
     return of (res);
-    
+
     //Later to be used with the api
     //return this.http.post<BankResponse>(this.api, bank);
   }

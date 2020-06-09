@@ -9,7 +9,7 @@ namespace TakTec.Accounting.Entities
     public class MoneyDeposit:EntityBase 
     {
         public MoneyDeposit(String creatorUserId,
-            String forUserRoleName,
+            String forUserId,
             decimal amount,
             String bankId,
             String? fromAccountId, // It might be check
@@ -22,7 +22,7 @@ namespace TakTec.Accounting.Entities
 
             //this.FromUserRoleName = fromUserRoleName;
             this.CreatorUserId = creatorUserId;
-            this.ForUserRoleName = forUserRoleName;
+            this.ForUserId = forUserId;
             this.Amount = amount;
             this.BankId = bankId;
             this.FromAccountId = fromAccountId;
@@ -33,7 +33,7 @@ namespace TakTec.Accounting.Entities
 
 
         //public String FromUserRoleName { get; set; }
-        public String ForUserRoleName { get; set; }        
+        public String ForUserId { get; set; }        
         public decimal Amount { get; set; }
         public String BankId { get; set; }
         public String? FromAccountId { get; set; }

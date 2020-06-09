@@ -1,4 +1,5 @@
 ﻿using System;
+using TakTec.Accounting.ViewModels;
 
 namespace TakTec.Accounting.BusinessLogic
 {
@@ -8,7 +9,8 @@ namespace TakTec.Accounting.BusinessLogic
         }
 
 
-        public bool ApproveMoneyDeposit(String id) {
+        public bool ApproveMoneyDeposit(ApproveMoneyDepositRequest request) {
+
             return false;
         }
 

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace TakTec.Accounting.BusinessLogic.Abstractions
 {
-    public class Class1
+    public interface IBankService
     {
     }
 }

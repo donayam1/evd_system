@@ -27,6 +27,9 @@
     <Reference Include="EthioArt.Data.EntityFramework">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="EthioArt.Syncronization.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Syncronization.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

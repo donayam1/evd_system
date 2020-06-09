@@ -1,5 +1,6 @@
 import { ObjectStatus } from "../../Shared/Models/newObjectStatus.model";
 import { ResponseBase } from "../../Shared/Models/responseBase";
+import { PagedItemResponseBase } from "../../Shared/Models/PagedItemResponseBase";
 
 export class UserBankAccount {
     id: string;
@@ -30,4 +31,12 @@ export class CreateUserBankAccoutResponse extends ResponseBase{
         super(obj);
         this.newUserBankAccount = obj && new NewUserBankAccount(obj) || new NewUserBankAccount();
     }
+}
+
+export class ListUserBankAccountResponse extends PagedItemResponseBase {
+    constructor(obj?: any){
+        super(obj);
+        this.userBankAccount = obj && obj.userBankAccount && obj.userBankAccount.map(uba => new UserBankAccount(uba)) || Array();
+    }
+    userBankAccount: UserBankAccount[];
 }

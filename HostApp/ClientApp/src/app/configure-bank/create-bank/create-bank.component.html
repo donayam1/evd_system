@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-md-4 ml-md-2">
+        <div class="card bg-light">
+            <form>
+                <h5 class="form-text card-header card-title mt-md-3 mb-md-4 text-md-center">Add Banks</h5>
+                <div class="card-body">
+                    <div class="form-group form-row">
+                        <label class="col-form-label col-form-label-sm col-md-5" for="name">Bank Name:</label>
+                        <input class="form-control form-control-sm" type="text" name="name" [(ngModel)]="currentBank.name">
+                    </div>
+    
+                    <button class="btn btn-sm btn-outline-secondary" (click)="addBank($event)">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-5 ml-md-1">
+        <div class="card bg-white mr-auto ml-auto" *ngIf="banks.length > 0">
+            <div class="card-header card-title">Confirmation Table</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of banks">
+                            <td>{{item.id}}</td>
+                            <td>{{item.name}}</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" (click)="deleteBank(item)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer float-sm-right">
+                <button class="btn btn-sm btn-primary" (click)="saveBanks(banks)">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<app-message #messages></app-message>

@@ -13,12 +13,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TakTec.Accounting.Data.Abstractions\TakTec.Accounting.Data.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.Accounting.Entities\TakTec.Accounting.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="EthioArt.Data.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+    </Reference>
     <Reference Include="EthioArt.Data.Entities.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Data.EntityFramework">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.EntityFramework.dll</HintPath>
     </Reference>
   </ItemGroup>
 

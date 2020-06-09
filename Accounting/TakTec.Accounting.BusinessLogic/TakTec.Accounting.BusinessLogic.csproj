@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TakTec.Accounting.Data.Abstractions\TakTec.Accounting.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\TakTec.Accounting.ViewModels\TakTec.Accounting.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -141,6 +141,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakTec.Accounting.ObjectMap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakTec.Accounting.Backend", "Accounting\TakTec.Accounting.Backend\TakTec.Accounting.Backend.csproj", "{9184C7E6-3380-4FCC-9683-9D1AE2D33C81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakTec.Accounting.Enumerations", "Accounting\TakTec.Accounting.Enumerations\TakTec.Accounting.Enumerations.csproj", "{E86FDC69-B592-4473-8581-556FD77F8819}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -391,6 +393,10 @@ Global
 		{9184C7E6-3380-4FCC-9683-9D1AE2D33C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9184C7E6-3380-4FCC-9683-9D1AE2D33C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9184C7E6-3380-4FCC-9683-9D1AE2D33C81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E86FDC69-B592-4473-8581-556FD77F8819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E86FDC69-B592-4473-8581-556FD77F8819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E86FDC69-B592-4473-8581-556FD77F8819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E86FDC69-B592-4473-8581-556FD77F8819}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -456,6 +462,7 @@ Global
 		{F101900B-E9CE-4FDD-A58C-C9243CBC9C51} = {A28A7672-621A-4D4F-AD9A-D5782CDBE357}
 		{53ABA427-488D-4093-A070-0FC806C2BFCC} = {A28A7672-621A-4D4F-AD9A-D5782CDBE357}
 		{9184C7E6-3380-4FCC-9683-9D1AE2D33C81} = {A28A7672-621A-4D4F-AD9A-D5782CDBE357}
+		{E86FDC69-B592-4473-8581-556FD77F8819} = {A28A7672-621A-4D4F-AD9A-D5782CDBE357}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9E686B4-CC76-435F-B915-E2FA0F0D7C71}

@@ -69,7 +69,8 @@ gulp.task(
         gulp.src([TakAccountingRoot + "TakTec.Accounting.EntityFramework/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Accounting.EntityFramework.dll"]).pipe(gulp.dest("Extensions"));        
         gulp.src([TakAccountingRoot + "TakTec.Accounting.ObjectMappers/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Accounting.ObjectMappers.dll"]).pipe(gulp.dest("Extensions"));        
         gulp.src([TakAccountingRoot + "TakTec.Accounting.ViewModels/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Accounting.ViewModels.dll"]).pipe(gulp.dest("Extensions"));        
-                
+        gulp.src([TakAccountingRoot + "TakTec.Accounting.Enumerations/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Accounting.Enumerations.dll"]).pipe(gulp.dest("Extensions"));        
+        
 
         gulp.src([TakUserRoot + "TakTec.Users.InitialDataSeed/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.InitialDataSeed.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakUserRoot + "TakTec.Users.BusinessLogic/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.BusinessLogic.dll"]).pipe(gulp.dest("Extensions"));

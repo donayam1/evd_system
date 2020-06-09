@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TakTec.Accounting.Enumerations\TakTec.Accounting.Enumerations.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="EthioArt.Data.Entities.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
     </Reference>

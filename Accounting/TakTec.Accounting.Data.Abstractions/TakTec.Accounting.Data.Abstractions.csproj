@@ -1,7 +1,29 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+        <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
+    <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />   
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TakTec.Accounting.Entities\TakTec.Accounting.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+    <Reference Include="EthioArt.Data.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+    </Reference>
+
+    <Reference Include="EthioArt.Data.Entities.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 
 </Project>

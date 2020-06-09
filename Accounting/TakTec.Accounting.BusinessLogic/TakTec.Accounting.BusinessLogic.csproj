@@ -9,4 +9,10 @@
     <ProjectReference Include="..\TakTec.Accounting.ViewModels\TakTec.Accounting.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="EthioArt.Data.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -7,7 +7,7 @@ namespace TakTec.RetailerPlans.ViewModels
     {
         [Required]
         public string Id { get; set; }
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         
         [Required]
         public double Rate { get; set; } = default;

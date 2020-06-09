@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TakTec.Accounting.Enumerations\TakTec.Accounting.Enumerations.csproj" />
+    <ProjectReference Include="..\TakTec.Accounting.ViewModels\TakTec.Accounting.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

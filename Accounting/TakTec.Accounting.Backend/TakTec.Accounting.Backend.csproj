@@ -1,7 +1,28 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EthioArt.Backend.Models">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Backend.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Security">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Messages.BusinessLogic.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.BusinessLogic.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="Messages.Models">
+      <HintPath>..\..\HostApp\OtherDeps\Messages.Models.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
 </Project>

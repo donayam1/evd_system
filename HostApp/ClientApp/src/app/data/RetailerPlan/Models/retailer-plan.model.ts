@@ -40,7 +40,7 @@ export class RetailerPlan extends NamedItem {
 export class RetailerPlanResponse extends PagedItemResponseBase{
     constructor(obj? : any){
         super(obj);
-        this.retailerPlans = obj && obj.retailerPlans.map(rp => new RetailerPlan(rp))
+        this.retailerPlans = obj && obj.retailerPlans && obj.retailerPlans.map(rp => new RetailerPlan(rp))
 
     }
     retailerPlans: RetailerPlan[]

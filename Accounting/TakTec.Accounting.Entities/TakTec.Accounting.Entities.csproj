@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
+    <PackageReference Include="ExtCore.Data.Entities.Abstractions" Version="5.0.0" />
     <ProjectReference Include="..\TakTec.Accounting.Enumerations\TakTec.Accounting.Enumerations.csproj" />
   </ItemGroup>
 
@@ -15,6 +17,9 @@
     </Reference>
     <Reference Include="EthioArt.Data.Enumerations">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Syncronization.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Syncronization.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
 

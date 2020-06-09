@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, observable, of } from 'rxjs';
-import { ListConfigureBankResponse, NewBank, CreateBankResponse } from '../Models/configure-bank.model';
+import { ListConfigureBankResponse, NewBank, CreateBankResponse, BankResponse, Bank } from '../Models/configure-bank.model';
 import { AppConfig } from '../../Configs/Services/app.config';
 import { Message } from '../../Shared/Models/responseBase';
 
@@ -58,5 +58,25 @@ export class ConfigureBankService {
     // });
   }
 
+  getBank(id: string): Observable<BankResponse>{
+    let response: BankResponse = new BankResponse();
+    let bank = new Bank({
+      id: '1',
+      name: 'Commercial bank of Ethiopia'
+    });
+    response.bank = bank;
+    response.status = true;
+    return of(response);
+  }
 
+  updateBank(bank: Bank):Observable<BankResponse>{
+    //Mock data
+    let res: BankResponse = new BankResponse();
+    res.bank = bank;
+    res.status = true;
+    return of (res);
+    
+    //Later to be used with the api
+    //return this.http.post<BankResponse>(this.api, bank);
+  }
 }

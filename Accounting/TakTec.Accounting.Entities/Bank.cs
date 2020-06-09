@@ -12,7 +12,7 @@ namespace TakTec.Accounting.Entities
             this.Name = name;
         }
         public String Name { get; set; }
-
-
+        public List<BankAccount> BankAccounts { get; set; } = new List<BankAccount>();
+        public List<MoneyDeposit> MoneyDeposits { get; set; } = new List<MoneyDeposit>();
     }
 }

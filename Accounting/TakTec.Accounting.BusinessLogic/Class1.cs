@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TakTec.Accounting.EntityFramework
+namespace TakTec.Accounting.BusinessLogic
 {
     public class Class1
     {

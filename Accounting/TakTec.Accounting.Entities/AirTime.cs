@@ -7,15 +7,14 @@ namespace TakTec.Accounting.Entities
 {
     public class AirTime:EntityBase 
     {
-        public AirTime(String ownerId) : 
-            base(ownerId,EthioArt.Data.Enumerations.ResourceTypes.GROUP) { 
+        public AirTime(String ownerId,Decimal amount) : 
+            base(ownerId,EthioArt.Data.Enumerations.ResourceTypes.GROUP) {
 
+            this.Amount = amount;
         }
 
-        public String MoneyDepositId { get; set; }
-        public String RetailerPlanId { get; set; }
         public Decimal Amount { get; set; }
-        public String IsCurrent { get; set; }
+        
 
     }
 }

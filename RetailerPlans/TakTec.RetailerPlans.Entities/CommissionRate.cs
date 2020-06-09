@@ -13,7 +13,8 @@ namespace TakTec.RetailerPlans.Entities
 {
     public class CommissionRate:EntityBase
     {
-         public CommissionRate(string ownerId, ResourceTypes ownerType,double amount,double rate) 
+         public CommissionRate(string ownerId, ResourceTypes ownerType,
+             double amount,double rate) 
                 : base(ownerId, ownerType)
         {
             Amount = amount;
@@ -21,6 +22,9 @@ namespace TakTec.RetailerPlans.Entities
         }
         public double Amount { get; set; } = 0;       
         public double Rate { get; set; }=default;
+
+        [ForeignKey(nameof(OwnerId))]
+        public RetailerPlan? RetailerPlan { get; set; } = default!;
     }
 }
 

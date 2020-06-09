@@ -7,10 +7,11 @@ namespace TakTec.Accounting.BusinessLogic
 {
     public class MoneyDepositService
     {
-        private readonly IMoneyDepositRepository moneyDepositRepository;
+        private readonly IMoneyDepositRepository _moneyDepositRepository;
         private readonly IStorage _storage;
         public MoneyDepositService(IStorage storage) {
             _storage = storage ?? throw new ArgumentNullException(nameof(IStorage));
+            _moneyDepositRepository = storage.GetRepository<IMoneyDepositRepository>();
         }
 
 

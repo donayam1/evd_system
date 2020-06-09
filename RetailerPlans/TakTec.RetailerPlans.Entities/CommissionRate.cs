@@ -22,6 +22,9 @@ namespace TakTec.RetailerPlans.Entities
         }
         public double Amount { get; set; } = 0;       
         public double Rate { get; set; }=default;
+
+        [ForeignKey(nameof(OwnerId))]
+        public RetailerPlan? RetailerPlan { get; set; } = default!;
     }
 }
 

@@ -30,11 +30,11 @@ namespace TakTec.RetailerPlans.Entities
         public double RenewalAmount { get; set; }
         public CommissionRateType CommissionRateType { get; set; }
         public String OperatorId { get; set; }
-        public ICollection<CommissionRate> CommissionRates{ get; set; } = new List<CommissionRate>(); 
+        public List<CommissionRate> CommissionRates{ get; set; } = new List<CommissionRate>();
 
 
         [ForeignKey(nameof(OperatorId))]
-        public virtual Operator? Operator { get; set; }
+        public virtual Operator? Operator { get; set; } = default!;
         
 
 

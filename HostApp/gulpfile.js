@@ -54,6 +54,7 @@ var TakUserRoot = "../Users/";
 var TakVouchersRoot = "../Vouchers/";
 var TakOperatorsRoot = "../Operators/";
 var TakPoRoot = "../PurchaseOrders/";
+var TakRetailerPlanRoot = "../RetailerPlans/";//
 gulp.task(
     "copy-extensions", function (cb) {
         gulp.src(["./OtherDeps/**"]).pipe(gulp.dest("Extensions"));
@@ -62,6 +63,13 @@ gulp.task(
 
         gulp.src([TakAccountingRoot + "TakTec.BusinessTransactions.Processors.Abstraction/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.Processors.Abstraction.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakAccountingRoot + "TakTec.BusinessTransactions.MoneyDeposit.Processors/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.BusinessTransactions.MoneyDeposit.Processors.dll"]).pipe(gulp.dest("Extensions"));        
+        gulp.src([TakAccountingRoot + "TakTec.Accounting.Backend/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Accounting.Backend.dll"]).pipe(gulp.dest("Extensions"));        
+        gulp.src([TakAccountingRoot + "TakTec.Accounting.Data.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Accounting.Data.Abstractions.dll"]).pipe(gulp.dest("Extensions"));        
+        gulp.src([TakAccountingRoot + "TakTec.Accounting.Entities/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Accounting.Entities.dll"]).pipe(gulp.dest("Extensions"));        
+        gulp.src([TakAccountingRoot + "TakTec.Accounting.EntityFramework/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Accounting.EntityFramework.dll"]).pipe(gulp.dest("Extensions"));        
+        gulp.src([TakAccountingRoot + "TakTec.Accounting.ObjectMappers/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Accounting.ObjectMappers.dll"]).pipe(gulp.dest("Extensions"));        
+        gulp.src([TakAccountingRoot + "TakTec.Accounting.ViewModels/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Accounting.ViewModels.dll"]).pipe(gulp.dest("Extensions"));        
+                
 
         gulp.src([TakUserRoot + "TakTec.Users.InitialDataSeed/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.InitialDataSeed.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakUserRoot + "TakTec.Users.BusinessLogic/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.Users.BusinessLogic.dll"]).pipe(gulp.dest("Extensions"));
@@ -111,6 +119,18 @@ gulp.task(
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.Enumerations/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.Enumerations.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.ServiceRegistrations/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.ServiceRegistrations.dll"]).pipe(gulp.dest("Extensions"));
         gulp.src([TakPoRoot + "TakTec.PurchaseOrders.ObjectMappers/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.PurchaseOrders.ObjectMappers.dll"]).pipe(gulp.dest("Extensions"));
+        
+        
+        gulp.src([TakRetailerPlanRoot + "TakTec.RetailerPlans.Abstractions/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.RetailerPlans.Abstractions.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakRetailerPlanRoot + "TakTec.RetailerPlans.Backend/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.RetailerPlans.Backend.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakRetailerPlanRoot + "TakTec.RetailerPlans.BusinessLogic/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.RetailerPlans.BusinessLogic.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakRetailerPlanRoot + "TakTec.RetailerPlans.BusinessLogic.Abstraction/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.RetailerPlans.BusinessLogic.Abstraction.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakRetailerPlanRoot + "TakTec.RetailerPlans.Entities/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.RetailerPlans.Entities.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakRetailerPlanRoot + "TakTec.RetailerPlans.EntityFramework/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.RetailerPlans.EntityFramework.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakRetailerPlanRoot + "TakTec.RetailerPlans.Enumerations/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.RetailerPlans.Enumerations.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakRetailerPlanRoot + "TakTec.RetailerPlans.Mapper/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.RetailerPlans.Mapper.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakRetailerPlanRoot + "TakTec.RetailerPlans.ServiceRegistrations/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.RetailerPlans.ServiceRegistrations.dll"]).pipe(gulp.dest("Extensions"));
+        gulp.src([TakRetailerPlanRoot + "TakTec.RetailerPlans.ViewModels/bin/" + version + "/" + dotNetCoreVersion + "/TakTec.RetailerPlans.ViewModels.dll"]).pipe(gulp.dest("Extensions"));
         
         
 

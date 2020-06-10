@@ -23,6 +23,7 @@ export class ConfigureBankService {
      const cb: Bank[] = Array();
      cb.push(configureBank);
      configBanklist.configureBank = cb;
+     configBanklist.status = true;
      return of(configBanklist);
 
     // const url = AppConfig.settings.apiServers.authServer + this.api;

@@ -31,23 +31,28 @@ namespace TakTec.Accounting.BusinessLogic
         }
 
 
-        public List<NewBankViewModel> CreateBanks(List<BankViewModel> newBanks)
+        public List<NewBankViewModel>? CreateBanks(List<NewBankViewModel> newBanks)
         {
-            // List<Bank> banks = newBanks.ToBankDomainList();
-            // foreach(Bank b in banks)
-            // {
-            //     if(!ValidateBank(b,ObjectStatusEnum.NEW))
-            //     {
-            //         _logger.AddUserError("Invalid request!");
-            //         break;
-            //     }
-            // }
+            List<Bank> banks = newBanks.Select(x=>x.ToBankDomainModel()).ToList();
+            foreach(Bank b in banks)
+            {
+                if(!ValidateBank(b,ObjectStatusEnum.NEW))
+                {
+                    _logger.AddUserError("Invalid request!");
+                    return null;
+                }
+            }
 
+            var _banks = banks.Select(x=>Create(x)).ToList();
 
-
-            throw new NotImplementedException();
+            var newBanksVm = _banks.Select(x=>     
+                           (NewBankViewModel)x.ToBankViewModel())
+                           .ToList();
+           
+            return SaveBanks(_banks)== true ? newBanksVm : null;
 
         }
+        
         private Bank Create(Bank bank)
         {
             _bankRepository.Create(bank);
@@ -61,17 +66,19 @@ namespace TakTec.Accounting.BusinessLogic
             return items.ToBankDomainList();
         }
 
-        public BankViewModel Update(BankViewModel bank)
+        public BankViewModel Update(BankViewModel bankVm)
         {
-            // Bank _bank = bank.ToBankDomainModel();
-            // if(!ValidateBank(_bank,bank.Status))
-            // {
-            //     _logger.AddUserError("Invalid request!");
-            //     return null;
-            // }
+            Bank _bank = bankVm.ToBankDomainModel();
+            if(!ValidateBank(_bank,bankVm.Status))
+            {
+                _logger.AddUserError("Invalid request!");
+                return null;
+            }
 
-
-            throw new NotImplementedException();
+            var bank = _bankRepository.WithKey(_bank.Id);
+            bank.Name = _bank.Name;
+            
+            return bank.ToBankViewModel();
         }
 
 
@@ -101,6 +108,25 @@ namespace TakTec.Accounting.BusinessLogic
                     return false;
                 }
             }
+            return true;
+        }
+
+        private bool SaveBanks(List<Bank> banks)
+        { 
+            foreach(Bank b in banks)
+            {
+                try
+                {
+                    _storage.Save();
+                }
+                catch(Exception e)
+                {
+                    _logger.LogError(e.InnerException,e.Message);
+                    _logger.AddUserError("Unknown error. Please contact adminstrator");
+                    return false;
+                }
+            }
+            
             return true;
         }
     }

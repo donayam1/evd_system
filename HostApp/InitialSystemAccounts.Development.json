@@ -20,7 +20,6 @@
         "RequireClientSecret": true,
         "clientScopes": [
           "EVDApi",
-          "BillingApi",
           "UsersApi",
           "KeysApi",
           "openid",
@@ -49,13 +48,13 @@
         "allowedGrantTypes": [ "password" ],
         "RequireClientSecret": true,
         "clientScopes": [
-          "BillingApi",
+          "EVDApi",
           "UsersApi",
           "KeysApi",
           "openid",
           "profile",
           "email",
-          "offline_access",
+          "offline_access"
         ],
         "AllowOfflineAccess": true,
         "clientProperties": []

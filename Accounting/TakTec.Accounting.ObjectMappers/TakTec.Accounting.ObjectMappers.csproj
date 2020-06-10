@@ -4,4 +4,18 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TakTec.Accounting.Enumerations\TakTec.Accounting.Enumerations.csproj" />
+    <ProjectReference Include="..\TakTec.Accounting.ViewModels\TakTec.Accounting.ViewModels.csproj" />
+    <ProjectReference Include="..\TakTec.Accounting.Entities\TakTec.Accounting.Entities.csproj" />
+  
+  
+    <Reference Include="EthioArt.Data.Entities.Abstraction">
+     <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+   </Reference>
+   <Reference Include="EthioArt.Data.Enumerations">
+     <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
+   </Reference>
+  </ItemGroup>
+
 </Project>

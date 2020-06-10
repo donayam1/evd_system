@@ -32,7 +32,7 @@
           }
         ],
         "clientScopes": [
-          "BillingApi",
+          "EVDApi",
           "UsersApi",
           "KeysApi",
           "openid",
@@ -62,7 +62,7 @@
         "allowedGrantTypes": [ "password" ],
         "RequireClientSecret": true,
         "clientScopes": [
-          "BillingApi",
+          "EVDApi",
           "UsersApi",
           "KeysApi",
           "openid",

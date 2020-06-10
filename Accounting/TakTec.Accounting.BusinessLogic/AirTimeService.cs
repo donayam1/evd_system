@@ -13,47 +13,50 @@ using Users.BusinessLogic.Abstraction;
 using System.Linq;
 using Messages.Logging.Extensions;
 using TakTec.Accounting.Entities;
+using TakTec.RetailerPlans.Entities;
 
 namespace TakTec.Accounting.BusinessLogic
 {
     public class AirTimeService: IAirTimeService
     {
-        private readonly IMoneyDepositRepository _moneyDepositRepository;
+        //private readonly IMoneyDepositRepository _moneyDepositRepository;
         private readonly IStorage _storage;
         private readonly ITokenUserService _tokenUserService;
         private readonly ILogger<IMoneyDepositRepository> _logger;
-        private IRetailerPlanRepository _retailerPlanRepository;
+        //private IRetailerPlanRepository _retailerPlanRepository;
         //private readonly IRoleService _roleService;
         private readonly IAccountService _accountService;
-        private readonly IOrAuthorizationService _orAuthorizationService;
+        //private readonly IOrAuthorizationService _orAuthorizationService;
         private readonly IAirTimeRepository _airTimeRepository;
         private readonly IAirTimeUpdateRepository _airTimeUpdateRepository;
-        private readonly IGlobalSyncronizationStore _globalSyncronizationStore;
-        public AirTimeService(IStorage storage,
+        //private readonly IGlobalSyncronizationStore _globalSyncronizationStore;
+        public AirTimeService(
+            IStorage storage,
             ITokenUserService tokenUserService,
             ILogger<IMoneyDepositRepository> logger,
             //IRoleService roleService,
-            IAccountService accountService,
-            IOrAuthorizationService orAuthorizationService,
-            IGlobalSyncronizationStore globalSyncronizationStore)
+            IAccountService accountService//,
+            //IOrAuthorizationService orAuthorizationService,
+            //IGlobalSyncronizationStore globalSyncronizationStore
+            )
         {
 
             _storage = storage ?? throw new ArgumentNullException(nameof(IStorage));
-            _moneyDepositRepository = _storage.GetRepository<IMoneyDepositRepository>();
+            //_moneyDepositRepository = _storage.GetRepository<IMoneyDepositRepository>();
             _tokenUserService = tokenUserService ??
                 throw new ArgumentNullException(nameof(ITokenUserService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             //_roleService = roleService ?? throw new ArgumentNullException(nameof(IRoleService));
             _accountService = accountService ??
                 throw new ArgumentNullException(nameof(IAccountService));
-            _orAuthorizationService = orAuthorizationService ??
-                throw new ArgumentNullException(nameof(IOrAuthorizationService));
-            _retailerPlanRepository = _storage.GetRepository<IRetailerPlanRepository>()
-                ?? throw new ArgumentNullException(nameof(IRetailerPlanRepository));
+            //_orAuthorizationService = orAuthorizationService ??
+            //    throw new ArgumentNullException(nameof(IOrAuthorizationService));
+            //_retailerPlanRepository = _storage.GetRepository<IRetailerPlanRepository>()
+            //    ?? throw new ArgumentNullException(nameof(IRetailerPlanRepository));
             _airTimeRepository = _storage.GetRepository<IAirTimeRepository>() ??
                 throw new ArgumentNullException(nameof(IAirTimeRepository));
-            _globalSyncronizationStore = globalSyncronizationStore ??
-                throw new ArgumentNullException(nameof(IGlobalSyncronizationStore));
+            //_globalSyncronizationStore = globalSyncronizationStore ??
+            //    throw new ArgumentNullException(nameof(IGlobalSyncronizationStore));
             _airTimeUpdateRepository = _storage.GetRepository<IAirTimeUpdateRepository>() ??
                 throw new ArgumentNullException(nameof(IAirTimeUpdateRepository));
 
@@ -115,6 +118,63 @@ namespace TakTec.Accounting.BusinessLogic
 
             return true;
         }
+
+
+
+        public decimal CalculateAirTime(RetailerPlan plan, decimal amount)
+        {
+            switch (plan.CommissionRateType)
+            {
+                case RetailerPlans.Enumerations.CommissionRateType.FLAT_COMMISSION:
+                    return CalculateAirTimeForFlatCommission(plan, amount);
+                case RetailerPlans.Enumerations.CommissionRateType.PER_RECHARGE_COMMISSION:
+                    return CalculateAirTimeForPerRechargeCommission(plan, amount);
+                default:
+                    throw new Exception($"Unknowne comision rate type {plan.CommissionRateType}");
+            }
+        }
+
+        decimal CalculateAirTimeForFlatCommission(RetailerPlan plan, decimal amount)
+        {
+            var rate = plan.CommissionRates.FirstOrDefault();
+            if (rate == null)
+            {
+                throw new Exception($"Comission rate not found for plan id {plan.Id}");
+            }
+
+            //decimal res = ((rate.Rate * amount) / 100) + amount;
+            return this.CalculateAirTime(rate.Rate, amount);
+        }
+
+        decimal CalculateAirTimeForPerRechargeCommission(RetailerPlan plan, decimal amount)
+        {
+            var rates = plan.CommissionRates.OrderBy(x => x.Amount);
+            CommissionRate? rate = null;
+            foreach (var v in rates)
+            {
+                if (amount < v.Amount)
+                {
+                    rate = v;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if (rate == null)
+            {
+                _logger.LogWarning($"Comission rate for amount not found. " +
+                    $"Using the last amount. rate amount {rate.Amount} - rate {rate.Rate}, for amount {amount}");
+                rate = plan.CommissionRates.Last();
+            }
+
+            return this.CalculateAirTime(rate.Rate, amount);
+        }
+
+
+
+
+
 
         public decimal CalculateAirTime(double rate, decimal amount)
         {

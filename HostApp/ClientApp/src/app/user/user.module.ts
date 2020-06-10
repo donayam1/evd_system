@@ -12,15 +12,18 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditUserPermissionComponent } from './edit-user-permission/edit-user-permission.component';
 import { StoreModule } from '@ngrx/store';
 import { UserReducers } from '../data/User/Reducers/user.resucers';
+import { EditUserBankDataComponent } from './edit-user-bank-data/edit-user-bank-data.component';
+import { UserBankAccountModule } from '../user-bank-account/user-bank-account.module';
 
 @NgModule({
-  declarations: [CreateUserComponent, UserHomeComponent, ListUserComponent, UserDetailComponent, EditUserComponent, EditUserPermissionComponent],
+  declarations: [CreateUserComponent, UserHomeComponent, ListUserComponent, UserDetailComponent, EditUserComponent, EditUserPermissionComponent, EditUserBankDataComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
     FormsModule,
     MessagesModule,
-    StoreModule.forFeature("users", UserReducers)
+    StoreModule.forFeature("users", UserReducers),
+    UserBankAccountModule
   ]
 })
 export class UserModule { }

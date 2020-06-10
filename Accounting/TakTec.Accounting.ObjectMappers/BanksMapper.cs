@@ -11,10 +11,7 @@ namespace TakTec.Accounting.ObjectMappers
         public static Bank ToBankDomainModel(this BankViewModel bankVM)
         {
             //add other props
-            var bank = new Bank(bankVM.Name)
-            {
-                Name = bankVM.Name
-            };
+            var bank = new Bank(bankVM.Name);
             return bank;
         }
         
@@ -29,6 +26,11 @@ namespace TakTec.Accounting.ObjectMappers
             return bankVM;
         }
 
+        public static Bank ToBankDomainModel(NewBankViewModel newBank)
+        {
+            Bank bank = new Bank(newBank.Name);
+            return bank; 
+        }
         public static List<Bank> ToBankDomainList(this List<BankViewModel> bankVms)
         {
             List<Bank> banks = bankVms.Select(x=> x.ToBankDomainModel()).ToList();

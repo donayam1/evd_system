@@ -40,3 +40,11 @@ export class ListUserBankAccountResponse extends PagedItemResponseBase {
     }
     userBankAccount: UserBankAccount[];
 }
+
+export class UserBankAccountResponse extends ResponseBase{
+    userBa: UserBankAccount;
+    constructor(obj?: any){
+        super(obj);
+        this.userBa = new UserBankAccount();
+    }
+}

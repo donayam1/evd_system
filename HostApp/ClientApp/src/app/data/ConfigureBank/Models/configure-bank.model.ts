@@ -32,3 +32,12 @@ export class CreateBankResponse extends ResponseBase{
         this.banks = obj && obj.banks && obj.banks.map(bank => new NewBank(bank)) || Array();
     }
 }
+
+export class BankResponse extends ResponseBase{
+    bank: Bank;
+    
+    constructor(obj?: any){
+        super(obj);
+        this.bank = obj && new Bank(obj) || new Bank();
+    }
+}

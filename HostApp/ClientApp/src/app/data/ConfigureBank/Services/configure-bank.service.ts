@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, observable, of } from 'rxjs';
-import { ListConfigureBankResponse, Bank } from '../Models/configure-bank.model';
-import { NewBank, CreateBankResponse } from '../Models/configure-bank.model';
+import { ListConfigureBankResponse, NewBank, CreateBankResponse, BankResponse, Bank } from '../Models/configure-bank.model';
 import { AppConfig } from '../../Configs/Services/app.config';
 import { Message } from '../../Shared/Models/responseBase';
 
@@ -40,20 +39,20 @@ export class ConfigureBankService {
 
   }
 
-  // createBank(newBank: NewBank[]):Observable<CreateBankResponse>{
-  //   //Mock Data
-  //   let response = new CreateBankResponse();
-  //   response.status = true;
+  createBank(newBank: NewBank[]):Observable<CreateBankResponse>{
+    //Mock Data
+    let response = new CreateBankResponse();
+    response.status = true;
 
-  //   let mes = new Message();
-  //   mes.messageCode = '30';
-  //   mes.messageType = 1;
-  //   mes.systemMessage = 'working';
-  //   response.messages.push(mes);
+    let mes = new Message();
+    mes.messageCode = '30';
+    mes.messageType = 1;
+    mes.systemMessage = 'working';
+    response.messages.push(mes);
 
-  //   response.banks = newBank;
+    response.banks = newBank;
 
-  //   return of(response);
+    return of(response);
 
     //Later to be used with the api
     // const url = AppConfig.settings.apiServers.authServer + this.api;
@@ -67,7 +66,27 @@ export class ConfigureBankService {
     //     observer.complete();
     //   });
     // });
-  //}
+  }
 
+  getBank(id: string): Observable<BankResponse>{
+    let response: BankResponse = new BankResponse();
+    let bank = new Bank({
+      id: '1',
+      name: 'Commercial bank of Ethiopia'
+    });
+    response.bank = bank;
+    response.status = true;
+    return of(response);
+  }
 
+  updateBank(bank: Bank):Observable<BankResponse>{
+    //Mock data
+    let res: BankResponse = new BankResponse();
+    res.bank = bank;
+    res.status = true;
+    return of (res);
+
+    //Later to be used with the api
+    //return this.http.post<BankResponse>(this.api, bank);
+  }
 }

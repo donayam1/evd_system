@@ -13,6 +13,7 @@
     <ProjectReference Include="..\TakTec.Accounting.BusinessLogic.Abstractions\TakTec.Accounting.BusinessLogic.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.Accounting.Data.Abstractions\TakTec.Accounting.Data.Abstractions.csproj" />
     <ProjectReference Include="..\TakTec.Accounting.ViewModels\TakTec.Accounting.ViewModels.csproj" />
+    <ProjectReference Include="..\TakTec.Accounting.ObjectMappers\TakTec.Accounting.ObjectMappers.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,8 +23,14 @@
     <Reference Include="EthioArt.Data.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Abstraction.dll</HintPath>
     </Reference>
+    <Reference Include="EthioArt.Data.Enumerations">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
+    </Reference>
     <Reference Include="EthioArt.Data.Entities.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Data.Entities">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.dll</HintPath>
     </Reference>
     <Reference Include="EthioArt.Security">
       <HintPath>..\..\HostApp\OtherDeps\EthioArt.Security.dll</HintPath>
@@ -45,6 +52,12 @@
     </Reference>
     <Reference Include="Users.BusinessLogic.Abstraction">
       <HintPath>..\..\HostApp\OtherDeps\Users.BusinessLogic.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Filters.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Filters.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Sorters.Abstractions">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Sorters.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
 

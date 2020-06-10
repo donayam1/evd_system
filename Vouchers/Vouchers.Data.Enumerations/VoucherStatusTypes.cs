@@ -8,7 +8,9 @@ namespace Vouchers.Data.Enumerations
         /// The voture is available and can be sold 
         /// </summary>
         Available = 0,
-        Sold = 10,
-        Reserved = 20       
+        Reserved = 10,
+
+        Sold = 20,        
+        Printed = 30
     }
 }

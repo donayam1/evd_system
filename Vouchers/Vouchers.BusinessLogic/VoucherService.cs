@@ -69,29 +69,82 @@ namespace Vouchers.BusinessLogic
 
         }
 
-        public List<VoucherModel> ListVoutchers(ListVoucherRequest request)
+        private List<UserVoucher> _listVoutchers(ListVoucherRequest request)
         {
             String? role = _tokenUserService.UserRole;
             var items0 = _userVoucherRepository.WithOwnerItemId(role, true, request.IsSyncing,
                 request.FromDate?.FromSharedDateTimeString(),
-                request.ToDate?.FromSharedDateTimeString());//.
-
+                request.ToDate?.FromSharedDateTimeString())
+                .Where(x => x.Voucher.VoucherStatuses.
+                 Where(x => x.IsCurrent == true).FirstOrDefault().Status == request.VoucherStatus);//.
 
             if (!String.IsNullOrWhiteSpace(request.PurchaseOrderId))
             {
                 items0 = items0.Where(x => x.PurchaseOrderId == request.PurchaseOrderId);
             }
 
-            var items = items0.Select(x => x.Voucher);
-                     
-            if (!String.IsNullOrWhiteSpace(request.BatchId)) {
-                items = items.Where(x => x.BatchId == request.BatchId);
+            if (!String.IsNullOrWhiteSpace(request.BatchId))
+            {
+                items0 = items0.Where(x => x.Voucher.BatchId == request.BatchId);
             }
-           
-            return items.OrderBy(x=>x.DatabaseAddedDateTime).
+
+
+            var items = items0.OrderBy(x => x.DatabaseAddedDateTime)
+                ;
+            return _userVoucherRepository.Page(items, request.Page, request.ItemsPerPage)
+                .ToList();
+        }
+
+        public List<VoucherModel> ListVoutchers(ListVoucherRequest request)
+        {
+            //String? role = _tokenUserService.UserRole;
+            //var items0 = _userVoucherRepository.WithOwnerItemId(role, true, request.IsSyncing,
+            //    request.FromDate?.FromSharedDateTimeString(),
+            //    request.ToDate?.FromSharedDateTimeString())
+            //    .Where(x=>x.Voucher.VoucherStatuses.
+            //     Where(x=>x.IsCurrent==true).FirstOrDefault().Status == request.VoucherStatus);//.
+
+
+            //if (!String.IsNullOrWhiteSpace(request.PurchaseOrderId))
+            //{
+            //    items0 = items0.Where(x => x.PurchaseOrderId == request.PurchaseOrderId);
+            //}
+
+            //if (!String.IsNullOrWhiteSpace(request.BatchId))
+            //{
+            //    items0 = items0.Where(x => x.Voucher.BatchId == request.BatchId);
+            //}
+
+
+            var items = _listVoutchers(request); // items0.OrderBy(x => x.DatabaseAddedDateTime)            
+            
+
+
+
+            return items.Select(x => x.Voucher).
                 ToList().
                 ToViewModel();
         }
+
+
+        public List<VoucherModel>? CheckOutVoutchers(ListVoucherRequest request) {
+            List<UserVoucher> vouchers= _listVoutchers(request);
+            foreach (var v in vouchers) {
+                if (!_checkOut(v)) {
+                    return null;
+                }
+            }
+
+            try {
+                _storage.Save();
+            } catch (Exception e) {
+                return null; 
+            }
+
+            return vouchers.Select(x => x.Voucher)?.ToList().ToSalesViewModel();
+
+        }
+
 
         /// <summary>
         /// TODO add the logic for not activated batches. For a pick request 
@@ -219,21 +272,23 @@ namespace Vouchers.BusinessLogic
                 return null;
             }
 
-            var cVs = voucher.Voucher?.VoucherStatuses.Where(x => x.IsCurrent).FirstOrDefault();
-            if (cVs == null) {
-                _logger.LogError("Voucher current status not found.");
-                throw new Exception("Internal Server Error, Please contact the admin.");
-            }
+            //var cVs = voucher.Voucher?.VoucherStatuses.Where(x => x.IsCurrent).FirstOrDefault();
+            //if (cVs == null) {
+            //    _logger.LogError("Voucher current status not found.");
+            //    throw new Exception("Internal Server Error, Please contact the admin.");
+            //}
 
-            if (cVs.Status != Data.Enumerations.VoucherStatusTypes.Sold) {
-                cVs.Status = Data.Enumerations.VoucherStatusTypes.Sold;
-                cVs.IsCurrent = false;
-                VoucherStatus vs = new VoucherStatus(voucher.Id, Data.Enumerations.VoucherStatusTypes.Sold) { 
-                    CreatorUserId = _tokenUserService.UserId
-                };
-                voucher.Voucher?.VoucherStatuses.Add(vs);
+            //if (cVs.Status != Data.Enumerations.VoucherStatusTypes.Sold) {
+            //    cVs.Status = Data.Enumerations.VoucherStatusTypes.Sold;
+            //    cVs.IsCurrent = false;
+            //    VoucherStatus vs = new VoucherStatus(voucher.Id, Data.Enumerations.VoucherStatusTypes.Sold) { 
+            //        CreatorUserId = _tokenUserService.UserId
+            //    };
+            //    voucher.Voucher?.VoucherStatuses.Add(vs);
+            //}
+            if (!_checkOut(voucher)) {
+                return null;
             }
-
             
 
             try {
@@ -247,6 +302,28 @@ namespace Vouchers.BusinessLogic
             return null;
 
         }
+
+        private bool _checkOut(UserVoucher voucher) {
+            var cVs = voucher.Voucher?.VoucherStatuses.Where(x => x.IsCurrent).FirstOrDefault();
+            if (cVs == null)
+            {
+                _logger.LogError("Voucher current status not found.");
+                throw new Exception("Internal Server Error, Please contact the admin.");
+            }
+
+            if (cVs.Status != Data.Enumerations.VoucherStatusTypes.Sold)
+            {
+                cVs.Status = Data.Enumerations.VoucherStatusTypes.Sold;
+                cVs.IsCurrent = false;
+                VoucherStatus vs = new VoucherStatus(voucher.Id, Data.Enumerations.VoucherStatusTypes.Sold)
+                {
+                    CreatorUserId = _tokenUserService.UserId
+                };
+                voucher.Voucher?.VoucherStatuses.Add(vs);
+            }            
+            return true;
+        }
+
 
     }
 }

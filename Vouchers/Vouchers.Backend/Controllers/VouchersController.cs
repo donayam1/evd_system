@@ -65,6 +65,25 @@ namespace Vouchers.Backend.Controllers
             return BadRequest(ModelState);
         }
 
+        [HttpPost(template:"CheckOut")]
+        public IActionResult CheckOutVouchers([FromBody] ListVoucherRequest request) {
+            if (ModelState.IsValid) {
+                ListVouchersResponse response = new ListVouchersResponse();
+                var res = _voucherService.CheckOutVoutchers(request);
+                if (res == null)
+                {
+                    response.Status = false;
+                }
+                else {
+                    response.Status = true;
+                    response.Vouchers = res;
+                }
+                return SendResult(response);
+            }
+            return BadRequest(ModelState);
+        }
+
+
         [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName,
                    Policy = TakTec.Core.Security.Policies.UploadVoucherBatchPolicy)]
         [HttpPost, DisableRequestSizeLimit]

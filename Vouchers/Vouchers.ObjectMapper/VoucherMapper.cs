@@ -18,6 +18,11 @@ namespace Vouchers.ObjectMapper
                 throw new System.Exception($"Voucher id={voucher.Id} has no current status.");
             }
 
+            var cuvs = voucher.UserVouchers.Where(x => x.IsCurrent == true).FirstOrDefault();
+            if (cuvs == null) {
+                throw new System.Exception($"Voucher id={voucher.Id} has no current user voucher entry.");
+            }
+
             VoucherModel vm = new VoucherModel()
             {
                 Id = voucher.Id,
@@ -26,7 +31,8 @@ namespace Vouchers.ObjectMapper
                 SerialNumber = voucher.SerialNumber,
                 VoucherStatus = cvs.Status,
                 StopDate = voucher.Batch?.StopDate.ToSharedDateString() ?? "",
-                BatchNumber  = voucher.Batch?.Batch??""
+                BatchNumber  = voucher.Batch?.Batch??"",
+                CreatedDate = cuvs.DatabaseAddedDateTime.ToSharedDateTimeString()
             };
             return vm;
         }

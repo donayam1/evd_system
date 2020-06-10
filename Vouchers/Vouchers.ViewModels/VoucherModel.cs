@@ -19,7 +19,7 @@ namespace Vouchers.ViewModels
 
         public VoucherStatusTypes VoucherStatus { get; set; }
         public String BatchNumber { get; set; } = default!;
-
+        public String CreatedDate { get; set; } = default!;
 
     }
 }

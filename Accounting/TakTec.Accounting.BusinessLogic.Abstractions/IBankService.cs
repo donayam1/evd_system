@@ -7,7 +7,7 @@ namespace TakTec.Accounting.BusinessLogic.Abstractions
 {
     public interface IBankService
     {
-        List<NewBankViewModel> CreateBanks(List<BankViewModel> NewBanks);
+        List<NewBankViewModel> CreateBanks(List<NewBankViewModel> NewBanks);
         BankViewModel Update(BankViewModel bank);
         List<BankViewModel> listBanks (int ItemsPerPage,int page);
 

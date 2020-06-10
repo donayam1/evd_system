@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TakTec.Accounting.Enumerations;
+using TakTec.RetailerPlans.Entities;
 
 namespace TakTec.Accounting.BusinessLogic.Abstractions
 {
@@ -12,6 +13,7 @@ namespace TakTec.Accounting.BusinessLogic.Abstractions
             String airTimeCouseId,
             bool isCredit);
 
-        decimal CalculateAirTime(double rate, decimal amount);
+        decimal CalculateAirTime(RetailerPlan plan, decimal amount);
+        //decimal CalculateAirTime(double rate, decimal amount);
     }
 }

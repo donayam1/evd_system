@@ -158,7 +158,7 @@ namespace TakTec.Accounting.BusinessLogic
             var mdReq = _moneyDepositRepository.WithKey(request.Id);
             var retailerPlan = _retailerPlanRepository.WithKey(mdReq.RetailerPlanId);
 
-            decimal airTime = CalculateAirTime(retailerPlan, mdReq.Amount);
+            decimal airTime =this._airTimeService.CalculateAirTime(retailerPlan, mdReq.Amount);
 
             
             bool res = this._airTimeService.TranserAirTime(_tokenUserService.UserId, mdReq.ForUserId, airTime,
@@ -183,48 +183,48 @@ namespace TakTec.Accounting.BusinessLogic
             return false;
         }
 
-        decimal CalculateAirTime(RetailerPlan plan, decimal amount) {
-            switch (plan.CommissionRateType) {
-                case RetailerPlans.Enumerations.CommissionRateType.FLAT_COMMISSION:
-                    return CalculateAirTimeForFlatCommission(plan, amount);                    
-                case RetailerPlans.Enumerations.CommissionRateType.PER_RECHARGE_COMMISSION:
-                    return CalculateAirTimeForPerRechargeCommission(plan, amount);
-                default:
-                    throw new Exception($"Unknowne comision rate type {plan.CommissionRateType}");                    
-            }            
-        }
+        //decimal CalculateAirTime(RetailerPlan plan, decimal amount) {
+        //    switch (plan.CommissionRateType) {
+        //        case RetailerPlans.Enumerations.CommissionRateType.FLAT_COMMISSION:
+        //            return CalculateAirTimeForFlatCommission(plan, amount);                    
+        //        case RetailerPlans.Enumerations.CommissionRateType.PER_RECHARGE_COMMISSION:
+        //            return CalculateAirTimeForPerRechargeCommission(plan, amount);
+        //        default:
+        //            throw new Exception($"Unknowne comision rate type {plan.CommissionRateType}");                    
+        //    }            
+        //}
 
-        decimal CalculateAirTimeForFlatCommission(RetailerPlan plan, decimal amount) {
-            var rate = plan.CommissionRates.FirstOrDefault();
-            if (rate == null) {
-                throw new Exception($"Comission rate not found for plan id {plan.Id}");                
-            }
+        //decimal CalculateAirTimeForFlatCommission(RetailerPlan plan, decimal amount) {
+        //    var rate = plan.CommissionRates.FirstOrDefault();
+        //    if (rate == null) {
+        //        throw new Exception($"Comission rate not found for plan id {plan.Id}");                
+        //    }
 
-            //decimal res = ((rate.Rate * amount) / 100) + amount;
-            return this._airTimeService.CalculateAirTime(rate.Rate,amount);
-        }
+        //    //decimal res = ((rate.Rate * amount) / 100) + amount;
+        //    return this._airTimeService.CalculateAirTime(rate.Rate,amount);
+        //}
 
-        decimal CalculateAirTimeForPerRechargeCommission(RetailerPlan plan, decimal amount)
-        {
-            var rates = plan.CommissionRates.OrderBy(x => x.Amount);
-            CommissionRate? rate = null;
-            foreach (var v in rates) {
-                if (amount < v.Amount )
-                {
-                    rate = v;
-                }
-                else {
-                    break;
-                }
-            }
-            if (rate == null) {
-                _logger.LogWarning($"Comission rate for amount not found. " +
-                    $"Using the last amount. rate amount {rate.Amount} - rate {rate.Rate}, for amount {amount}");
-                rate = plan.CommissionRates.Last();
-            }
+        //decimal CalculateAirTimeForPerRechargeCommission(RetailerPlan plan, decimal amount)
+        //{
+        //    var rates = plan.CommissionRates.OrderBy(x => x.Amount);
+        //    CommissionRate? rate = null;
+        //    foreach (var v in rates) {
+        //        if (amount < v.Amount )
+        //        {
+        //            rate = v;
+        //        }
+        //        else {
+        //            break;
+        //        }
+        //    }
+        //    if (rate == null) {
+        //        _logger.LogWarning($"Comission rate for amount not found. " +
+        //            $"Using the last amount. rate amount {rate.Amount} - rate {rate.Rate}, for amount {amount}");
+        //        rate = plan.CommissionRates.Last();
+        //    }
 
-            return this._airTimeService.CalculateAirTime(rate.Rate, amount);            
-        }
+        //    return this._airTimeService.CalculateAirTime(rate.Rate, amount);            
+        //}
 
     }
 }

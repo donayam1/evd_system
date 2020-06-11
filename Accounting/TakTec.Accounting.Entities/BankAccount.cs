@@ -17,8 +17,18 @@ namespace TakTec.Accounting.Entities
         public String AccountId { get; set; }
         public String BankId { get; set; }
 
+
+        private Bank? _bank;
         [ForeignKey(nameof(BankId))]
-        public Bank? Bank { get; set; } = default!;
+        public Bank Bank
+        {
+            get
+            {
+                return _bank ?? throw new InvalidOperationException($"{nameof(_bank)} is null.");
+            }
+            set
+            { _bank = value; }
+        }
 
     }
 }

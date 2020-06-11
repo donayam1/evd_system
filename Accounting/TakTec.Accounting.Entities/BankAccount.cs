@@ -8,13 +8,13 @@ namespace TakTec.Accounting.Entities
 {
     public class BankAccount:EntityBase 
     {
-        public BankAccount(String bankId,String accountId,String ownerId) : 
+        public BankAccount(String bankId,String accountNumber,String ownerId) : 
             base(ownerId, EthioArt.Data.Enumerations.ResourceTypes.GROUP) {
-            this.AccountId = accountId;
+            this.AccountNumber = accountNumber;
             this.BankId = bankId;
         }
 
-        public String AccountId { get; set; }
+        public String AccountNumber { get; set; }
         public String BankId { get; set; }
 
 

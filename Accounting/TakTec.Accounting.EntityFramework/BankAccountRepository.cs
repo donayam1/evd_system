@@ -5,19 +5,18 @@ using EthioArt.Data.EntityFramework;
 using ExtCore.Data.Abstractions;
 using TakTec.Accounting.Data.Abstractions;
 using TakTec.Accounting.Entities;
-
 namespace TakTec.Accounting.EntityFramework
 {
-    public class BankRepository : GenericRepositoryBase<Bank>, IBankRepository
+    public class BankAccountRepository : GenericRepositoryBase<BankAccount>, IBankAccountRepository
     {
-        public override IQueryable<Bank> LoadNavigationProperties(IQueryable<Bank> items)
+        public override IQueryable<BankAccount> LoadNavigationProperties(IQueryable<BankAccount> items)
         {
             throw new NotImplementedException();
         }
 
-        public Bank? WithName(string BankName)
+        public BankAccount? WithAccountNumber(string accountNumber)
         {
-            return All().Where(x=>x.Name == BankName).FirstOrDefault();
+            return All().Where(x=>x.AccountNumber == accountNumber).FirstOrDefault();
         }
     }
 }

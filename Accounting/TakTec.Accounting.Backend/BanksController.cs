@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 using TakTec.Accounting.Entities;
 using TakTec.Accounting.ViewModels;
 using TakTec.Accounting.BusinessLogic.Abstractions;
-using TakTec.Core.Security;
 using System.Collections.Generic;
 
 namespace TakTec.Accounting.Backend

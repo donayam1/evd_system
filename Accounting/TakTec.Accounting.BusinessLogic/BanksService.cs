@@ -44,12 +44,21 @@ namespace TakTec.Accounting.BusinessLogic
             }
             
 
-            var _banks = banks.Select(x=>Create(x)).ToList();
+           // var _banks = banks.Select(x=>Create(x)).ToList();
+           List<Bank> _banks = new List<Bank>();
+           foreach (var item in banks)
+           {
+               _banks.Add(Create(item));
+           }
 
-            var newBanksVm = _banks.Select(x=>     
-                           (NewBankViewModel)x.ToBankViewModel())
-                           .ToList();
-           
+            List<NewBankViewModel>? newBanksVm = new List<NewBankViewModel>();
+                           
+
+            foreach (var item in _banks)
+            {
+               newBanksVm.Add((NewBankViewModel)item.ToBankViewModel());
+            } 
+
             return SaveBanks(_banks)== true ? newBanksVm : null;
 
         }
@@ -85,7 +94,7 @@ namespace TakTec.Accounting.BusinessLogic
 
         private bool ValidateBank(Bank bank, ObjectStatusEnum status)
         {
-            Bank _bank = _bankRepository.WithName(bank);
+            Bank _bank = _bankRepository.WithName(bank.Name);
             if(status != ObjectStatusEnum.NEW)
             {
                 bool exists = _bankRepository.Exists(bank.Id);

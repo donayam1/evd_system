@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace TakTec.Accounting.Backend
 {
-    [Route("api/accounting/[controller")]
+    [Route("api/accounting/[controller]")]
     public class BanksController:ControllersBase
     {
         private readonly IBankService _bankService;

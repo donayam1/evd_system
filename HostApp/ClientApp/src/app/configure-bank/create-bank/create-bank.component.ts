@@ -39,23 +39,23 @@ export class CreateBankComponent implements OnInit {
     
   }
 
-  // saveBanks($event?: any){
-  //   this.bankService.createBank(this.banks).subscribe(x => {
-  //     //console.dir(x);
-  //     if (x.status === true){
-  //       this.banks = x.banks;
-  //       console.log(this.banks);
-  //     }
-  //     else{
-  //       this.isError = true;
-  //       this.messages = x.messages;
-  //       console.log('error');
-  //       console.log(this.messages);
-  //     }
-  //   }, error => {
-  //     this.isError = true;
-  //   });
-  // }
+  saveBanks($event?: any){
+    this.bankService.createBank(this.banks).subscribe(x => {
+      //console.dir(x);
+      if (x.status === true){
+        this.banks = x.banks;
+        console.log(this.banks);
+      }
+      else{
+        this.isError = true;
+        this.messages = x.messages;
+        console.log('error');
+        console.log(this.messages);
+      }
+    }, error => {
+      this.isError = true;
+    });
+  }
 
   deleteBank(item: NewBank){
     const index = this.banks.findIndex(x => x.id === item.id);

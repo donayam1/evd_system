@@ -6,7 +6,7 @@ export class MoneyDeposit {
         this.bankId = obj && obj.bankId;
         this.ammount = obj && obj.ammount;
         this.userId = obj && obj.userId;
-        this.isCheque = obj && obj.isCheque;
+        this.isCheque = obj && obj.isCheque || false;
         this.refNumber = obj && obj.refNumber;
         this.objectStatus = obj && obj.objectStatus;
 
@@ -28,3 +28,19 @@ export class ListDepositResponse extends ResponseBase{
     moneyDeposit: MoneyDeposit[];
 
 } 
+
+export class NewMoneyDeposit extends MoneyDeposit{
+    ui_id: string;
+    constructor(obj?: any){
+        super(obj);
+        this.ui_id = obj && obj.ui_id
+    }
+}
+
+export class CreateMoneyDepositResponse extends ResponseBase{
+    newMoneyDeposit: NewMoneyDeposit;
+    constructor(obj?: any){
+        super(obj);
+        this.newMoneyDeposit = obj && new NewMoneyDeposit(obj) || new NewMoneyDeposit();
+    }
+}

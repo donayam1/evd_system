@@ -53,17 +53,17 @@ export class UserBankAccountService {
     return of(response);
 
     //Later to be used with the api
-    const url = AppConfig.settings.apiServers.authServer + this.api;
-    return new Observable(observer => {
-      this.http.post<CreateUserBankAccoutResponse>(url, newUserBankAccount).subscribe(data => {
-        const response = new CreateUserBankAccoutResponse(data);
-        observer.next(response);
-        observer.complete();
-      }, error => {
-        observer.error(error);
-        observer.complete();
-      })
-    })
+    // const url = AppConfig.settings.apiServers.authServer + this.api;
+    // return new Observable(observer => {
+    //   this.http.post<CreateUserBankAccoutResponse>(url, newUserBankAccount).subscribe(data => {
+    //     const response = new CreateUserBankAccoutResponse(data);
+    //     observer.next(response);
+    //     observer.complete();
+    //   }, error => {
+    //     observer.error(error);
+    //     observer.complete();
+    //   })
+    // })
   }
 
   getUserBankAccount(userId: string):Observable<UserBankAccountResponse>{

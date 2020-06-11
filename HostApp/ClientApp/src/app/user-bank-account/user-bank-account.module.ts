@@ -5,14 +5,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EditUserBankAccountComponent } from './edit-user-bank-account/edit-user-bank-account.component';
 import { MessagesModule } from '../messages/messages.module';
+import { ListUserBankAccountComponent } from './list-user-bank-account/list-user-bank-account.component';
+import { StoreModule } from '@ngrx/store';
+import { UserBankAccountReducers } from '../data/UserBankAccount/Reducers/userBankAccount.reducers';
 
 @NgModule({
-  declarations: [EditUserBankAccountComponent],
+  declarations: [EditUserBankAccountComponent, ListUserBankAccountComponent],
   imports: [
     CommonModule,
     //UserBankAccountRoutingModule,
     FormsModule,
-    MessagesModule
+    MessagesModule,
+    StoreModule.forFeature("userBankAccounts" , UserBankAccountReducers)
   ],
   exports: [EditUserBankAccountComponent]
 })

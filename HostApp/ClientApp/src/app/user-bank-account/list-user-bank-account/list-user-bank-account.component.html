@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i>User Bank Accounts
+      </div>
+      <div class="card-body">
+        <table
+          class="table table-bordered table-striped"
+          aria-labelledby="tableLabel"
+        >
+          <thead>
+            <tr>
+              <th>Bank</th>
+              <th>Account Number</th>
+              <th>User</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bankaccount of response.userBankAccount">
+              <td>{{ bankaccount.bankId }}</td>
+              <td>{{ bankaccount.accountNumber }}</td>
+              <td>{{ vb.userId }}</td>
+              <td><button class="btn btn-outline-primary"
+                (click)= "editUserBankAccount(bankaccount)"
+                routerLink = "/home" >Edit</button></td>
+              <td><button>Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

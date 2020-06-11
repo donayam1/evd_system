@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
     <ProjectReference Include="..\..\PurchaseOrders\TakTec.PurchaseOrders.Entities\TakTec.PurchaseOrders.Entities.csproj" />
     <ProjectReference Include="..\Vouchers.Data.Enumerations\Vouchers.Data.Enumerations.csproj" />
   </ItemGroup>

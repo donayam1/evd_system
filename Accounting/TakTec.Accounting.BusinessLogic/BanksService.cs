@@ -42,6 +42,7 @@ namespace TakTec.Accounting.BusinessLogic
                     return null;
                 }
             }
+            
 
             var _banks = banks.Select(x=>Create(x)).ToList();
 

@@ -16,6 +16,9 @@ namespace Vouchers.Data.EntityFramework
                     .IsUnique();
                 x.HasIndex(x => x.PinNumber)
                     .IsUnique();
+                x.Property(x => x.Batch)
+                    .HasField("_batch");
+
                 x.HasOne(x => x.Batch)
                     .WithMany(z => z.Vouchers)
                     .HasForeignKey(w => w.BatchId);
@@ -51,9 +54,12 @@ namespace Vouchers.Data.EntityFramework
 
             modelbuilder.Entity<VoucherStatus>(x => {
                 x.HasKey(x => x.Id);
-                x.HasOne(x => x.Voucher)
+                x.HasOne(x => x.Voucher)                
                 .WithMany(z => z.VoucherStatuses)
                     .HasForeignKey(z => z.OwnerId);
+
+                x.Property(x => x.Voucher)
+                    .HasField("_voucher");
 
                 x.ToTable(nameof(VoucherStatus)+"es");
             });

@@ -11,7 +11,7 @@ namespace Vouchers.Data.Entities
 {
     public class VoucherStatus:EntityBase 
     {
-        public VoucherStatus(String ownerId,VoucherStatusTypes status) : 
+        public VoucherStatus(String ownerId, VoucherStatusTypes status) : 
             base(ownerId,ResourceTypes.NONE) // Make this voture
         {
             this.Status = status;
@@ -20,8 +20,17 @@ namespace Vouchers.Data.Entities
         public Boolean IsCurrent { get; set; } = true;
 
 
+        private Voucher? _voucher;
+
         [ForeignKey(nameof(OwnerId))]
-        public Voucher? Voucher { get; set; }
+        public Voucher Voucher
+        {
+            get
+            {
+                return _voucher ?? throw new InvalidOperationException($"{nameof(_voucher)} is null");
+            }
+            set { _voucher = value; }
+        }
 
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
+
 namespace Vouchers.Data.Entities
 {
     public class Voucher:EntityBase 
@@ -26,8 +27,19 @@ namespace Vouchers.Data.Entities
         /// </summary>
         public bool IsInSystemPool { get; set; } = true;
 
+        private VoucherBatch? _batch;
+
         [ForeignKey(nameof(BatchId))]
-        public VoucherBatch? Batch { get; set; }
+        //[BackingField(nameof(_batch))]
+        public VoucherBatch Batch
+        {
+            get
+            {
+                return _batch ?? throw new InvalidOperationException($"{nameof(_batch)} is null");
+            }
+            set { _batch = value; }
+        }
+
         public List<VoucherStatus> VoucherStatuses { get; set; } = new List<VoucherStatus>();
 
         public List<UserVoucher> UserVouchers { get; set; } = new List<UserVoucher>();

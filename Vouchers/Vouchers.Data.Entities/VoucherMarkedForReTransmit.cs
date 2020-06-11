@@ -29,9 +29,19 @@ namespace Vouchers.Data.Entities
         /// pin along with the users Sync pins request 
         /// </summary>
         public int MinWaitMinutes { get; set; }
-        
+
+
+        private Voucher? _voucher;
+
         [ForeignKey(nameof(VoucherId))]
-        public Voucher? Voucher { get; set; }
+        public Voucher Voucher
+        {
+            get
+            {
+                return _voucher ?? throw new InvalidOperationException($"{nameof(_voucher)} is null");
+            }
+            set { _voucher = value; }
+        }
 
 
     }

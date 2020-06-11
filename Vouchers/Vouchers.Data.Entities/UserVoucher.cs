@@ -32,12 +32,34 @@ namespace Vouchers.Data.Entities
 
         public String PurchaseOrderId { get; set; }
 
+        private Voucher? _voucher;
         [ForeignKey(nameof(VoucherId))]
-        public Voucher? Voucher { get; set; }
+        public Voucher Voucher
+        {
+            get
+            {
+                return _voucher ?? throw new InvalidOperationException($"{nameof(_voucher)} is null.");
+            }
+            set
+            {
+                _voucher = value;
+            }
+        }
 
+        private PurchaseOrder? _purchaseOrder;
 
         [ForeignKey(nameof(PurchaseOrderId))]
-        public PurchaseOrder? PurchaseOrder { get; set; } = default!;
+        public PurchaseOrder PurchaseOrder
+        {
+            get
+            {
+                return _purchaseOrder ?? throw new InvalidOperationException($"{nameof(_purchaseOrder)} is null.");
+            }
+            set
+            {
+                _purchaseOrder = value;
+            }
+        }
 
     }
 }

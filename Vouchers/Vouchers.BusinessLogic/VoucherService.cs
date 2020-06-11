@@ -44,7 +44,7 @@ namespace Vouchers.BusinessLogic
         }
 
         public List<VoucherStatistics> GetVoucherStatistics() {
-            String? role = _tokenUserService.UserRole;
+            String role = _tokenUserService.UserRole;
             List<VoucherStatistics> stats = new List<VoucherStatistics>();
             if (role == RoleTypeConstants.RoleNameSupperAdmin) {
                 var res0 = _vouchersRepository.GetFreeSystemVouchers().GroupBy(x => x.Batch.Denomination)
@@ -138,6 +138,7 @@ namespace Vouchers.BusinessLogic
             try {
                 _storage.Save();
             } catch (Exception e) {
+                _logger.LogError(e, $"{e.Message} - {e.InnerException} - {e.StackTrace}");
                 return null; 
             }
 
@@ -187,12 +188,12 @@ namespace Vouchers.BusinessLogic
         /// <param name="fromUserRoleName">This is the distributor who is selling the vouchers</param>
         /// <param name="toUserRole">This is the distributor who is reciving the vouchers</param>
         /// <returns></returns>
-        public List<Voucher?>? TransferVouchersToUser(VoucherTransferRequest request,
+        public List<Voucher>? TransferVouchersToUser(VoucherTransferRequest request,
             String fromUserRoleName, String toUserRole) {
-            List<Voucher?> allVouchers = new List<Voucher?>();
+            List<Voucher> allVouchers = new List<Voucher>();
 
             foreach (var v in request.TransferRequestItems) {
-                List<Voucher?> userVouchers = new List<Voucher?>();
+                List<Voucher> userVouchers = new List<Voucher>();
 
                 if (!fromUserRoleName.Equals(toUserRole)) // user does not buy form his own stock, he already ownes the stock
                 {

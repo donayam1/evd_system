@@ -10,7 +10,7 @@
     <PackageReference Include="ExtCore.Mvc.Infrastructure" Version="5.0.0" />
 
 
-    <ProjectReference Include="..\TakTec.Accounting.BusinessLogic.Abstraction\TakTec.Accounting.BusinessLogic.Abstraction.csproj" />
+    <!--<ProjectReference Include="..\TakTec.Accounting.BusinessLogic.Abstraction\TakTec.Accounting.BusinessLogic.Abstraction.csproj" />-->
     <ProjectReference Include="..\TakTec.Accounting.BusinessLogic\TakTec.Accounting.BusinessLogic.csproj" />
     <ProjectReference Include="..\TakTec.Accounting.Entities\TakTec.Accounting.Entities.csproj" />
     <ProjectReference Include="..\..\Core\TakTec.Core.Security\TakTec.Core.Security.csproj" />

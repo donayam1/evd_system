@@ -29,7 +29,7 @@ namespace TakTec.Accounting.BusinessLogic
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public BankAccountViewModel? CreateorUpdate(BankAccountViewModel bankAccountViewModel)
+        public BankAccountViewModel? CreateOrUpdate(BankAccountViewModel bankAccountViewModel)
         {
             BankAccount bankAccount = bankAccountViewModel.ToDomain();
             if(!(ValidateBankAccount(bankAccount,bankAccountViewModel.Status)))

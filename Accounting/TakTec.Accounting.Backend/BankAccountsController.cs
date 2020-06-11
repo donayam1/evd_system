@@ -13,8 +13,8 @@ using System.Collections.Generic;
 
 namespace TakTec.Accounting.Backend
 {
-    [Route("api/accounting/[controller]")]
-    public class BankAccountsController:ControllersBase
+    //[Route("api/accounting/[controller]")]
+    public class BankAccountsController: AccountingControllersBase
     {
         private readonly IBankAccountService _bankAccountService;
         public BankAccountsController(IUserMessageLogges userMessageLogges,IBankAccountService bankAccountService)
@@ -52,7 +52,7 @@ namespace TakTec.Accounting.Backend
             var resp =  new BankAccountResponseModel();
             if(ModelState.IsValid)
             {
-                var updatedBankAccount = _bankAccountService.CreateorUpdate(bankAccountViewModel);
+                var updatedBankAccount = _bankAccountService.CreateOrUpdate(bankAccountViewModel);
                 if(updatedBankAccount == null)
                 {
                     resp.Status = false;
@@ -74,7 +74,7 @@ namespace TakTec.Accounting.Backend
             var response = new NewBankAccountResponse();
             if(ModelState.IsValid)
             {
-                var newBankAccnt = _bankAccountService.CreateorUpdate((BankAccountViewModel)newBankAccount);
+                var newBankAccnt = _bankAccountService.CreateOrUpdate((BankAccountViewModel)newBankAccount);
                 if(newBankAccount == null)
                 {
                     response.Status = false;

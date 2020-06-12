@@ -11,13 +11,15 @@ namespace TakTec.RetailerPlans.ViewModels
         public string? Id { get; set; }
         public String? Code { get; set; } // TODO change this to String
         public string Name { get; set; } = default!;
-        public string Description { get; set; } = default!;
+        public string? Description { get; set; } = default!;
         public double JoinAmount { get; set; }
         public double RenewalAmount  { get; set; }
         public double  RenewalAmountChargingRate { get; set; }
         public CommissionRateType CommissionRateType { get; set; } = CommissionRateType.FLAT_COMMISSION;
-        public List<CommissionRateViewModel> CommissionRateViewModels { get; set; } = new List<CommissionRateViewModel>();
-        public String? OperatorId { get; set; }
+        public List<CommissionRateViewModel> CommissionRates { get; set; } = new List<CommissionRateViewModel>();
+        
+        [Required]
+        public String OperatorId { get; set; } = default!;
         public ObjectStatusEnum Status { get; set; } = ObjectStatusEnum.UNCHANGED;
        
     }

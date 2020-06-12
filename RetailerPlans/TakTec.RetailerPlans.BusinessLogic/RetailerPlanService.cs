@@ -40,12 +40,12 @@ namespace TakTec.RetailerPlans.BusinessLogic
 
         }
 
-        public RetailerPlanViewModel? CreateorUpdatePlan(RetailerPlanViewModel retailerPlanModel)
+        public RetailerPlanViewModel? CreateorUpdatePlan(RetailerPlanViewModel retPlan)
         {
             //TODO create and update
-            RetailerPlan retPlan = retailerPlanModel.ToPlanDomailModel();
+            //RetailerPlan retPlan = retailerPlanModel.ToPlanDomailModel();
 
-            if(!(isValidRequest(retPlan)|| ValidatePlan(retPlan,retailerPlanModel.Status)))
+            if(!ValidatePlan(retPlan))
             {
                 _logger.AddUserError("Invalid request");
                 return null;
@@ -53,7 +53,7 @@ namespace TakTec.RetailerPlans.BusinessLogic
 
             RetailerPlan? plan;
 
-            switch (retailerPlanModel.Status)
+            switch (retPlan.Status)
             {
                 case ObjectStatusEnum.NEW:
                     plan = CreateNewPlan(retPlan);
@@ -65,7 +65,7 @@ namespace TakTec.RetailerPlans.BusinessLogic
                     plan = RemovePlan(retPlan);
                     break;
                 default:
-                    return retailerPlanModel;
+                    return retPlan;
             }
 
             if (plan != null)
@@ -73,6 +73,9 @@ namespace TakTec.RetailerPlans.BusinessLogic
                 try
                 {
                     _storage.Save();
+
+                    var planViewModel = plan.ToNewPlanViewModel(retPlan.Id);
+                    return planViewModel;
                 }
                 catch (Exception e)
                 {
@@ -81,74 +84,90 @@ namespace TakTec.RetailerPlans.BusinessLogic
                     return null;
                 }
             }
-            var planViewModel = plan.ToNewPlanViewModel(retailerPlanModel.Id);
-            return planViewModel;
-                
+            
+           return null;
             
 
         }
-        private bool ValidatePlan(RetailerPlan plan,ObjectStatusEnum status)
+        private bool ValidatePlan(RetailerPlanViewModel plan)
         {
             //TODO check if the owner of the plan exists ie the user is valid user or not
+            bool isValidOperator = _operatorRepository.Exists(plan.OperatorId);
 
-            RetailerPlan _plan = _retailerPlanRepository.WithCodeorWithName(plan);
-            if(status != ObjectStatusEnum.NEW)
+            bool isValidJoinAmount = plan.JoinAmount >= 0;
+            bool isValidRenwalAMount = plan.RenewalAmount >= 0;
+            bool isValidCommissionRate = plan.CommissionRateType == CommissionRateType.FLAT_COMMISSION ||
+                                         plan.CommissionRateType == CommissionRateType.PER_RECHARGE_COMMISSION;
+
+
+            // add other validation criteria
+            if (isValidOperator && isValidJoinAmount && isValidRenwalAMount && isValidCommissionRate)
+            {               
+            }
+            else
+            {
+                return false;
+            }
+
+            RetailerPlan? _plan = _retailerPlanRepository.WithName(plan.Name);
+            
+
+            if (plan.Status != ObjectStatusEnum.NEW)
             {
                 bool exists = _retailerPlanRepository.Exists(plan.Id);
-                if(!exists)
+                if (!exists)
                 {
                     _logger.AddUserError("Plan does not exist!");
                     return false;
                 }
-                if(_plan != null)
+
+                if (_plan != null && !_plan.Id.Equals( plan.Id))
                 {
-                    _logger.AddUserError("Plan with name"+_plan.Name+" and code"+_plan.Code+"exists!");
+                    _logger.AddUserError($"Plan with name  {_plan.Name} exists!");
                     return false;
                 }
+                             
             }
 
-            else if(status == ObjectStatusEnum.NEW)
-            {
-                if(_plan != null)
-                {
-                    _logger.AddUserError("Plan with name"+_plan.Name+" and code"+_plan.Code+"exists!");
-                    return false;
-                }
+            else if(plan.Status == ObjectStatusEnum.NEW)
+            {                
             }
             return true;
         }
 
-        private bool isValidRequest(RetailerPlan plan)
-        {
-            bool isValidOperator = _operatorRepository.Exists(plan.Operator.Id);
+        //private bool isValidRequest(RetailerPlan plan)
+        //{
+        //    bool isValidOperator = _operatorRepository.Exists(plan.OperatorId);
 
-            bool isValidJoinAmount = plan.JoiningAmount >= 0;
-            bool isValidRenwalAMount = plan.RenewalAmount >= 0;
-            bool isValidCommissionRate = plan.CommissionRateType == CommissionRateType.FLAT_COMMISSION ||
-                                         plan.CommissionRateType == CommissionRateType.PER_RECHARGE_COMMISSION;   
+        //    bool isValidJoinAmount = plan.JoiningAmount >= 0;
+        //    bool isValidRenwalAMount = plan.RenewalAmount >= 0;
+        //    bool isValidCommissionRate = plan.CommissionRateType == CommissionRateType.FLAT_COMMISSION ||
+        //                                 plan.CommissionRateType == CommissionRateType.PER_RECHARGE_COMMISSION;   
 
 
-            // add other validation criteria
-            if(isValidOperator && isValidJoinAmount && isValidRenwalAMount && isValidCommissionRate)
-            {
-                return true;
-            }
-            return false;
-        }
+        //    // add other validation criteria
+        //    if(isValidOperator && isValidJoinAmount && isValidRenwalAMount && isValidCommissionRate)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
-         private RetailerPlan CreateNewPlan(RetailerPlan newPlan)
+         private RetailerPlan CreateNewPlan(RetailerPlanViewModel newPlan)
          {
-            _retailerPlanRepository.Create(newPlan);
-            return newPlan;
+            String ownerId = _tokenUserService.UserRole;
+            var model = newPlan.ToPlanDomailModel(ownerId);
+            _retailerPlanRepository.Create(model);
+            return model;
         }
 
-         private RetailerPlan UpdatePlan (RetailerPlan retailerPlan)
+        private RetailerPlan UpdatePlan(RetailerPlanViewModel retailerPlan)
         {
             var result = _retailerPlanRepository.WithKey(retailerPlan.Id);
             result.Name = retailerPlan.Name;
             result.Code = retailerPlan.Code;
             result.Description = retailerPlan.Description;
-            
+
             _retailerPlanRepository.Edit(result);
             return result;
         }
@@ -173,7 +192,7 @@ namespace TakTec.RetailerPlans.BusinessLogic
 
            
         }
-        private RetailerPlan? RemovePlan(RetailerPlan plan){
+        private RetailerPlan? RemovePlan(RetailerPlanViewModel plan){
             return null;
         }
 

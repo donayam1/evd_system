@@ -41,7 +41,7 @@ namespace TakTec.Accounting.BusinessLogic
                 _logger.AddUserError("Invalid request!");
                 return null;
             }
-            var user = _accountService.GetUser(bankAccountViewModel.Id);
+            var user = _accountService.GetUser(bankAccountViewModel.UserId);
             if (user == null) {
                 return null;
             }

@@ -77,7 +77,7 @@ namespace TakTec.Accounting.Backend.Controllers
             if(ModelState.IsValid)
             {
                 var newBankAccnt = _bankAccountService.CreateOrUpdate(newBankAccount);
-                if(newBankAccount == null)
+                if(newBankAccnt == null)
                 {
                     response.Status = false;
                 }

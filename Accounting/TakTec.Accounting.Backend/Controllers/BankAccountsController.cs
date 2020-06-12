@@ -26,12 +26,12 @@ namespace TakTec.Accounting.Backend.Controllers
         }
 
         [HttpGet(template:"list")]
-        public IActionResult List([FromQuery]PagedItemRequestBase page)
+        public IActionResult List([FromQuery]ListBankAccountsRequest request)
         {
             var bankAccountList = new BankAccountListResponse();
             if(ModelState.IsValid)
             {
-                var bankAccounts = _bankAccountService.List(page.Page,page.ItemsPerPage);
+                var bankAccounts = _bankAccountService.List(request);
                 if(bankAccounts == null)
                 {
                     bankAccountList.Status = false;

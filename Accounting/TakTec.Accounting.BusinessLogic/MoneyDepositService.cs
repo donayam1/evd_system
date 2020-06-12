@@ -21,7 +21,7 @@ using Users.BusinessLogic.Abstraction;
 
 namespace TakTec.Accounting.BusinessLogic
 {
-    public class MoneyDepositService
+    public class MoneyDepositService: IMoneyDepositService
     {
         private readonly IMoneyDepositRepository _moneyDepositRepository;
         private readonly IStorage _storage;
@@ -183,48 +183,22 @@ namespace TakTec.Accounting.BusinessLogic
             return false;
         }
 
-        //decimal CalculateAirTime(RetailerPlan plan, decimal amount) {
-        //    switch (plan.CommissionRateType) {
-        //        case RetailerPlans.Enumerations.CommissionRateType.FLAT_COMMISSION:
-        //            return CalculateAirTimeForFlatCommission(plan, amount);                    
-        //        case RetailerPlans.Enumerations.CommissionRateType.PER_RECHARGE_COMMISSION:
-        //            return CalculateAirTimeForPerRechargeCommission(plan, amount);
-        //        default:
-        //            throw new Exception($"Unknowne comision rate type {plan.CommissionRateType}");                    
-        //    }            
-        //}
+        public List<MoneyDepositModel> ListDeposits(ListMoneyDepositsRequest request) {
+            return null;
+        }
 
-        //decimal CalculateAirTimeForFlatCommission(RetailerPlan plan, decimal amount) {
-        //    var rate = plan.CommissionRates.FirstOrDefault();
-        //    if (rate == null) {
-        //        throw new Exception($"Comission rate not found for plan id {plan.Id}");                
-        //    }
+        bool ValidateMoneyDeposit(MoneyDepositModel request) {
+            return false;
+        }
 
-        //    //decimal res = ((rate.Rate * amount) / 100) + amount;
-        //    return this._airTimeService.CalculateAirTime(rate.Rate,amount);
-        //}
+        public MoneyDepositModel? CreateDeposit(MoneyDepositModel request)
+        {
+            if (!ValidateMoneyDeposit(request)) {
+                return null;
+            }
+            
 
-        //decimal CalculateAirTimeForPerRechargeCommission(RetailerPlan plan, decimal amount)
-        //{
-        //    var rates = plan.CommissionRates.OrderBy(x => x.Amount);
-        //    CommissionRate? rate = null;
-        //    foreach (var v in rates) {
-        //        if (amount < v.Amount )
-        //        {
-        //            rate = v;
-        //        }
-        //        else {
-        //            break;
-        //        }
-        //    }
-        //    if (rate == null) {
-        //        _logger.LogWarning($"Comission rate for amount not found. " +
-        //            $"Using the last amount. rate amount {rate.Amount} - rate {rate.Rate}, for amount {amount}");
-        //        rate = plan.CommissionRates.Last();
-        //    }
-
-        //    return this._airTimeService.CalculateAirTime(rate.Rate, amount);            
-        //}
-
+            throw new NotImplementedException();
+        }
     }
 }

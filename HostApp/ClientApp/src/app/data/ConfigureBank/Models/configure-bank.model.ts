@@ -12,9 +12,9 @@ export class Bank extends NamedItem {
 export class ListConfigureBankResponse extends PagedItemResponseBase{
     constructor(obj?: any){
         super(obj)
-        this.configureBank = obj && obj.configureBank && obj.configureBank.map(cb => new Bank(cb)) || Array();
+        this.banks = obj && obj.configureBank && obj.configureBank.map(cb => new Bank(cb)) || Array();
     }
-    configureBank: Bank[];
+    banks: Bank[];
 }
 
 export class NewBank extends Bank{

@@ -18,53 +18,55 @@ export class RetailerPlanService {
   constructor(private http: HttpClient) { }
 
   fetchRetailerPlan():Observable<RetailerPlanResponse>{
-    const RpResponse : RetailerPlanResponse = new RetailerPlanResponse();
-    RpResponse.status = true;
-    const retailerPlan1 = new RetailerPlan({
-      id: '1',
-      code: "CO1",
-      name: "Plan One",
-      description: "10% Benefit",
-      joiningAmount: 1000,
-      renwalAmount: 100,
-      renewalAmountChargingRate: 2,
-      commissionRateType: 2,
-      commissionRates: [{id:"1" ,amount:10 ,rate: 5}, {id: '2', amount: 100, rate: 10}, {id: '3', amount: 1000, rate: 20}],
-      operatorId: 1,
-      objectStatus: ObjectStatus.NEW
-    });
-    const retailerPlan2 = new RetailerPlan({
-      id: '2',
-      code: "CO2",
-      name: "Plan Two",
-      description: "5% Benefit",
-      joiningAmount: 1000,
-      renwalAmount: 100,
-      renewalAmountChargingRate: 3,
-      commissionRateType: 1,
-      commissionRates: [{id:"1" ,amount: null ,rate: 5}],
-      operatorId: 1,
-      objectStatus: ObjectStatus.NEW
-    });
 
-    const retailerPlan : RetailerPlan[] = Array();
-    retailerPlan.push(retailerPlan1, retailerPlan2);
-    RpResponse.retailerPlans = retailerPlan;
-    return of(RpResponse);
+    const url = AppConfig.settings.apiServers.authServer + this.api;
+    const observer = Observable.create(observer=>{
+      this.http.get<RetailerPlanResponse>(url).subscribe(data =>{
+        const response = new RetailerPlanResponse(data);
+        observer.next(response);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      });
+    })
+    return observer;
+    // const RpResponse : RetailerPlanResponse = new RetailerPlanResponse();
+    // RpResponse.status = true;
+    // const retailerPlan1 = new RetailerPlan({
+    //   id: '1',
+    //   code: "CO1",
+    //   name: "Plan One",
+    //   description: "10% Benefit",
+    //   joiningAmount: 1000,
+    //   renwalAmount: 100,
+    //   renewalAmountChargingRate: 2,
+    //   commissionRateType: 2,
+    //   commissionRates: [{id:"1" ,amount:10 ,rate: 5}, {id: '2', amount: 100, rate: 10}, {id: '3', amount: 1000, rate: 20}],
+    //   operatorId: 1,
+    //   objectStatus: ObjectStatus.NEW
+    // });
+    // const retailerPlan2 = new RetailerPlan({
+    //   id: '2',
+    //   code: "CO2",
+    //   name: "Plan Two",
+    //   description: "5% Benefit",
+    //   joiningAmount: 1000,
+    //   renwalAmount: 100,
+    //   renewalAmountChargingRate: 3,
+    //   commissionRateType: 1,
+    //   commissionRates: [{id:"1" ,amount: 20 ,rate: 5}],
+    //   operatorId: 1,
+    //   objectStatus: ObjectStatus.NEW
+    // });
+
+    // const retailerPlan : RetailerPlan[] = Array();
+    // retailerPlan.push(retailerPlan1, retailerPlan2);
+    // RpResponse.retailerPlans = retailerPlan;
+    // return of(RpResponse);
 
 
-    // const url = AppConfig.settings.apiServers.authServer + this.api;
-    // const observer = Observable.create(observer=>{
-    //   this.http.get<RetailerPlanResponse>(url).subscribe(data =>{
-    //     const response = new RetailerPlanResponse(data);
-    //     observer.next(response);
-    //     observer.complete();
-    //   }, error => {
-    //     observer.error(error);
-    //     observer.complete();
-    //   });
-    // })
-    // return observer;
+    
   }
 
   getRetailerPlan(id: String){

@@ -13,17 +13,17 @@ namespace TakTec.RetailerPlans.Entities
     public class RetailerPlan : EntityBase
     {
         public RetailerPlan(string ownerId, ResourceTypes ownerType,
-            String code,string name,CommissionRateType commissionRateType,String operatorId) 
+            string name,CommissionRateType commissionRateType,String operatorId) 
                 : base(ownerId, ownerType)
         {
             Name = name;
-            Code = code;
+            //Code = code;
             CommissionRateType = commissionRateType;
             OperatorId=operatorId;
         }
 
         [Required]
-        public String Code { get; set; }
+        public String? Code { get; set; }
         public string Name { get; set; }
         public double RenewalAmountChargingRate { get; set; }
         public double JoiningAmount { get; set; }

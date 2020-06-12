@@ -10,7 +10,7 @@ namespace TakTec.RetailerPlans.Abstractions
 {
     public interface IRetailerPlanRepository:IGenericRepository<RetailerPlan>
     {
-        RetailerPlan WithCodeorWithName(RetailerPlan retailerPlan);
+        RetailerPlan? WithName(String name);
         List<RetailerPlan> Getplans(string userRole);
     }
 

@@ -55,7 +55,7 @@ namespace TakTec.RetailerPlans.Backend
             var resp = new NewRetailerPlanResponseViewModel();   
             if(ModelState.IsValid)
             {
-                var newRetailerPlan = (NewRetailerPlanViewModel?)_retailerPlanService.
+                var newRetailerPlan = _retailerPlanService.
                     CreateorUpdatePlan(retailerPlanViewModel);
                 if(newRetailerPlan == null)
                 {
@@ -64,7 +64,7 @@ namespace TakTec.RetailerPlans.Backend
                 else
                 {
                     resp.Status = true;
-                    resp.NewRetailerPlanViewModel = newRetailerPlan;
+                    resp.NewRetailerPlanViewModel = (NewRetailerPlanViewModel?) newRetailerPlan;
                 }
 
                 return SendResult(resp);

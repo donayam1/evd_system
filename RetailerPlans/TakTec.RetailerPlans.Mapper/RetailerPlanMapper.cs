@@ -25,7 +25,7 @@ namespace TakTec.RetailerPlans.Mapper
                 RenewalAmountChargingRate = retailerPlan.RenewalAmountChargingRate,
                 JoinAmount = retailerPlan.JoiningAmount,
             };
-            retailerVM.CommissionRateViewModels=retailerPlan.CommissionRates.ToList().ToCommissionRateViewModelList();
+            retailerVM.CommissionRates=retailerPlan.CommissionRates.ToList().ToCommissionRateViewModelList();
             return retailerVM;
         }
 
@@ -44,8 +44,7 @@ namespace TakTec.RetailerPlans.Mapper
         {
             //TODO owner id  =  group name of User , userId = CreatorUserId
             var retailerplan = new RetailerPlan("", ResourceTypes.GROUP,
-                                retailerPlanViewModel.Code, retailerPlanViewModel.
-                                Name, retailerPlanViewModel.CommissionRateType,
+                                 retailerPlanViewModel.Name, retailerPlanViewModel.CommissionRateType,
                                 retailerPlanViewModel.OperatorId)
             {
                 Description = retailerPlanViewModel.Description,
@@ -54,7 +53,7 @@ namespace TakTec.RetailerPlans.Mapper
                 RenewalAmount=retailerPlanViewModel.RenewalAmount,
                // CommissionRates = commissionRates.
             };
-            retailerplan.CommissionRates = retailerPlanViewModel.CommissionRateViewModels.ToCommissionRateList();
+            retailerplan.CommissionRates = retailerPlanViewModel.CommissionRates.ToCommissionRateList();
             return retailerplan;
         }
 
@@ -67,7 +66,7 @@ namespace TakTec.RetailerPlans.Mapper
         }
         
 
-        public static NewRetailerPlanViewModel ToNewPlanViewModel(this RetailerPlan retailerPlan, string UI_Id)
+        public static NewRetailerPlanViewModel ToNewPlanViewModel(this RetailerPlan retailerPlan, string? UI_Id)
         {
             NewRetailerPlanViewModel newRetailerPlanVM = (NewRetailerPlanViewModel)retailerPlan.ToPlanViewModel();
             newRetailerPlanVM.UI_Id = UI_Id;

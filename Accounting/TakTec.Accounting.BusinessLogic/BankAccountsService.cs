@@ -132,9 +132,15 @@ namespace TakTec.Accounting.BusinessLogic
         {
             return null;
         }
-        public List<BankAccountViewModel> List(int page, int itemsPerPage)
+
+        public List<BankAccountViewModel> List(ListBankAccountsRequest request)
         {
-            return this._bankAccountRepository.All().ToList().ToListViewModels();
+            var user = _accountService.GetUser(request.UserId);
+            if (user == null) {
+                return new List<BankAccountViewModel>();
+            }
+            String roleName = user.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
+            return this._bankAccountRepository.WithOwnerItemId(roleName).ToList().ToListViewModels();
         }
     }
 }

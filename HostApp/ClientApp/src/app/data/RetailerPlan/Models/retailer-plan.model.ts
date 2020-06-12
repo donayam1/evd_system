@@ -6,7 +6,7 @@ export class CommissionRate {
     constructor(obj? : any){
         this.id = obj && obj.id;
         this.amount = obj && obj.amount;
-        this.rate = obj && obj.amount;
+        this.rate = obj && obj.rate;
     }
     id: string;
     amount: number;

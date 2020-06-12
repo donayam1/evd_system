@@ -8,22 +8,27 @@
           <table class="table table-bordered table-striped" aria-labelledby="tableLabel">
             <thead>
               <tr>
-                <th>Code</th>
-                <th>Name</th>
+                <th>Name</th>               
+                <th>Commission Rates</th>
                 <th>Description</th>
-                <th>Amount</th>
-                <th>Detail</th>
-
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let retailerPlan of response.retailerPlans">
-                <td>{{ retailerPlan.code }}</td>
                 <td>{{ retailerPlan.name }}</td>
+                <td>
+                  <table class="table  table-bordered  table-sm">
+                    <th>Amount</th>
+                    <th>Rate</th>
+                    <tbody>
+                      <tr *ngFor="let commission of retailerPlan.commissionRates" >
+                        <td>{{commission.amount}} </td>
+                        <td>{{commission.rate}} </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
                 <td>{{retailerPlan.description}}</td>
-                <td>{{retailerPlan.commissionRates.amount}} </td>
-               
-                <td><button  class="btn btn-outline-primary">veiw</button></td>
               </tr>
             </tbody>
           </table>

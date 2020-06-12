@@ -24,6 +24,7 @@ namespace TakTec.Accounting.EntityFramework
             modelbuilder.Entity<Bank>(x => {
                 x.HasKey(x => x.Id);
                 x.HasMany(x => x.BankAccounts);
+               
                 x.ToTable(nameof(Bank) + "s");
             });
             modelbuilder.Entity<BankAccount>(x => {
@@ -31,6 +32,8 @@ namespace TakTec.Accounting.EntityFramework
                 x.HasOne(x => x.Bank)
                     .WithMany(x => x.BankAccounts)
                         .HasForeignKey(x => x.BankId);
+                //x.Property(x => x.Bank)
+                //    .HasField("_bank");
 
                 x.ToTable(nameof(BankAccount) + "s");
             });

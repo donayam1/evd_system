@@ -11,7 +11,7 @@
         "dummyClientSecret": "secret",
         "oidc":true,  
         "skipSubjectCheck":true,      
-        "scope" :"email profile openid EVDApi BillingApi RolesApi",
+        "scope" :"email profile openid EVDApi RolesApi",
         "issuer": "http://192.168.137.1:5001",
         "responseType":"token id_token", 
         "showDebugInformation" : true,

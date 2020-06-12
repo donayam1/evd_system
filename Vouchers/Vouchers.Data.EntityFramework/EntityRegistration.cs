@@ -16,8 +16,8 @@ namespace Vouchers.Data.EntityFramework
                     .IsUnique();
                 x.HasIndex(x => x.PinNumber)
                     .IsUnique();
-                x.Property(x => x.Batch)
-                    .HasField("_batch");
+                //x.Property(x => x.Batch)
+                //    .HasField("_batch");
 
                 x.HasOne(x => x.Batch)
                     .WithMany(z => z.Vouchers)
@@ -31,6 +31,9 @@ namespace Vouchers.Data.EntityFramework
                 x.HasOne(x => x.Voucher)
                  .WithMany(x => x.UserVouchers)
                     .HasForeignKey(x => x.VoucherId);
+                //x.Property(x => x.Voucher)
+                //    .HasField("_voucher");
+
                 //x.HasIndex(x => x.VoucherId)
                 //    .IsUnique();
                 x.ToTable(nameof(UserVoucher) + "s");
@@ -48,7 +51,9 @@ namespace Vouchers.Data.EntityFramework
                 x.HasOne(x => x.Voucher)
                     .WithMany()
                     .HasForeignKey(x => x.VoucherId);
-                
+                //x.Property(x => x.Voucher)
+                //    .HasField("_voucher");
+
                 x.ToTable(nameof(VoucherMarkedForReTransmit));
             });
 
@@ -58,8 +63,8 @@ namespace Vouchers.Data.EntityFramework
                 .WithMany(z => z.VoucherStatuses)
                     .HasForeignKey(z => z.OwnerId);
 
-                x.Property(x => x.Voucher)
-                    .HasField("_voucher");
+                //x.Property(x => x.Voucher)
+                //    .HasField("_voucher");
 
                 x.ToTable(nameof(VoucherStatus)+"es");
             });

@@ -32,52 +32,64 @@ export class UserBankAccountService {
 
   saveUserBankAccount(newUserBankAccount: NewUserBankAccount):Observable<CreateUserBankAccoutResponse>{
     //Mock Data
-    let response = new CreateUserBankAccoutResponse();
-    response.status = true;
-    let mes = new Message();
-    mes.messageCode = '30';
-    mes.messageType = 1;
-    mes.systemMessage = 'Working fine!';
-    response.messages.push(mes);
+    // let response = new CreateUserBankAccoutResponse();
+    // response.status = true;
+    // let mes = new Message();
+    // mes.messageCode = '30';
+    // mes.messageType = 1;
+    // mes.systemMessage = 'Working fine!';
+    // response.messages.push(mes);
 
-    let nub = new NewUserBankAccount();
-    nub.ui_id = newUserBankAccount.ui_id;
-    nub.id = '2';
-    nub.bankId = newUserBankAccount.bankId;
-    nub.accountNumber = newUserBankAccount.accountNumber;
-    nub.userId = newUserBankAccount.userId;
-    nub.objectStatus = newUserBankAccount.objectStatus;
+    // let nub = new NewUserBankAccount();
+    // nub.ui_id = newUserBankAccount.ui_id;
+    // nub.id = '2';
+    // nub.bankId = newUserBankAccount.bankId;
+    // nub.accountNumber = newUserBankAccount.accountNumber;
+    // nub.userId = newUserBankAccount.userId;
+    // nub.objectStatus = newUserBankAccount.objectStatus;
 
-    response.newUserBankAccount = nub;
+    // response.newUserBankAccount = nub;
 
-    return of(response);
+    // return of(response);
 
     //Later to be used with the api
-    // const url = AppConfig.settings.apiServers.authServer + this.api;
-    // return new Observable(observer => {
-    //   this.http.post<CreateUserBankAccoutResponse>(url, newUserBankAccount).subscribe(data => {
-    //     const response = new CreateUserBankAccoutResponse(data);
-    //     observer.next(response);
-    //     observer.complete();
-    //   }, error => {
-    //     observer.error(error);
-    //     observer.complete();
-    //   })
-    // })
+    const url = AppConfig.settings.apiServers.authServer + this.api + '/create';
+    return new Observable(observer => {
+      this.http.post<CreateUserBankAccoutResponse>(url, newUserBankAccount).subscribe(data => {
+        const response = new CreateUserBankAccoutResponse(data);
+        observer.next(response);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      });
+    });
   }
 
   getUserBankAccount(userId: string):Observable<UserBankAccountResponse>{
-    let response = new UserBankAccountResponse();
-    let ub = new UserBankAccount({
-      id: '2',
-      bankId: '1',
-      accountNumber: '10001000001',
-      userId: userId,
-      objectStatus: ObjectStatus.UNCHANGED
+    // let response = new UserBankAccountResponse();
+    // let ub = new UserBankAccount({
+    //   id: '2',
+    //   bankId: '1',
+    //   accountNumber: '10001000001',
+    //   userId: userId,
+    //   objectStatus: ObjectStatus.UNCHANGED
+    // });
+    // response.userBa = ub;
+    // response.status = true;
+    // return of(response);
+
+    const url = AppConfig.settings.apiServers.authServer + this.api + '/list';
+    return new Observable(observer => {
+      this.http.get<UserBankAccountResponse>(url).subscribe(data => {
+        const response = new UserBankAccountResponse(data);
+        observer.next(response);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      });
     });
-    response.userBa = ub;
-    response.status = true;
-    return of(response);
   }
 
   updateUserBankAccount(ub: UserBankAccount):Observable<UserBankAccountResponse>{

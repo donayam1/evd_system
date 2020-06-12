@@ -34,7 +34,7 @@ namespace TakTec.Accounting.BusinessLogic
         public List<NewBankViewModel>? CreateBanks(List<BankViewModel> newBanks)
         {
             //List<Bank> banks = newBanks.Select(x=>x.ToBankDomainModel()).ToList();
-            foreach(NewBankViewModel b in newBanks)
+            foreach(BankViewModel b in newBanks)
             {
                 if(!ValidateBank(b))
                 {

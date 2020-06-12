@@ -12,7 +12,7 @@ namespace TakTec.Accounting.EntityFramework
     {
         public override IQueryable<Bank> LoadNavigationProperties(IQueryable<Bank> items)
         {
-            throw new NotImplementedException();
+            return items;
         }
 
         public Bank? WithName(string BankName)

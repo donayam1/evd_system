@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using TakTec.Accounting.Data.Abstractions;
 using TakTec.Accounting.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace TakTec.Accounting.EntityFramework
 {
@@ -14,7 +15,7 @@ namespace TakTec.Accounting.EntityFramework
     {
         public override IQueryable<MoneyDeposit> LoadNavigationProperties(IQueryable<MoneyDeposit> items)
         {
-            throw new NotImplementedException();
+            return items.Include(x => x.Bank);
         }
     }
 }

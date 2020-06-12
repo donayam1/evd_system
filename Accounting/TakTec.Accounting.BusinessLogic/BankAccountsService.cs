@@ -54,22 +54,23 @@ namespace TakTec.Accounting.BusinessLogic
                 default:
                     return null;
             }
-
+            
             if(_bankAccount != null)
             {
                 try
                 {
                     _storage.Save();
+                    return _bankAccount.ToViewModel();
                 }
                 catch (Exception e)
                 {
                     _logger.LogError(e.InnerException,e.Message);
-                    _logger.AddUserError("Unknown error. please contact adminstrator");
-                    return null;
+                    _logger.AddUserError("Unknown error. please contact adminstrator");                    
                 }
             }
 
-            throw new NotImplementedException();
+            return null;
+
         }
 
         private bool ValidateBankAccount(BankAccount bankAccount, ObjectStatusEnum status)

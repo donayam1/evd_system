@@ -41,8 +41,20 @@ namespace TakTec.Accounting.Entities
         public String RetailerPlanId { get; set; }
         public Boolean IsCheque { get; set; }
 
+
+        public Bank? _bank { get; set; }
         [ForeignKey(nameof(BankId))]
-        public Bank? Bank { get; set; } = default!;
+        public Bank Bank
+        {
+            get
+            {
+                return _bank ?? throw new InvalidOperationException($"Navigation property {_bank} is null.");
+            }
+            set
+            {
+                _bank = value;
+            }
+        }
         public List<MoneyDepositRollbackRequest> MoneyDepositRollbackRequests { get; set; } = 
             new List<MoneyDepositRollbackRequest>();
 

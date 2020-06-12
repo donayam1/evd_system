@@ -4,15 +4,16 @@ namespace TakTec.Accounting.ViewModels
 {
     public class BankAccountViewModel
     {
+        public string? Id {get;set;}
         [Required]
-        public string Id {get;set;}
+        public string AccountNumber { get; set; } = default!;
+        public ObjectStatusEnum Status { get; set; } = ObjectStatusEnum.UNCHANGED;
+
         [Required]
-        public int AccountNumber { get; set; }
-        public ObjectStatusEnum Status { get; set; }
+        public string BankId { get; set; } = default!;
+
         [Required]
-        public string BankId {get;set;}
-        [Required]
-        public string UserId{get;set;}
+        public string UserId { get; set; } = default!;
 
     }
 }

@@ -12,12 +12,12 @@ import { UPDATE } from '@ngrx/store';
 })
 export class UserBankAccountService {
 
-  private readonly api = "";
+  private readonly api = "/api/accounting/BankAccounts";
 
   constructor(private http: HttpClient) { }
 
   fetchUserBankAccount():Observable<ListUserBankAccountResponse>{
-    const url = AppConfig.settings.apiServers.authServer + this.api;
+    const url = AppConfig.settings.apiServers.authServer + this.api + '/list';
     return new Observable(observer => {
       this.http.get<ListUserBankAccountResponse>(url).subscribe(data =>{
         const response = new ListUserBankAccountResponse(data);

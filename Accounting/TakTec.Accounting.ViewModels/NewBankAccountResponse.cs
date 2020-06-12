@@ -4,6 +4,6 @@ namespace TakTec.Accounting.ViewModels
 {
     public class NewBankAccountResponse:ResponseBase
     {
-        public NewBankAccountViewModel NewBankAccount { get; set; } = default!;
+        public NewBankAccountViewModel? NewBankAccount { get; set; } = default!;
     }
 }

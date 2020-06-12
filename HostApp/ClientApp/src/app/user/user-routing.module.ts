@@ -7,6 +7,7 @@ import { ListUserComponent } from './list-user/list-user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { EditUserPermissionComponent } from './edit-user-permission/edit-user-permission.component';
 import { EditUserBankDataComponent } from './edit-user-bank-data/edit-user-bank-data.component';
+import {ListUserBankAccountComponent} from './list-user-bank-account/list-user-bank-account.component';
 
 const routes: Routes = [
   { path: '', component: UserHomeComponent , children:[
@@ -15,7 +16,8 @@ const routes: Routes = [
     {path: 'list', component: ListUserComponent},
     {path: 'detail', component: UserDetailComponent },
     {path: 'permissions', component: EditUserPermissionComponent},
-    {path: 'bankdata', component: EditUserBankDataComponent}
+    {path: 'bankdata', component: EditUserBankDataComponent},
+    {path: 'bankAccountList', component: ListUserBankAccountComponent}
   ]}
 ];
 

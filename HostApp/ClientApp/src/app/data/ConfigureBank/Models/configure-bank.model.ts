@@ -4,8 +4,10 @@ import { ResponseBase } from "../../Shared/Models/responseBase";
 
 
 export class Bank extends NamedItem {
+    status: number;
     constructor(obj?: any){
         super(obj);
+        this.status = obj && obj.status;
     }
 }
 

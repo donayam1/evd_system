@@ -3,6 +3,7 @@ import { NewBank } from 'src/app/data/ConfigureBank/Models/configure-bank.model'
 import { Message } from 'src/app/data/Shared/Models/responseBase';
 import { MessageComponent } from 'src/app/messages/message/message.component';
 import { ConfigureBankService } from 'src/app/data/ConfigureBank/Services/configure-bank.service';
+import { ObjectStatus } from 'src/app/data/Shared/Models/newObjectStatus.model';
 
 @Component({
   selector: 'app-create-bank',
@@ -33,6 +34,7 @@ export class CreateBankComponent implements OnInit {
     this.idCounter++;
     this.currentBank.id = this.idCounter + '';
     this.currentBank.ui_id = this.idCounter + '';
+    this.currentBank.status = ObjectStatus.NEW;
     console.log(this.currentBank);
     this.banks.push(new NewBank(this.currentBank));
     this.currentBank.name = '';
@@ -40,8 +42,10 @@ export class CreateBankComponent implements OnInit {
   }
 
   saveBanks($event?: any){
+    //this.banks.status = ObjectStatus.NEW;
+    console.dir(this.banks);
     this.bankService.createBank(this.banks).subscribe(x => {
-      //console.dir(x);
+      this.messageComponent.addMessages(x);
       if (x.status === true){
         this.banks = x.banks;
         console.log(this.banks);

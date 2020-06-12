@@ -25,6 +25,27 @@ namespace TakTec.Accounting.ObjectMappers
             //add status
             return bankVM;
         }
+        public static List<BankViewModel> ToBankViewModel(this List<Bank> banks)
+        {
+            return banks.Select(x => x.ToBankViewModel()).ToList();
+        }
+        public static NewBankViewModel ToNewBankViewModel(this Bank bank,string ui_id)
+        {
+            var bank2 = new NewBankViewModel()
+            {
+                Id = bank.Id,
+                Name = bank.Name,
+                Status = ObjectStatusEnum.UNCHANGED,
+                UI_Id = ui_id
+            };
+            return bank2;
+        }
+
+        public static List<NewBankViewModel> ToNewBankViewModel(this List<Bank> banks)
+        {
+            return banks.Select(x => x.ToNewBankViewModel(x.Id)).ToList();
+        }
+
 
         public static Bank ToBankDomainModel(NewBankViewModel newBank)
         {

@@ -10,10 +10,12 @@ using TakTec.Accounting.Entities;
 using TakTec.Accounting.ViewModels;
 using TakTec.Accounting.BusinessLogic.Abstractions;
 using System.Collections.Generic;
+using TakTec.Core.Security;
 
-namespace TakTec.Accounting.Backend
+namespace TakTec.Accounting.Backend.Controllers
 {
     //[Route("api/accounting/[controller]")]
+    [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName)]
     public class BankAccountsController: AccountingControllersBase
     {
         private readonly IBankAccountService _bankAccountService;

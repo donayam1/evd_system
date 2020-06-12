@@ -31,12 +31,12 @@ namespace TakTec.Accounting.BusinessLogic
         }
 
 
-        public List<NewBankViewModel>? CreateBanks(List<NewBankViewModel> newBanks)
+        public List<NewBankViewModel>? CreateBanks(List<BankViewModel> newBanks)
         {
-            List<Bank> banks = newBanks.Select(x=>x.ToBankDomainModel()).ToList();
-            foreach(Bank b in banks)
+            //List<Bank> banks = newBanks.Select(x=>x.ToBankDomainModel()).ToList();
+            foreach(NewBankViewModel b in newBanks)
             {
-                if(!ValidateBank(b,ObjectStatusEnum.NEW))
+                if(!ValidateBank(b))
                 {
                     _logger.AddUserError("Invalid request!");
                     return null;
@@ -46,56 +46,87 @@ namespace TakTec.Accounting.BusinessLogic
 
            // var _banks = banks.Select(x=>Create(x)).ToList();
            List<Bank> _banks = new List<Bank>();
-           foreach (var item in banks)
+           foreach (var item in newBanks)
            {
-               _banks.Add(Create(item));
+               var bank = Create(item);
+                _banks.Add(bank);
            }
 
-            List<NewBankViewModel>? newBanksVm = new List<NewBankViewModel>();
+            //List<NewBankViewModel>? newBanksVm = new List<NewBankViewModel>();
                            
 
-            foreach (var item in _banks)
-            {
-               newBanksVm.Add((NewBankViewModel)item.ToBankViewModel());
-            } 
+            //foreach (var item in _banks)
+            //{
+            //   newBanksVm.Add((NewBankViewModel)item.ToBankViewModel());
+            //}
 
-            return SaveBanks(_banks)== true ? newBanksVm : null;
+            try
+            {
+                _storage.Save();
+                return _banks.ToNewBankViewModel(); //TODO add the UI_IDs here 
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.InnerException, e.Message);
+                _logger.AddUserError("Unknown error. Please contact adminstrator");
+                return null;
+            }
+
+
+            //return SaveBanks(_banks)== true ? newBanksVm : null;
 
         }
         
-        private Bank Create(Bank bank)
+        private Bank Create(BankViewModel bank)
         {
-            _bankRepository.Create(bank);
-            return bank;
+            var tBank = bank.ToBankDomainModel();
+            _bankRepository.Create(tBank);
+            return tBank;
         }
 
 
-        public List<BankViewModel> listBanks(int ItemsPerPage, int page)
+        public List<BankViewModel> ListBanks(int ItemsPerPage, int page)
         {
            var items =  _bankRepository.GetCustomFilters(page,ItemsPerPage).Items.ToList();
             return items.ToBankDomainList();
         }
 
-        public BankViewModel Update(BankViewModel bankVm)
+        public BankViewModel? Update(BankViewModel bankVm)
         {
-            Bank _bank = bankVm.ToBankDomainModel();
-            if(!ValidateBank(_bank,bankVm.Status))
+            //Bank _bank = bankVm.ToBankDomainModel();
+            if (!ValidateBank(bankVm))
             {
                 _logger.AddUserError("Invalid request!");
                 return null;
             }
 
-            var bank = _bankRepository.WithKey(_bank.Id);
-            bank.Name = _bank.Name;
-            
-            return bank.ToBankViewModel();
+            var bank = _bankRepository.WithKey(bankVm.Id);
+            bank.Name = bankVm.Name;
+
+            try
+            {
+                _storage.Save();
+                return bank.ToBankViewModel();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.InnerException, e.Message);
+                _logger.AddUserError("Unknown error. Please contact adminstrator");
+                return null;
+            }
+
         }
 
 
-        private bool ValidateBank(Bank bank, ObjectStatusEnum status)
+        private bool ValidateBank(BankViewModel bank)
         {
-            Bank _bank = _bankRepository.WithName(bank.Name);
-            if(status != ObjectStatusEnum.NEW)
+            Bank? _bank = _bankRepository.WithName(bank.Name);
+            if (_bank != null)
+            {
+                _logger.AddUserError("Bank with name" + _bank.Name + " already exists!");
+                return false;
+            }
+            if (bank.Status != ObjectStatusEnum.NEW)
             {
                 bool exists = _bankRepository.Exists(bank.Id);
                 if(exists==false)
@@ -103,41 +134,40 @@ namespace TakTec.Accounting.BusinessLogic
                     _logger.AddUserError("Bank does not exist!");
                     return false;
                 }
-                if(_bank!=null)
-                {
-                    _logger.AddUserError("Bank with name"+_bank.Name+" already exists!");
-                    return false;
-                }
+                
             }
 
-            else if(status == ObjectStatusEnum.NEW)
+            else if(bank.Status == ObjectStatusEnum.NEW)
             {
-                if(_bank!=null)
-                {
-                    _logger.AddUserError("Bank with name"+_bank.Name+" already exists!");
-                    return false;
-                }
+                //if(_bank!=null)
+                //{
+                //    _logger.AddUserError("Bank with name"+_bank.Name+" already exists!");
+                //    return false;
+                //}
             }
             return true;
         }
 
-        private bool SaveBanks(List<Bank> banks)
-        { 
-            foreach(Bank b in banks)
-            {
-                try
-                {
-                    _storage.Save();
-                }
-                catch(Exception e)
-                {
-                    _logger.LogError(e.InnerException,e.Message);
-                    _logger.AddUserError("Unknown error. Please contact adminstrator");
-                    return false;
-                }
-            }
-            
-            return true;
-        }
+        //private bool SaveBanks(List<Bank> banks)
+        //{ 
+        //    foreach(Bank b in banks)
+        //    {
+        //        Create(b);
+        //    }
+
+        //    try
+        //    {
+        //        _storage.Save();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        _logger.LogError(e.InnerException, e.Message);
+        //        _logger.AddUserError("Unknown error. Please contact adminstrator");
+        //        return false;
+        //    }
+
+
+        //    return true;
+        //}
     }
 }

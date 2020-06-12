@@ -29,7 +29,7 @@ namespace TakTec.Accounting.Backend
             var bankList = new BanksListResponseViewModel();
             if(ModelState.IsValid)
             {
-                var banks = _bankService.listBanks(page.ItemsPerPage,page.Page);
+                var banks = _bankService.ListBanks(page.ItemsPerPage,page.Page);
                 if(banks == null)
                 {
                     bankList.Status = false;
@@ -69,7 +69,7 @@ namespace TakTec.Accounting.Backend
         }
 
         [HttpPost(template:("create"))]
-        public IActionResult Create([FromBody] List<NewBankViewModel> newBanks)
+        public IActionResult Create([FromBody] List<BankViewModel> newBanks)
         {
             var newBanksResp = new NewBanksListResponse();
             if(ModelState.IsValid)

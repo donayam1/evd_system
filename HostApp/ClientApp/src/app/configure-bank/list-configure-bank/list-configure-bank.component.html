@@ -8,13 +8,11 @@
           <table class="table table-bordered table-striped" aria-labelledby="tableLabel">
             <thead>
               <tr>
-                <th>Id</th>
                 <th>Name</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let bank of response.banks">
-                <th>{{bank.id}} </th>
                 <td>{{bank.name }}</td>
                 </tr>
             </tbody>

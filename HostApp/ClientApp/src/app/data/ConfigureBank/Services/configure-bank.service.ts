@@ -21,6 +21,7 @@ export class ConfigureBankService {
     return new Observable(observer => {
       this.http.get<ListConfigureBankResponse>(url).subscribe(data => {
         const response = new ListConfigureBankResponse(data);
+        console.log(response)
         observer.next(response);
         observer.complete();
       }, error => {

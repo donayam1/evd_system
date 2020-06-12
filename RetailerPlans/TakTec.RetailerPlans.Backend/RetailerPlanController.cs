@@ -65,7 +65,7 @@ namespace TakTec.RetailerPlans.Backend
                 else
                 {
                     resp.Status = true;
-                    resp.NewRetailerPlanViewModel = (NewRetailerPlanViewModel?) newRetailerPlan;
+                    resp.NewRetailerPlan = (NewRetailerPlanViewModel?) newRetailerPlan;
                 }
 
                 return SendResult(resp);

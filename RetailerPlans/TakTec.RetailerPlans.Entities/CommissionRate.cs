@@ -26,7 +26,7 @@ namespace TakTec.RetailerPlans.Entities
 
         public RetailerPlan? _retailerPlan;
         [ForeignKey(nameof(OwnerId))]
-        public RetailerPlan? RetailerPlan
+        public RetailerPlan RetailerPlan
         {
             get
             {

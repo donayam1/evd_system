@@ -22,7 +22,7 @@ export class RetailerPlan extends NamedItem {
         this.renwalAmount = obj && obj.renwalAmount;
         this.renewalAmountChargingRate = obj && obj.renewalAmountChargingRate;
         this.commisionRateType = obj && obj.commisionRateType;
-        this.commissionRates = obj && obj.commissionRates || Array();
+        this.commissionRates = obj && obj.commissionRates && obj.commissionRates.map(cr => new CommissionRate(cr)) || Array();
         this.operatorId = obj && obj.operatorId;
         this.objectStatus = obj && obj.objectStatus;
     }

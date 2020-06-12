@@ -17,11 +17,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let retailerPlan of response.retailerPlans; index as i">
+              <tr *ngFor="let retailerPlan of response.retailerPlans">
                 <td>{{ retailerPlan.code }}</td>
                 <td>{{ retailerPlan.name }}</td>
                 <td>{{retailerPlan.description}}</td>
-                <td>{{retailerPlan.commissionRates[i].amount}} </td>
+                <td>{{retailerPlan.commissionRates.amount}} </td>
                
                 <td><button  class="btn btn-outline-primary">veiw</button></td>
               </tr>

@@ -36,9 +36,9 @@ export class CreateUserBankAccoutResponse extends ResponseBase{
 export class ListUserBankAccountResponse extends PagedItemResponseBase {
     constructor(obj?: any){
         super(obj);
-        this.userBankAccount = obj && obj.userBankAccount && obj.userBankAccount.map(uba => new UserBankAccount(uba)) || Array();
+        this.bankAccounts = obj && obj.bankAccounts && obj.bankAccounts.map(uba => new UserBankAccount(uba)) || Array();
     }
-    userBankAccount: UserBankAccount[];
+    bankAccounts: UserBankAccount[];
 }
 
 export class UserBankAccountResponse extends ResponseBase{

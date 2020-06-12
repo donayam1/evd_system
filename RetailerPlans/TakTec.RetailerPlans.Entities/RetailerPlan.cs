@@ -22,7 +22,6 @@ namespace TakTec.RetailerPlans.Entities
             OperatorId=operatorId;
         }
 
-        [Required]
         public String? Code { get; set; }
         public string Name { get; set; }
         public double RenewalAmountChargingRate { get; set; }
@@ -32,10 +31,19 @@ namespace TakTec.RetailerPlans.Entities
         public String OperatorId { get; set; }
         public List<CommissionRate> CommissionRates{ get; set; } = new List<CommissionRate>();
 
-
+        private Operator? _operator;
         [ForeignKey(nameof(OperatorId))]
-        public virtual Operator? Operator { get; set; } = default!;
-        
+        public virtual Operator Operator
+        {
+            get
+            {
+                return _operator ?? throw new InvalidOperationException($"Navigation propery {_operator} is null.");
+            }
+            set
+            {
+                _operator = value;
+            }
+        }       
 
 
     }

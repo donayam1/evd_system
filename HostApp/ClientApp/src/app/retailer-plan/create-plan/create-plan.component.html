@@ -16,8 +16,8 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="operator" class="col-form-label col-form-label-sm">Operator:</label>
-                    <select class="form-control form-control-sm" name="operator" id="operator" (change)="operatorSelected($event)">
-                        <option *ngFor="let item of opList.operators" [value]="item.id">{{item.name}}</option>
+                    <select class="form-control form-control-sm" name="operator" id="operator" [(ngModel)]="selectedOp">
+                        <option *ngFor="let item of opList.operators" [ngValue]="item">{{item.name}}</option>
                     </select>
                     <div class="card bg-transparent mt-md-3" *ngIf="opTriggered != false">
                         <div class="card-body">

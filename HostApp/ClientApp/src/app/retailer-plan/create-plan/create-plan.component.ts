@@ -121,8 +121,12 @@ export class CreatePlanComponent implements OnInit {
 
   ngOnInit() {
     this.opService.fetchOperator().subscribe((data) => {
-      this.opList = data;
-      console.log(data)
+      if(data.status === true){
+        this.opList = data;
+        this.selectedOp = data.operators[0];
+        console.log(data);
+        this.opTriggered = true;
+      }
     });
   }
 

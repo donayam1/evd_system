@@ -13,7 +13,7 @@ import { Message } from '../../Shared/Models/responseBase';
 })
 export class RetailerPlanService {
 
-  private readonly api = "";
+  private readonly api = "api/retailerPlans/RetailerPlan";
 
   constructor(private http: HttpClient) { }
 
@@ -90,45 +90,45 @@ export class RetailerPlanService {
 
   createRetailerPlan(newPlan: NewPlan):Observable<CreateRetailerPlanResponse>{
     //Mock Data
-    let response = new CreateRetailerPlanResponse();
-    response.status = true;
+    // let response = new CreateRetailerPlanResponse();
+    // response.status = true;
     
-    let mes = new Message();
-    mes.messageCode = '30';
-    mes.messageType = 1;
-    mes.systemMessage = "working";
-    response.messages.push(mes);
+    // let mes = new Message();
+    // mes.messageCode = '30';
+    // mes.messageType = 1;
+    // mes.systemMessage = "working";
+    // response.messages.push(mes);
 
-    let nP = new NewPlan();
-    nP.ui_id = newPlan.ui_id;
-    nP.id = '12';
-    nP.code = newPlan.code;
-    nP.name = newPlan.name;
-    nP.description = newPlan.description;
-    nP.joiningAmount = newPlan.joiningAmount;
-    nP.renwalAmount = newPlan.renwalAmount;
-    nP.renewalAmountChargingRate = newPlan.renewalAmountChargingRate;
-    nP.commisionRateType = newPlan.commisionRateType;
-    nP.commissionRates = newPlan.commissionRates;
-    nP.operatorId = '1';
-    nP.objectStatus = newPlan.objectStatus;
+    // let nP = new NewPlan();
+    // nP.ui_id = newPlan.ui_id;
+    // nP.id = '12';
+    // nP.code = newPlan.code;
+    // nP.name = newPlan.name;
+    // nP.description = newPlan.description;
+    // nP.joiningAmount = newPlan.joiningAmount;
+    // nP.renwalAmount = newPlan.renwalAmount;
+    // nP.renewalAmountChargingRate = newPlan.renewalAmountChargingRate;
+    // nP.commisionRateType = newPlan.commisionRateType;
+    // nP.commissionRates = newPlan.commissionRates;
+    // nP.operatorId = '1';
+    // nP.objectStatus = newPlan.objectStatus;
 
-    response.newRetailerPlan = nP;
+    // response.newRetailerPlan = nP;
 
-    return of(response);
+    // return of(response);
 
     //Later to be used with the api
-    // const url = AppConfig.settings.apiServers.authServer + this.api;
-    // const observer = Observable.create(observer => {
-    //   this.http.post<CreateRetailerPlanResponse>(url, newPlan).subscribe(result => {
-    //     const response = new CreateRetailerPlanResponse (result);
-    //     observer.next(response);
-    //     observer.complete();
-    //   }, error => {
-    //     observer.error(error);
-    //     observer.complete();
-    //   });
-    // });
-    // return observer;
+    const url = AppConfig.settings.apiServers.authServer + this.api + '/Create';
+    const observer = Observable.create(observer => {
+      this.http.post<CreateRetailerPlanResponse>(url, newPlan).subscribe(result => {
+        const response = new CreateRetailerPlanResponse (result);
+        observer.next(response);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      });
+    });
+    return observer;
   }
 }

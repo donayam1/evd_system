@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ListConfigureBankResponse, NewBank, CreateBankResponse, BankResponse, Bank } from '../Models/configure-bank.model';
 import { AppConfig } from '../../Configs/Services/app.config';
 import { Message } from '../../Shared/Models/responseBase';
@@ -10,33 +10,25 @@ import { Message } from '../../Shared/Models/responseBase';
 })
 export class ConfigureBankService {
 
-  private readonly api = "";
+  private readonly api = "/api/accounting/banks";
 
   constructor(private http: HttpClient) { }
+  
 
   fetchConfigureBank():Observable<ListConfigureBankResponse> {
-    
-    const configBanklist =  new ListConfigureBankResponse();
-    const configureBank = new Bank({
-      id: "1" , name: 'Commercial Bank'
-    })
-     const cb: Bank[] = Array();
-     cb.push(configureBank);
-     configBanklist.configureBank = cb;
-     configBanklist.status = true;
-     return of(configBanklist);
 
-    // const url = AppConfig.settings.apiServers.authServer + this.api;
-    // return new Observable(observer => {
-    //   this.http.get<ListConfigureBankResponse>(url).subscribe(data => {
-    //     const response = new ListConfigureBankResponse(data);
-    //     observer.next(response);
-    //     observer.complete();
-    //   }, error => {
-    //     observer.error(error);
-    //     observer.complete();
-    //   });
-    // });
+    const url = AppConfig.settings.apiServers.authServer + this.api + "/list";
+    return new Observable(observer => {
+      this.http.get<ListConfigureBankResponse>(url).subscribe(data => {
+        const response = new ListConfigureBankResponse(data);
+        console.log(response)
+        observer.next(response);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      });
+    });
 
   }
 

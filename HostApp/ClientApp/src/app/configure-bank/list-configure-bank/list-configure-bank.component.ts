@@ -18,6 +18,7 @@ export class ListConfigureBankComponent implements OnInit {
   ngOnInit() {
     this.bankService.fetchConfigureBank().subscribe(data => {
       this.response = data;
+      console.log(data)
     })
   }
 

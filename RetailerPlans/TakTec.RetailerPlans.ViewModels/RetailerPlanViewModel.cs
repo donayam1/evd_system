@@ -11,7 +11,7 @@ namespace TakTec.RetailerPlans.ViewModels
         public string? Id { get; set; }
         public String? Code { get; set; } // TODO change this to String
         public string Name { get; set; } = default!;
-        public string Description { get; set; } = default!;
+        public string? Description { get; set; } = default!;
         public double JoinAmount { get; set; }
         public double RenewalAmount  { get; set; }
         public double  RenewalAmountChargingRate { get; set; }

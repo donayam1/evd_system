@@ -25,7 +25,25 @@ namespace TakTec.RetailerPlans.Mapper
                 RenewalAmountChargingRate = retailerPlan.RenewalAmountChargingRate,
                 JoinAmount = retailerPlan.JoiningAmount,
             };
-            retailerVM.CommissionRateViewModels=retailerPlan.CommissionRates.ToList().ToCommissionRateViewModelList();
+            retailerVM.CommissionRates=retailerPlan.CommissionRates.ToList().ToCommissionRateViewModelList();
+            return retailerVM;
+        }
+        public static RetailerPlanViewModel ToNewPlanViewModel(this RetailerPlan retailerPlan,String? UI_Id)
+        {
+            var retailerVM = new NewRetailerPlanViewModel()
+            {
+                Id = retailerPlan.Id,
+                Code = retailerPlan.Code,
+                Name = retailerPlan.Name,
+                Description = retailerPlan.Description,
+                CommissionRateType = retailerPlan.CommissionRateType,
+                OperatorId = retailerPlan.OperatorId,
+                RenewalAmount = retailerPlan.RenewalAmount,
+                RenewalAmountChargingRate = retailerPlan.RenewalAmountChargingRate,
+                JoinAmount = retailerPlan.JoiningAmount,
+                UI_Id = UI_Id
+            };
+            retailerVM.CommissionRates = retailerPlan.CommissionRates.ToList().ToCommissionRateViewModelList();
             return retailerVM;
         }
 
@@ -40,12 +58,11 @@ namespace TakTec.RetailerPlans.Mapper
             return commissionrate;
         }
 
-        public static RetailerPlan ToPlanDomailModel(this RetailerPlanViewModel retailerPlanViewModel)//,List<CommissionRateViewModel> commissionRates)
+        public static RetailerPlan ToPlanDomailModel(this RetailerPlanViewModel retailerPlanViewModel, String ownerId)//,List<CommissionRateViewModel> commissionRates)
         {
             //TODO owner id  =  group name of User , userId = CreatorUserId
-            var retailerplan = new RetailerPlan("", ResourceTypes.GROUP,
-                                retailerPlanViewModel.Code, retailerPlanViewModel.
-                                Name, retailerPlanViewModel.CommissionRateType,
+            var retailerplan = new RetailerPlan(ownerId, ResourceTypes.GROUP,
+                                 retailerPlanViewModel.Name, retailerPlanViewModel.CommissionRateType,
                                 retailerPlanViewModel.OperatorId)
             {
                 Description = retailerPlanViewModel.Description,
@@ -54,7 +71,7 @@ namespace TakTec.RetailerPlans.Mapper
                 RenewalAmount=retailerPlanViewModel.RenewalAmount,
                // CommissionRates = commissionRates.
             };
-            retailerplan.CommissionRates = retailerPlanViewModel.CommissionRateViewModels.ToCommissionRateList();
+            retailerplan.CommissionRates = retailerPlanViewModel.CommissionRates.ToCommissionRateList();
             return retailerplan;
         }
 
@@ -67,12 +84,12 @@ namespace TakTec.RetailerPlans.Mapper
         }
         
 
-        public static NewRetailerPlanViewModel ToNewPlanViewModel(this RetailerPlan retailerPlan, string UI_Id)
-        {
-            NewRetailerPlanViewModel newRetailerPlanVM = (NewRetailerPlanViewModel)retailerPlan.ToPlanViewModel();
-            newRetailerPlanVM.UI_Id = UI_Id;
-            return newRetailerPlanVM;
-        }
+        //public static NewRetailerPlanViewModel ToNewPlanViewModel(this RetailerPlan retailerPlan, string? UI_Id)
+        //{
+        //    NewRetailerPlanViewModel newRetailerPlanVM = retailerPlan.ToNewPlanViewModel();
+        //    newRetailerPlanVM.UI_Id = UI_Id;
+        //    return newRetailerPlanVM;
+        //}
 
         public static List<RetailerPlanViewModel> ToPlanViewModelList(this List<RetailerPlan> retailerPlans)
         {

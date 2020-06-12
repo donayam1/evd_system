@@ -23,8 +23,20 @@ namespace TakTec.RetailerPlans.Entities
         public decimal Amount { get; set; } = 0;       
         public double Rate { get; set; }=default;
 
+
+        public RetailerPlan? _retailerPlan;
         [ForeignKey(nameof(OwnerId))]
-        public RetailerPlan? RetailerPlan { get; set; } = default!;
+        public RetailerPlan RetailerPlan
+        {
+            get
+            {
+                return _retailerPlan ?? throw new InvalidOperationException($"Navigation propery {_retailerPlan}  is null");
+            }
+            set
+            {
+                _retailerPlan = value;
+            }
+        }
     }
 }
 

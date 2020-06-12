@@ -4,6 +4,6 @@ namespace TakTec.RetailerPlans.ViewModels
 {
     public class NewRetailerPlanResponseViewModel:ResponseBase
     {
-        public NewRetailerPlanViewModel NewRetailerPlanViewModel { get; set; } = default;
+        public NewRetailerPlanViewModel? NewRetailerPlan { get; set; } = default;
     }
 }

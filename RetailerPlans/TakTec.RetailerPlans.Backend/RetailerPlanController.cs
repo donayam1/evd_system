@@ -14,6 +14,7 @@ using TakTec.Core.Security;
 namespace TakTec.RetailerPlans.Backend
 {
     [Route("api/retailerPlans/[controller]")]
+    [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName)]
     public class RetailerPlanController:ControllersBase
     {
 
@@ -55,7 +56,7 @@ namespace TakTec.RetailerPlans.Backend
             var resp = new NewRetailerPlanResponseViewModel();   
             if(ModelState.IsValid)
             {
-                var newRetailerPlan = (NewRetailerPlanViewModel?)_retailerPlanService.
+                var newRetailerPlan = _retailerPlanService.
                     CreateorUpdatePlan(retailerPlanViewModel);
                 if(newRetailerPlan == null)
                 {
@@ -64,7 +65,7 @@ namespace TakTec.RetailerPlans.Backend
                 else
                 {
                     resp.Status = true;
-                    resp.NewRetailerPlanViewModel = newRetailerPlan;
+                    resp.NewRetailerPlan = (NewRetailerPlanViewModel?) newRetailerPlan;
                 }
 
                 return SendResult(resp);

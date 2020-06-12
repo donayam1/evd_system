@@ -5,6 +5,8 @@ using EthioArt.Data.EntityFramework;
 using TakTec.RetailerPlans.Abstractions;
 using TakTec.RetailerPlans.Entities;
 using TakTec.Users.Constants;
+using Microsoft.EntityFrameworkCore;
+
 namespace TakTec.RetailerPlans.EntityFramework
 {
     public class RetailerPlanRepository : GenericRepositoryBase<RetailerPlan>, IRetailerPlanRepository
@@ -12,14 +14,15 @@ namespace TakTec.RetailerPlans.EntityFramework
 
         public override IQueryable<RetailerPlan> LoadNavigationProperties(IQueryable<RetailerPlan> items)
          {
-             throw new NotImplementedException();
+            items = items.Include(x => x.CommissionRates)
+                       .Include(x => x.Operator);
+            return items;
          }
 
-         public RetailerPlan WithCodeorWithName(RetailerPlan retailerPlan)
+         public RetailerPlan? WithName(String name)
          {
              var plan = All().Where(x =>
-                        (x.Code == retailerPlan.Code || x.Name == retailerPlan.Name)&&
-                        (x.Id != retailerPlan.Id)).FirstOrDefault();
+                        x.Name == name).FirstOrDefault();
              return plan;
          }
          

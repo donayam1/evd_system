@@ -155,7 +155,8 @@ namespace TakTec.RetailerPlans.BusinessLogic
 
          private RetailerPlan CreateNewPlan(RetailerPlanViewModel newPlan)
          {
-            var model = newPlan.ToPlanDomailModel();
+            String ownerId = _tokenUserService.UserRole;
+            var model = newPlan.ToPlanDomailModel(ownerId);
             _retailerPlanRepository.Create(model);
             return model;
         }

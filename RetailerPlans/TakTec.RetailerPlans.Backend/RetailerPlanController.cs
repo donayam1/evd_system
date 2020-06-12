@@ -14,6 +14,7 @@ using TakTec.Core.Security;
 namespace TakTec.RetailerPlans.Backend
 {
     [Route("api/retailerPlans/[controller]")]
+    [Authorize(AuthenticationSchemes = EVDAuthenticationNames.EVDAuthenticationName)]
     public class RetailerPlanController:ControllersBase
     {
 

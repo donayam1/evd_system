@@ -17,7 +17,8 @@ namespace TakTec.RetailerPlans.EntityFramework
                 x.HasOne(o=>o.Operator)
                     .WithMany()
                         .HasForeignKey(x=>x.OperatorId);
-
+                //x.HasIndex(z => new { z.OwnerId, z.Name })
+                //        .IsUnique();
                 x.ToTable(nameof(RetailerPlan)+"s");
             });
 

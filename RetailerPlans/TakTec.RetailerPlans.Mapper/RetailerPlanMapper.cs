@@ -58,10 +58,10 @@ namespace TakTec.RetailerPlans.Mapper
             return commissionrate;
         }
 
-        public static RetailerPlan ToPlanDomailModel(this RetailerPlanViewModel retailerPlanViewModel)//,List<CommissionRateViewModel> commissionRates)
+        public static RetailerPlan ToPlanDomailModel(this RetailerPlanViewModel retailerPlanViewModel, String ownerId)//,List<CommissionRateViewModel> commissionRates)
         {
             //TODO owner id  =  group name of User , userId = CreatorUserId
-            var retailerplan = new RetailerPlan("", ResourceTypes.GROUP,
+            var retailerplan = new RetailerPlan(ownerId, ResourceTypes.GROUP,
                                  retailerPlanViewModel.Name, retailerPlanViewModel.CommissionRateType,
                                 retailerPlanViewModel.OperatorId)
             {

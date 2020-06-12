@@ -107,7 +107,7 @@ export class UserBankAccountService {
     uB.bankId = ub.bankId;
     uB.accountNumber = ub.accountNumber;
     uB.userId = ub.userId;
-    uB.objectStatus = ub.objectStatus;
+    uB.status = ub.status;
 
     response.userBa = uB;
 

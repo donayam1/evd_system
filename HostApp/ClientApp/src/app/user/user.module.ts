@@ -12,10 +12,11 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditUserPermissionComponent } from './edit-user-permission/edit-user-permission.component';
 import { StoreModule } from '@ngrx/store';
 import { UserReducers } from '../data/User/Reducers/user.resucers';
-import { EditUserBankDataComponent } from './edit-user-bank-data/edit-user-bank-data.component';
 import { UserBankAccountModule } from '../user-bank-account/user-bank-account.module';
 import { ListUserBankAccountComponent } from './list-user-bank-account/list-user-bank-account.component'
 import { from } from 'rxjs';
+import { CreateBankAccountComponent } from '../user-bank-account/create-bank-account/create-bank-account.component';
+import { AddBankAccountComponent } from './add-bank-account/add-bank-account.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +26,9 @@ import { from } from 'rxjs';
     UserDetailComponent,
     EditUserComponent,
     EditUserPermissionComponent,
-    EditUserBankDataComponent,
-    ListUserBankAccountComponent],
+    ListUserBankAccountComponent,
+    //CreateBankAccountComponent,
+    AddBankAccountComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

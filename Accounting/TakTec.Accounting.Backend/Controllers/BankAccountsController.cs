@@ -71,12 +71,12 @@ namespace TakTec.Accounting.Backend.Controllers
         }
 
         [HttpPost(template:("create"))]
-        public IActionResult Create([FromBody] NewBankAccountViewModel newBankAccount)
+        public IActionResult Create([FromBody] BankAccountViewModel newBankAccount)
         {
             var response = new NewBankAccountResponse();
             if(ModelState.IsValid)
             {
-                var newBankAccnt = _bankAccountService.CreateOrUpdate((BankAccountViewModel)newBankAccount);
+                var newBankAccnt = _bankAccountService.CreateOrUpdate(newBankAccount);
                 if(newBankAccount == null)
                 {
                     response.Status = false;
@@ -84,7 +84,7 @@ namespace TakTec.Accounting.Backend.Controllers
                 else
                 {
                     response.Status = true;
-                    response.NewBankAccount = (NewBankAccountViewModel)newBankAccnt;
+                    response.NewBankAccount = (NewBankAccountViewModel?)newBankAccnt;
                 }
 
                 return SendResult(response);

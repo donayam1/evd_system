@@ -31,6 +31,10 @@ export class EditPlanComponent implements OnInit {
   }
 
   updatePlan(){
+    this.np.code = '0';
+    this.np.joiningAmount = 0;
+    this.np.renwalAmount = 0;
+    this.np.renewalAmountChargingRate = 0;
     this.retailerPlanService.createRetailerPlan(this.np).subscribe(x => {
       this.messageComponent.addMessages(x);
       if(x.status === true){
@@ -42,18 +46,18 @@ export class EditPlanComponent implements OnInit {
     this.retailerPlanService.getRetailerPlan('1').subscribe(x => {
       this.messageComponent.addMessages(x);
       if(x.status === true){
-        if(x.newRetailerPlan.renewalAmountChargingRate === 1){
-          this.selectedRate = 'Per Day';
-        }
-        else if(x.newRetailerPlan.renewalAmountChargingRate === 2){
-          this.selectedRate = 'Per Week';
-        }
-        else if(x.newRetailerPlan.renewalAmountChargingRate === 3){
-          this.selectedRate = 'Per Month';
-        }
-        else if(x.newRetailerPlan.renewalAmountChargingRate === 4){
-          this.selectedRate = 'Per Year';
-        }
+        // if(x.newRetailerPlan.renewalAmountChargingRate === 1){
+        //   this.selectedRate = 'Per Day';
+        // }
+        // else if(x.newRetailerPlan.renewalAmountChargingRate === 2){
+        //   this.selectedRate = 'Per Week';
+        // }
+        // else if(x.newRetailerPlan.renewalAmountChargingRate === 3){
+        //   this.selectedRate = 'Per Month';
+        // }
+        // else if(x.newRetailerPlan.renewalAmountChargingRate === 4){
+        //   this.selectedRate = 'Per Year';
+        // }
 
         if(x.newRetailerPlan.commisionRateType === 1){
           this.selectedType = 'Flat Commission';

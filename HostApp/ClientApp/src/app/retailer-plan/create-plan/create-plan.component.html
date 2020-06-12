@@ -9,15 +9,14 @@
                         <label for="planName" class="col-form-label col-form-label-sm">Name:</label>
                         <input type="text" class="form-control form-control-sm" name="planName" id="planName" placeholder="New Plan Name" [(ngModel)]="np.name">
                     </div>
-                    <div class="form-row form-group">
+                    <!-- <div class="form-row form-group">
                         <label for="planCode" class="col-form-label col-form-label-sm">Code:</label>
                         <input type="text" class="form-control form-control-sm" name="planCode" id="planCode" placeholder="Self Given New Plan Code" [(ngModel)]="np.code">
-                    </div>
+                    </div> -->
                 </div>
                 <div class="form-group col-md-6">
                     <label for="operator" class="col-form-label col-form-label-sm">Operator:</label>
                     <select class="form-control form-control-sm" name="operator" id="operator" (change)="operatorSelected($event)">
-                        <option selected class="text-muted disabled">Select your providing operator</option>
                         <option *ngFor="let item of opList.operators" [value]="item.id">{{item.name}}</option>
                     </select>
                     <div class="card bg-transparent mt-md-3" *ngIf="opTriggered != false">
@@ -33,10 +32,10 @@
                 <div class="col-md-6 align-self-md-center">
                     <div class="form-group">
                         <label for="description" class="col-form-label col-form-label-sm">Description:</label>
-                        <input type="text" class="form-control form-control-sm text-body" name="description" id="description" placeholder="Brief description of your plan. This is viewed by your subscribers." [(ngModel)]="np.description">
+                        <textarea type="text" class="form-control form-control-sm text-area" name="description" id="description" placeholder="Brief description of your plan. This is viewed by your subscribers." [(ngModel)]="np.description"></textarea>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="form-row form-group">
                         <label for="joiningAmount" class="col-form-label col-form-label-sm">Joining Amount:</label>
                         <input type="number" class="form-control form-control-sm" name="joiningAmount" id="joiningAmount" placeholder="Joining Amount" [(ngModel)]="np.joiningAmount">
@@ -52,10 +51,10 @@
                             <option *ngFor="let item of renewalRate" [value]="item">{{item}}</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="form-row">
-                <div class="col-md-6 align-self-md-center">
+                <div class="col-md-6 align-self-md-start">
                     <label for="commissionType" class="col-form-label col-form-label-sm">Commission Type:</label>
                     <select class="form-control form-control-sm" name="commissionType" id="commissionType" (change)="checkCommissionType($event)" [(ngModel)]="np.commisionRateType">
                         <option selected class="text-muted disabled">Select how you want to give out commissions</option>

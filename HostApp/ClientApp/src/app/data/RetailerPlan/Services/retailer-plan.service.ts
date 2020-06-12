@@ -13,7 +13,7 @@ import { Message } from '../../Shared/Models/responseBase';
 })
 export class RetailerPlanService {
 
-  private readonly api = "api/retailerPlans/RetailerPlan";
+  private readonly api = "/api/retailerPlans/RetailerPlan";
 
   constructor(private http: HttpClient) { }
 
@@ -120,6 +120,7 @@ export class RetailerPlanService {
     // return of(response);
 
     //Later to be used with the api
+    console.log(newPlan);
     const url = AppConfig.settings.apiServers.authServer + this.api + '/Create';
     const observer = Observable.create(observer => {
       this.http.post<CreateRetailerPlanResponse>(url, newPlan).subscribe(result => {

@@ -93,14 +93,25 @@ export class CreatePlanComponent implements OnInit {
     this.crId++;
     this.np.ui_id = this.idCounter + "";
     this.cr.id = this.crId + "";
+    console.log(this.cr);
     this.crs.push(new CommissionRate(this.cr));
     //this.np.commissionRates.push(new CommissionRate(this.cr));
   }
 
   savePlan($event?: any){
-    this.addCr();
-    this.np.objectStatus = ObjectStatus.NEW;
-    this.np.commissionRates = this.crs;
+    //this.addCr();
+    this.np.status = ObjectStatus.NEW;
+    if(this.selectedType === 'Flat Commission'){
+      this.idCounter--;
+      this.crId++;
+      this.np.ui_id = this.idCounter + "";
+      this.cr.id = this.crId + "";
+      this.cr.amount = 0;
+      this.np.commissionRates.push(this.cr);
+    }
+    else{
+      this.np.commissionRates = this.crs;
+    }
     this.np.code = '0';
     this.np.joiningAmount = 0;
     this.np.renwalAmount = 0;

@@ -54,26 +54,26 @@ export class CreatePlanComponent implements OnInit {
     // let currentOperator = SelectCurrentOperator(this.state.value);
   }
 
-  checkRenewalRate($event?: any){
-    this.selectedRenewalRate = $event.target.value;
-    if(this.selectedRenewalRate === 'Per Day'){
-      this.np.renewalAmountChargingRate = 1;
-      // console.log('Perday');
-    }
-    if(this.selectedRenewalRate === 'Per Week'){
-      this.np.renewalAmountChargingRate = 2;
-      //console.log('Perweek');
-    }
-    if(this.selectedRenewalRate === 'Per Month'){
-      this.np.renewalAmountChargingRate = 3;
-      //console.log('Permonth');
-    }
-    if(this.selectedRenewalRate === 'Per Year'){
-      this.np.renewalAmountChargingRate = 4;
-      // console.log('Peryear');
-    }
+  // checkRenewalRate($event?: any){
+  //   this.selectedRenewalRate = $event.target.value;
+  //   if(this.selectedRenewalRate === 'Per Day'){
+  //     this.np.renewalAmountChargingRate = 1;
+  //     // console.log('Perday');
+  //   }
+  //   if(this.selectedRenewalRate === 'Per Week'){
+  //     this.np.renewalAmountChargingRate = 2;
+  //     //console.log('Perweek');
+  //   }
+  //   if(this.selectedRenewalRate === 'Per Month'){
+  //     this.np.renewalAmountChargingRate = 3;
+  //     //console.log('Permonth');
+  //   }
+  //   if(this.selectedRenewalRate === 'Per Year'){
+  //     this.np.renewalAmountChargingRate = 4;
+  //     // console.log('Peryear');
+  //   }
     
-  }
+  // }
 
   checkCommissionType($event?: any){
     this.selectedType = $event.target.value;
@@ -93,14 +93,29 @@ export class CreatePlanComponent implements OnInit {
     this.crId++;
     this.np.ui_id = this.idCounter + "";
     this.cr.id = this.crId + "";
+    console.log(this.cr);
     this.crs.push(new CommissionRate(this.cr));
     //this.np.commissionRates.push(new CommissionRate(this.cr));
   }
 
   savePlan($event?: any){
-    this.addCr();
-    this.np.objectStatus = ObjectStatus.NEW;
-    this.np.commissionRates = this.crs;
+    //this.addCr();
+    this.np.status = ObjectStatus.NEW;
+    if(this.selectedType === 'Flat Commission'){
+      this.idCounter--;
+      this.crId++;
+      this.np.ui_id = this.idCounter + "";
+      this.cr.id = this.crId + "";
+      this.cr.amount = 0;
+      this.np.commissionRates.push(this.cr);
+    }
+    else{
+      this.np.commissionRates = this.crs;
+    }
+    this.np.code = '0';
+    this.np.joiningAmount = 0;
+    this.np.renwalAmount = 0;
+    this.np.renewalAmountChargingRate = 0;
     this.np.operatorId = this.selectedOp.id;
     this.retailerPlanService.createRetailerPlan(this.np).subscribe(x => {
       this.messagesComponent.addMessages(x);
@@ -117,8 +132,12 @@ export class CreatePlanComponent implements OnInit {
 
   ngOnInit() {
     this.opService.fetchOperator().subscribe((data) => {
-      this.opList = data;
-      console.log(data)
+      if(data.status === true){
+        this.opList = data;
+        this.selectedOp = data.operators[0];
+        console.log(data);
+        this.opTriggered = true;
+      }
     });
   }
 

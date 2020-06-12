@@ -24,7 +24,7 @@ export class RetailerPlan extends NamedItem {
         this.commisionRateType = obj && obj.commisionRateType;
         this.commissionRates = obj && obj.commissionRates && obj.commissionRates.map(cr => new CommissionRate(cr)) || Array();
         this.operatorId = obj && obj.operatorId;
-        this.objectStatus = obj && obj.objectStatus;
+        this.status = obj && obj.objectStatus;
     }
     code: string;
     description: string;
@@ -34,7 +34,7 @@ export class RetailerPlan extends NamedItem {
     commisionRateType: number;
     commissionRates: CommissionRate[];
     operatorId: string;
-    objectStatus: number;
+    status: number;
 }
 
 export class RetailerPlanResponse extends PagedItemResponseBase{

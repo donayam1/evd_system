@@ -9,10 +9,10 @@
                         <label for="planName" class="col-form-label col-form-label-sm">Name:</label>
                         <input type="text" class="form-control form-control-sm" name="planName" id="planName" placeholder="New Plan Name" value="{{np.name}}" [(ngModel)]="np.name">
                     </div>
-                    <div class="form-row form-group">
+                    <!-- <div class="form-row form-group">
                         <label for="planCode" class="col-form-label col-form-label-sm">Code:</label>
                         <input type="text" class="form-control form-control-sm" name="planCode" id="planCode" placeholder="Self Given New Plan Code" value="{{np.code}}" [(ngModel)]="np.code">
-                    </div>
+                    </div> -->
                 </div>
                 <div class="form-group col-md-6">
                     <label for="operator" class="col-form-label col-form-label-sm">Operator:</label>
@@ -36,7 +36,7 @@
                         <input type="text" class="form-control form-control-sm text-body" name="description" id="description" placeholder="Brief description of your plan. This is viewed by your subscribers." value="{{np.description}}" [(ngModel)]="np.description">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="form-row form-group">
                         <label for="joiningAmount" class="col-form-label col-form-label-sm">Joining Amount:</label>
                         <input type="number" class="form-control form-control-sm" name="joiningAmount" id="joiningAmount" placeholder="Joining Amount" value="{{np.joiningAmount}}" [(ngModel)]="np.joiningAmount" readonly>
@@ -52,7 +52,7 @@
                             <option *ngFor="let item of renewalRate" [value]="item">{{item}}</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="form-row">
                 <div class="col-md-6 align-self-md-center">

@@ -12,7 +12,7 @@ namespace TakTec.Accounting.ObjectMappers
         public static BankAccount ToDomain(this BankAccountViewModel bankAccountViewModel,string ownerId)
         {
             BankAccount bankAccount = new BankAccount(bankAccountViewModel.BankId,
-                bankAccountViewModel.Id,ownerId);
+                bankAccountViewModel.AccountNumber,ownerId);
             return bankAccount;
         }
 

@@ -22,10 +22,12 @@ export class CreateBankAccountComponent implements OnInit {
   uiCounter = 0;
   idCounter = 0;
 
-  @ViewChild('messages', {static: true})
+  @ViewChild('messages', { static: true })
   messagesComponent: MessageComponent;
 
-  constructor(private ubService: UserBankAccountService, private bankService: ConfigureBankService, private store: Store<UserState>, private state: State<UserState>) {
+  constructor(private ubService: UserBankAccountService,
+    private bankService: ConfigureBankService,
+    private store: Store<UserState>, private state: State<UserState>) {
     this.newAccount = new NewUserBankAccount();
     this.selectedUser = new Users();
     this.banks = new ListConfigureBankResponse();
@@ -35,31 +37,31 @@ export class CreateBankAccountComponent implements OnInit {
   ngOnInit() {
     const currentUser = SelectCurrentUser(this.state.value);
     console.dir(currentUser);
-    if(currentUser != null){
+    if (currentUser != null) {
       this.selectedUser = currentUser;
       console.log(this.selectedUser);
     }
 
     this.bankService.fetchConfigureBank().subscribe(x => {
-      if(x.status === true){
+      if (x.status === true) {
         this.banks = x;
         console.log(x);
       }
     });
   }
 
-  saveBankData(){
+  saveBankData() {
     this.uiCounter--;
     this.idCounter++;
     this.newAccount.status = ObjectStatus.NEW;
     this.newAccount.userId = this.selectedUser.Id;
     this.newAccount.bankId = this.selectedBank.id;
-    //this.newAccount.ui_id = this.uiCounter + "";
+    // this.newAccount.ui_id = this.uiCounter + "";
     this.newAccount.id = this.idCounter + "";
     console.dir(this.newAccount);
     this.ubService.saveUserBankAccount(this.newAccount).subscribe(x => {
       this.messagesComponent.addMessages(x);
-      if(x.status === true){
+      if (x.status === true) {
         console.log(x);
       }
     });

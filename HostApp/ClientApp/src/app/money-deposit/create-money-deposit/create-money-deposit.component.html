@@ -16,14 +16,14 @@
                     <div class="form-group form-row">
                         <label class="col-form-label col-form-label-sm" for="bank">Bank:</label>
                         <select class="form-control form-control-sm" name="bank" [(ngModel)]="selectedBank">
-                            <option *ngFor="let item of bankL" [value]="item">{{item.name}}</option>
+                            <option *ngFor="let item of bankL" [ngValue]="item">{{item.name}}</option>
                             <!-- <option selected [ngValue]="selectedBank">{{selectedBank.name}}</option> -->
                         </select>
                     </div>
                     <div class="form-group form-row">
                         <label class="col-form-label col-form-label-sm" for="accountNumber">Account Number:</label>
                         <select class="form-control form-control-sm" name="accountNumber" [(ngModel)]="selectedUserBankAccount">
-                            <option *ngFor="let item of userBankList" [value]="item">{{item.accountNumber}}</option>
+                            <option *ngFor="let item of userBankList" [ngValue]="item">{{item.accountNumber}}</option>
                             <!-- <option selected [ngValue]="selectedUserBankAccount">{{selectedUserBankAccount.accountNumber}}</option> -->
                         </select>
                     </div>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label class="col-form-label col-form-label-sm" for="amount">Deposit Amount:</label>
-                    <input class="form-control form-control-sm" type="number" name="referenceNumber" [(ngModel)]="newMoneyDeposit.ammount">
+                    <input class="form-control form-control-sm" type="number" name="referenceNumber" [(ngModel)]="newMoneyDeposit.amount">
                 </div>
             </div>
             <div class="float-md-right mb-md-3">

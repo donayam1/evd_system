@@ -13,6 +13,7 @@ import { UPDATE } from '@ngrx/store';
 export class UserBankAccountService {
 
   private readonly api = "/api/accounting/BankAccounts";
+  uId: number;
 
   constructor(private http: HttpClient) { }
 
@@ -74,7 +75,7 @@ export class UserBankAccountService {
     });
   }
 
-  getUserBankAccount(userId: string):Observable<UserBankAccountResponse>{
+  getUserBankAccount(userId: any):Observable<UserBankAccountResponse>{
     // let response = new UserBankAccountResponse();
     // let ub = new UserBankAccount({
     //   id: '2',
@@ -86,10 +87,16 @@ export class UserBankAccountService {
     // response.userBa = ub;
     // response.status = true;
     // return of(response);
+    
+    //this.uId = +userId;
 
-    const url = AppConfig.settings.apiServers.authServer + this.api + "/list?userId={{userId}}";
+    const url = AppConfig.settings.apiServers.authServer + this.api + "/list";
     return new Observable(observer => {
-      this.http.get<UserBankAccountResponse>(url).subscribe(data => {
+      let req = {};
+      if(userId != null){
+        req = {params: new HttpParams().set('userId', userId)};
+      }
+      this.http.get<UserBankAccountResponse>(url, req).subscribe(data => {
         const response = new UserBankAccountResponse(data);
         observer.next(response);
         observer.complete();

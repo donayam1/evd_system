@@ -7,13 +7,13 @@ export class UserBankAccount {
     bankId: string;
     accountNumber: string;
     userId: string;
-    objectStatus: ObjectStatus;
+    status: number;
     constructor(obj?: any){
         this.id = obj && obj.id;
         this.bankId = obj && obj.bankId;
         this.accountNumber = obj && obj.accountNumber;
         this.userId = obj && obj.userId;
-        this.objectStatus = obj && obj.objectStatus;
+        this.status = obj && obj.objectStatus;
     }
 }
 

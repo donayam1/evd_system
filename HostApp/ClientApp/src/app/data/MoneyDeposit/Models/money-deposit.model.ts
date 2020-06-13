@@ -4,7 +4,7 @@ export class MoneyDeposit {
     constructor(obj?: any){
         this.id = obj && obj.id;
         this.bankId = obj && obj.bankId;
-        this.ammount = obj && obj.ammount;
+        this.amount = obj && obj.amount;
         this.forUserId = obj && obj.forUserId;
         this.isCheque = obj && obj.isCheque || false;
         this.referanceNumber = obj && obj.referanceNumber;
@@ -13,7 +13,7 @@ export class MoneyDeposit {
     }
     id: string;
     bankId: string;
-    ammount: number;
+    amount: number;
     forUserId: string;
     isCheque: boolean;
     referanceNumber: string;

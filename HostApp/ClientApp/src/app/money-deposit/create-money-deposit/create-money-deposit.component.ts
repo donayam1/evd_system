@@ -62,6 +62,7 @@ export class CreateMoneyDepositComponent implements OnInit {
               for(let i of this.userBankList){
                 if(i.bankId === item.id){
                   this.bankL.push(item);
+                  this.selectedBank= item;
                 }
               }
             }

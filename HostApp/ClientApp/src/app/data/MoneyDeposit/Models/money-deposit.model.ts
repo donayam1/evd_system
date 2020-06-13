@@ -23,9 +23,9 @@ export class MoneyDeposit {
 export class ListDepositResponse extends ResponseBase{
     constructor(obj?: any){
         super(obj);
-        this.moneyDeposit = obj && obj.moneyDeposit && obj.moneyDeposit.map(md => new MoneyDeposit(md)) || Array();
+        this.response = obj && obj.response && obj.response.map(md => new MoneyDeposit(md)) || Array();
     }
-    moneyDeposit: MoneyDeposit[];
+    response: MoneyDeposit[];
 
 } 
 

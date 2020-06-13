@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { ListUserBankAccountResponse, CreateUserBankAccoutResponse, NewUserBankAccount, UserBankAccountResponse, UserBankAccount } from '../Models/user-bank-account.model';
 import { AppConfig } from '../../Configs/Services/app.config';
@@ -17,10 +17,18 @@ export class UserBankAccountService {
 
   constructor(private http: HttpClient) { }
 
-  fetchUserBankAccount(userId: string):Observable<ListUserBankAccountResponse>{
-    const url = AppConfig.settings.apiServers.authServer + this.api + '/list?userId={{userId}}';
+  fetchUserBankAccount(userId?: any):Observable<ListUserBankAccountResponse>{
+    console.log(userId)
+    const url = AppConfig.settings.apiServers.authServer + this.api + '/list';
     return new Observable(observer => {
-      this.http.get<ListUserBankAccountResponse>(url).subscribe(data =>{
+      let req = {};
+      if(userId != null){
+        req ={
+          params: new HttpParams()
+          .set("userId" , userId)
+        }
+      }
+      this.http.get<ListUserBankAccountResponse>(url , req).subscribe(data =>{
         const response = new ListUserBankAccountResponse(data);
         observer.next(response);
         observer.complete();

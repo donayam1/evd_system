@@ -15,7 +15,7 @@ namespace TakTec.Accounting.Entities
         }
 
         public Decimal Amount { get; set; }
-
+        public List<AirTimeUpdate> AirTimeUpdates { get; set; } = new List<AirTimeUpdate>();
         public string GetLockId()
         {
             return Id;

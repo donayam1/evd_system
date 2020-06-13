@@ -65,9 +65,14 @@ namespace TakTec.Users.InitialDataSeed
             new AspNetRoleType(RoleTypeConstants.RoleLevelSystemAdmin, RoleTypeConstants.RoleLevelNameSystemAdmin){ //"SupperAdmin"
                 Id = "0"
             },
-            //new AspNetRoleType(RoleTypeConstants.RoleLevelSystemAccounts,RoleTypeConstants.RoleLevelNameSystemAccounts){ //"SystemAccounts"
-            //    Id = "100"
-            //},
+            new AspNetRoleType(100,"Master Distributor"){ //"SystemAccounts"
+
+                Id = "100"
+            },
+            new AspNetRoleType(120,"Sub-Distributor"){ //"SystemAccounts"
+                Id = "120"
+            },
+
             new AspNetRoleType(RoleTypeConstants.RoleLevelRetailer,RoleTypeConstants.RoleLevelNameRetailer ){ //"Retailer"
                 Id = "10000"
             }
@@ -75,8 +80,8 @@ namespace TakTec.Users.InitialDataSeed
 
         public static List<AspNetRole> Roles = new List<AspNetRole>()
         {
-            new AspNetRole("1",RoleTypeConstants.RoleNameSupperAdmin,"1",ResourceTypes.USER){
-                Id = "1",
+            new AspNetRole("0",RoleTypeConstants.RoleNameSupperAdmin,"1",ResourceTypes.USER){
+                Id = "0",
                 CreatorUserId = "1"
             }
         };
@@ -84,7 +89,7 @@ namespace TakTec.Users.InitialDataSeed
         public static List<AspNetUserRole> AspNetUserRoles = new List<AspNetUserRole>() {
             new AspNetUserRole(){
                 UserId = "1",
-                RoleId = "1"
+                RoleId = "0"
             }
         };
     }

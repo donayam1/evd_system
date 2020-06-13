@@ -29,8 +29,21 @@ namespace TakTec.Accounting.Entities
         //public String AirTimeId { get; set; }
         public Boolean IsCredit { get; set; }
 
+
+        private AirTime? _airTime;
         [ForeignKey(nameof(OwnerId))]
-        public AirTime? AirTime { get; set; } = default!;
+        public AirTime AirTime
+        {
+            get
+            {
+                return _airTime ?? throw new InvalidOperationException($"Navigation property {nameof(_airTime)} is null.");
+            }
+            set
+            {
+                _airTime = value;
+
+            }
+        }
 
     }
 }

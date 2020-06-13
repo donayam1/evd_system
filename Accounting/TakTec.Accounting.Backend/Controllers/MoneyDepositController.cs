@@ -52,7 +52,7 @@ namespace TakTec.Accounting.Backend.Controllers
         }
 
         [HttpPost(template: "approve")]
-        public IActionResult Update([FromBody] ApproveMoneyDepositRequest request)
+        public IActionResult Approve([FromBody] ApproveMoneyDepositRequest request)
         {
             
             if (ModelState.IsValid)
@@ -61,11 +61,11 @@ namespace TakTec.Accounting.Backend.Controllers
                 var res = _moneyDepositService.ApproveMoneyDeposit(request);
                 if (res == true)
                 {
-                    response.Status = false;
+                    response.Status = true;
                 }
                 else
                 {
-                    response.Status = true;
+                    response.Status = false;
                 }
 
                 return SendResult(response);

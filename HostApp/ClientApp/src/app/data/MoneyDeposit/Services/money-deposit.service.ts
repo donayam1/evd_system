@@ -10,12 +10,12 @@ import { Message } from '../../Shared/Models/responseBase';
 })
 export class MoneyDepositService {
 
-  private readonly api = "";
+  private readonly api = "/api/accounting/MoneyDeposit";
 
   constructor(private http: HttpClient) { }
 
   fetchMoneyDeposit():Observable<ListDepositResponse>{
-    const url = AppConfig.settings.apiServers.authServer + this.api;
+    const url = AppConfig.settings.apiServers.authServer + this.api + '/list';
     return new Observable(observer => {
       this.http.get<ListDepositResponse>(url).subscribe(data => {
         const resonse = new ListDepositResponse(data);

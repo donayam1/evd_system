@@ -13,6 +13,7 @@ import { UPDATE } from '@ngrx/store';
 export class UserBankAccountService {
 
   private readonly api = "/api/accounting/BankAccounts";
+  uId: number;
 
   constructor(private http: HttpClient) { }
 
@@ -78,8 +79,10 @@ export class UserBankAccountService {
     // response.userBa = ub;
     // response.status = true;
     // return of(response);
+    
+    this.uId = +userId;
 
-    const url = AppConfig.settings.apiServers.authServer + this.api + "/list?userId={{userId}}";
+    const url = AppConfig.settings.apiServers.authServer + this.api + "/list?userId=uId";
     return new Observable(observer => {
       this.http.get<UserBankAccountResponse>(url).subscribe(data => {
         const response = new UserBankAccountResponse(data);

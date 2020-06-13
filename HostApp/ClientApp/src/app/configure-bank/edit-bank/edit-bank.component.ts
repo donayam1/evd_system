@@ -22,7 +22,7 @@ export class EditBankComponent implements OnInit {
   ngOnInit() {
     this.bankService.getBank('1').subscribe(x => {
       if (x.status === true){
-        this.bank = x.bank;
+        this.bank = x.banks[0];
       }
       else{
         this.isError = true;

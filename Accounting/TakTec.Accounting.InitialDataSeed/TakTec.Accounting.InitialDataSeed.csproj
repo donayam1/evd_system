@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExtCore.Data.Abstractions" Version="5.0.0" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\TaKTec.Core.APIs\TaKTec.Core.APIs.csproj" />
+    <ProjectReference Include="..\TakTec.Accounting.Entities\TakTec.Accounting.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AspNetIdentity.Data.Entities">
+      <HintPath>..\..\HostApp\OtherDeps\AspNetIdentity.Data.Entities.dll</HintPath>
+    </Reference>
+   
+    <Reference Include="EthioArt.Data.Entities.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Entities.Abstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.Data.Enumerations">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
+    </Reference>
+    <Reference Include="EthioArt.EntityFramework.DatabaseInit.Abstraction">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.EntityFramework.DatabaseInit.Abstraction.dll</HintPath>
+    </Reference>
+   
+
+  </ItemGroup>
+
+
+
+  <!--<ItemGroup>
+    <ProjectReference Include="..\..\Accounts\EthioArt.UserAccounts.Models\EthioArt.UserAccounts.Models.csproj" />
+    <ProjectReference Include="..\..\Accounts\EthioArt.UserAccounts.Security\EthioArt.UserAccounts.Security.csproj" />
+    <ProjectReference Include="..\..\Accounts\EthioArt.UserAccounts.Services.Abstractions\EthioArt.UserAccounts.Services.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Clients\EthioArt.Clients.Claims\EthioArt.Clients.Claims.csproj" />
+    <ProjectReference Include="..\..\Clients\EthioArt.Clients.Security\EthioArt.Clients.Security.csproj" />
+    <ProjectReference Include="..\IdentityServer4.Data.Entities\IdentityServer4.Data.Entities.csproj" />
+    <ProjectReference Include="..\IdentityServer4.Mappers\IdentityServer4.Mappers.csproj" />
+  </ItemGroup>-->
+
+
+
+
+
+</Project>

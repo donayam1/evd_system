@@ -12,13 +12,18 @@ namespace TakTec.Accounting.EntityFramework
             //RetailerPlan->Commission : one to many
             //RetailerPlan->Operator : many to one 
             modelbuilder.Entity<AirTime>(x => {
-                x.HasKey(x => x.Id);                
+                x.HasKey(x => x.Id);
+                //x.HasMany(x => x.AirTimeUpdates);
                 x.ToTable(nameof(AirTime) + "s");
             });
 
            
             modelbuilder.Entity<AirTimeUpdate>(x => {
                 x.HasKey(x => x.Id);
+                //x.HasOne(x => x.AirTime)
+                //.WithMany(x => x.AirTimeUpdates)
+                //.HasForeignKey(x => x.OwnerId);
+
                 x.ToTable(nameof(AirTimeUpdate) + "s");
             });
             modelbuilder.Entity<Bank>(x => {

@@ -15,7 +15,18 @@ namespace TakTec.Accounting.Entities
 
         public String MoneyDepositRequestId { get; set; }
 
+        public MoneyDeposit? _moneyDeposit;
         [ForeignKey(nameof(MoneyDepositRequestId))]
-        public MoneyDeposit? MoneyDeposit { get; set; } = default!;
+        public MoneyDeposit MoneyDeposit
+        {
+            get
+            {
+                return _moneyDeposit ?? throw new InvalidOperationException($"Naviagation property {nameof(_moneyDeposit)} is null.");
+            }
+            set
+            {
+                _moneyDeposit = value;
+            }
+        }
     }
 }

@@ -17,10 +17,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let bankaccount of response.userBankAccount">
+            <tr *ngFor="let bankaccount of response.bankAccounts">
               <td>{{ bankaccount.bankId }}</td>
               <td>{{ bankaccount.accountNumber }}</td>
-              <td>{{ vb.userId }}</td>
+              <td>{{ bankaccount.userId }}</td>
               <td><button class="btn btn-outline-primary"
                 (click)= "editUserBankAccount(bankaccount)"
                 routerLink = "/home" >Edit</button></td>

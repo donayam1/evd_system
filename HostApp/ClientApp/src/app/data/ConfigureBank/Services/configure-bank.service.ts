@@ -61,15 +61,29 @@ export class ConfigureBankService {
     });
   }
 
-  getBank(id: string): Observable<BankResponse>{
-    let response: BankResponse = new BankResponse();
-    let bank = new Bank({
-      id: '1',
-      name: 'Commercial bank of Ethiopia'
+  getBank(id: string): Observable<ListConfigureBankResponse>{
+
+    const url = AppConfig.settings.apiServers.authServer + this.api + "/list?id={{id}}";
+    return new Observable(observer => {
+      this.http.get<ListConfigureBankResponse>(url).subscribe(data => {
+        const response = new ListConfigureBankResponse(data);
+        console.log(response)
+        observer.next(response);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      });
     });
-    response.bank = bank;
-    response.status = true;
-    return of(response);
+
+    // let response: BankResponse = new BankResponse();
+    // let bank = new Bank({
+    //   id: '1',
+    //   name: 'Commercial bank of Ethiopia'
+    // });
+    // response.bank = bank;
+    // response.status = true;
+    // return of(response);
   }
 
   updateBank(bank: Bank):Observable<BankResponse>{

@@ -6,7 +6,7 @@ import { Users, ListUserResponse } from 'src/app/data/User/Models/user.model';
 import { UserBankAccount } from 'src/app/data/UserBankAccount/Models/user-bank-account.model';
 import { ConfigureBankService } from 'src/app/data/ConfigureBank/Services/configure-bank.service';
 import { UserBankAccountService } from 'src/app/data/UserBankAccount/Services/user-bank-account.service';
-import { Bank } from 'src/app/data/ConfigureBank/Models/configure-bank.model';
+import { Bank, ListConfigureBankResponse } from 'src/app/data/ConfigureBank/Models/configure-bank.model';
 import { ObjectStatus } from 'src/app/data/Shared/Models/newObjectStatus.model';
 import { MessageComponent } from 'src/app/messages/message/message.component';
 
@@ -20,8 +20,10 @@ export class CreateMoneyDepositComponent implements OnInit {
   userList: ListUserResponse;
   selectedUser: Users;
   selectedUserBankAccount: UserBankAccount;
+  bankList: ListConfigureBankResponse;
   selectedBank: Bank;
   isCheque: boolean;
+  idCounter = 0;
 
   @ViewChild('messages', { static: true })
   messages: MessageComponent;
@@ -31,6 +33,7 @@ export class CreateMoneyDepositComponent implements OnInit {
     this.userList = new ListUserResponse();
     this.selectedUser = new Users();
     this.selectedUserBankAccount = new UserBankAccount();
+    this.bankList = new ListConfigureBankResponse();
     this.selectedBank = new Bank();
     this.isCheque = false;
   }
@@ -48,9 +51,14 @@ export class CreateMoneyDepositComponent implements OnInit {
     this.ubService.getUserBankAccount(this.selectedUser.Id).subscribe(x => {
       if(x.status === true){
         this.selectedUserBankAccount = x.userBa;
-        this.bankService.getBank(this.selectedUserBankAccount.bankId).subscribe(x => {
+        this.bankService.fetchConfigureBank().subscribe(x => {
           if(x.status === true){
-            this.selectedBank = x.bank;
+            // this.selectedBank = x.banks;
+            for(let item of x.banks){
+              if(item.id == this.selectedUserBankAccount.bankId){
+                this.selectedBank = item;
+              }
+            }
           }
         })
       }
@@ -62,8 +70,10 @@ export class CreateMoneyDepositComponent implements OnInit {
   }
 
   saveDeposit(){
+    this.idCounter--;
+    this.newMoneyDeposit.id = this.idCounter + '';
     this.newMoneyDeposit.bankId = this.selectedUserBankAccount.bankId;
-    this.newMoneyDeposit.userId = this.selectedUserBankAccount.userId;
+    this.newMoneyDeposit.forUserId = this.selectedUserBankAccount.userId;
     this.newMoneyDeposit.isCheque = this.isCheque;
     this.newMoneyDeposit.objectStatus = ObjectStatus.NEW;
     console.dir(this.newMoneyDeposit);

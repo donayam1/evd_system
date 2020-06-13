@@ -16,8 +16,8 @@ export class UserBankAccountService {
 
   constructor(private http: HttpClient) { }
 
-  fetchUserBankAccount():Observable<ListUserBankAccountResponse>{
-    const url = AppConfig.settings.apiServers.authServer + this.api + '/list';
+  fetchUserBankAccount(userId: string):Observable<ListUserBankAccountResponse>{
+    const url = AppConfig.settings.apiServers.authServer + this.api + '/list?userId={{userId}}';
     return new Observable(observer => {
       this.http.get<ListUserBankAccountResponse>(url).subscribe(data =>{
         const response = new ListUserBankAccountResponse(data);
@@ -79,7 +79,7 @@ export class UserBankAccountService {
     // response.status = true;
     // return of(response);
 
-    const url = AppConfig.settings.apiServers.authServer + this.api + '/list';
+    const url = AppConfig.settings.apiServers.authServer + this.api + "/list?userId={{userId}}";
     return new Observable(observer => {
       this.http.get<UserBankAccountResponse>(url).subscribe(data => {
         const response = new UserBankAccountResponse(data);

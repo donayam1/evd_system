@@ -42,13 +42,14 @@ namespace TakTec.Accounting.Entities
         public Boolean IsCheque { get; set; }
 
 
-        public Bank? _bank { get; set; }
+        private Bank? _bank;
         [ForeignKey(nameof(BankId))]
         public Bank Bank
         {
             get
             {
-                return _bank ?? throw new InvalidOperationException($"Navigation property {_bank} is null.");
+                return _bank ?? throw new InvalidOperationException($"Navigation property {nameof(_bank)} is null.");
+
             }
             set
             {

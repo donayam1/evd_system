@@ -63,7 +63,7 @@ namespace TakTec.Users.InitialDataSeed
         public static List<AspNetRoleType> RoleTypes = new List<AspNetRoleType>()
         {
             new AspNetRoleType(RoleTypeConstants.RoleLevelSystemAdmin, RoleTypeConstants.RoleLevelNameSystemAdmin){ //"SupperAdmin"
-                Id = "1"
+                Id = "0"
             },
             //new AspNetRoleType(RoleTypeConstants.RoleLevelSystemAccounts,RoleTypeConstants.RoleLevelNameSystemAccounts){ //"SystemAccounts"
             //    Id = "100"

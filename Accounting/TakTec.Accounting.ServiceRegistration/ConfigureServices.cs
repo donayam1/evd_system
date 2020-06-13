@@ -14,7 +14,8 @@ namespace TakTec.Accounting.ServiceRegistration
         {
             services.AddScoped<IBankAccountService, BankAccountsService>();
             services.AddScoped<IBankService, BanksService>();
-            
+            services.AddScoped<IMoneyDepositService, MoneyDepositService>();
+            services.AddScoped<IAirTimeService, AirTimeService>();
         }
     }
 }

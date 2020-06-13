@@ -75,7 +75,7 @@ export class UserBankAccountService {
     });
   }
 
-  getUserBankAccount(userId: string):Observable<UserBankAccountResponse>{
+  getUserBankAccount(userId: any):Observable<UserBankAccountResponse>{
     // let response = new UserBankAccountResponse();
     // let ub = new UserBankAccount({
     //   id: '2',
@@ -88,11 +88,15 @@ export class UserBankAccountService {
     // response.status = true;
     // return of(response);
     
-    this.uId = +userId;
+    //this.uId = +userId;
 
-    const url = AppConfig.settings.apiServers.authServer + this.api + "/list?userId=uId";
+    const url = AppConfig.settings.apiServers.authServer + this.api + "/list";
     return new Observable(observer => {
-      this.http.get<UserBankAccountResponse>(url).subscribe(data => {
+      let req = {};
+      if(userId != null){
+        req = {params: new HttpParams().set('userId', userId)};
+      }
+      this.http.get<UserBankAccountResponse>(url, req).subscribe(data => {
         const response = new UserBankAccountResponse(data);
         observer.next(response);
         observer.complete();

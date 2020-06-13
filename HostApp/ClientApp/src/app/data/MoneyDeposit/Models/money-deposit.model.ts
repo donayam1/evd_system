@@ -7,7 +7,7 @@ export class MoneyDeposit {
         this.ammount = obj && obj.ammount;
         this.forUserId = obj && obj.forUserId;
         this.isCheque = obj && obj.isCheque || false;
-        this.refNumber = obj && obj.refNumber;
+        this.referanceNumber = obj && obj.referanceNumber;
         this.objectStatus = obj && obj.objectStatus;
 
     }
@@ -16,7 +16,7 @@ export class MoneyDeposit {
     ammount: number;
     forUserId: string;
     isCheque: boolean;
-    refNumber: string;
+    referanceNumber: string;
     objectStatus: number;
 }
 

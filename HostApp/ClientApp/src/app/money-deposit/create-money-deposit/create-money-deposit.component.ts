@@ -3,7 +3,7 @@ import { NewMoneyDeposit } from 'src/app/data/MoneyDeposit/Models/money-deposit.
 import { MoneyDepositService } from 'src/app/data/MoneyDeposit/Services/money-deposit.service';
 import { UserService } from 'src/app/data/User/Services/user.service';
 import { Users, ListUserResponse } from 'src/app/data/User/Models/user.model';
-import { UserBankAccount } from 'src/app/data/UserBankAccount/Models/user-bank-account.model';
+import { UserBankAccount, ListUserBankAccountResponse } from 'src/app/data/UserBankAccount/Models/user-bank-account.model';
 import { ConfigureBankService } from 'src/app/data/ConfigureBank/Services/configure-bank.service';
 import { UserBankAccountService } from 'src/app/data/UserBankAccount/Services/user-bank-account.service';
 import { Bank, ListConfigureBankResponse } from 'src/app/data/ConfigureBank/Models/configure-bank.model';
@@ -20,8 +20,10 @@ export class CreateMoneyDepositComponent implements OnInit {
   userList: ListUserResponse;
   selectedUser: Users;
   selectedUserBankAccount: UserBankAccount;
+  userBankList: UserBankAccount[];
   bankList: ListConfigureBankResponse;
   selectedBank: Bank;
+  bankL: Bank[];
   isCheque: boolean;
   idCounter = 0;
 
@@ -32,9 +34,11 @@ export class CreateMoneyDepositComponent implements OnInit {
     this.newMoneyDeposit = new NewMoneyDeposit();
     this.userList = new ListUserResponse();
     this.selectedUser = new Users();
-    this.selectedUserBankAccount = new UserBankAccount();
+    this.userBankList = new Array();
+    this.selectedUserBankAccount = new UserBankAccount
     this.bankList = new ListConfigureBankResponse();
     this.selectedBank = new Bank();
+    this.bankL = new Array();
     this.isCheque = false;
   }
 
@@ -48,15 +52,17 @@ export class CreateMoneyDepositComponent implements OnInit {
   }
 
   getbankAccount(id: string){
-    this.ubService.getUserBankAccount(this.selectedUser.Id).subscribe(x => {
+    this.ubService.fetchUserBankAccount(this.selectedUser.Id).subscribe(x => {
       if(x.status === true){
-        this.selectedUserBankAccount = x.userBa;
+        this.userBankList = x.bankAccounts;
         this.bankService.fetchConfigureBank().subscribe(x => {
           if(x.status === true){
             // this.selectedBank = x.banks;
             for(let item of x.banks){
-              if(item.id == this.selectedUserBankAccount.bankId){
-                this.selectedBank = item;
+              for(let i of this.userBankList){
+                if(i.bankId === item.id){
+                  this.bankL.push(item);
+                }
               }
             }
           }
@@ -72,8 +78,9 @@ export class CreateMoneyDepositComponent implements OnInit {
   saveDeposit(){
     this.idCounter--;
     this.newMoneyDeposit.id = this.idCounter + '';
-    this.newMoneyDeposit.bankId = this.selectedUserBankAccount.bankId;
-    this.newMoneyDeposit.forUserId = this.selectedUserBankAccount.userId;
+    this.newMoneyDeposit.ui_id = this.idCounter + '';
+    this.newMoneyDeposit.bankId = this.selectedBank.id;
+    this.newMoneyDeposit.forUserId = this.selectedUser.Id;
     this.newMoneyDeposit.isCheque = this.isCheque;
     this.newMoneyDeposit.objectStatus = ObjectStatus.NEW;
     console.dir(this.newMoneyDeposit);

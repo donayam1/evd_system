@@ -14,6 +14,7 @@ using ExtCore.Data.Abstractions;
 using AspNetIdentity.Data.Entities;
 using EthioArt.Backend.Models.Requests;
 using TakTec.Users.ObjectMappers;
+using TakTec.RetailerPlans.BusinessLogic.Abstraction;
 
 namespace TakTec.Users.BusinessLogic
 {
@@ -25,12 +26,14 @@ namespace TakTec.Users.BusinessLogic
         private readonly IRoleTypeService _roleTypeService;
         private readonly ILogger<IEVDUserService> _logger;
         private readonly IStorage _storage;
+        private readonly IRetailerPlanService _retailerPlanService;
 
         public EVDUserService(IAccountService accountService,
             ITokenUserService tokenUserService,
             IRoleTypeService roleTypeService,
             ILogger<IEVDUserService> logger,
-            IStorage storage) {
+            IStorage storage,
+            IRetailerPlanService retailerPlanService) {
             _accountService = accountService ?? 
                 throw new ArgumentNullException(nameof(accountService));
             _tokenUserService = tokenUserService ??
@@ -39,6 +42,8 @@ namespace TakTec.Users.BusinessLogic
                 throw new ArgumentNullException(nameof(roleTypeService));
             _logger = logger ?? throw new ArgumentNullException(nameof(ILogger<IEVDUserService>));
             _storage = storage ?? throw new ArgumentNullException(nameof(IStorage));
+            _retailerPlanService = retailerPlanService ??
+                throw new ArgumentNullException(nameof(retailerPlanService));
         }
 
         
@@ -49,6 +54,13 @@ namespace TakTec.Users.BusinessLogic
             if (res != null)
             {
 
+                //TODO. Assert that the current user owns the plan.
+
+                var ares = _retailerPlanService.AddUserToPlan(res.Role.Name, request.PlanId);
+                if (ares == false) {
+                    _logger.LogError("Error adding user to retailer plan");
+                    return null;
+                }
                 try
                 {
                     _storage.Save();//TODO improve this a lot 

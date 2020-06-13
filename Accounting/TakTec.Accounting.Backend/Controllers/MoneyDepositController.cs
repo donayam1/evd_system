@@ -51,27 +51,27 @@ namespace TakTec.Accounting.Backend.Controllers
             return BadRequest(ModelState);
         }
 
-        //[HttpPost(template:"update")]
-        //public IActionResult Update([FromBody] BankViewModel bankViewModel)
-        //{
-        //    var bankResponse =  new BankResponseViewModel();
-        //    if(ModelState.IsValid)
-        //    {
-        //        var updatedBank = _bankService.Update(bankViewModel);
-        //        if(updatedBank == null)
-        //        {
-        //            bankResponse.Status = false;
-        //        }
-        //        else
-        //        {
-        //            bankResponse.Status = true;
-        //            bankResponse.Bank = updatedBank;
-        //        }
+        [HttpPost(template: "approve")]
+        public IActionResult Update([FromBody] ApproveMoneyDepositRequest request)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                var response = new ResponseBase();
+                var res = _moneyDepositService.ApproveMoneyDeposit(request);
+                if (res == true)
+                {
+                    response.Status = false;
+                }
+                else
+                {
+                    response.Status = true;
+                }
 
-        //        return SendResult(bankResponse);
-        //    }
-        //    return BadRequest(ModelState);
-        //}
+                return SendResult(response);
+            }
+            return BadRequest(ModelState);
+        }
 
         [HttpPost(template:"create")]
         public IActionResult Create([FromBody]MoneyDepositModel moneyDeposit)

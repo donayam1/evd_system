@@ -26,7 +26,7 @@ namespace TakTec.RetailerPlans.BusinessLogic
         private readonly IStorage _storage;
         private readonly IOperatorRepository _operatorRepository; 
         private readonly ITokenUserService _tokenUserService;
-
+        private readonly IUserPlanRepository _userPlanRepository;
 
         public RetailerPlanService(IStorage storage,ILogger<IRetailerPlanService> logger,ITokenUserService tokenUserService)
         {
@@ -37,6 +37,8 @@ namespace TakTec.RetailerPlans.BusinessLogic
                                      throw new ArgumentNullException(nameof(IOperatorRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _tokenUserService = tokenUserService ?? throw new ArgumentNullException(nameof(tokenUserService));
+            _userPlanRepository = _storage.GetRepository<IUserPlanRepository>() ??
+                throw new ArgumentNullException(nameof(IUserPlanRepository));
 
         }
 
@@ -195,6 +197,23 @@ namespace TakTec.RetailerPlans.BusinessLogic
         private RetailerPlan? RemovePlan(RetailerPlanViewModel plan){
             return null;
         }
+
+
+        public Boolean AddUserToPlan(String userRole, String planId) {
+
+            var currUserPlan = _userPlanRepository.GetCurrentPlan(userRole);
+            if (currUserPlan != null) {
+                currUserPlan.IsCurrent = false;
+            }
+
+            UserPlan up = new UserPlan(planId, userRole) {
+                IsCurrent = true
+            };
+
+            _userPlanRepository.Create(up);
+            return true;
+        }
+
 
        
     }

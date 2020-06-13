@@ -7,6 +7,7 @@ namespace TakTec.Accounting.ViewModels
     public class MoneyDepositModel
     {
         //public String FromUserRoleName { get; set; }
+        public String? Id { get; set; } = default!;
         public String ForUserId { get; set; } = default!;
         public decimal Amount { get; set; }
         public String BankId { get; set; } = default!;

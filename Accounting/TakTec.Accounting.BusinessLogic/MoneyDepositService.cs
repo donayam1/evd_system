@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TakTec.Accounting.BusinessLogic.Abstractions;
 using TakTec.Accounting.Data.Abstractions;
+using TakTec.Accounting.ObjectMappers;
 //using TakTec.Accounting.Entities;
 using TakTec.Accounting.ViewModels;
 using TakTec.RetailerPlans.Abstractions;
@@ -28,12 +29,15 @@ namespace TakTec.Accounting.BusinessLogic
         private readonly ITokenUserService _tokenUserService;
         private readonly ILogger<IMoneyDepositRepository> _logger;
         private IRetailerPlanRepository _retailerPlanRepository;
+        private IUserPlanRepository _userPlanRepository;
         //private readonly IRoleService _roleService;
         private readonly IAccountService _accountService;
         private readonly IOrAuthorizationService _orAuthorizationService;
         private readonly IAirTimeRepository _airTimeRepository;
         private readonly IGlobalSyncronizationStore _globalSyncronizationStore;
         private readonly IAirTimeService _airTimeService;
+
+
 
         public MoneyDepositService(IStorage storage,
             ITokenUserService tokenUserService,
@@ -56,6 +60,8 @@ namespace TakTec.Accounting.BusinessLogic
                 throw new ArgumentNullException(nameof(IOrAuthorizationService));
             _retailerPlanRepository = _storage.GetRepository<IRetailerPlanRepository>()
                 ?? throw new ArgumentNullException(nameof(IRetailerPlanRepository));
+            _userPlanRepository = _storage.GetRepository<IUserPlanRepository>() ??
+                throw new ArgumentNullException(nameof(IUserPlanRepository));
             _airTimeRepository = _storage.GetRepository<IAirTimeRepository>() ??
                 throw new ArgumentNullException(nameof(IAirTimeRepository));
             _globalSyncronizationStore = globalSyncronizationStore ??
@@ -184,11 +190,17 @@ namespace TakTec.Accounting.BusinessLogic
         }
 
         public List<MoneyDepositModel> ListDeposits(ListMoneyDepositsRequest request) {
-            return null;
+
+            //TODO filer only deposits the current user can see.
+
+            var res = this._moneyDepositRepository.All(request.IsSyncing, request.FromDate, request.ToDate)
+                .Where(x => x.IsAproved == request.IsApproved).ToList();
+
+            return res.ToViewModel();
         }
 
         bool ValidateMoneyDeposit(MoneyDepositModel request) {
-            return false;
+            return true;
         }
 
         public MoneyDepositModel? CreateDeposit(MoneyDepositModel request)
@@ -196,9 +208,30 @@ namespace TakTec.Accounting.BusinessLogic
             if (!ValidateMoneyDeposit(request)) {
                 return null;
             }
-            
 
-            throw new NotImplementedException();
+
+            var user = _accountService.GetUser(request.ForUserId);
+            String userRoleName = user.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
+
+            var plan = _userPlanRepository.GetCurrentPlan(userRoleName);
+
+
+            var moneyDepositRequest = request.ToDomainModel(_tokenUserService.UserId, 
+                plan.Id,
+                userRoleName
+                );
+
+            _moneyDepositRepository.Create(moneyDepositRequest);
+
+            try {
+                _storage.Save();
+                return moneyDepositRequest.ToViewModel();
+            }
+            catch (Exception e) {
+                _logger.LogError(e, $"{e.Message}-{e.StackTrace}-{e.InnerException}");
+            }
+
+            return null;
         }
     }
 }

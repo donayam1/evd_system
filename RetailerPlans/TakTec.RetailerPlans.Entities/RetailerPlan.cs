@@ -30,6 +30,8 @@ namespace TakTec.RetailerPlans.Entities
         public CommissionRateType CommissionRateType { get; set; }
         public String OperatorId { get; set; }
         public List<CommissionRate> CommissionRates{ get; set; } = new List<CommissionRate>();
+        public List<UserPlan> UserPlans { get; set; } = new List<UserPlan>();
+
 
         private Operator? _operator;
         [ForeignKey(nameof(OperatorId))]

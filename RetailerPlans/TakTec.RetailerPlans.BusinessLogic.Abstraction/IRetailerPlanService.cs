@@ -12,5 +12,6 @@ namespace TakTec.RetailerPlans.BusinessLogic.Abstraction
        // RetailerPlanViewModel? UpdateRetailerPlan(RetailerPlan retailerPlan);
         
         List<RetailerPlanViewModel> ListRetailerPlans(int pageNo,int ItemsPerPage);
+        Boolean AddUserToPlan(String userRole, String planId);
     }
 }

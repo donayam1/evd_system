@@ -188,24 +188,24 @@ namespace Vouchers.BusinessLogic
         /// <param name="fromUserRoleName">This is the distributor who is selling the vouchers</param>
         /// <param name="toUserRole">This is the distributor who is reciving the vouchers</param>
         /// <returns></returns>
-        public List<Voucher>? TransferVouchersToUser(VoucherTransferRequest request,
-            String fromUserRoleName, String toUserRole) {
+        public List<Voucher>? TransferVouchersToUser(VoucherTransferRequest request, //String fromUserRoleName,
+             String toUserRole) {
             List<Voucher> allVouchers = new List<Voucher>();
 
             foreach (var v in request.TransferRequestItems) {
                 List<Voucher> userVouchers = new List<Voucher>();
 
-                if (!fromUserRoleName.Equals(toUserRole)) // user does not buy form his own stock, he already ownes the stock
-                {
-                  var vouchers =  _userVoucherRepository.
-                        GetFreeUserVouchers(fromUserRoleName, v.Denomination, v.Quantity,
-                        request.BatchId, request.IsApproved).Select(x => x.Voucher).ToList();
-                    userVouchers.AddRange(vouchers);
-                }
-                allVouchers.AddRange(userVouchers);
+                //if (!fromUserRoleName.Equals(toUserRole)) // user does not buy form his own stock, he already ownes the stock
+                //{
+                //  var vouchers =  _userVoucherRepository.
+                //        GetFreeUserVouchers(fromUserRoleName, v.Denomination, v.Quantity,
+                //        request.BatchId, request.IsApproved).Select(x => x.Voucher).ToList();
+                //    userVouchers.AddRange(vouchers);
+                //}
+                //allVouchers.AddRange(userVouchers);
 
                 if (userVouchers.Count() < v.Quantity) {
-                    _logger.LogWarning($"user {fromUserRoleName} has no stocked vouchers of {v.Denomination}birr-{v.Quantity}. Checking system stock. ");
+                    //_logger.LogWarning($"user {fromUserRoleName} has no stocked vouchers of {v.Denomination}birr-{v.Quantity}. Checking system stock. ");
 
                     int availableStock = userVouchers.Count();
                     int remainingStock = v.Quantity - availableStock;

@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Accounting\TakTec.Accounting.BusinessLogic.Abstractions\TakTec.Accounting.BusinessLogic.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Accounting\TakTec.Accounting.Data.Abstractions\TakTec.Accounting.Data.Abstractions.csproj" />
     <ProjectReference Include="..\..\Users\TakTec.Users.Constants\TakTec.Users.Constants.csproj" />
     <ProjectReference Include="..\Vouchers.BusinessLogic.Abstractions\Vouchers.BusinessLogic.Abstractions.csproj" />
     <ProjectReference Include="..\Vouchers.Configurations\Vouchers.Configurations.csproj" />

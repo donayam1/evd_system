@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { VouchersRoutingModule } from './vouchers-routing.module';
-import { UploadComponent } from './upload/upload.component';
-import { FileUploadModule } from '../file-upload/file-upload.module';
+// import { UploadComponent } fro../voucher-batch/upload/upload.componentent';
+// import { FileUploadModule } from '../file-upload/file-upload.module';
 import { HomeComponent } from './home/home.component';
 import { ListVouchersComponent } from './list-vouchers/list-vouchers.component';
 import { MessagesModule } from '../messages/messages.module';
@@ -11,22 +11,22 @@ import { FormsModule } from '@angular/forms';
 import { VoucherComponent } from './voucher/voucher.component';
 import { StoreModule } from '@ngrx/store';
 import { VoucherReducers } from '../data/Voucher/Reducers/vouchers.reducers';
-import { PoItemModule } from '../po-item/po-item.module';
+// import { PoItemModule } from '../po-item/po-item.module';
 
 
 @NgModule({
-  declarations: [UploadComponent, HomeComponent, ListVouchersComponent,VoucherComponent],
+  declarations: [ HomeComponent, ListVouchersComponent,VoucherComponent],
   imports: [
     CommonModule,
     VouchersRoutingModule,
-    FileUploadModule,
+    // FileUploadModule,
     MessagesModule,
     FormsModule,
-    StoreModule.forFeature("vouchers", VoucherReducers),
-    PoItemModule
+    StoreModule.forFeature("vouchers", VoucherReducers)//,
+    // PoItemModule
   ],
   exports: [
-    UploadComponent
+    
   ]
 })
 export class VouchersModule { }

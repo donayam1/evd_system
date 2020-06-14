@@ -69,7 +69,7 @@ namespace TakTec.Accounting.BusinessLogic
             _airTimeService = airTimeService ?? throw new ArgumentNullException(nameof(IAirTimeService));
 
         }
-
+        
         public bool ApproveMoneyDeposit(ApproveMoneyDepositRequest request)
         {
             var mdReq = _moneyDepositRepository.WithKey(request.Id);
@@ -80,8 +80,9 @@ namespace TakTec.Accounting.BusinessLogic
             }
 
             //check if the current user has this amount air time 
-            var currUserAirTime = _airTimeRepository.
-                WithOwnerItemId(_tokenUserService.UserRole).FirstOrDefault();
+            var currUserAirTime = _airTimeService.GetCurrentUserAirTime();
+            //_airTimeRepository.
+            //    WithOwnerItemId(_tokenUserService.UserRole).FirstOrDefault();
             if (currUserAirTime == null)
             {
                 return false;
@@ -167,9 +168,9 @@ namespace TakTec.Accounting.BusinessLogic
             decimal airTime =this._airTimeService.CalculateAirTime(retailerPlan, mdReq.Amount);
 
             
-            bool res = this._airTimeService.TranserAirTime(_tokenUserService.UserId, mdReq.ForUserId, airTime,
+            bool res = this._airTimeService.TranserAirTimeFromCurrentUser( mdReq.ForUserId, airTime,
                 Enumerations.AirTimeUpdateCauseType.MONEY_DEPOSIT,
-                mdReq.Id,false);
+                mdReq.Id);
 
             if (res == false) {
                 _logger.AddUserError("Air time transfer failed");
@@ -179,7 +180,7 @@ namespace TakTec.Accounting.BusinessLogic
             try
             {
                 _storage.Save();
-                return false;
+                return true;
             }
             catch (Exception e) {
                 _logger.LogError(e, $"{e.Message}-{e.InnerException}");
@@ -188,6 +189,8 @@ namespace TakTec.Accounting.BusinessLogic
 
             return false;
         }
+
+
 
         public List<MoneyDepositModel> ListDeposits(ListMoneyDepositsRequest request) {
 
@@ -217,7 +220,7 @@ namespace TakTec.Accounting.BusinessLogic
 
 
             var moneyDepositRequest = request.ToDomainModel(_tokenUserService.UserId, 
-                plan.Id,
+                plan.RetailerPlan.Id,
                 userRoleName
                 );
 

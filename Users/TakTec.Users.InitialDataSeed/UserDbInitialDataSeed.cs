@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 //using IdentityServer4.EntityFramework.StorageContext;
 using System;
 using System.Collections.Generic;
+using TakTec.Accounting.Entities;
 using TakTec.Users.Constants;
 
 namespace TakTec.Users.InitialDataSeed
@@ -119,16 +120,27 @@ namespace TakTec.Users.InitialDataSeed
             }
 
             var rolesDbset = sc.Set<AspNetRole>();
+            var airTimeDbset = sc.Set<AirTime>();
             foreach (var v in UserData.Roles)
             {
                 rolesDbset.Add(v);
+                airTimeDbset.Add(new AirTime(v.Name, 0));
             }
+
+            // That is 
+            airTimeDbset.Add(new AirTime(RoleTypeConstants.RoleNameSystem, 0));
+
             var userRolesDbset = sc.Set<AspNetUserRole>();
+            
             foreach (var v in UserData.AspNetUserRoles)
             {
                 userRolesDbset.Add(v);
+                
             }
+            //TODO initialize user air time data.
 
+           
+            
             //sc.SaveChanges();
 
             return true;

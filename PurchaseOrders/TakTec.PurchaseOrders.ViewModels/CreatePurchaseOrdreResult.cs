@@ -9,7 +9,7 @@ namespace TakTec.PurchaseOrders.ViewModels
     public class CreatePurchaseOrdreResult
     {
         public NewPurchaseOrderResult? PurchaseOrder { get; set; } = default!;
-        public List<Voucher?> Vouchers { get; set; } = new List<Voucher?>();
+        public List<Voucher> Vouchers { get; set; } = new List<Voucher>();
     }
 
     public class PeekVoucherResult {

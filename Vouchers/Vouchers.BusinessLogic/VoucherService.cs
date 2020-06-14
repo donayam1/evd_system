@@ -42,13 +42,21 @@ namespace Vouchers.BusinessLogic
                 throw new ArgumentNullException(nameof(tokenUserService));
             _logger = logger ?? throw new ArgumentNullException(nameof(ILogger<IVoucherService>));
         }
+        public List<VoucherStatistics> GetFreeSystemAvailabelDenominations() {
+            var res0 = _vouchersRepository.GetFreeSystemVouchers().GroupBy(x => x.Batch.Denomination)
+                   .Select(x => new VoucherStatistics() 
+                   { Denomination = x.Key, Quantity = x.Count() }).ToList();
 
+            return res0;
+
+        }
         public List<VoucherStatistics> GetVoucherStatistics() {
             String role = _tokenUserService.UserRole;
             List<VoucherStatistics> stats = new List<VoucherStatistics>();
             if (role == RoleTypeConstants.RoleNameSupperAdmin) {
-                var res0 = _vouchersRepository.GetFreeSystemVouchers().GroupBy(x => x.Batch.Denomination)
-                    .Select(x=>new VoucherStatistics() { Denomination=x.Key,Quantity=x.Count() }).ToList();
+                var res0 = GetFreeSystemAvailabelDenominations();
+                //_vouchersRepository.GetFreeSystemVouchers().GroupBy(x => x.Batch.Denomination)
+                //    .Select(x=>new VoucherStatistics() { Denomination=x.Key,Quantity=x.Count() }).ToList();
                 stats.AddRange(res0);
             }
 

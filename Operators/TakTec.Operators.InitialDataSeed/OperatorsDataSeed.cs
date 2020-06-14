@@ -22,7 +22,7 @@ namespace TakTec.Operators.InitialDataSeed
 
     public class UserDbInitialDataSeed : IInitialDataSeed
     {
-        public int Priority { get => 120;  }
+        public int Priority { get => 80;  }
 
         public bool SeedData(IServiceProvider serviceProvider)
         {

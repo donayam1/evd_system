@@ -12,9 +12,9 @@ namespace TakTec.RetailerPlans.Entities
 {
     public class RetailerPlan : EntityBase
     {
-        public RetailerPlan(string ownerId, ResourceTypes ownerType,
+        public RetailerPlan(string ownerId,
             string name,CommissionRateType commissionRateType,String operatorId) 
-                : base(ownerId, ownerType)
+                : base(ownerId, ResourceTypes.GROUP)
         {
             Name = name;
             //Code = code;

@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using TakTec.Accounting.Entities;
+using TakTec.RetailerPlans.Entities;
+using TakTec.RetailerPlans.Enumerations;
 using TakTec.Users.Constants;
 
 namespace TakTec.Users.InitialDataSeed
@@ -93,6 +95,27 @@ namespace TakTec.Users.InitialDataSeed
                 RoleId = "0"
             }
         };
+
+        public static List<RetailerPlan> RetailerPlans = new List<RetailerPlan>() {
+            new RetailerPlan(RoleTypeConstants.RoleNameSupperAdmin,"Dummy Plan",
+                CommissionRateType.FLAT_COMMISSION,"0"){ 
+                Id = "1",
+                CommissionRates = new List<CommissionRate>(){ 
+                    new CommissionRate("1",0,0)
+                }
+            }
+        };
+
+        public static List<UserPlan> UserPlans = new List<UserPlan>() {
+            new UserPlan("1",RoleTypeConstants.RoleNameSupperAdmin)
+        };
+
+        public static List<BankAccount> UserAccounts = new List<BankAccount>() {
+            new BankAccount("1","0000000000",RoleTypeConstants.RoleNameSupperAdmin)
+        };
+
+
+
     }
 
     public class UserDbInitialDataSeed : IInitialDataSeed
@@ -137,10 +160,27 @@ namespace TakTec.Users.InitialDataSeed
                 userRolesDbset.Add(v);
                 
             }
+            var retailerPlanDbSet = sc.Set<RetailerPlan>();
+            foreach (var v in UserData.RetailerPlans) {
+                retailerPlanDbSet.Add(v);
+            }
+
+            var userPlanDbSet = sc.Set<UserPlan>();
+            foreach (var v in UserData.UserPlans)
+            {
+                userPlanDbSet.Add(v);
+            }
+
+            var userAccountDbSet = sc.Set<BankAccount>();
+            foreach (var v in UserData.UserAccounts)
+            {
+                userAccountDbSet.Add(v);
+            }
+
             //TODO initialize user air time data.
 
-           
-            
+
+
             //sc.SaveChanges();
 
             return true;

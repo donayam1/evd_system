@@ -9,6 +9,7 @@ namespace Vouchers.BusinessLogic.Abstractions
 {
     public interface IVoucherService
     {
+        List<VoucherStatistics> GetFreeSystemAvailabelDenominations();
         List<VoucherStatistics> GetVoucherStatistics();
         /// <summary>
         /// Returns Pages List of votures for the current user

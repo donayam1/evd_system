@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Accounting\TakTec.Accounting.Entities\TakTec.Accounting.Entities.csproj" />
     <ProjectReference Include="..\..\Core\TaKTec.Core.APIs\TaKTec.Core.APIs.csproj" />
+    <ProjectReference Include="..\..\RetailerPlans\TakTec.RetailerPlans.Entities\TakTec.RetailerPlans.Entities.csproj" />
     <ProjectReference Include="..\TakTec.Users.Constants\TakTec.Users.Constants.csproj" />
   </ItemGroup>
 

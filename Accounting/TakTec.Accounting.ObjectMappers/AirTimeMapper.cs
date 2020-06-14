@@ -13,7 +13,7 @@ namespace TakTec.Accounting.ObjectMappers
             AirTimeModel airTimeModel = new AirTimeModel()
             {
                 Id = airTime.Id,
-                AirTime = airTime.Amount.ToString(),
+                AirTime = airTime.Amount.ToString("0.00"),
                 LastUpdatedDate = airTime.LastUpdateDate.ToSharedDateTimeString(),
                 ObjectStatus = airTime.IsDeleted ? EthioArt.Data.Enumerations.ObjectStatusEnum.REMOVED :
                   EthioArt.Data.Enumerations.ObjectStatusEnum.UNCHANGED

@@ -48,6 +48,21 @@ namespace Vouchers.Backend.Controllers
             return BadRequest(ModelState);
         }
 
+        [HttpGet(template: "denominations")]
+        public IActionResult GetAvailableDenominations()
+        {
+            if (ModelState.IsValid)
+            {
+                VoucherStatisticsResponse response = new VoucherStatisticsResponse() {
+                    Status = true
+                };
+                var res = _voucherService.GetFreeSystemAvailabelDenominations();
+                response.VoucherStatistics = res;
+                return SendResult(response);
+            }
+            return BadRequest(ModelState);
+        }
+
 
         [HttpGet]      
         public IActionResult Get([FromQuery] ListVoucherRequest request) {

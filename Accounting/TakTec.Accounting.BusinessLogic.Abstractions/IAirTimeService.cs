@@ -1,8 +1,10 @@
-﻿using System;
+﻿using EthioArt.Backend.Models.Requests;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using TakTec.Accounting.Entities;
 using TakTec.Accounting.Enumerations;
+using TakTec.Accounting.ViewModels;
 using TakTec.RetailerPlans.Entities;
 
 namespace TakTec.Accounting.BusinessLogic.Abstractions
@@ -24,6 +26,7 @@ namespace TakTec.Accounting.BusinessLogic.Abstractions
         decimal CalculateAirTime(RetailerPlan plan, decimal amount);
         bool CreateAirTime(String ownerId);
         AirTime GetCurrentUserAirTime();
+        AirTimeModel GetCurrentUserAirTime(SynchronizeItemRequestBase request);
         AirTime GetSystemAirTime();
     }
 }

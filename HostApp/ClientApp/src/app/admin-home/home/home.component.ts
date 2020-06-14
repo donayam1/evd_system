@@ -11,7 +11,7 @@ export class HomeComponent {
 
   }
   sendMessage(){
-    this.notificationService.hubConnection.invoke("SendMessage","DOnayam","Neag")
+    this.notificationService.hubConnection.invoke("SendMessage","Donayam","Nega")
     .catch(error=>{
       console.dir(error);
     });

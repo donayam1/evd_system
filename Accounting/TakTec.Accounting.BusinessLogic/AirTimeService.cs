@@ -15,6 +15,9 @@ using Messages.Logging.Extensions;
 using TakTec.Accounting.Entities;
 using TakTec.RetailerPlans.Entities;
 using TakTec.Users.Constants;
+using EthioArt.Backend.Models.Requests;
+using TakTec.Accounting.ViewModels;
+using TakTec.Accounting.ObjectMappers;
 
 namespace TakTec.Accounting.BusinessLogic
 {
@@ -325,6 +328,11 @@ namespace TakTec.Accounting.BusinessLogic
                 throw new NullReferenceException($" System airtime not found.");
             }
             return airTime;
+        }
+
+        public AirTimeModel GetCurrentUserAirTime(SynchronizeItemRequestBase request) {
+            var airTime = this.GetCurrentUserAirTime();
+            return airTime.ToViewModel(); 
         }
 
 

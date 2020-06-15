@@ -1,5 +1,5 @@
 import { OAuthStorage } from 'angular-oauth2-oidc';
-import { CookieService } from 'angular2-cookie';
+import { CookieService } from 'ngx-cookie-service';
 import { CurrentUser } from '../Models/user.model';
 import { Injectable } from '@angular/core';
 import { Language } from '../../Language/Models/language.model';
@@ -25,10 +25,10 @@ export class CookieOAuthStorage extends OAuthStorage {
         return this.cookieService.get(key);
     }
     removeItem(key: string): void {
-        this.cookieService.remove(key);
+        this.cookieService.delete(key);
     }
     setItem(key: string, data: string): void {
-        this.cookieService.put(key, data);
+        this.cookieService.set(key, data);
     }
     saveUser(user: CurrentUser) {
         this.setItem(USERNAME_KEY, user.UserName);

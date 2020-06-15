@@ -14,6 +14,10 @@ using System.Linq;
 using Messages.Logging.Extensions;
 using TakTec.Accounting.Entities;
 using TakTec.RetailerPlans.Entities;
+using TakTec.Users.Constants;
+using EthioArt.Backend.Models.Requests;
+using TakTec.Accounting.ViewModels;
+using TakTec.Accounting.ObjectMappers;
 
 namespace TakTec.Accounting.BusinessLogic
 {
@@ -62,13 +66,52 @@ namespace TakTec.Accounting.BusinessLogic
 
         }
 
+        public bool RemoveAirTimeFromUser(String fromUserId, decimal airTime,
+            Enumerations.AirTimeUpdateCauseType airTimeUpdateCauseType,
+            String airTimeCauseId
+            )
+        {
+            var fromUser = _accountService.GetUser(fromUserId);
+            if (fromUser == null)
+            {
+                return false;
+            }
 
+            String fromUserRoleName = fromUser.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
+            var fromUserAirTime = _airTimeRepository.WithOwnerItemId(fromUserRoleName).FirstOrDefault();
+            if (fromUserAirTime == null)
+            {
+                return false;
+            }
 
+            return TransferAirTime(fromUserAirTime, airTime, airTimeUpdateCauseType, airTimeCauseId, true);
+        }
+
+        public bool TranserAirTimeFromCurrentUser(String toUserId, decimal airTime,
+            Enumerations.AirTimeUpdateCauseType airTimeUpdateCauseType,
+            String airTimeCauseId
+            )
+        {
+            var fromAirTime = GetCurrentUserAirTime();
+            var toUser = _accountService.GetUser(toUserId);
+            if (toUser == null)
+            {
+                return false;
+            }
+
+            String toUserRoleName = toUser.AspNetUserRoles.FirstOrDefault().AspNetRole.Name;
+            var toUserAirTime = _airTimeRepository.WithOwnerItemId(toUserRoleName).FirstOrDefault();
+            if (toUserAirTime == null)
+            {
+                return false;
+            }
+
+            return TransferAirTime(fromAirTime, toUserAirTime, airTime, airTimeUpdateCauseType, airTimeCauseId);
+        }
 
         public bool TranserAirTime(String fromUserId, String toUserId, decimal airTime,
             Enumerations.AirTimeUpdateCauseType airTimeUpdateCauseType,
-            String airTimeCouseId,
-            bool isCredit
+            String airTimeCauseId
             )
         {
             var fromUser = _accountService.GetUser(fromUserId);
@@ -98,24 +141,93 @@ namespace TakTec.Accounting.BusinessLogic
                 return false;
             }
 
-            if (currUserAirTime.Amount < airTime)
+            return TransferAirTime(currUserAirTime, toUserAirTime, airTime, airTimeUpdateCauseType, airTimeCauseId);
+
+
+            //if (currUserAirTime.Amount < airTime)
+            //{
+            //    _logger.AddUserError($"Insefficient airtime error. User airtime = {currUserAirTime.Amount}, trying to transfer {airTime}.");
+            //    return false;
+            //}
+
+            //AirTimeUpdate airTimeUpdate = new AirTimeUpdate(
+            //    airTimeUpdateCauseType, airTimeCouseId,
+            //    airTime, isCredit, toUserAirTime.Id)
+            //{
+            //    CreatorUserId = _tokenUserService.UserId
+            //};
+
+            //currUserAirTime.Amount -= airTime;
+            //toUserAirTime.Amount += airTime;
+
+            //_airTimeUpdateRepository.Create(airTimeUpdate);
+
+            //return true;
+        }
+
+        private bool TransferAirTime(AirTime fromUserAirTime, 
+            AirTime toUserAirTime, decimal airTime,
+            Enumerations.AirTimeUpdateCauseType airTimeUpdateCauseType,
+            String airTimeCouseId) {
+            if (fromUserAirTime.Amount < airTime)
             {
-                _logger.AddUserError($"Insefficient airtime error. User airtime = {currUserAirTime.Amount}, trying to transfer {airTime}.");
+                _logger.AddUserError($"Insefficient airtime error. User airtime = {fromUserAirTime.Amount}, trying to transfer {airTime}.");
                 return false;
             }
 
-            AirTimeUpdate airTimeUpdate = new AirTimeUpdate(
+            //AirTimeUpdate airTimeUpdate = new AirTimeUpdate(
+            //    airTimeUpdateCauseType, airTimeCouseId,
+            //    airTime, isCredit, toUserAirTime.Id)
+            //{
+            //    CreatorUserId = _tokenUserService.UserId
+            //};
+            //AirTimeUpdate airTimeUpdatef = new AirTimeUpdate(
+            //    airTimeUpdateCauseType, airTimeCouseId,
+            //    airTime, isCredit, currUserAirTime.Id)
+            //{
+            //    CreatorUserId = _tokenUserService.UserId
+            //};
+
+            //currUserAirTime.Amount -= airTime;
+            //toUserAirTime.Amount += airTime;
+
+            //_airTimeUpdateRepository.Create(airTimeUpdatef);
+            //_airTimeUpdateRepository.Create(airTimeUpdate);
+            TransferAirTime(toUserAirTime,airTime,airTimeUpdateCauseType, airTimeCouseId, false);
+            TransferAirTime(fromUserAirTime, airTime, airTimeUpdateCauseType, airTimeCouseId, true);
+            return true;
+        }
+
+        private bool TransferAirTime(AirTime currUserAirTime,
+          decimal airTime,
+          Enumerations.AirTimeUpdateCauseType airTimeUpdateCauseType,
+          String airTimeCouseId,
+          bool isCredit)
+        {
+            if (isCredit)
+            {
+                if (currUserAirTime.Amount < airTime)
+                {
+                    _logger.AddUserError($"Insefficient airtime error. User airtime = {currUserAirTime.Amount}, trying to transfer {airTime}.");
+                    return false;
+                }
+            }
+
+
+            AirTimeUpdate airTimeUpdatef = new AirTimeUpdate(
                 airTimeUpdateCauseType, airTimeCouseId,
-                airTime, isCredit, toUserAirTime.Id)
+                airTime, isCredit, currUserAirTime.Id)
             {
                 CreatorUserId = _tokenUserService.UserId
             };
-
-            currUserAirTime.Amount -= airTime;
-            toUserAirTime.Amount += airTime;
-
-            _airTimeUpdateRepository.Create(airTimeUpdate);
-
+            if (isCredit)
+            {
+                currUserAirTime.Amount -= airTime;
+            }
+            else {
+                currUserAirTime.Amount += airTime;
+            }
+            _airTimeUpdateRepository.Create(airTimeUpdatef);
             return true;
         }
 
@@ -172,16 +284,57 @@ namespace TakTec.Accounting.BusinessLogic
         }
 
 
-
-
-
-
         public decimal CalculateAirTime(double rate, decimal amount)
         {
 
             decimal res = (((decimal)rate * amount) / 100) + amount;
             return res;
         }
+
+        public bool CreateAirTime(String ownerId) {
+            AirTime airTime = new AirTime(ownerId, 0){
+            };
+            _airTimeRepository.Create(airTime);
+
+            return true;
+        }
+
+        /// <summary>
+        /// If the current user is the SupperAdmin it returns the systems air time
+        /// otherwise it returns he users air time
+        /// </summary>
+        /// <returns></returns>       
+        public AirTime GetCurrentUserAirTime() {
+            String userRole = _tokenUserService.UserRole;
+            if (userRole.Equals(RoleTypeConstants.RoleNameSupperAdmin))
+            {
+                return this.GetSystemAirTime();
+            }
+            else {
+                var airTime = _airTimeRepository.WithOwnerItemId(userRole).FirstOrDefault();
+                if (airTime == null)
+                {
+                    throw new NullReferenceException($" User airtime not found.");
+                }
+                return airTime;
+            }           
+        }
+
+        public AirTime GetSystemAirTime()
+        {            
+            var airTime = _airTimeRepository.WithOwnerItemId(RoleTypeConstants.RoleNameSystem).FirstOrDefault();
+            if (airTime == null)
+            {
+                throw new NullReferenceException($" System airtime not found.");
+            }
+            return airTime;
+        }
+
+        public AirTimeModel GetCurrentUserAirTime(SynchronizeItemRequestBase request) {
+            var airTime = this.GetCurrentUserAirTime();
+            return airTime.ToViewModel(); 
+        }
+
 
     }
 }

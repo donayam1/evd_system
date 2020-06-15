@@ -7,8 +7,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\RetailerPlans\TakTec.RetailerPlans.Entities\TakTec.RetailerPlans.Entities.csproj" />
+    <ProjectReference Include="..\TakTec.Accounting.Entities\TakTec.Accounting.Entities.csproj" />
     <ProjectReference Include="..\TakTec.Accounting.Enumerations\TakTec.Accounting.Enumerations.csproj" />
     <ProjectReference Include="..\TakTec.Accounting.ViewModels\TakTec.Accounting.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EthioArt.Backend.Models">
+      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Backend.Models.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

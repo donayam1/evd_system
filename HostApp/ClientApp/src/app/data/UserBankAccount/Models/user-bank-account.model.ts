@@ -8,7 +8,7 @@ export class UserBankAccount {
     accountNumber: string;
     userId: string;
     status: number;
-    constructor(obj?: any){
+    constructor(obj?: any) {
         this.id = obj && obj.id;
         this.bankId = obj && obj.bankId;
         this.accountNumber = obj && obj.accountNumber;
@@ -17,33 +17,33 @@ export class UserBankAccount {
     }
 }
 
-export class NewUserBankAccount extends UserBankAccount{
+export class NewUserBankAccount extends UserBankAccount {
     ui_id: string;
-    constructor(obj?: any){
+    constructor(obj?: any) {
         super(obj);
         this.ui_id = obj && obj.ui_id;
     }
 }
 
-export class CreateUserBankAccoutResponse extends ResponseBase{
+export class CreateUserBankAccoutResponse extends ResponseBase {
     newUserBankAccount: NewUserBankAccount;
-    constructor(obj?: any){
+    constructor(obj?: any) {
         super(obj);
         this.newUserBankAccount = obj && new NewUserBankAccount(obj) || new NewUserBankAccount();
     }
 }
 
 export class ListUserBankAccountResponse extends PagedItemResponseBase {
-    constructor(obj?: any){
+    constructor(obj?: any) {
         super(obj);
         this.bankAccounts = obj && obj.bankAccounts && obj.bankAccounts.map(uba => new UserBankAccount(uba)) || Array();
     }
     bankAccounts: UserBankAccount[];
 }
 
-export class UserBankAccountResponse extends ResponseBase{
+export class UserBankAccountResponse extends ResponseBase {
     userBa: UserBankAccount;
-    constructor(obj?: any){
+    constructor(obj?: any) {
         super(obj);
         this.userBa = new UserBankAccount();
     }

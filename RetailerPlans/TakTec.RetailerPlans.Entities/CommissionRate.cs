@@ -13,9 +13,9 @@ namespace TakTec.RetailerPlans.Entities
 {
     public class CommissionRate:EntityBase
     {
-         public CommissionRate(string ownerId, ResourceTypes ownerType,
+         public CommissionRate(string ownerId, 
              decimal amount,double rate) 
-                : base(ownerId, ownerType)
+                : base(ownerId, ResourceTypes.NONE)
         {
             Amount = amount;
             Rate = rate;

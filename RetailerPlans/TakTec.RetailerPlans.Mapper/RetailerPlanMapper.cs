@@ -61,7 +61,7 @@ namespace TakTec.RetailerPlans.Mapper
         public static RetailerPlan ToPlanDomailModel(this RetailerPlanViewModel retailerPlanViewModel, String ownerId)//,List<CommissionRateViewModel> commissionRates)
         {
             //TODO owner id  =  group name of User , userId = CreatorUserId
-            var retailerplan = new RetailerPlan(ownerId, ResourceTypes.GROUP,
+            var retailerplan = new RetailerPlan(ownerId,
                                  retailerPlanViewModel.Name, retailerPlanViewModel.CommissionRateType,
                                 retailerPlanViewModel.OperatorId)
             {
@@ -71,13 +71,13 @@ namespace TakTec.RetailerPlans.Mapper
                 RenewalAmount=retailerPlanViewModel.RenewalAmount,
                // CommissionRates = commissionRates.
             };
-            retailerplan.CommissionRates = retailerPlanViewModel.CommissionRates.ToCommissionRateList();
+            retailerplan.CommissionRates = retailerPlanViewModel.CommissionRates.ToCommissionRateList(retailerplan.Id);
             return retailerplan;
         }
 
-        public static CommissionRate ToCommissionRateDomainModel(this CommissionRateViewModel commissionRateViewModel)
+        public static CommissionRate ToCommissionRateDomainModel(this CommissionRateViewModel commissionRateViewModel,String ownerId)
         {
-            CommissionRate commissionRate = new CommissionRate("",ResourceTypes.GROUP,
+            CommissionRate commissionRate = new CommissionRate(ownerId,
                                             commissionRateViewModel.Amount,
                                             commissionRateViewModel.Rate);
             return commissionRate;
@@ -103,9 +103,9 @@ namespace TakTec.RetailerPlans.Mapper
             return items;
         }
 
-        public static List<CommissionRate> ToCommissionRateList(this List<CommissionRateViewModel> commissionRates)
+        public static List<CommissionRate> ToCommissionRateList(this List<CommissionRateViewModel> commissionRates,String ownerId)
         {
-            var items = commissionRates.Select(x=>x.ToCommissionRateDomainModel()).ToList();
+            var items = commissionRates.Select(x=>x.ToCommissionRateDomainModel(ownerId)).ToList();
             return items;
         }
     }

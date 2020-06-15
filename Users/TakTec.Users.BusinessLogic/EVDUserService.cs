@@ -15,6 +15,7 @@ using AspNetIdentity.Data.Entities;
 using EthioArt.Backend.Models.Requests;
 using TakTec.Users.ObjectMappers;
 using TakTec.RetailerPlans.BusinessLogic.Abstraction;
+using TakTec.Accounting.BusinessLogic.Abstractions;
 
 namespace TakTec.Users.BusinessLogic
 {
@@ -27,13 +28,16 @@ namespace TakTec.Users.BusinessLogic
         private readonly ILogger<IEVDUserService> _logger;
         private readonly IStorage _storage;
         private readonly IRetailerPlanService _retailerPlanService;
+        private readonly IAirTimeService _airTimeService;
 
         public EVDUserService(IAccountService accountService,
             ITokenUserService tokenUserService,
             IRoleTypeService roleTypeService,
             ILogger<IEVDUserService> logger,
             IStorage storage,
-            IRetailerPlanService retailerPlanService) {
+            IRetailerPlanService retailerPlanService, 
+            IAirTimeService airTimeService) {
+
             _accountService = accountService ?? 
                 throw new ArgumentNullException(nameof(accountService));
             _tokenUserService = tokenUserService ??
@@ -44,6 +48,8 @@ namespace TakTec.Users.BusinessLogic
             _storage = storage ?? throw new ArgumentNullException(nameof(IStorage));
             _retailerPlanService = retailerPlanService ??
                 throw new ArgumentNullException(nameof(retailerPlanService));
+            _airTimeService = airTimeService ??
+                throw new ArgumentNullException(nameof(airTimeService));
         }
 
         
@@ -61,6 +67,13 @@ namespace TakTec.Users.BusinessLogic
                     _logger.LogError("Error adding user to retailer plan");
                     return null;
                 }
+
+                var airTimeRes = _airTimeService.CreateAirTime(res.Role.Name);
+                if (airTimeRes == false) {
+                    _logger.LogError("Error creating airtime.");
+                    return null;
+                }
+
                 try
                 {
                     _storage.Save();//TODO improve this a lot 

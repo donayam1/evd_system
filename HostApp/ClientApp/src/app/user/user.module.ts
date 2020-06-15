@@ -14,9 +14,6 @@ import { StoreModule } from '@ngrx/store';
 import { UserReducers } from '../data/User/Reducers/user.resucers';
 import { UserBankAccountModule } from '../user-bank-account/user-bank-account.module';
 import { ListUserBankAccountComponent } from './list-user-bank-account/list-user-bank-account.component'
-import { from } from 'rxjs';
-import { CreateBankAccountComponent } from '../user-bank-account/create-bank-account/create-bank-account.component';
-import { AddBankAccountComponent } from './add-bank-account/add-bank-account.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +24,7 @@ import { AddBankAccountComponent } from './add-bank-account/add-bank-account.com
     EditUserComponent,
     EditUserPermissionComponent,
     ListUserBankAccountComponent,
-    //CreateBankAccountComponent,
-    AddBankAccountComponent],
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,

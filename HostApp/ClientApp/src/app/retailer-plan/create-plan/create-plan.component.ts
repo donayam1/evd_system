@@ -32,7 +32,9 @@ export class CreatePlanComponent implements OnInit {
   @ViewChild('messages', {static: true})
   messagesComponent: MessageComponent;
 
-  constructor(private retailerPlanService: RetailerPlanService, private opService: OperatorService, private store: Store<OperatorState>, private state: State<OperatorState>) {
+  constructor(private retailerPlanService: RetailerPlanService,
+     private opService: OperatorService, private store: Store<OperatorState>, 
+     private state: State<OperatorState>) {
     this.np = new NewPlan();
     this.cr = new CommissionRate();
     this.crs = Array() || null;

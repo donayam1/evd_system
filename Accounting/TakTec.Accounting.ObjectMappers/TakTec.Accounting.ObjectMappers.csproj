@@ -16,6 +16,9 @@
    <Reference Include="EthioArt.Data.Enumerations">
      <HintPath>..\..\HostApp\OtherDeps\EthioArt.Data.Enumerations.dll</HintPath>
    </Reference>
+   <Reference Include="EthioArt.Extensions">
+     <HintPath>..\..\HostApp\OtherDeps\EthioArt.Extensions.dll</HintPath>
+   </Reference>
   </ItemGroup>
 
 </Project>

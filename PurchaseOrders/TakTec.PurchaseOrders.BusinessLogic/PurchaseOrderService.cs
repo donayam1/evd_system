@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TakTec.Accounting.BusinessLogic.Abstractions;
 using TakTec.PurchaseOrders.BusinessLogic.Abstractions;
 using TakTec.PurchaseOrders.Data.Abstractions;
 using TakTec.PurchaseOrders.ObjectMappers;
@@ -35,6 +36,7 @@ namespace TakTec.PurchaseOrders.BusinessLogic
         private readonly IGlobalSyncronizationStore _globalSyncronizationStore;
         private readonly UserManager<AspNetUser> _userManager;
         private readonly IAccountService _accountService;
+        private readonly IAirTimeService _airTimeService;
 
         public PurchaseOrderService(ILogger<IPurchaseOrderService> logger,
             ITokenUserService tokenUserService,
@@ -42,7 +44,8 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             IVoucherService voucherService,
             IGlobalSyncronizationStore globalSyncronizationStore,
             UserManager<AspNetUser> userManager,
-            IAccountService accountService)
+            IAccountService accountService,
+            IAirTimeService airTimeService)
         {
 
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -59,7 +62,8 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                 throw new ArgumentNullException(nameof(userManager));
             _accountService = accountService ??
                 throw new ArgumentNullException(nameof(accountService));
-
+            _airTimeService = airTimeService ??
+                throw new ArgumentNullException(nameof(IAirTimeService));
         }
         /// <summary>
         /// When a purchase order is set, just create it. when it is confirmed then sell it.
@@ -127,8 +131,11 @@ namespace TakTec.PurchaseOrders.BusinessLogic
             }
 
             //TODO assert the user has balance 
-
-
+            var airTime = _airTimeService.GetCurrentUserAirTime();
+            if ((float)airTime.Amount < total) {
+                _logger.AddUserError($"User has no enough air time. Requested {total} -> user air time {airTime.Amount}");
+                return false;
+            }
             return true;
         }
         public CreatePurchaseOrdreResult? CreatePurchaseOrder(NewPurchaseOrderModel request) {
@@ -220,15 +227,29 @@ namespace TakTec.PurchaseOrders.BusinessLogic
                     TransferRequestItems = request.Items.Cast<VoucherTransferRequestItem>().ToList()
                 };
 
-                List<Voucher?>? vouchers = _voucherService.TransferVouchersToUser(
-                     voucherTransferReqeust,
-                     buyerUserOwnerRoleName, buyerUserRole
+                List<Voucher>? vouchers = _voucherService.TransferVouchersToUser(
+                     voucherTransferReqeust, //buyerUserOwnerRoleName,
+                      buyerUserRole
                  );
 
-                    if (vouchers == null) {
-                        _logger.LogError("Error transfering vouchers to user.");
-                        return null;
-                    }
+                if (vouchers == null) {
+                    _logger.LogError("Error transfering vouchers to user.");
+                    return null;
+                }
+                float total = 0;
+                foreach (var v in vouchers) {
+                    total += v.Batch.Denomination;
+                }
+
+                //TODO deduct the air time
+               var airTimeTransferRes = _airTimeService.RemoveAirTimeFromUser(buyerUser.Id,(int)total,
+                    Accounting.Enumerations.AirTimeUpdateCauseType.PURCHASE,
+                    po.Id);
+
+                if (airTimeTransferRes == false) {
+                    _logger.LogError("AirTime transfer failed.");
+                    return null;
+                }
 
                 result.Vouchers = vouchers;//.Select(x=>x.Voucher).ToList();
 

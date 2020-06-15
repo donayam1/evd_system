@@ -15,7 +15,8 @@
                 <!-- <th>Account Number</th> -->
                 <th>Amount</th>
                 <th>To User</th>
-                <th>Ref</th>                 
+                <th>Ref</th>           
+                <th></th>      
               </tr>
             </thead>
             <tbody>
@@ -25,6 +26,8 @@
                 <td>{{deposit.amount}} </td>
                 <td>{{deposit.forUserId}} </td>
                 <td>{{deposit.referanceNumber}} </td>
+                <td> <button (click)="approve(deposit)">Approve</button>
+                 </td>
               </tr>
             </tbody>
           </table>

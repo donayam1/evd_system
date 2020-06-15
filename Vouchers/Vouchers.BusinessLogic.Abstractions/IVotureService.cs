@@ -9,6 +9,7 @@ namespace Vouchers.BusinessLogic.Abstractions
 {
     public interface IVoucherService
     {
+        List<VoucherStatistics> GetFreeSystemAvailabelDenominations();
         List<VoucherStatistics> GetVoucherStatistics();
         /// <summary>
         /// Returns Pages List of votures for the current user
@@ -16,7 +17,7 @@ namespace Vouchers.BusinessLogic.Abstractions
         public List<VoucherModel> ListVoutchers(ListVoucherRequest request);
         public List<VoucherModel>? CheckOutVoutchers(ListVoucherRequest request);
         bool AreVouchersAvailable(VoucherTransferRequest request, String fromUserRoleName, String buyerUserRoleName);
-        List<Voucher>? TransferVouchersToUser(VoucherTransferRequest request, String fromUserRoleName, String toUserRole);
+        List<Voucher>? TransferVouchersToUser(VoucherTransferRequest request,  String toUserRole);//String fromUserRoleName,
         VoucherBatch? GetBatch(String id);
 
         /// <summary>

@@ -30,12 +30,14 @@ export class CreateMoneyDepositComponent implements OnInit {
   @ViewChild('messages', { static: true })
   messages: MessageComponent;
 
-  constructor(private mdService: MoneyDepositService, private userService: UserService, private bankService: ConfigureBankService, private ubService: UserBankAccountService) {
+  constructor(private mdService: MoneyDepositService, private userService: UserService, 
+    private bankService: ConfigureBankService,
+    private ubService: UserBankAccountService) {
     this.newMoneyDeposit = new NewMoneyDeposit();
     this.userList = new ListUserResponse();
     this.selectedUser = new Users();
     this.userBankList = new Array();
-    this.selectedUserBankAccount = new UserBankAccount
+    this.selectedUserBankAccount = new UserBankAccount();
     this.bankList = new ListConfigureBankResponse();
     this.selectedBank = new Bank();
     this.bankL = new Array();

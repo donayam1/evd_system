@@ -17,5 +17,7 @@ namespace TakTec.Users.Constants
         //public const String RoleNameSystemAccounts = "SystemAccounts";
         public const String RoleNameRetailer = "Retailer";
 
+        public const String RoleNameSystem = "System";
+
     }
 }

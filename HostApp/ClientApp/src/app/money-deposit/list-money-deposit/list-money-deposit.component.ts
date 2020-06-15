@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoneyDepositService } from 'src/app/data/MoneyDeposit/Services/money-deposit.service';
 import { ListDepositResponse } from 'src/app/data/MoneyDeposit/Models/money-deposit.model';
+import { MoneyDeposit } from '../../data/MoneyDeposit/Models/money-deposit.model';
 
 
 @Component({
@@ -10,17 +11,28 @@ import { ListDepositResponse } from 'src/app/data/MoneyDeposit/Models/money-depo
 })
 export class ListMoneyDepositComponent implements OnInit {
 
-  response : ListDepositResponse;
+  response: ListDepositResponse;
 
-  constructor(private moneyDepositService : MoneyDepositService) { 
+  constructor(private moneyDepositService: MoneyDepositService) {
     this.response = new ListDepositResponse();
   }
 
   ngOnInit() {
     this.moneyDepositService.fetchMoneyDeposit().subscribe(data => {
       this.response = data;
-      console.log(this.response)
+      console.log(this.response);
     })
   }
+
+  approve(deposit: MoneyDeposit) {
+    this.moneyDepositService.approveMoneyDeposit(deposit).subscribe(x => {
+      if (x.status == true) {
+        alert("Sucess");
+      } else {
+        alert("failer");
+      }
+    });
+  }
+
 
 }

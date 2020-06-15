@@ -3,35 +3,39 @@
   <div class="row">
     <div class="col-sm-2">
       <ul>
-        <li><a [routerLink]="['./']">Home</a></li>
+        <li><a [routerLink]="['./']">Dashboard</a></li>
         <li>
-          <a [routerLink]="['./operators']"> Operators </a>
-        </li>
-        <li>
-          <a [routerLink]="['./groups']"> Groups</a>
-        </li>
-        <li>
-          <a [routerLink]="['./user']">Users</a>
-        </li>
-        <li>
-          <a [routerLink]="['./banks']">Banks</a>
-        </li>
-        <li>
-          <a [routerLink]="['./vouchersBatch']">Vouchers Batch</a>
-        </li>
-        <li>
-          <a [routerLink]="['./vouchers']">Vouchers</a>
-        </li>
-        <li>
-          <a [routerLink]="['./po']">Purchase Orders</a>
+          <span>Administration</span>
+          <ul>
+            <li>
+              <a [routerLink]="['./operators']"> Operators </a>
+            </li>
+            <li>
+              <a [routerLink]="['./groups']"> Groups</a>
+            </li>
+            <li>
+              <a [routerLink]="['./banks']">Banks</a>
+            </li>
+            <li>
+              <a [routerLink]="['./vouchersBatch']">Vouchers Batch</a>
+            </li>
+          </ul>
         </li>
         <li>
           <a [routerLink]="['./retailarPlans']">Retailer Plan</a>          
         </li>
         <li>
+          <a [routerLink]="['./user']">Users</a>
+        </li>
+        <li>
+          <a [routerLink]="['./po']">Purchase Orders</a>
+        </li>        
+        <li>
           <a [routerLink]="['./moneyDeposit']">Money Deposit</a>          
         </li>
-
+        <li>
+          <a [routerLink]="['./vouchers']">Vouchers</a>
+        </li>
       </ul>
     </div>
     <div class="col-sm-10">

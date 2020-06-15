@@ -5,12 +5,14 @@ import { AdminRoutingModule } from './admin-routing.module';
 // import { TreeModule } from 'angular-tree-component';
 import { HomeComponent } from './home/home.component';
 import { VoucherStatisticsModule } from '../voucher-statistics/voucher-statistics.module';
+import { AirTimeModule } from '../air-time/air-time.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
-    VoucherStatisticsModule
+    VoucherStatisticsModule,
+    AirTimeModule
     // ,
     // TreeModule.forRoot()
   ],

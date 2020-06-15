@@ -16,11 +16,15 @@ using Vouchers.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SignalR;
 using TakTec.Users.Constants;
+using TakTec.Accounting.Data.Abstractions;
+using System.Linq;
+using TakTec.Accounting.BusinessLogic.Abstractions;
 
 namespace Vouchers.BusinessLogic
 {
     public class VoucherFileProcessor : IVoucherFileProcessor
     {
+        private static readonly Object SystemAirTimeUpdateLock = new Object();
         private readonly VoucherFileParameters _voucherFileParameters;
         private readonly ILogger<VoucherFileProcessor> _logger;
         private readonly IStorage _storage;
@@ -30,14 +34,16 @@ namespace Vouchers.BusinessLogic
         //private readonly IServiceProvider _serviceProvider;
         //private readonly IHubContext<VoucherSignalHub> _hubContext;
         private readonly IVoucherStatusNotificationService _voucherStatusNotificationService;
-
+        //private readonly IAirTimeRepository _airTimeRepository;
+        private readonly IAirTimeService _airTimeService;
         public VoucherFileProcessor(
             //IServiceProvider serviceProvider,
             IOptions<VoucherFileParameters> voucherFileParameterOptions,
             ILogger<VoucherFileProcessor> logger,
             IStorage storage,
-            IVoucherStatusNotificationService voucherStatusNotificationService//,
-            //IHubContext<VoucherSignalHub> hubContext
+            IVoucherStatusNotificationService voucherStatusNotificationService,
+            IAirTimeService airTimeService//,
+                                          //IHubContext<VoucherSignalHub> hubContext
             )
         {
             //_serviceProvider = serviceProvider ??
@@ -51,6 +57,9 @@ namespace Vouchers.BusinessLogic
                 throw new ArgumentNullException(nameof(IVoucherBatchRepository));
             _userVoucherRepository = _storage.GetRepository<IUserVoucherRepository>() ??
                 throw new ArgumentNullException(nameof(IUserVoucherRepository));
+            //_airTimeRepository = _storage.GetRepository<IAirTimeRepository>() ??
+            //    throw new ArgumentNullException(nameof(IAirTimeRepository));
+            _airTimeService = airTimeService ?? throw new ArgumentNullException(nameof(IAirTimeService));
             //_hubContext = hubContext;
             _voucherStatusNotificationService = voucherStatusNotificationService ??
                 throw new ArgumentNullException(nameof(IVoucherStatusNotificationService));
@@ -68,10 +77,11 @@ namespace Vouchers.BusinessLogic
             {
                 using StreamReader f = new StreamReader(path);
 
-                String line;
+                String? line;
                 Boolean readingHeader = true;
                 Boolean endFound = false;
                 int lineNumber = 0;
+                int airTime = 0;
                 VoucherBatch batch = new VoucherBatch(poId, "", DateTime.Now, 0, 0, 0);
                 while ((line = f.ReadLine()) != null)
                 {
@@ -103,7 +113,11 @@ namespace Vouchers.BusinessLogic
                         Voucher v = GetVoucher(line, lineNumber, batch.Id);
                         //CreateUserVoucher(poId, v.Id);
                         batch.Vouchers.Add(v);
+                        
                     }
+                }
+                if (!this.validateVoucherBatch(batch)) {
+                    throw new Exception($"Voucher batch validation failed for file {path}.");
                 }
 
                 if (endFound == false)
@@ -111,10 +125,19 @@ namespace Vouchers.BusinessLogic
                     _logger.LogWarning($"Voucher file {path} does not have end tag");
                 }
 
+                lock (SystemAirTimeUpdateLock) // Lock and update the system air time.
+                    //This might not be required as only the one file is processed at a time
+                {
+                    airTime = (int)batch.Denomination * batch.Vouchers.Count;
+                    var sysairTime = _airTimeService.GetSystemAirTime();// _airTimeRepository.WithOwnerItemId(RoleTypeConstants.RoleNameSystem).FirstOrDefault();
+                    if (sysairTime == null) {
+                        throw new NullReferenceException($" System air time not found.");
+                    }                
+                    sysairTime.Amount += airTime;
 
-                _voucherBatchRepository.Create(batch);
-                _storage.Save();
-
+                    _voucherBatchRepository.Create(batch);
+                    _storage.Save();
+                }
                 response0.Status = true;
             }
             catch (FileNotFoundException e)

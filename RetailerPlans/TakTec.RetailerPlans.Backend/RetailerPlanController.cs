@@ -52,10 +52,10 @@ namespace TakTec.RetailerPlans.Backend
 
         [HttpPost(template:"create")]
         public IActionResult Create([FromBody] RetailerPlanViewModel retailerPlanViewModel)
-        {
-            var resp = new NewRetailerPlanResponseViewModel();   
+        {             
             if(ModelState.IsValid)
             {
+                var resp = new NewRetailerPlanResponseViewModel();
                 var newRetailerPlan = _retailerPlanService.
                     CreateorUpdatePlan(retailerPlanViewModel);
                 if(newRetailerPlan == null)

@@ -30,7 +30,7 @@ export class EditPlanComponent implements OnInit {
     this.renewalRate = ['Per Day', 'Per Week', 'Per Month', 'Per Year'];
   }
 
-  updatePlan(){
+  updatePlan($event:any){
     this.np.code = '0';
     this.np.joiningAmount = 0;
     this.np.renwalAmount = 0;

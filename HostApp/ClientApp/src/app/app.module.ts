@@ -36,7 +36,8 @@ import { StoreModule } from "@ngrx/store";
 import { AppReducers } from "./data/app.state";
 import { ItemResolverReducer } from "./data/Shared/Reducers/itemResolver.reducers";
 import { NgbDropdownModule } from "@ng-bootstrap/ng-bootstrap";
-import { PaginationComponent } from './Shared/pagination/pagination.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 const externalUrlProvider = new InjectionToken("externalUrlRedirectResolver");
 
@@ -49,7 +50,7 @@ const externalUrlProvider = new InjectionToken("externalUrlRedirectResolver");
     LoginComponent,
     LanguageComponent,
     NotFoundComponent,
-    PaginationComponent,
+   
     
   ],
   imports: [
@@ -91,6 +92,7 @@ const externalUrlProvider = new InjectionToken("externalUrlRedirectResolver");
         component: NotFoundComponent,
       },
     ]),
+    BrowserAnimationsModule,
   ],
   providers: [
     {

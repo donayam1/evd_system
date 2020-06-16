@@ -63,6 +63,7 @@ namespace TakTec.Accounting.BusinessLogic
             try
             {
                 _storage.Save();
+                _logger.AddUserMesage("Create performed Successfully!");
                 return _banks.ToNewBankViewModel(); //TODO add the UI_IDs here 
             }
             catch (Exception e)
@@ -107,6 +108,7 @@ namespace TakTec.Accounting.BusinessLogic
             try
             {
                 _storage.Save();
+                _logger.AddUserMesage("Update performed Successfully!");
                 return bank.ToBankViewModel();
             }
             catch (Exception e)

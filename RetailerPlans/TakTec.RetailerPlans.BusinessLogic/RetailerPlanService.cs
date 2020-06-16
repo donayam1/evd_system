@@ -75,7 +75,7 @@ namespace TakTec.RetailerPlans.BusinessLogic
                 try
                 {
                     _storage.Save();
-
+                    _logger.AddUserMesage("Create or Update performed Successfully!");
                     var planViewModel = plan.ToNewPlanViewModel(retPlan.Id);
                     return planViewModel;
                 }

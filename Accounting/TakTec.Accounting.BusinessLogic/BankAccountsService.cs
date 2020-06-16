@@ -68,6 +68,7 @@ namespace TakTec.Accounting.BusinessLogic
                 try
                 {
                     _storage.Save();
+                    _logger.AddUserMesage("Create or Update performed Successfully!");
                     return _bankAccount.ToNewBankAccountViewModel(bankAccountViewModel.Id);
                 }
                 catch (Exception e)

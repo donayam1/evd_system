@@ -63,6 +63,7 @@ namespace TakTec.Operators.BusinessLogic
                 try
                 {
                     _storage.Save();
+                    _logger.AddUserMesage("Create or Update performed Successfully!");
                 }
                 catch(Exception e)
                 {
@@ -118,6 +119,7 @@ namespace TakTec.Operators.BusinessLogic
         private Operator UpdateOperator(Operator op)
         {
             var _operator = _operatorRepository.WithKey(op.Id);
+            //operator with given Id already exists so _operator can not be null
             _operator.Name = op.Name;
             _operator.USSDRechargeCode = op.USSDRechargeCode;
             _operatorRepository.Edit(_operator);

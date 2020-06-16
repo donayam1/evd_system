@@ -18,7 +18,6 @@ export class UserBankAccountService {
   constructor(private http: HttpClient) { }
 
   fetchUserBankAccount(userId?: any):Observable<ListUserBankAccountResponse>{
-    console.log(userId)
     const url = AppConfig.settings.apiServers.authServer + this.api + '/list';
     return new Observable(observer => {
       let req = {};

@@ -28,9 +28,9 @@ namespace TakTec.Accounting.Backend.Controllers
         [HttpGet(template:"list")]
         public IActionResult ListBanks([FromQuery]PagedItemRequestBase page)
         {
-            var bankList = new BanksListResponseViewModel();
             if(ModelState.IsValid)
             {
+                var bankList = new BanksListResponseViewModel();
                 var banks = _bankService.ListBanks(page.ItemsPerPage,page.Page);
                 if(banks == null)
                 {
@@ -51,9 +51,9 @@ namespace TakTec.Accounting.Backend.Controllers
         [HttpPost(template:"update")]
         public IActionResult Update([FromBody] BankViewModel bankViewModel)
         {
-            var bankResponse =  new BankResponseViewModel();
             if(ModelState.IsValid)
             {
+                var bankResponse =  new BankResponseViewModel();
                 var updatedBank = _bankService.Update(bankViewModel);
                 if(updatedBank == null)
                 {
@@ -73,9 +73,9 @@ namespace TakTec.Accounting.Backend.Controllers
         [HttpPost(template:"create")]
         public IActionResult Create([FromBody] List<BankViewModel> newBanks)
         {
-            var newBanksResp = new NewBanksListResponse();
             if(ModelState.IsValid)
             {
+                var newBanksResp = new NewBanksListResponse();
                 var _newBanks = _bankService.CreateBanks(newBanks);
                 if(_newBanks == null)
                 {

@@ -1,21 +1,63 @@
-<header>
-  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
-    <div class="container">
-      <a class="navbar-brand" [routerLink]='["/"]'>EVD System</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
-        <ul class="navbar-nav flex-grow">    
-          <li>
-            <app-language></app-language>
-          </li>     
-          <li>
-            <app-signin></app-signin>
-          </li>          
-        </ul>
-      </div>
+<mat-toolbar style="background-color: #0e0e0f !important; color: azure !important;">
+  <mat-toolbar-row style="font-size: small !important;">
+    <!-- The side bar navigation toggle -->
+    <button mat-icon-button><mat-icon (click)="mainMenuToggle()">menu</mat-icon></button>
+    <span style="margin-left: 3rem;">
+      <h2 class="px-md-5"><b style="color: #9c0904;">Tak</b> Technologies</h2>
+    </span>
+    <span style="flex: 1 1 auto;"></span>
+    <div style="margin-right: 3rem;">
+      <app-language></app-language>
+      <a mat-button style="margin-right: 1% !important;" [routerLink]="'./'"><mat-icon style="size: 20; margin-right: 5px;">home</mat-icon>Home</a>
+      <button mat-button [matMenuTriggerFor]="username"><mat-icon style="size: 20; margin-right: 7px;">account_circle</mat-icon>Username</button>
+      <mat-menu #username="matMenu">
+        <button mat-menu-item style="margin: 0 !important; padding: 0 !important"><a mat-button [routerLink]="'./'"><mat-icon style="size: 20 !important;">logout</mat-icon> Signout</a></button>
+      </mat-menu>
     </div>
-  </nav>
-</header>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- The Side Bar Navigation -->
+<mat-sidenav-container style="height: 89vh;">
+  <mat-sidenav #sidenav mode="side" opened="true" [class.sidenav-open]="isMainToggle" [class.sidenav-close]="!isMainToggle">
+    <mat-nav-list>
+      
+      <!-- Administration Pane -->
+      <span><mat-list-item mat-list-item role="menu" (click)="adminSubmenuToggle()"><mat-icon style="margin-right: 2rem;"><img src="https://img.icons8.com/material/24/000000/administrative-tools--v1.png"/></mat-icon> Administration <mat-icon class="menu-button" style="margin-left: 1rem !important;" [class.rotated]="isAdminSubToggle" [class.initial]="!isAdminSubToggle">expand_more</mat-icon></mat-list-item></span>
+      <mat-nav-list class="sidenav-submenu submenu" [class.expanded]="isAdminSubToggle" *ngIf="isAdminSubToggle">
+        <a mat-list-item [routerLink]="'./'"><mat-icon mat-list-icon style="margin-right: 2rem;">nfc</mat-icon> Operators</a>
+        <a mat-list-item [routerLink]="'./'"><mat-icon mat-list-icon style="margin-right: 2rem;">group</mat-icon> Group Types</a>
+        <a mat-list-item [routerLink]="'./'"><mat-icon mat-list-icon style="margin-right: 2rem;">money</mat-icon> Banks</a>
+        <a mat-list-item [routerLink]="'./'" (click)="vbSubmenuToggle()"><mat-icon mat-list-icon style="margin-right: 2rem;">insert_drive_file</mat-icon> Vouchers Batch<mat-icon class="menu-button" style="margin-left: 1rem !important;" [class.rotated]="isVbSubToggle" [class.initial]="!isVbSubToggle">expand_more</mat-icon></a>
+        <!-- Voucher Batches Submenu -->
+        <mat-nav-list class="sidenav-submenu submenu" [class.expanded]="isVbSubToggle" *ngIf="isVbSubToggle">
+          <a mat-list-item [routerLink]="'/accounts'" style="font-size: small;"><mat-icon style="margin-right: 1rem; size: 20 !important;">list</mat-icon>List Awaiting Batches </a>
+          <a mat-list-item [routerLink]="'/accounts'" style="font-size: small;"><mat-icon style="margin-right: 1rem; size: 20 !important;">file_upload</mat-icon>Upload New Batches </a>
+        </mat-nav-list>
+      </mat-nav-list>
+
+      <a mat-list-item [routerLink]="'./'"><mat-icon mat-list-icon style="margin-right: 2rem;">shop_two</mat-icon> Retailer Plans</a>
+      <!-- Users Submenu -->
+      <a mat-list-item [routerLink]="'./'" (click)="userSubmenuToggle()"><mat-icon mat-list-icon style="margin-right: 2rem;">recent_actors</mat-icon> Users<mat-icon class="menu-button" style="margin-left: 1rem !important;" [class.rotated]="isUserSubToggle" [class.initial]="!isUserSubToggle">expand_more</mat-icon></a>
+      <mat-nav-list class="sidenav-submenu submenu" [class.expanded]="isUserSubToggle" *ngIf="isUserSubToggle">
+        <a mat-list-item [routerLink]="'/accounts'" style="font-size: small;"><mat-icon style="margin-right: 1rem; size: 20 !important;">person_add</mat-icon>Add New Users </a>
+      </mat-nav-list>
+      <a mat-list-item [routerLink]="'./'"><mat-icon mat-list-icon style="margin-right: 2rem;">account_balance_wallet</mat-icon> Money Deposit</a>
+      <!-- Purchase Orders Submenu -->
+      <a mat-list-item [routerLink]="'./'" (click)="poSubmenuToggle()"><mat-icon mat-list-icon style="margin-right: 2rem;">add_shopping_cart</mat-icon> Purchase Orders<mat-icon class="menu-button" style="margin-left: 1rem !important;" [class.rotated]="isPoSubToggle" [class.initial]="!isPoSubToggle">expand_more</mat-icon></a>
+      <mat-nav-list class="sidenav-submenu submenu" [class.expanded]="isPoSubToggle" *ngIf="isPoSubToggle">
+        <a mat-list-item [routerLink]="'/accounts'" style="font-size: small;"><mat-icon style="margin-right: 1rem; size: 20 !important;">add_circle_outline</mat-icon>Create New Operators </a>
+      </mat-nav-list>
+      <a mat-list-item [routerLink]="'./'"><mat-icon mat-list-icon style="margin-right: 2rem;">confirmation_number</mat-icon> Vouchers</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- The Main Content Section -->
+  <mat-sidenav-content style="display: flex !important; position: relative !important;">
+    <!-- <div style="display: flex !important; height: 100% !important; align-items: flex-start !important; justify-content: flex-start !important;"> -->
+      Main Content that resizes properly
+      <!-- ------ -->
+      <router-outlet></router-outlet>
+    <!-- </div> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

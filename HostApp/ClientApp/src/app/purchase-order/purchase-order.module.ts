@@ -8,6 +8,7 @@ import { MessagesModule } from '../messages/messages.module';
 import { FormsModule } from '@angular/forms';
 import { ListPurchaseOrderComponent } from './list-purchase-order/list-purchase-order.component';
 import { PoItemModule } from '../po-item/po-item.module';
+import { PaginationModule } from '../Shared/Pagination-Comp/pagination/pagination.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PoItemModule } from '../po-item/po-item.module';
     PurchaseOrderRoutingModule,
     MessagesModule,
     FormsModule,
-    PoItemModule
+    PoItemModule,
+    PaginationModule
   ]
 })
 export class PurchaseOrderModule { }

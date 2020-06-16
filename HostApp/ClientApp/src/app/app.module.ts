@@ -38,6 +38,13 @@ import { ItemResolverReducer } from "./data/Shared/Reducers/itemResolver.reducer
 import { NgbDropdownModule } from "@ng-bootstrap/ng-bootstrap";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule} from '@angular/material/menu';
+
 
 const externalUrlProvider = new InjectionToken("externalUrlRedirectResolver");
 
@@ -56,6 +63,12 @@ const externalUrlProvider = new InjectionToken("externalUrlRedirectResolver");
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
     HttpClientModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
     FormsModule,
     LoadingModule,
     NgbDropdownModule,

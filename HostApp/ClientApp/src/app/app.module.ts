@@ -27,7 +27,7 @@ import { CookieOAuthStorage } from "./data/Account/Services/CookieOauthStorage";
 import { LanguageInterceptor } from "./data/Shared/Services/languageInterceptor";
 import { HttpErrorInterceptor } from "./data/Shared/Services/httpErorResponseInterceptor";
 import { AuthGuard } from "./authentication/auth-guard.service";
-import { CookieService } from "angular2-cookie";
+import { CookieService } from "ngx-cookie-service";
 import { AuthService } from "./data/Account/Services/account.service";
 import { LoginPageGardService } from "./authentication/login-page-gard.service";
 import { NotFoundComponent } from "./not-found/not-found.component";

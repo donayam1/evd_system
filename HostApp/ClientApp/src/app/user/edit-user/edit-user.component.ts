@@ -106,7 +106,7 @@ export class EditUserComponent implements OnInit {
     //this.rpTriggered = true;
   }
 
-  updateUser(){
+  updateUser($event:any){
     this.user.objectStatus = ObjectStatus.EDITTED;
     this.userServide.createUser(this.user).subscribe(x => {}, err => {})
   }

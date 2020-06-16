@@ -21,7 +21,7 @@ export class EditGroupTypeComponent implements OnInit {
     this.messages = Array();
   }
 
-  updateGroupType(){
+  updateGroupType($event:any){
     this.grouptypeService.updateGroupType(this.grouptype).subscribe(success=>{}, err=>{});
   }
 

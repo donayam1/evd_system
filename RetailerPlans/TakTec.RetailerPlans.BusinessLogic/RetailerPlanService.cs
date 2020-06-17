@@ -75,7 +75,7 @@ namespace TakTec.RetailerPlans.BusinessLogic
                 try
                 {
                     _storage.Save();
-
+                    _logger.AddUserMesage("Create or Update performed Successfully!");
                     var planViewModel = plan.ToNewPlanViewModel(retPlan.Id);
                     return planViewModel;
                 }
@@ -113,6 +113,11 @@ namespace TakTec.RetailerPlans.BusinessLogic
 
             RetailerPlan? _plan = _retailerPlanRepository.WithName(plan.Name);
             
+            if(plan.Id==null)
+            {
+                _logger.AddUserError("Null Id field");
+                return false;
+            }
 
             if (plan.Status != ObjectStatusEnum.NEW)
             {
@@ -137,23 +142,6 @@ namespace TakTec.RetailerPlans.BusinessLogic
             return true;
         }
 
-        //private bool isValidRequest(RetailerPlan plan)
-        //{
-        //    bool isValidOperator = _operatorRepository.Exists(plan.OperatorId);
-
-        //    bool isValidJoinAmount = plan.JoiningAmount >= 0;
-        //    bool isValidRenwalAMount = plan.RenewalAmount >= 0;
-        //    bool isValidCommissionRate = plan.CommissionRateType == CommissionRateType.FLAT_COMMISSION ||
-        //                                 plan.CommissionRateType == CommissionRateType.PER_RECHARGE_COMMISSION;   
-
-
-        //    // add other validation criteria
-        //    if(isValidOperator && isValidJoinAmount && isValidRenwalAMount && isValidCommissionRate)
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}
 
          private RetailerPlan CreateNewPlan(RetailerPlanViewModel newPlan)
          {

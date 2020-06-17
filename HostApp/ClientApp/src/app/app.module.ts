@@ -36,7 +36,15 @@ import { StoreModule } from "@ngrx/store";
 import { AppReducers } from "./data/app.state";
 import { ItemResolverReducer } from "./data/Shared/Reducers/itemResolver.reducers";
 import { NgbDropdownModule } from "@ng-bootstrap/ng-bootstrap";
-import { PaginationComponent } from './Shared/pagination/pagination.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule} from '@angular/material/menu';
+
 
 import { MatToolbarModule } from '@angular/material/toolbar'; 
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -57,7 +65,7 @@ const externalUrlProvider = new InjectionToken("externalUrlRedirectResolver");
     LoginComponent,
     LanguageComponent,
     NotFoundComponent,
-    PaginationComponent,
+   
     
   ],
   imports: [

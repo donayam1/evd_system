@@ -63,6 +63,7 @@ namespace TakTec.Accounting.BusinessLogic
             try
             {
                 _storage.Save();
+                _logger.AddUserMesage("Create performed Successfully!");
                 return _banks.ToNewBankViewModel(); //TODO add the UI_IDs here 
             }
             catch (Exception e)
@@ -99,13 +100,15 @@ namespace TakTec.Accounting.BusinessLogic
                 _logger.AddUserError("Invalid request!");
                 return null;
             }
-
+            // null Id already validated
             var bank = _bankRepository.WithKey(bankVm.Id);
+            // bank with Id already exists
             bank.Name = bankVm.Name;
 
             try
             {
                 _storage.Save();
+                _logger.AddUserMesage("Update performed Successfully!");
                 return bank.ToBankViewModel();
             }
             catch (Exception e)
@@ -126,6 +129,13 @@ namespace TakTec.Accounting.BusinessLogic
                 _logger.AddUserError("Bank with name" + _bank.Name + " already exists!");
                 return false;
             }
+
+            if(bank.Id == null)
+            {
+                _logger.AddUserError("Null Bank Id field");
+                return false;
+            }
+            
             if (bank.Status != ObjectStatusEnum.NEW)
             {
                 bool exists = _bankRepository.Exists(bank.Id);
@@ -136,38 +146,9 @@ namespace TakTec.Accounting.BusinessLogic
                 }
                 
             }
-
-            else if(bank.Status == ObjectStatusEnum.NEW)
-            {
-                //if(_bank!=null)
-                //{
-                //    _logger.AddUserError("Bank with name"+_bank.Name+" already exists!");
-                //    return false;
-                //}
-            }
             return true;
         }
 
-        //private bool SaveBanks(List<Bank> banks)
-        //{ 
-        //    foreach(Bank b in banks)
-        //    {
-        //        Create(b);
-        //    }
-
-        //    try
-        //    {
-        //        _storage.Save();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        _logger.LogError(e.InnerException, e.Message);
-        //        _logger.AddUserError("Unknown error. Please contact adminstrator");
-        //        return false;
-        //    }
-
-
-        //    return true;
-        //}
+      
     }
 }

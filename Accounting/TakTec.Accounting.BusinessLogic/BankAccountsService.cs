@@ -68,6 +68,7 @@ namespace TakTec.Accounting.BusinessLogic
                 try
                 {
                     _storage.Save();
+                    _logger.AddUserMesage("Create or Update performed Successfully!");
                     return _bankAccount.ToNewBankAccountViewModel(bankAccountViewModel.Id);
                 }
                 catch (Exception e)
@@ -83,7 +84,12 @@ namespace TakTec.Accounting.BusinessLogic
 
         private bool ValidateBankAccount(BankAccountViewModel bankAccount)
         {
-            
+            //check for null Account Id 
+            if(bankAccount.Id==null)
+            {
+                _logger.AddUserError("Null Id field!!");
+                return false;
+            }
 
             BankAccount? bankAcct = _bankAccountRepository.WithAccountNumber(bankAccount.AccountNumber, bankAccount.BankId);
             if (bankAcct != null)
@@ -100,14 +106,6 @@ namespace TakTec.Accounting.BusinessLogic
                     return false;
                 }
                 
-                else if(bankAccount.Status == ObjectStatusEnum.NEW)
-                {
-                    //if(bankAcct != null)
-                    //{
-                    //    _logger.AddUserError("Bank account with account number "+bankAccount.AccountNumber+" already exists");
-                    //    return false;
-                    //}
-                }
             }
             return true;
         }
@@ -120,8 +118,9 @@ namespace TakTec.Accounting.BusinessLogic
         }
         private BankAccount? Update(BankAccountViewModel bankAccount)
         {
+            //Null Id is already validated
             BankAccount? bAccount = _bankAccountRepository.WithKey(bankAccount.Id);
-            //perform updates
+            //existance of bank account with this Id is already validated
             bAccount.AccountNumber = bankAccount.AccountNumber;
         
             _bankAccountRepository.Edit(bAccount);

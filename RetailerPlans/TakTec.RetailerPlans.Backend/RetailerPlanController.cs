@@ -32,9 +32,9 @@ namespace TakTec.RetailerPlans.Backend
         [HttpGet(template:"list")]
         public IActionResult ListRetailerPlans([FromQuery]PagedItemRequestBase page)
         {
-            var planList = new RetailerPlanResponseListViewModel();
             if(ModelState.IsValid)
             {
+                var planList = new RetailerPlanResponseListViewModel();
                 var items = _retailerPlanService.ListRetailerPlans(page.Page,page.ItemsPerPage);//pass page object instead
                 if(items == null)
                 {
@@ -77,9 +77,9 @@ namespace TakTec.RetailerPlans.Backend
         [HttpPost(template:"update")]
         public IActionResult Update([FromBody] RetailerPlanViewModel retailerPlanViewModel)
         {
-            var retailerPlan = new RetailerPlanResponseViewModel();
             if(ModelState.IsValid)
             {
+                var retailerPlan = new RetailerPlanResponseViewModel();
                 var updatedPlan = _retailerPlanService.CreateorUpdatePlan(retailerPlanViewModel);
                 if(updatedPlan == null)
                 {

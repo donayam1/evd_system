@@ -6,6 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-home.component.css']
 })
 export class AdminHomeComponent implements OnInit {
+
+  isExpanded = true;
+  showSubmenu: boolean = false;
+  isShowing = false;
+  showSubSubMenu: boolean = false;
+
+  isMainToggle = false;
+  isAdminSubToggle = false;
+  isVbSubToggle = false;
+  isUserSubToggle = false;
+  isPoSubToggle = false;
+
   nodes = [
     {
       id: 1,
@@ -35,5 +47,37 @@ export class AdminHomeComponent implements OnInit {
 
   ngOnInit() {
   }
+ 
+  mainMenuToggle(){
+    this.isMainToggle = !this.isMainToggle;
+  }
 
+  adminSubmenuToggle(){
+    this.isAdminSubToggle = !this.isAdminSubToggle;
+  }
+
+  voucherBatchSubmenuToggle(){
+    this.isVbSubToggle = !this.isVbSubToggle;
+  }
+
+  userSubmenuToggle(){
+    this.isUserSubToggle = !this.isUserSubToggle;
+  }
+
+  purchaseOrderSubmenuToggle(){
+    this.isPoSubToggle = !this.isPoSubToggle;
+  }
+
+  // mouseenter() {
+  //   if (!this.isExpanded) {
+  //     this.isShowing = true;
+      
+  //   }
+  // }
+
+  // mouseleave() {
+  //   if (!this.isExpanded) {
+  //     this.isShowing = false;
+  //   }
+  // }
 }

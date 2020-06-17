@@ -7,12 +7,32 @@ import { HomeComponent } from './home/home.component';
 import { VoucherStatisticsModule } from '../voucher-statistics/voucher-statistics.module';
 import { AirTimeModule } from '../air-time/air-time.module';
 
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule} from '@angular/material/menu';
+
+import {MatCardModule} from '@angular/material/card';
+
+
 @NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
     VoucherStatisticsModule,
-    AirTimeModule
+    AirTimeModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatCardModule
+
+
+    
     // ,
     // TreeModule.forRoot()
   ],

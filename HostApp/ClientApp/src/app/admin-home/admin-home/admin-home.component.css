@@ -32,16 +32,27 @@
     transform: scaleY(1);
   }
 
-  .example-card {
-    max-width: 400px;
-  }
+.tittle-name {margin-left: 2rem;}
 
+.toolbar-row {font-size: small;}
+
+.toolbar-left {margin-right: 3rem;}
+
+.user-icon { size: 20; margin-right: 7px;}
+
+
+
+ .sidnav-icon-right { margin-right: 2rem !important; }
+
+ .submenu-icon { margin-right: 1rem; size: 20 !important;}
+
+ .submenu-list {font-size: small;}
 
 .sidenav-open{ width: 55px !important; }
 
 .sidenav-close{ width: 240px !important; }
 
-.menu-button { transition: 300ms ease-in-out; }
+.menu-button {margin-left: 2rem !important;  transition: 600ms ease-in-out; }
 
 .menu-button.initial { transform: rotate(0deg); }
 

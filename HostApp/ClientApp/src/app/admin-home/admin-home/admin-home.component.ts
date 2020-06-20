@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  isExpanded = true;
-  showSubmenu: boolean = false;
-  isShowing = false;
-  showSubSubMenu: boolean = false;
+  //isExpanded = true;
+  //showSubmenu: boolean = false;
+  //isShowing = false;
+  //: boolean = false;
 
   isMainToggle = false;
   isAdminSubToggle = false;
@@ -50,22 +50,44 @@ export class AdminHomeComponent implements OnInit {
  
   mainMenuToggle(){
     this.isMainToggle = !this.isMainToggle;
+    
   }
 
   adminSubmenuToggle(){
-    this.isAdminSubToggle = !this.isAdminSubToggle;
+    if(this.isMainToggle){
+      this.isMainToggle =! this.isMainToggle;
+      this.isAdminSubToggle = !this.isAdminSubToggle;
+    } else {
+      this.isAdminSubToggle = !this.isAdminSubToggle;
+    }
   }
 
   voucherBatchSubmenuToggle(){
-    this.isVbSubToggle = !this.isVbSubToggle;
+    if(this.isMainToggle){
+      this.isMainToggle =! this.isMainToggle;
+      this.isVbSubToggle = !this.isVbSubToggle;
+    }else {
+      this.isVbSubToggle = !this.isVbSubToggle;
+    }
   }
 
   userSubmenuToggle(){
-    this.isUserSubToggle = !this.isUserSubToggle;
+    if (this.isMainToggle) {
+      this.isMainToggle =! this.isMainToggle;
+      this.isUserSubToggle = !this.isUserSubToggle;
+    }else {
+      this.isUserSubToggle = !this.isUserSubToggle;
+    }
+    
   }
 
   purchaseOrderSubmenuToggle(){
-    this.isPoSubToggle = !this.isPoSubToggle;
+    if (this.isMainToggle) {
+      this.isMainToggle =! this.isMainToggle;
+      this.isPoSubToggle = !this.isPoSubToggle;
+    } else {
+      this.isPoSubToggle = !this.isPoSubToggle;
+    }
   }
 
   // mouseenter() {
